@@ -25,10 +25,10 @@ export class ListRuneWordsComponent {
     }
 
     public headers: Array<ITableHeader<TRuneWordSort, IRuneWord>> = [
+        { title: 'labels.owned', key: 'owned', width: 80 },
         { title: 'common.rune', key: 'name' },
         { title: 'common.runes', key: 'runes' },
-        { title: 'labels.effect', key: 'cLvl' },
-        { title: 'labels.owned', key: 'owned', width: 80 }
+        { title: 'labels.effect', key: 'cLvl' }
     ];
 
     constructor(

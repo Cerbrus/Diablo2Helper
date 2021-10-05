@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UiTableSortControlComponent } from './ui-table-sort-control.component';
+import { UiTableHeadComponent } from './ui-table-head.component';
 
-describe('ControlTableSortComponent', () => {
-    let component: UiTableSortControlComponent<any, any>;
-    let fixture: ComponentFixture<UiTableSortControlComponent<any, any>>;
+describe('UiTableHeadComponent', () => {
+    let component: UiTableHeadComponent;
+    let fixture: ComponentFixture<UiTableHeadComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                declarations: [UiTableSortControlComponent]
+                declarations: [UiTableHeadComponent]
             })
             .compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(UiTableSortControlComponent);
+        fixture = TestBed.createComponent(UiTableHeadComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

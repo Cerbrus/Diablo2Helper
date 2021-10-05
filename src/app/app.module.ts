@@ -24,6 +24,7 @@ import { TabRuneWordsComponent } from './components/tab-rune-words/tab-rune-word
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
+import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
 import { UiTableSortControlComponent } from './components/ui-table-sort-control/ui-table-sort-control.component';
 import { UiTabsComponent } from './components/ui-tabs/ui-tabs.component';
 
@@ -71,6 +72,7 @@ const components = [
     ThemeSwitcherComponent,
     UiCollapsibleComponent,
     UiTabComponent,
+    UiTableHeadComponent,
     UiTableSortControlComponent,
     UiTabsComponent
 ];

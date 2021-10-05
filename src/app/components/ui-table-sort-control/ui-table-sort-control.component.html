@@ -3,6 +3,6 @@
          [class.enabled]="isEnabled()"
          [icon]="getIcon()"
          pull="left"
-         [title]="('labels.sort.' + config.header.key) | translate"
+         [title]="('labels.sort.' + header.key) | translate"
 ></fa-icon>
-{{ config.header.title | translate }}
+<span>{{ header.title | translate }}</span>

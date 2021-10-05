@@ -110,6 +110,10 @@ export class RunewordFilterService {
         this.storageService.save.runeWordFilters(this.filters);
     }
 
+    public canCraftRunes(runeWord: TRuneWord): boolean {
+        return this.craftableRuneSets[runeWord];
+    }
+
     private applyFilterToRuneWord(runeWord: TRuneWord | IRuneWord): boolean {
         runeWord = this.runeWordHelper.asItem(runeWord);
         if (!runeWord)
@@ -141,7 +145,7 @@ export class RunewordFilterService {
             }
         }
 
-        this.calculateCraftableRunes(runeWord);
+        this.craftableRuneSets[runeWord.name] = this.runeTracker.calculateCraftableRunes(runeWord)
 
         return this.runeTracker.areRunesOwned(runeWord.runes) ||
             this.filters.showCraftable && this.canCraftRunes(runeWord.name) ||
@@ -152,13 +156,5 @@ export class RunewordFilterService {
         return ArrayHelper
             .toArray(runeWord.itemTypes)
             .some(type => enabledFilters.includes(type));
-    }
-
-    public canCraftRunes(runeWord: TRuneWord): boolean {
-        return this.craftableRuneSets[runeWord];
-    }
-
-    public calculateCraftableRunes(runeWord: IRuneWord): void {
-        this.craftableRuneSets[runeWord.name] = this.runeTracker.calculateCraftableRunes(runeWord);
     }
 }

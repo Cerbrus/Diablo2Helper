@@ -1,40 +1,44 @@
 <div class="grid filters">
     <label class="text-l">{{ 'labels.filters' | translate }}</label>
 
-    <label>{{ 'labels.search' | translate }}:</label>
-    <div class="clearable-input">
-        <input type="text"
-               [(ngModel)]="filters.name"
-               [placeholder]="'labels.search-placeholder' | translate"
-               (keyup)="search()"
+    <ui-collapsible title="labels.search">
+        <div class="clearable-input">
+            <input type="text"
+                   [(ngModel)]="filters.name"
+                   [placeholder]="'labels.search-placeholder' | translate"
+                   (keyup)="search()"
+                   onClickSelect>
+            <fa-icon class="clear-input" [icon]="clearInputIcon"
+                     (click)="this.filters.name = ''; search();"></fa-icon>
+        </div>
+    </ui-collapsible>
+
+    <ui-collapsible title="labels.show">
+        <input-checkbox [labelKey]="'labels.showUnavailable'"
+                        [(checked)]="filters.showUnavailable"
+                        (click)="saveFilters()"
+        ></input-checkbox>
+        <input-checkbox [labelKey]="'labels.showCraftable'"
+                        [(checked)]="filters.showCraftable"
+                        (click)="saveFilters()"
+        ></input-checkbox>
+    </ui-collapsible>
+
+    <ui-collapsible title="labels.maxClvl">
+        <input type="number"
+               [(ngModel)]="filters.cLvl"
+               [placeholder]="'labels.maxClvl' | translate"
+               [min]="minClvl"
+               [max]="maxClvl"
+               (change)="clampClvl()"
                onClickSelect>
-        <fa-icon class="clear-input" [icon]="clearInputIcon"
-                 (click)="this.filters.name = ''; search();"></fa-icon>
-    </div>
+    </ui-collapsible>
 
-    <label>{{ 'labels.show' | translate }}:</label>
-    <input-checkbox [labelKey]="'labels.showUnavailable'"
-                    [(checked)]="filters.showUnavailable"
-                    (click)="saveFilters()"
-    ></input-checkbox>
-    <input-checkbox [labelKey]="'labels.showCraftable'"
-                    [(checked)]="filters.showCraftable"
-                    (click)="saveFilters()"
-    ></input-checkbox>
-
-    <label>{{ 'labels.maxClvl' | translate }}:</label>
-    <input type="number"
-           [(ngModel)]="filters.cLvl"
-           [placeholder]="'labels.maxClvl' | translate"
-           [min]="minClvl"
-           [max]="maxClvl"
-           (change)="clampClvl()"
-           onClickSelect>
-
-    <label>{{ 'labels.itemType' | translate }}:</label>
-    <input-checkbox *ngFor="let itemType of itemTypes"
-                    [labelKey]="'itemTypes.' + itemType"
-                    [(checked)]="filters.itemTypes[itemType]"
-                    (click)="updateFilters(itemType)"
-    ></input-checkbox>
+    <ui-collapsible title="labels.itemType">
+        <input-checkbox *ngFor="let itemType of itemTypes"
+                        [labelKey]="'itemTypes.' + itemType"
+                        [(checked)]="filters.itemTypes[itemType]"
+                        (click)="updateFilters(itemType)"
+        ></input-checkbox>
+    </ui-collapsible>
 </div>

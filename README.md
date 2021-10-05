@@ -17,11 +17,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## 🛠 Todo
 -[ ] Add effects to runewords.
 -[ ] Add filters for effect types.
--[ ] Collapsible filters.
+-[x] Collapsible filters.
+    -[ ] Store collapsed state.
 -[ ] Automated Testing.
     -[ ] Add test to releases on the `develop` branch.
     -[ ] `RunewordFilterService.calculateCraftableRunes` testing
 -[ ] Refactor `RuneTrackerService` into `RuneHelper`?
+
+## 🎉 Implemented
 
 <!--
 Icons:

@@ -12,8 +12,8 @@ import { FormatEffectComponent } from './components/format-effect/format-effect.
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
 import { InputNumberCheckboxComponent } from './components/input-number-checkbox/input-number-checkbox.component';
 import { ListGemsComponent } from './components/list-gems/list-gems.component';
-import { ListRuneWordsComponent } from './components/list-rune-words/list-rune-words.component';
 import { ListRuneWordsFiltersComponent } from './components/list-rune-words-filters/list-rune-words-filters.component';
+import { ListRuneWordsComponent } from './components/list-rune-words/list-rune-words.component';
 import { ListRunesComponent } from './components/list-runes/list-runes.component';
 import { RuneCounterComponent } from './components/rune-counter/rune-counter.component';
 import { RuneTrackingCountersComponent } from './components/rune-tracking-counters/rune-tracking-counters.component';
@@ -22,6 +22,7 @@ import { SpriteGemComponent } from './components/sprite-gem/sprite-gem.component
 import { SpriteRuneComponent } from './components/sprite-rune/sprite-rune.component';
 import { TabRuneWordsComponent } from './components/tab-rune-words/tab-rune-words.component';
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
+import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
 import { UiTableSortControlComponent } from './components/ui-table-sort-control/ui-table-sort-control.component';
 import { UiTabsComponent } from './components/ui-tabs/ui-tabs.component';
@@ -68,6 +69,7 @@ const components = [
     SpriteRuneComponent,
     TabRuneWordsComponent,
     ThemeSwitcherComponent,
+    UiCollapsibleComponent,
     UiTabComponent,
     UiTableSortControlComponent,
     UiTabsComponent

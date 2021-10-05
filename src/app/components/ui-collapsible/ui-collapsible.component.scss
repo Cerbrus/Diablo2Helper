@@ -1,0 +1,33 @@
+@use 'variables';
+@use 'mixins';
+
+label {
+    display: block;
+    cursor: pointer;
+    margin-bottom: variables.$size-gap-small;
+}
+
+.collapsible {
+    height: auto;
+    overflow: hidden;
+
+    .wrapper {
+        grid-template-columns: none;
+        @include mixins.transition(margin-top);
+    }
+}
+
+::ng-deep fa-icon {
+    svg {
+
+        @include mixins.transition(transform);
+    }
+
+    &.up svg {
+        transform: rotate(180deg);
+
+        &.fa-pull-left {
+            transform: rotate(-180deg);
+        }
+    }
+}

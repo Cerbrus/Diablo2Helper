@@ -1,11 +1,12 @@
-<label>{{ 'labels.trackedRunesCount' | translate }}</label>
-<div class="rune-counter">
-    <ng-container *ngFor="let rune of runes">
-        <ng-container *ngVar="runeHelper.asItem(rune) as r">
-            <rune-counter *ngIf="r.track"
-                          [rune]="r"
-                          (onChange)="change($event)"
-            ></rune-counter>
+<ui-collapsible title="labels.trackedRunesCount" pullIcon="left">
+    <div class="rune-counter">
+        <ng-container *ngFor="let rune of runes">
+            <ng-container *ngVar="runeHelper.asItem(rune) as r">
+                <rune-counter *ngIf="r.track"
+                              [rune]="r"
+                              (onChange)="change($event)"
+                ></rune-counter>
+            </ng-container>
         </ng-container>
-    </ng-container>
-</div>
+    </div>
+</ui-collapsible>

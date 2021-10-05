@@ -1,0 +1,9 @@
+<label (click)="toggle()">
+    {{ title | translate }}
+    <fa-icon [icon]="icon" [pull]="pull" [class.up]="collapsed"></fa-icon>
+</label>
+<div class="collapsible">
+    <div class="wrapper grid" [style.margin-top]="collapseMargin" #wrapper>
+        <ng-content></ng-content>
+    </div>
+</div>

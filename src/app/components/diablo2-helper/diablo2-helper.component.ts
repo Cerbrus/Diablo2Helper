@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'diablo2helper',
@@ -13,6 +14,6 @@ export class Diablo2HelperComponent {
         translate: TranslateService
     ) {
         translate.get('common.appTitle')
-            .subscribe(title => titleService.setTitle(title));
+            .subscribe(title => titleService.setTitle(environment.titlePrefix + title));
     }
 }

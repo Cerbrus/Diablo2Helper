@@ -1,37 +1,38 @@
-<table>
+<div class="grid">
     <ng-container *ngFor="let gemType of gemArray">
-        <tr>
-            <th colspan="6">
-                {{ 'gems.type.' + gemType.type | translate }}
-            </th>
-        </tr>
-        <tr>
-            <td>{{ 'gems.quality.title' | translate }}</td>
-            <td></td>
-            <td>{{ 'labels.weapon' | translate }}</td>
-            <td>{{ 'labels.armorHelm' | translate }}</td>
-            <td>{{ 'labels.shield' | translate }}</td>
-            <td>{{ 'labels.cLvl' | translate }}</td>
-        </tr>
-        <tr *ngFor="let gem of gemType.gems">
-            <td>
-                {{ 'gems.quality.' + gem.quality | translate }}
-            </td>
-            <td>
-                <sprite-gem [gem]="gem" [size]="24"></sprite-gem>
-            </td>
-            <ng-container *ngVar="gem.effects as effects">
-                <td>
-                    <format-effect [effects]="effects.weapon"></format-effect>
-                </td>
-                <td>
-                    <format-effect [effects]="effects.armorHelm"></format-effect>
-                </td>
-                <td>
-                    <format-effect [effects]="effects.shield"></format-effect>
-                </td>
-            </ng-container>
-            <td>{{ gem.cLvl }}</td>
-        </tr>
+        <div class="table">
+            <div class="table-row table-head">
+                <ui-table-head [label]="'gems.type.' + gemType.type" key="gemType"></ui-table-head>
+            </div>
+            <div class="table-row table-body">
+                <div class="column-quality">{{ 'gems.quality.title' | translate }}</div>
+                <div class="column-gem"></div>
+                <div class="column-effectWeapon">{{ 'labels.weapon' | translate }}</div>
+                <div class="column-effectArmorHelm">{{ 'labels.armorHelm' | translate }}</div>
+                <div class="column-effectShield">{{ 'labels.shield' | translate }}</div>
+                <div class="column-cLvl center-text">{{ 'labels.cLvl' | translate }}</div>
+
+                <ng-container *ngFor="let gem of gemType.gems">
+                    <div class="column-quality">
+                        {{ 'gems.quality.' + gem.quality | translate }}
+                    </div>
+                    <div class="column-gem">
+                        <sprite-gem [gem]="gem" [size]="24"></sprite-gem>
+                    </div>
+                    <ng-container *ngVar="gem.effects as effects">
+                        <div class="column-effectWeapon">
+                            <format-effect [effects]="effects.weapon"></format-effect>
+                        </div>
+                        <div class="column-effectArmorHelm">
+                            <format-effect [effects]="effects.armorHelm"></format-effect>
+                        </div>
+                        <div class="column-effectShield">
+                            <format-effect [effects]="effects.shield"></format-effect>
+                        </div>
+                    </ng-container>
+                    <div class="column-cLvl center-text">{{ gem.cLvl }}</div>
+                </ng-container>
+            </div>
+        </div>
     </ng-container>
-</table>
+</div>

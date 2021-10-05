@@ -1,24 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ArrayHelper } from '../helpers';
-import { IRuneWordFilters } from '../interfaces/runeWord';
+import { IStorage } from '../interfaces/IStorage';
 import { ItemOrLambda, RecordValues, Returns } from '../types/helpers';
-import { TRune, TRuneSort } from '../types/rune';
-import { TRuneWord, TRuneWordSort } from '../types/runeWord';
 import { GetValue, SaveValue } from '../types/storage';
-
-interface IStorageService {
-    darkMode: boolean;
-    runeSort: TRuneSort;
-    runeWordFilters: IRuneWordFilters;
-    runeWordSort: TRuneWordSort;
-    runeWordsOwned: Partial<Record<TRuneWord, number>>;
-    runesOwned: Partial<Record<TRune, number>>;
-    uiCollapsibleState: Partial<Record<string, boolean>>;
-}
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
-    private storageKeys: Array<keyof IStorageService> = [
+    private storageKeys: Array<keyof IStorage> = [
+        'activeTabs',
         'darkMode',
         'runeSort',
         'runeWordFilters',
@@ -28,17 +17,17 @@ export class StorageService {
         'uiCollapsibleState'
     ];
 
-    public get: GetValue<IStorageService>;
-    public save: SaveValue<IStorageService>;
+    public get: GetValue<IStorage>;
+    public save: SaveValue<IStorage>;
 
     constructor() {
         this.get = ArrayHelper.toRecord(this.storageKeys,
-            (key) => <T extends RecordValues<IStorageService>>(defaultValue?: ItemOrLambda<T>): T =>
+            (key) => <T extends RecordValues<IStorage>>(defaultValue?: ItemOrLambda<T>): T =>
                 StorageService.getItem(key, defaultValue)
         );
 
         this.save = ArrayHelper.toRecord(this.storageKeys,
-            (key) => <T extends RecordValues<IStorageService>>(value: T): T =>
+            (key) => <T extends RecordValues<IStorage>>(value: T): T =>
                 StorageService.saveItem(key, value)
         );
     }

@@ -18,11 +18,13 @@ export class UiCollapsibleComponent implements AfterViewInit {
     @Input('pullIcon')
     public pull: PullProp = 'right';
 
-    @ViewChild('wrapper')
-    private wrapper!: ElementRef<HTMLDivElement>;
-
     public collapseMargin: string | 0 = 0;
     public icon = faAngleDoubleDown;
+
+    public afterInit = false;
+
+    @ViewChild('wrapper')
+    private wrapper!: ElementRef<HTMLDivElement>;
 
     constructor(private readonly storageService: StorageService) {
     }
@@ -31,6 +33,7 @@ export class UiCollapsibleComponent implements AfterViewInit {
         const collapsed = this.storageService.get
             .uiCollapsibleState({})[this.title];
         this.setState(collapsed ?? false);
+        this.afterInit = true;
     }
 
     public toggle(): void {

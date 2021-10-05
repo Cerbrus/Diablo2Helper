@@ -13,20 +13,23 @@ label {
 
     .wrapper {
         grid-template-columns: none;
-        @include mixins.transition(margin-top);
     }
 }
 
-::ng-deep fa-icon {
-    svg {
-        @include mixins.transition(transform);
+::ng-deep fa-icon.up svg {
+    transform: rotate(180deg);
+
+    &.fa-pull-left {
+        transform: rotate(-180deg);
+    }
+}
+
+.transition {
+    .collapsible .wrapper {
+        @include mixins.transition(margin-top);
     }
 
-    &.up svg {
-        transform: rotate(180deg);
-
-        &.fa-pull-left {
-            transform: rotate(-180deg);
-        }
+    ::ng-deep fa-icon svg {
+        @include mixins.transition(transform);
     }
 }

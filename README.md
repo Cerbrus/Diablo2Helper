@@ -17,19 +17,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## 🛠 Todo
 -[ ] Add effects to runewords.
 -[ ] Add filters for effect types.
--[x] Collapsible filters.
-    -[ ] Store collapsed state.
 -[ ] Automated Testing.
     -[ ] Add test to releases on the `develop` branch.
     -[ ] `RunewordFilterService.calculateCraftableRunes` testing
 -[ ] Fix UI on narrower screens.
--[ ] Store active tab.
 -[ ] Refactor `RuneTrackerService` into `RuneHelper`?
--[ ] Refactor `StorageService` into to store a single object?
 -[ ] Parse save file?
 
 ## 🎉 Implemented
 -[x] `<table>` to CSS grid?
+-[x] Collapsible filters.
+    -[x] Store collapsed state.
+-[x] Store active tab.
 
 <!--
 Icons:

@@ -16,7 +16,7 @@
     }
 
     &-body {
-        $offset: v.$size-gap * 4 + v.$size-tab-control + v.$size-gap-table * 2 + $header-height;
+        $offset: v.$size-gap * 4 + v.$size-tab-control + 1px + v.$size-gap-table * 2 + $header-height;
         max-height: calc(100vh - #{$offset});
         overflow-y: auto;
 

@@ -1,10 +1,10 @@
 @use 'variables';
 
-$offset: variables.$size-gap * 4 + variables.$size-tab-control + 2px;
 
 :host {
+    //$offset: variables.$size-gap * 4 + variables.$size-tab-control + 2px;
+    //height: calc(100vh - #{$offset});
     display: block;
-    height: calc(100vh - #{$offset});
     overflow-x: hidden;
     overflow-y: auto;
     box-sizing: border-box;

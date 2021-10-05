@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { EffectHelper } from '../../helpers';
 import { IEffect } from '../../interfaces/effect';
 import { ItemOrArray } from '../../types/helpers';
@@ -21,6 +21,11 @@ export class FormatEffectComponent {
 
     @Input()
     public lineBreak = false;
+
+    @HostBinding('hidden')
+    get isHidden(): boolean {
+        return !this.effects;
+    }
 
     constructor(private readonly effectHelper: EffectHelper) {
     }

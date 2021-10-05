@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output, ViewEncapsulation } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import {
     faSortAlphaDown,
@@ -17,28 +17,29 @@ import {
 import { ITable, ITableHeader, TableSortDirection, TableSortIcon } from '../../interfaces';
 
 @Component({
-    selector: 'th[ui-table-sort-control]',
+    selector: 'ui-table-sort-control',
     templateUrl: './ui-table-sort-control.component.html',
-    styleUrls: ['./ui-table-sort-control.component.scss']
+    styleUrls: ['./ui-table-sort-control.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class UiTableSortControlComponent<TSort, TEntity extends Record<string, ITable<TSort>>> {
     @Output()
     public onSort = new EventEmitter<ITable<TSort>>();
 
-    @Input('ui-table-sort-control')
-    public config!: {
-        header: ITableHeader<TEntity, TSort>;
-        sort: TEntity;
-    };
+    @Input()
+    public header!: ITableHeader<TEntity, TSort>;
+
+    @Input()
+    public sort!: TEntity;
 
     @HostBinding('colSpan')
     public get colSpan(): number | undefined {
-        return this.config.header.colSpan;
+        return this.header.colSpan;
     }
 
     @HostBinding('class')
     public get cssClass(): string {
-        return `header-${this.config.header.key}`;
+        return `header-${this.header.key}`;
     }
 
     private icons: Record<TableSortIcon, Record<'asc' | 'desc', IconDefinition>> = {
@@ -76,7 +77,7 @@ export class UiTableSortControlComponent<TSort, TEntity extends Record<string, I
     }
 
     public getSort(): ITable<TSort> {
-        return this.config.sort[this.config.header.key];
+        return this.sort[this.header.key];
     }
 
     private getDirection(): TableSortDirection {

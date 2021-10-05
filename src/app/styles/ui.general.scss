@@ -8,34 +8,20 @@ body {
 
     background: variables.$theme-background;
     transition: all 0.1s linear;
+    //height: 100vh;
+    //overflow: hidden;
 }
 
 .center-text {
     text-align: center;
 }
 
-.text {
-    &-xs {
-        font-size: 0.5rem;
-    }
-
-    &-s {
-        font-size: 0.75rem;
-    }
-
-    &-m {
-        font-size: 1rem;
-    }
-
-    &-l {
-        font-size: 1.5rem;
-    }
-
-    &-xl {
-        font-size: 2rem;
+$sizes: ('xs': 0.5rem, 's': 0.75rem, 'm': 1rem, 'l': 1.5rem, 'xl': 2rem);
+@each $key, $size in $sizes {
+    .text-#{$key} {
+        font-size: $size;
     }
 }
-
 
 .hidden {
     display: none;

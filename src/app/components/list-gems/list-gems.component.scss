@@ -1,0 +1,9 @@
+.table {
+    &-row {
+        grid-template-columns: 90px 50px repeat(3, 1fr) 80px;
+    }
+
+    &-head .header-gemType {
+        grid-column: span 6;
+    }
+}

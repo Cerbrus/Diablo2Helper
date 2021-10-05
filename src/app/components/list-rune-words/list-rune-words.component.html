@@ -1,15 +1,24 @@
 <label>{{ 'common.runeWords' | translate }}</label>
-<table>
-    <tr>
-        <th *ngFor="let header of headers"
-            [ui-table-sort-control]="{ header: header, sort: runeWordSort }"
-            (onSort)="applySort($event)"
-        ></th>
-    </tr>
-    <ng-container *ngFor="let runeWord of runeWordArraySorted">
-        <tr [class.hidden]="!showRuneWord(runeWord)">
-            <td>
-                <div class="rune-name">
+
+<div class="table">
+    <div class="table-row table-head">
+        <ui-table-sort-control
+            *ngFor="let header of headers"
+            [header]="header"
+            [sort]="runeWordSort"
+            (onSort)="applySort($event)">
+        </ui-table-sort-control>
+    </div>
+    <div class="table-row table-body">
+        <ng-container *ngFor="let runeWord of runeWordArraySorted">
+            <ng-container *ngVar="!showRuneWord(runeWord) as hidden">
+                <div class="column-owned">
+                    <input-number-checkbox
+                        [(value)]="runeWord.owned"
+                        (valueChange)="runeWordOwned(runeWord)"
+                    ></input-number-checkbox>
+                </div>
+                <div class="column-name" [class.hidden]="hidden">
                     <strong>{{ runeWord.name }}</strong>
                     <em>{{ runeNames(runeWord.runes) }}</em>
                     <div>
@@ -22,25 +31,19 @@
                     </div>
                     <span>{{ formatItemTypes(runeWord.itemTypes) + ' {' + runeWord.runes.length + '}' }}</span>
                 </div>
-            </td>
-            <td class="runes"
-                [class.runes-owned]="areRunesOwned(runeWord)"
-                [class.runes-craftable]="canCraftRunes(runeWord)">
-                <sprite-rune *ngFor="let rune of runeWord.runes" [rune]="rune" [size]="32"></sprite-rune>
-            </td>
-            <td *ngVar="runeWord.effects as effects">
-                <format-effect [effects]="effects" [lineBreak]="true"></format-effect>
-                <div>
-                    <strong>{{ 'labels.cLvl' | translate }}:</strong>
-                    {{ runeWord.cLvl || ('common.none' | translate) }}
+                <div class="column-runes runes block center-text"
+                     [class.runes-owned]="areRunesOwned(runeWord)"
+                     [class.runes-craftable]="canCraftRunes(runeWord)">
+                    <sprite-rune *ngFor="let rune of runeWord.runes" [rune]="rune" [size]="32"></sprite-rune>
                 </div>
-            </td>
-            <td class="child-height">
-                <input-number-checkbox
-                    [(value)]="runeWord.owned"
-                    (valueChange)="runeWordOwned(runeWord)"
-                ></input-number-checkbox>
-            </td>
-        </tr>
-    </ng-container>
-</table>
+                <div class="column-effects" *ngVar="runeWord.effects as effects">
+                    <format-effect [effects]="effects" [lineBreak]="true"></format-effect>
+                    <div>
+                        <strong>{{ 'labels.cLvl' | translate }}:</strong>
+                        {{ runeWord.cLvl || ('common.none' | translate) }}
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

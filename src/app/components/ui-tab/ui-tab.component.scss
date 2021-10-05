@@ -1,7 +1,7 @@
 @use 'variables';
 
 .pane {
-    padding: 1em;
+    padding: variables.$size-gap;
     border: 1px solid variables.$theme-tabs-border;
     border-radius: variables.$size-gap;
 }

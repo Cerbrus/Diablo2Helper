@@ -1,8 +1,8 @@
 @use 'variables';
 
 :host {
-    position: fixed;
-    bottom: variables.$size-gap * 2;
+    position: absolute;
+    top: variables.$size-gap * 2;
     right: variables.$size-gap * 2;
     color: variables.$theme-button-text;
 }

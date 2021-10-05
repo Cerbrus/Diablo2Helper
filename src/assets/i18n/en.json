@@ -28,7 +28,7 @@
         "showUnavailable": "Unavailable Runewords",
         "showCraftable": "Craftable Runewords",
         "maxClvl": "Max Clvl",
-        "itemType": "Only show",
+        "itemType": "Item Type",
         "filters": "Filters",
         "search": "Search",
         "search-placeholder": "Runeword name",

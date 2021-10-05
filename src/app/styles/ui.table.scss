@@ -15,3 +15,41 @@ tr {
         background: variables.$theme-table-background-hover;
     }
 }
+
+.table {
+    display: grid;
+    grid-gap: 2px;
+
+    &-head,
+    &-body {
+        display: grid;
+        grid-gap: 2px;
+
+        > div,
+        > ui-table-sort-control,
+        > ui-table-head {
+            display: grid;
+            background: variables.$theme-table-background;
+            padding: variables.$size-gap-small variables.$size-gap;
+            align-items: center;
+
+            &.block {
+                display: block;
+            }
+        }
+    }
+
+    &-head {
+        font-weight: bold;
+        text-align: center;
+
+        > div,
+        > ui-table-sort-control {
+            grid-auto-flow: column;
+            grid-template-columns: min-content;
+        }
+    }
+
+    &-body {
+    }
+}

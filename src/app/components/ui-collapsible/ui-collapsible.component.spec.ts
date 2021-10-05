@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UiTableSortControlComponent } from './ui-table-sort-control.component';
+import { UiCollapsibleComponent } from './ui-collapsible.component';
 
-describe('ControlTableSortComponent', () => {
-    let component: UiTableSortControlComponent<any, any>;
-    let fixture: ComponentFixture<UiTableSortControlComponent<any, any>>;
+describe('UiCollapsibleComponent', () => {
+    let component: UiCollapsibleComponent;
+    let fixture: ComponentFixture<UiCollapsibleComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                declarations: [UiTableSortControlComponent]
+                declarations: [UiCollapsibleComponent]
             })
             .compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(UiTableSortControlComponent);
+        fixture = TestBed.createComponent(UiCollapsibleComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

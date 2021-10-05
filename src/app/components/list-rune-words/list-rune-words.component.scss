@@ -1,19 +1,8 @@
-@use 'variables';
+@use 'variables' as v;
 @use 'mixins';
 
 table {
     width: 100%;
-
-    .header {
-        &-owned {
-            width: 80px;
-        }
-    }
-}
-
-.rune-name {
-    display: grid;
-    grid-auto-flow: row;
 }
 
 .runes {
@@ -21,10 +10,43 @@ table {
     text-align: center;
 
     &-craftable {
-        background: variables.$theme-background-craftable;
+        background: v.$theme-background-craftable;
     }
 
     &-owned {
-        background: variables.$theme-background-owned;
+        background: v.$theme-background-owned;
+    }
+}
+
+.table {
+    $header-height: 45px;
+
+    &-row {
+        grid-template-columns:  90px 220px 120px 1fr;
+    }
+
+    &-head {
+        height: $header-height;
+
+        .header-name {
+        }
+    }
+
+    &-body {
+        //$offset: v.$size-gap * 4 + v.$size-tab-control + v.$size-gap-table * 2 + $header-height;
+        //max-height: calc(100vh - #{$offset});
+        overflow-y: auto;
+
+        .column {
+            &-rune {
+                justify-items: center;
+            }
+
+            &-runes {
+                width: 120px;
+                text-align: center;
+                box-sizing: border-box;
+            }
+        }
     }
 }

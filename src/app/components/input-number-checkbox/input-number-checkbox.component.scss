@@ -1,5 +1,9 @@
 @use 'variables';
 
+:host {
+    height: 100%;
+}
+
 input {
     text-align: center;
     font-family: variables.$font-family-exocet;

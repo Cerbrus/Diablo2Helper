@@ -1,3 +1,21 @@
+@use 'variables';
+
+
+:host {
+    //$offset: variables.$size-gap * 4 + variables.$size-tab-control + 2px;
+    //height: calc(100vh - #{$offset});
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
 .grid {
     grid-template-rows: repeat(3, min-content) auto;
+    grid-template-columns: auto;
+}
+
+.row {
+    height: 100%;
+    overflow: hidden;
 }

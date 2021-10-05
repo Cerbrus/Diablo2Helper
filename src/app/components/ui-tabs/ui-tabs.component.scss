@@ -8,22 +8,27 @@
     &-tabs {
         margin-block-start: 0;
         margin-left: variables.$size-gap;
+        box-sizing: border-box;
+        height: variables.$size-tab-control;
+        margin-bottom: 1px;
 
         > li {
             float: left;
-            margin-bottom: -1px;
             color: variables.$theme-text;
             font-family: variables.$font-family-exocet;
             font-weight: bold;
+            box-sizing: border-box;
+            height: variables.$size-tab-control;
 
             > a {
                 color: variables.$theme-text;
                 display: block;
-                padding: 10px 15px;
+                padding: 0 variables.$size-gap;
                 text-decoration: none;
                 margin-right: 2px;
                 border: 1px solid transparent;
-                border-radius: 4px 4px 0 0;
+                border-radius: variables.$size-gap-small variables.$size-gap-small 0 0;
+                line-height: variables.$size-tab-control;
             }
 
             &:hover > a {

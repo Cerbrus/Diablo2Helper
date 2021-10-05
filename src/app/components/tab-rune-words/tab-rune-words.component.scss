@@ -1,3 +1,13 @@
+@use 'variables';
+
+:host {
+    display: block;
+    height: calc(100vh - #{variables.$size-gap * 4 + variables.$size-tab-control + 2px });
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
 .grid {
     grid-template-rows: repeat(3, min-content) auto;
 }

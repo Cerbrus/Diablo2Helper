@@ -8,6 +8,8 @@ body {
 
     background: variables.$theme-background;
     transition: all 0.1s linear;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .center-text {

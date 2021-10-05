@@ -17,7 +17,7 @@ import {
 import { ITable, ITableHeader, TableSortDirection, TableSortIcon } from '../../interfaces';
 
 @Component({
-    selector: 'th[ui-table-sort-control]',
+    selector: 'th[ui-table-sort-control], div[ui-table-sort-control]',
     templateUrl: './ui-table-sort-control.component.html',
     styleUrls: ['./ui-table-sort-control.component.scss']
 })

@@ -1,0 +1,12 @@
+<span class="button" (click)="add(1)">+</span>
+<sprite-rune [rune]="rune" [size]="32"></sprite-rune>
+<span class="button" (click)="add(-1)">-</span>
+
+<input class="input"
+       type="number"
+       onClickSelect
+       [(ngModel)]="rune.owned"
+       (keyup)="onCountChange()"
+       [max]="max"
+       [min]="min"
+       [tooltipSocketable]="rune">

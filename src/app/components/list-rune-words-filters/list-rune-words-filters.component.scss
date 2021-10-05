@@ -1,0 +1,9 @@
+@use 'variables';
+
+label {
+    margin-bottom: -(variables.$size-gap);
+}
+
+.filters {
+    grid-template-rows: min-content;
+}

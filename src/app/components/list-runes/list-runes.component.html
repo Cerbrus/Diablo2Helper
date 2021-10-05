@@ -1,0 +1,46 @@
+<table>
+    <tr>
+        <th *ngFor="let header of headers"
+            [ui-table-sort-control]="{ header: header, sort: runeSort }"
+            (onSort)="applySort($event)"
+        ></th>
+        <th class="header-craft">{{ 'labels.craft' | translate }}</th>
+        <th class="header-effects">{{ 'labels.socketEffect' | translate }}</th>
+    </tr>
+    <tr class="rune" *ngFor="let rune of runeArraySorted">
+        <td class="center-text">
+            #{{ rune.number }}
+            <br>
+            {{ rune.name }}
+        </td>
+        <td>
+            <sprite-rune [rune]="rune" [size]="32"></sprite-rune>
+        </td>
+        <td class="child-height">
+            <input-number-checkbox
+                [(value)]="rune.owned"
+                (valueChange)="onCountChange(rune)"
+            ></input-number-checkbox>
+        </td>
+        <td *ngVar="rune.craft as craft">
+            <ng-container *ngIf="craft">
+                <sprite-rune *ngFor="let rune of craft.runes | asArray" [rune]="rune" [size]="32"></sprite-rune>
+                <sprite-gem *ngFor="let gem of craft.gems | asArray" [gem]="gem" [size]="32"></sprite-gem>
+            </ng-container>
+        </td>
+        <td *ngVar="rune.effects as effects">
+            <format-effect title="weapon"
+                           [effects]="effects.weapon"></format-effect>
+            <format-effect [title]="effects.shield ? 'armorHelm' : 'armorHelmShield'"
+                           [effects]="effects.armorHelm"></format-effect>
+            <format-effect title="shield"
+                           [effects]="effects.shield"></format-effect>
+            <div>
+                <span *ngIf="rune.iLvl">
+                    <strong>{{ 'labels.iLvl' | translate }}:</strong> {{ rune.iLvl }}
+                </span>
+                <strong>{{ 'labels.cLvl' | translate }}:</strong> {{ rune.cLvl || ('common.none' | translate) }}
+            </div>
+        </td>
+    </tr>
+</table>

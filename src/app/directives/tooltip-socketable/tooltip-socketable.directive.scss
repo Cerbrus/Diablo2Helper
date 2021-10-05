@@ -1,0 +1,14 @@
+@use 'variables';
+
+.tooltip-socketable {
+    .title-rune {
+        color: variables.$color-rune-name;
+    }
+}
+
+span,
+div {
+    &.tooltip-socketable:hover {
+        text-decoration: underline;
+    }
+}

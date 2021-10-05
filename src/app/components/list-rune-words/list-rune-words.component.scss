@@ -1,0 +1,30 @@
+@use 'variables';
+@use 'mixins';
+
+table {
+    width: 100%;
+
+    .header {
+        &-owned {
+            width: 80px;
+        }
+    }
+}
+
+.rune-name {
+    display: grid;
+    grid-auto-flow: row;
+}
+
+.runes {
+    width: 110px;
+    text-align: center;
+
+    &-craftable {
+        background: variables.$theme-background-craftable;
+    }
+
+    &-owned {
+        background: variables.$theme-background-owned;
+    }
+}

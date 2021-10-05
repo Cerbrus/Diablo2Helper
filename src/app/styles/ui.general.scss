@@ -1,0 +1,42 @@
+@use 'variables';
+@use 'mixins';
+
+html,
+body {
+    font-family: sans-serif;
+    color: variables.$theme-text;
+
+    background: variables.$theme-background;
+    transition: all 0.1s linear;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.text {
+    &-xs {
+        font-size: 0.5rem;
+    }
+
+    &-s {
+        font-size: 0.75rem;
+    }
+
+    &-m {
+        font-size: 1rem;
+    }
+
+    &-l {
+        font-size: 1.5rem;
+    }
+
+    &-xl {
+        font-size: 2rem;
+    }
+}
+
+
+.hidden {
+    display: none;
+}

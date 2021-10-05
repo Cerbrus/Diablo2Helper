@@ -1,0 +1,13 @@
+@use 'variables';
+
+.grid,
+.row {
+    display: grid;
+    grid-gap: variables.$size-gap;
+    grid-template-columns: min-content;
+    grid-template-rows: min-content;
+}
+
+.row {
+    grid-auto-flow: column;
+}

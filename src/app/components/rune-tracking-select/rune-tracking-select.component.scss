@@ -1,0 +1,29 @@
+@use 'variables';
+@use 'mixins';
+
+.rune-tracker {
+    display: grid;
+    grid-gap: variables.$size-gap-small;
+    grid-auto-flow: row;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(11, 65px);
+    text-align: center;
+
+    .rune {
+        font-family: variables.$font-family-exocet;
+        font-weight: bold;
+        color: variables.$color-rune-name;
+        text-shadow: variables.$shadow-text;
+        user-select: none;
+
+        padding: 1px 2px;
+        cursor: pointer;
+        background: variables.$color-gray-light-transparent;
+        border-radius: variables.$size-gap-small;
+        @include mixins.transition(background);
+
+        &.tracked {
+            background: variables.$color-gray-dark-transparent;
+        }
+    }
+}

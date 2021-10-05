@@ -1,0 +1,37 @@
+<table>
+    <ng-container *ngFor="let gemType of gemArray">
+        <tr>
+            <th colspan="6">
+                {{ 'gems.type.' + gemType.type | translate }}
+            </th>
+        </tr>
+        <tr>
+            <td>{{ 'gems.quality.title' | translate }}</td>
+            <td></td>
+            <td>{{ 'labels.weapon' | translate }}</td>
+            <td>{{ 'labels.armorHelm' | translate }}</td>
+            <td>{{ 'labels.shield' | translate }}</td>
+            <td>{{ 'labels.cLvl' | translate }}</td>
+        </tr>
+        <tr *ngFor="let gem of gemType.gems">
+            <td>
+                {{ 'gems.quality.' + gem.quality | translate }}
+            </td>
+            <td>
+                <sprite-gem [gem]="gem" [size]="24"></sprite-gem>
+            </td>
+            <ng-container *ngVar="gem.effects as effects">
+                <td>
+                    <format-effect [effects]="effects.weapon"></format-effect>
+                </td>
+                <td>
+                    <format-effect [effects]="effects.armorHelm"></format-effect>
+                </td>
+                <td>
+                    <format-effect [effects]="effects.shield"></format-effect>
+                </td>
+            </ng-container>
+            <td>{{ gem.cLvl }}</td>
+        </tr>
+    </ng-container>
+</table>

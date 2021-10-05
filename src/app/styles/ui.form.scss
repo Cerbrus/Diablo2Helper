@@ -1,0 +1,82 @@
+@use 'variables';
+@use 'mixins';
+
+input {
+    font-family: variables.$font-family-exocet;
+    font-weight: bold;
+    width: auto;
+    min-width: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: variables.$theme-input-text;
+    caret-color: variables.$theme-input-text;
+
+    &[type=text],
+    &[type=number] {
+        background: variables.$theme-input-background;
+        border: 1px solid variables.$theme-input-border;
+        border-radius: variables.$size-gap-small;
+        padding: variables.$size-gap-small variables.$size-gap;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &[type=number] {
+        -moz-appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}
+
+.clearable-input {
+    position: relative;
+
+    fa-icon {
+        position: absolute;
+        top: variables.$size-gap-small;
+        right: variables.$size-gap-small;
+        color: variables.$theme-input-clear;
+        cursor: pointer;
+        @include mixins.transition(color);
+
+        &:hover{
+            color: variables.$theme-input-clear-hover;
+        }
+    }
+}
+
+button,
+.button {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    font-family: variables.$font-family-exocet;
+    font-weight: bold;
+    text-align: center;
+    border-radius: variables.$size-gap-small;
+    padding: variables.$size-gap-small variables.$size-gap;
+    background: variables.$theme-button;
+
+    &:hover {
+        background: variables.$theme-button-hover;
+    }
+}
+
+label {
+    font-family: variables.$font-family-exocet;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: variables.$size-gap;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}

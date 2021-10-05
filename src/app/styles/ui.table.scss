@@ -1,0 +1,17 @@
+@use 'variables';
+
+th,
+td {
+    background: variables.$theme-table-background;
+    padding: variables.$size-gap-small variables.$size-gap;
+
+    &.child-height {
+        height: 1px;
+    }
+}
+
+tr {
+    &:hover td {
+        background: variables.$theme-table-background-hover;
+    }
+}

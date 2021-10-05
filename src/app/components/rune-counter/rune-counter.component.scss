@@ -1,0 +1,58 @@
+@use 'variables';
+@use 'mixins';
+@use 'sass:math';
+
+$control-width: 32px;
+$control-height: 24px;
+$input-width: $control-width;
+$input-height: $control-width;
+
+:host {
+    position: relative;
+    display: grid;
+    grid-auto-flow: row;
+    grid-gap: variables.$size-gap-small;
+    justify-items: center;
+    font-family: variables.$font-family-exocet;
+    user-select: none;
+}
+
+.button {
+    font-size: 2em;
+    width: $control-width;
+    height: $control-height;
+    line-height: $control-height;
+    padding: 0;
+    color: variables.$color-tooltip-text;
+}
+
+.input {
+    position: absolute;
+    top: $control-height + variables.$size-gap-small;
+    left: 0;
+    color: variables.$color-tooltip-text;
+    font-family: variables.$font-family-exocet;
+    text-align: center;
+    text-shadow: variables.$shadow-text;
+    background: variables.$color-gray-light-transparent;
+    border: none;
+    border-radius: 25%;
+    padding: 0;
+    cursor: pointer;
+    user-select: initial;
+    opacity: 1;
+    @include mixins.transition(opacity);
+
+    width: $input-width;
+    height: $input-height;
+    line-height: $input-height;
+
+    &:hover {
+        opacity: 0;
+    }
+
+    &:focus {
+        opacity: 1;
+        background: variables.$color-gray-dark-transparent;
+    }
+}

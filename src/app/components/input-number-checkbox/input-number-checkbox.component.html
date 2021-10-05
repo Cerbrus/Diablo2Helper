@@ -1,0 +1,11 @@
+<input-checkbox
+    *ngIf="!value"
+    (checkedChange)="onCheck()"
+    [label]="'X'"
+    [isXl]="true"
+></input-checkbox>
+<input *ngIf="value"
+       type="number"
+       onClickSelect
+       [(ngModel)]="value"
+       (ngModelChange)="onChange()">

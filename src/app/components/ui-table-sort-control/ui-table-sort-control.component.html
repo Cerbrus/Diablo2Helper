@@ -1,0 +1,8 @@
+<fa-icon *ngIf="getSort()"
+         class="sort-control"
+         [class.enabled]="isEnabled()"
+         [icon]="getIcon()"
+         pull="left"
+         [title]="('labels.sort.' + config.header.key) | translate"
+></fa-icon>
+{{ config.header.title | translate }}

@@ -1,0 +1,63 @@
+@use 'variables';
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+
+    &-tabs {
+        margin-block-start: 0;
+        margin-left: variables.$size-gap;
+
+        > li {
+            float: left;
+            margin-bottom: -1px;
+            color: variables.$theme-text;
+            font-family: variables.$font-family-exocet;
+            font-weight: bold;
+
+            > a {
+                color: variables.$theme-text;
+                display: block;
+                padding: 10px 15px;
+                text-decoration: none;
+                margin-right: 2px;
+                border: 1px solid transparent;
+                border-radius: 4px 4px 0 0;
+            }
+
+            &:hover > a {
+                &,
+                &:hover,
+                &:focus {
+                    border: 1px solid variables.$theme-tabs-border;
+                }
+            }
+
+            &.active > a {
+                &,
+                &:hover,
+                &:focus {
+                    cursor: default;
+                    border: 1px solid variables.$theme-tabs-border;
+                    border-bottom-color: variables.$theme-background;
+                }
+            }
+        }
+    }
+}
+
+.nav,
+.navbar,
+.navbar-header,
+.navbar-collapse {
+    &:before,
+    &:after {
+        display: table;
+        content: ' ';
+    }
+
+    &:after {
+        clear: both;
+    }
+}

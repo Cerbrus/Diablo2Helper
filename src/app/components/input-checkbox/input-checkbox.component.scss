@@ -1,0 +1,36 @@
+@use 'variables';
+@use 'mixins';
+
+.label {
+    font-family: variables.$font-family-exocet;
+    font-weight: bold;
+    color: variables.$color-rune-name;
+    text-shadow: variables.$shadow-text;
+    user-select: none;
+
+    padding: variables.$size-gap-small variables.$size-gap;
+    cursor: pointer;
+    background: variables.$theme-checkbox;
+    border-radius: variables.$size-gap-small;
+    @include mixins.transition(background);
+
+    &:hover {
+        background: variables.$theme-checkbox-hover;
+    }
+
+    &.checked {
+        background: variables.$theme-checkbox-checked;
+    }
+
+    &.text-xl {
+        text-align: center;
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+:host{
+    display: block;
+    height: 100%;}

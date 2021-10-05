@@ -1,0 +1,24 @@
+@use 'variables';
+
+.tooltip {
+    font-family: variables.$font-family-exocet;
+    position: absolute;
+    max-width: 90%;
+    font-size: 14px;
+    text-align: center;
+    color: variables.$color-tooltip-text;
+    padding: 5px;
+    background: variables.$color-gray-dark-transparent;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+
+    &.show {
+        opacity: 1;
+    }
+
+    .title {
+        font-weight: bold;
+    }
+}

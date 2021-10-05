@@ -1,0 +1,14 @@
+@use 'variables';
+
+:host {
+    position: fixed;
+    bottom: variables.$size-gap * 2;
+    right: variables.$size-gap * 2;
+    color: variables.$theme-button-text;
+}
+
+.button {
+    width: 20px;
+    height: 16px;
+    padding: 6px 8px;
+}

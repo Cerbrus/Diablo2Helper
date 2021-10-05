@@ -1,0 +1,8 @@
+<div class="label"
+     *ngVar="getLabel() as translated"
+     [class.checked]="checked"
+     [class.text-xl]="isXl || !translated"
+     (click)="onClick()">
+    <span *ngIf="translated">{{ translated }}</span>
+    <fa-icon *ngIf="!translated" [icon]="checked ? iconCheck : iconX"></fa-icon>
+</div>

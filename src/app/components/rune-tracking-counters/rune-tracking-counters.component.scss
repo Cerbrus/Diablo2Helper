@@ -1,0 +1,7 @@
+@use 'variables';
+
+.rune-counter {
+    display: grid;
+    grid-gap: variables.$size-gap-small;
+    grid-template-columns: repeat(auto-fit, 32px);
+}

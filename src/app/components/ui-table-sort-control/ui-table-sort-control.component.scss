@@ -1,0 +1,19 @@
+@use 'variables';
+
+:host {
+    cursor: pointer;
+
+    &:hover .sort-control:not(.enabled) {
+        opacity: 0.6;
+    }
+}
+
+.sort-control {
+    user-select: none;
+    cursor: pointer;
+    opacity: 0.3;
+
+    &.enabled {
+        opacity: 1;
+    }
+}

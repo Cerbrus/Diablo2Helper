@@ -1,0 +1,38 @@
+@use 'sass:color';
+
+$font-family-exocet: Exocet;
+
+$color-rune-name: var(--color-rune-name);
+$color-tooltip-text: var(--color-tooltip-text);
+$color-gray-dark-transparent: var(--color-gray-dark-transparent);
+$color-gray-medium-transparent: var(--color-gray-medium-transparent);
+$color-gray-light-transparent: var(--color-gray-light-transparent);
+
+$theme-text: var(--theme-text);
+$theme-tabs-border: var(--theme-tabs-border);
+
+$theme-background: var(--theme-background);
+$theme-background-owned: var(--theme-background-owned);
+$theme-background-craftable: var(--theme-background-craftable);
+
+$theme-checkbox: var(--theme-checkbox);
+$theme-checkbox-hover: var(--theme-checkbox-hover);
+$theme-checkbox-checked: var(--theme-checkbox-checked);
+
+$theme-input-background: var(--theme-input-background);
+$theme-input-border: var(--theme-input-border);
+$theme-input-text: var(--theme-input-text);
+$theme-input-clear: var(--theme-input-clear);
+$theme-input-clear-hover: var(--theme-input-clear-hover);
+
+$theme-button: var(--theme-button);
+$theme-button-text: var(--theme-button-text);
+$theme-button-hover: var(--theme-button-hover);
+
+$theme-table-background: var(--theme-table-background);
+$theme-table-background-hover: var(--theme-table-background-hover);
+
+$shadow-text: 1px 1px 2px black;
+
+$size-gap: 8px;
+$size-gap-small: $size-gap / 2;

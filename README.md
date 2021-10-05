@@ -22,7 +22,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 -[ ] Automated Testing.
     -[ ] Add test to releases on the `develop` branch.
     -[ ] `RunewordFilterService.calculateCraftableRunes` testing
+-[ ] Fix UI on narrower screens.
+-[ ] `<table>` to CSS grid?
 -[ ] Refactor `RuneTrackerService` into `RuneHelper`?
+-[ ] Refactor `StorageService` into to store a single object?
+-[ ] Parse save file?
 
 ## 🎉 Implemented
 

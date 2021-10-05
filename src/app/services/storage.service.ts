@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ArrayHelper, ObjectHelper } from '../helpers';
+import { ArrayHelper } from '../helpers';
 import { IRuneWordFilters } from '../interfaces/runeWord';
-import { ItemOrLambda, KeysRecord, RecordValues, Returns } from '../types/helpers';
+import { ItemOrLambda, RecordValues, Returns } from '../types/helpers';
 import { TRune, TRuneSort } from '../types/rune';
 import { TRuneWord, TRuneWordSort } from '../types/runeWord';
 import { GetValue, SaveValue } from '../types/storage';
@@ -13,32 +13,33 @@ interface IStorageService {
     runeWordSort: TRuneWordSort;
     runeWordsOwned: Partial<Record<TRuneWord, number>>;
     runesOwned: Partial<Record<TRune, number>>;
+    uiCollapsibleState: Partial<Record<string, boolean>>;
 }
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
-    private storageKeys: KeysRecord<IStorageService> = {
-        darkMode: 'darkMode',
-        runeSort: 'runeSort',
-        runeWordFilters: 'runeWordFilters',
-        runeWordSort: 'runeWordSort',
-        runeWordsOwned: 'runeWordsOwned',
-        runesOwned: 'runesOwned'
-    };
+    private storageKeys: Array<keyof IStorageService> = [
+        'darkMode',
+        'runeSort',
+        'runeWordFilters',
+        'runeWordSort',
+        'runeWordsOwned',
+        'runesOwned',
+        'uiCollapsibleState'
+    ];
 
     public get: GetValue<IStorageService>;
     public save: SaveValue<IStorageService>;
 
     constructor() {
-        const keys = ObjectHelper.entries(this.storageKeys).map(([key]) => key);
-        this.get = ArrayHelper.toRecord(keys,
+        this.get = ArrayHelper.toRecord(this.storageKeys,
             (key) => <T extends RecordValues<IStorageService>>(defaultValue?: ItemOrLambda<T>): T =>
-                StorageService.getItem(this.storageKeys[key], defaultValue)
+                StorageService.getItem(key, defaultValue)
         );
 
-        this.save = ArrayHelper.toRecord(keys,
+        this.save = ArrayHelper.toRecord(this.storageKeys,
             (key) => <T extends RecordValues<IStorageService>>(value: T): T =>
-                StorageService.saveItem(this.storageKeys[key], value)
+                StorageService.saveItem(key, value)
         );
     }
 

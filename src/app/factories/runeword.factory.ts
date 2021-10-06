@@ -32,7 +32,7 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
     }
 
     public buildItems(): IRuneWordMap {
-        const owned = this.storageService.get.runeWordsOwned({});
+        const owned = this.storageService.get.runeWordsOwned();
         const gems = this.gemHelper.getItems();
 
         const { repeat } = ArrayHelper;

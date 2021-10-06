@@ -91,7 +91,7 @@ export class RuneTrackerService {
     }
 
     private initializeRuneCounts(): void {
-        const runesOwned = this.storageService.get.runesOwned({});
+        const runesOwned = this.storageService.get.runesOwned();
         this.runeHelper.itemsArray.forEach(rune => {
             rune.owned = runesOwned[rune.name] ?? 0;
             rune.track = rune.owned > 0;

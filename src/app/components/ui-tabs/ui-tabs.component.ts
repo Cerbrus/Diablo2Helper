@@ -35,10 +35,10 @@ export class UiTabsComponent implements AfterContentInit {
 
         const activeTabs = this.getActiveTabs();
         activeTabs[this.name] = tab.title;
-        this.storageService.save.activeTabs(activeTabs);
+        this.storageService.save.uiActiveTabs(activeTabs);
     }
 
     private getActiveTabs(): Record<string, string> {
-        return this.storageService.get.activeTabs({});
+        return this.storageService.get.uiActiveTabs();
     }
 }

@@ -26,7 +26,7 @@ export class LogMissingTranslationHandler implements MissingTranslationHandler {
             this.logTimeout = undefined;
         }
 
-        setTimeout(this.logMissingKeys.bind(this), 100);
+        window.setTimeout(this.logMissingKeys.bind(this), 100);
 
         return `[${key}]`;
     }

@@ -19,12 +19,7 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
     ) {
         super(runeWordFactory);
 
-        this.entitySort = this.storageService.get.runeWordSort({
-            name: { key: 'name', icon: 'alpha' },
-            runes: { key: 'runes' },
-            cLvl: { key: 'cLvl', icon: 'numeric' },
-            owned: { key: 'owned', icon: 'numericAlt' }
-        });
+        this.entitySort = this.storageService.get.runeWordSort();
         this.applySort();
     }
 

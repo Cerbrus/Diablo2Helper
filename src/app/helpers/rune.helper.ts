@@ -16,11 +16,7 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
     ) {
         super(runeFactory);
 
-        this.entitySort = this.storageService.get.runeSort({
-            name: { key: 'name', icon: 'alpha' },
-            owned: { key: 'owned', icon: 'numericAlt' },
-            number: { key: 'number', icon: 'numeric' }
-        });
+        this.entitySort = this.storageService.get.runeSort();
         this.applySort();
     }
 

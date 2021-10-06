@@ -1,6 +1,6 @@
 # Diablo 2 Helper
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+Generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
 ## 💾 Stack
 <img alt="Angular" src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white">&nbsp;<!--
@@ -13,22 +13,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## ✔ Status
 <img alt="Maintained" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge">&nbsp;<img alt="Site Status" src="https://img.shields.io/website-up-down-green-red/https/diablo2helper.cerbrus.nl.svg?style=for-the-badge">&nbsp;<a href="https://github.com/SamKirkland/FTP-Deploy-Action"><img alt="Deployed with FTP Deploy Action" src="https://img.shields.io/badge/Deployed With-FTP DEPLOY ACTION-0077b6?style=for-the-badge"></a>
-
-## 🛠 Todo
--[ ] Add effects to runewords.
--[ ] Add filters for effect types.
--[ ] Automated Testing.
-    -[ ] Add test to releases on the `develop` branch.
-    -[ ] `RunewordFilterService.calculateCraftableRunes` testing
--[ ] Fix UI on narrower screens.
--[ ] Refactor `RuneTrackerService` into `RuneHelper`?
--[ ] Parse save file?
-
-## 🎉 Implemented
--[x] `<table>` to CSS grid?
--[x] Collapsible filters.
-    -[x] Store collapsed state.
--[x] Store active tab.
 
 <!--
 Icons:

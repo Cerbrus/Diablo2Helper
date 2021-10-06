@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 export const Effects: Array<TEffect> = [
     'AR', 'ARDemons', 'ARUndead', 'AttackRating', 'Blocking',
     'CannotBeFrozen', 'ChanceBlind', 'ChanceCrushingBlow', 'ChanceDeadlyStrike', 'ChanceFear',

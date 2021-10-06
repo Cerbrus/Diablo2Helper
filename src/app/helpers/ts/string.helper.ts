@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 export class StringHelper {
     public static equalsStripped(a: string, b?: string, ignoreCase = false): boolean {
         const [valA, valB] = this.stripNonAZ(a, b, ignoreCase);

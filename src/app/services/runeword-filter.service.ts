@@ -9,12 +9,6 @@ import { RuneTrackerService, StorageService } from './';
 export class RunewordFilterService {
     public filters: IRuneWordFilters;
 
-    private defaultFilters: IRuneWordFilters = {
-        showUnavailable: true,
-        showCraftable: false,
-        itemTypes: {}
-    };
-
     private readonly types: {
         melee: Array<TItem>,
         ranged: Array<TItem>,
@@ -40,7 +34,7 @@ export class RunewordFilterService {
         private readonly runeHelper: RuneHelper,
         private readonly runeWordHelper: RuneWordHelper
     ) {
-        this.filters = storageService.get.runeWordFilters(this.defaultFilters);
+        this.filters = storageService.get.runeWordFilters();
         this.runeWords = runeWordHelper.getItems();
         this.calculateRuneWordVisibility();
     }
@@ -145,7 +139,7 @@ export class RunewordFilterService {
             }
         }
 
-        this.craftableRuneSets[runeWord.name] = this.runeTracker.calculateCraftableRunes(runeWord)
+        this.craftableRuneSets[runeWord.name] = this.runeTracker.calculateCraftableRunes(runeWord);
 
         return this.runeTracker.areRunesOwned(runeWord.runes) ||
             this.filters.showCraftable && this.canCraftRunes(runeWord.name) ||

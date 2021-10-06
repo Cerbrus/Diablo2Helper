@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { PullProp } from '@fortawesome/fontawesome-svg-core';
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 import { StorageService } from '../../services';
@@ -31,7 +31,7 @@ export class UiCollapsibleComponent implements AfterViewInit {
 
     public ngAfterViewInit(): void {
         const collapsed = this.storageService.get
-            .uiCollapsibleState({})[this.title];
+            .uiCollapsibleState()[this.title];
         this.setState(collapsed ?? false);
         this.afterInit = true;
     }

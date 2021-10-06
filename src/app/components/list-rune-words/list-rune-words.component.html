@@ -11,14 +11,14 @@
     </div>
     <div class="table-row table-body">
         <ng-container *ngFor="let runeWord of runeWordArraySorted">
-            <ng-container *ngVar="!showRuneWord(runeWord) as hidden">
+            <div class="table-row" *ngVar="!showRuneWord(runeWord) as hidden"  [class.hidden]="hidden">
                 <div class="column-owned">
                     <input-number-checkbox
                         [(value)]="runeWord.owned"
                         (valueChange)="runeWordOwned(runeWord)"
                     ></input-number-checkbox>
                 </div>
-                <div class="column-name" [class.hidden]="hidden">
+                <div class="column-name" >
                     <strong>{{ runeWord.name }}</strong>
                     <em>{{ runeNames(runeWord.runes) }}</em>
                     <div>
@@ -43,7 +43,7 @@
                         {{ runeWord.cLvl || ('common.none' | translate) }}
                     </div>
                 </div>
-            </ng-container>
+            </div>
         </ng-container>
     </div>
 </div>

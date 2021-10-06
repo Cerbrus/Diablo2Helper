@@ -1,20 +1,6 @@
 @use 'variables';
 
-th,
-td {
-    background: variables.$theme-table-background;
-    padding: variables.$size-gap-small variables.$size-gap;
-
-    &.child-height {
-        height: 1px;
-    }
-}
-
-tr {
-    &:hover td {
-        background: variables.$theme-table-background-hover;
-    }
-}
+$td: '[class*=column-]';
 
 .table {
     display: grid;
@@ -25,7 +11,7 @@ tr {
         display: grid;
         grid-gap: 2px;
 
-        > div,
+        #{$td},
         > ui-table-sort-control,
         > ui-table-head {
             display: grid;
@@ -37,13 +23,21 @@ tr {
                 display: block;
             }
         }
+
+        .table-row {
+            display: contents;
+
+            &:hover #{$td}, {
+                background: variables.$theme-table-background-hover;
+            }
+        }
     }
 
     &-head {
         font-weight: bold;
         text-align: center;
 
-        > div,
+        #{$td},
         > ui-table-sort-control {
             grid-auto-flow: column;
             grid-template-columns: min-content;

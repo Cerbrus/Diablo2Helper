@@ -15,22 +15,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 <img alt="Maintained" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge">&nbsp;<img alt="Site Status" src="https://img.shields.io/website-up-down-green-red/https/diablo2helper.cerbrus.nl.svg?style=for-the-badge">&nbsp;<a href="https://github.com/SamKirkland/FTP-Deploy-Action"><img alt="Deployed with FTP Deploy Action" src="https://img.shields.io/badge/Deployed With-FTP DEPLOY ACTION-0077b6?style=for-the-badge"></a>
 
 ## 🛠 Todo
--[ ] Add effects to runewords.
--[ ] Add filters for effect types.
--[ ] Automated Testing.
-    -[ ] Add test to releases on the `develop` branch.
-    -[ ] `RunewordFilterService.calculateCraftableRunes` testing
--[ ] Fix UI on narrower screens.
--[ ] CSS Grid table row hover.
--[ ] Tutorial / tooltips.
--[ ] Refactor `RuneTrackerService` into `RuneHelper`?
--[ ] Parse save file?
+- [ ] Add effects to runewords.
+- [ ] Add filters for effect types.
+- [ ] Automated Testing.
+    - [ ] Add test to releases on the `develop` branch.
+    - [ ] `RunewordFilterService.calculateCraftableRunes` testing
+- [ ] Fix UI on narrower screens.
+- [ ] CSS Grid table row hover.
+- [ ] Tutorial / tooltips.
+- [ ] Refactor `RuneTrackerService` into `RuneHelper`?
+- [ ] Parse save file?
 
 ## 🎉 Implemented
--[x] `<table>` to CSS grid?
--[x] Collapsible filters.
-    -[x] Store collapsed state.
--[x] Store active tab.
+- [x] `<table>` to CSS grid?
+- [x] Collapsible filters.
+    - [x] Store collapsed state.
+- [x] Store active tab.
 
 <!--
 Icons:

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ArrayHelper } from '../helpers';
 import { IStorage } from '../interfaces/IStorage';
-import { ItemOrLambda, RecordValues, Returns } from '../types/helpers';
+import { RecordValues } from '../types/helpers';
 import { GetValue, SaveValue } from '../types/storage';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
     private storageKeys: Array<keyof IStorage> = [
-        'activeTabs',
+        'uiActiveTabs',
         'darkMode',
         'runeSort',
         'runeWordFilters',
@@ -17,13 +17,37 @@ export class StorageService {
         'uiCollapsibleState'
     ];
 
+    private static defaultValues: IStorage = {
+        darkMode: true,
+        runeSort: {
+            name: { key: 'name', icon: 'alpha' },
+            owned: { key: 'owned', icon: 'numericAlt' },
+            number: { key: 'number', icon: 'numeric' }
+        },
+        runeWordFilters: {
+            showUnavailable: true,
+            showCraftable: true,
+            itemTypes: {}
+        },
+        runeWordSort: {
+            name: { key: 'name', icon: 'alpha' },
+            runes: { key: 'runes' },
+            cLvl: { key: 'cLvl', icon: 'numeric' },
+            owned: { key: 'owned', icon: 'numericAlt' }
+        },
+        runeWordsOwned: {},
+        runesOwned: {},
+        uiActiveTabs: {},
+        uiCollapsibleState: {}
+    };
+
     public get: GetValue<IStorage>;
     public save: SaveValue<IStorage>;
 
     constructor() {
         this.get = ArrayHelper.toRecord(this.storageKeys,
-            (key) => <T extends RecordValues<IStorage>>(defaultValue?: ItemOrLambda<T>): T =>
-                StorageService.getItem(key, defaultValue)
+            (key) => <T extends RecordValues<IStorage>>(): T =>
+                StorageService.getItem(key)
         );
 
         this.save = ArrayHelper.toRecord(this.storageKeys,
@@ -32,16 +56,14 @@ export class StorageService {
         );
     }
 
-    private static getItem<T>(key: string, defaultValue?: ItemOrLambda<T>): T {
+    private static getItem<T>(key: string): T {
         const stored = localStorage.getItem(`d2helper.${key}`);
 
-        if ((stored === undefined || stored === null) &&
-            defaultValue !== undefined &&
-            defaultValue !== null) {
-            return this.saveItem(key,
-                typeof defaultValue === 'function'
-                    ? (defaultValue as Returns<T>)()
-                    : defaultValue);
+        if (stored === undefined || stored === null) {
+            const defaultValue = this.defaultValues[key as keyof IStorage];
+
+            if (defaultValue !== undefined && defaultValue !== null)
+                return this.saveItem(key, defaultValue as T);
         }
 
         return stored ? JSON.parse(stored) : null;

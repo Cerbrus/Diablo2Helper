@@ -16,7 +16,7 @@ export class ThemeSwitcherComponent {
     }
 
     constructor(private readonly storageService: StorageService) {
-        this.isDark = storageService.get.darkMode(true);
+        this.isDark = storageService.get.darkMode();
         this.setClass();
     }
 

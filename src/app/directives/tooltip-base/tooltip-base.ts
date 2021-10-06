@@ -39,7 +39,7 @@ export abstract class TooltipBaseDirective {
     @HostListener('mouseleave')
     public onMouseLeave(): void {
         this.cancelHide();
-        this.hideDelay = setTimeout(() => {
+        this.hideDelay = window.setTimeout(() => {
             this.renderer.removeClass(this.tooltip, 'show');
         }, this.delay);
     }

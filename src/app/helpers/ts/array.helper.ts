@@ -20,7 +20,7 @@ export class ArrayHelper {
 
     public static toRecord<TKey extends Key, TValue>(
         array: ItemOrArray<TKey>,
-        getValue: (item: TKey, record: Record<TKey, TValue>) => TValue
+        getValue: (item: TKey, record: Record<TKey, TValue>, index: number) => TValue
     ): Record<TKey, TValue> {
         return ArrayHelper.toRecordWithKey(array, key => key, getValue);
     }
@@ -28,14 +28,19 @@ export class ArrayHelper {
     public static toRecordWithKey<TKey extends Key, TValue, TArrayValue>(
         array: ItemOrArray<TArrayValue>,
         getKey: (item: TArrayValue) => TKey,
-        getValue: (item: TArrayValue, record: Record<TKey, TValue>) => TValue
+        getValue: (item: TArrayValue, record: Record<TKey, TValue>, index: number) => TValue
     ): Record<TKey, TValue> {
         return ArrayHelper
             .toArray(array)
-            .reduce((record, item) => ({
-                ...record,
-                [getKey(item)]: getValue(item, record)
-            }), {} as Record<TKey, TValue>);
+            .reduce((record, item, index) => {
+                const key = getKey(item);
+                return key
+                    ? {
+                        ...record,
+                        [key]: getValue(item, record, index)
+                    }
+                    : record;
+            }, {} as Record<TKey, TValue>);
     }
 
     public static countItems<TType extends Key>(items: ItemOrArray<TType>): Record<TType, number> {

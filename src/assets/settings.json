@@ -1,0 +1,25 @@
+{
+    "storageDefaults": {
+        "darkMode": true,
+        "runeSort": {
+            "name": {"key": "name", "icon": "alpha"},
+            "owned": {"key": "owned", "icon": "numericAlt"},
+            "number": {"key": "number", "icon": "numeric"}
+        },
+        "runeWordFilters": {
+            "showUnavailable": true,
+            "showCraftable": true,
+            "itemTypes": {}
+        },
+        "runeWordSort": {
+            "name": {"key": "name", "icon": "alpha"},
+            "runes": {"key": "runes"},
+            "cLvl": {"key": "cLvl", "icon": "numeric"},
+            "owned": {"key": "owned", "icon": "numericAlt"}
+        },
+        "runeWordsOwned": {},
+        "runesOwned": {},
+        "uiActiveTabs": {},
+        "uiCollapsibleState": {}
+    }
+}

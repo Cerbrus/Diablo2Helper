@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ArrayHelper, EffectHelper, GemHelper, ObjectHelper, RuneHelper } from '../helpers';
+import { EffectHelper, GemHelper, ObjectHelper, RuneHelper } from '../helpers';
 import { IRuneWordMap } from '../interfaces/runeWord';
 import { StorageService } from '../services';
 import { TItem } from '../types';
@@ -33,15 +33,15 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
 
     public buildItems(): IRuneWordMap {
         const owned = this.storageService.get.runeWordsOwned();
-        const gems = this.gemHelper.getItems();
+        // const gems = this.gemHelper.getItems();
 
-        const { repeat } = ArrayHelper;
-        const rune = this.runeHelper.getItem.bind(this.runeHelper);
+        // const { repeat } = ArrayHelper;
+        // const rune = this.runeHelper.getItem.bind(this.runeHelper);
         const {
-            integerEffect: int,
-            percentageEffect: pct,
-            rangeEffect: rng,
-            damageOverTimeEffect: dot
+            integerEffect: int
+            // percentageEffect: pct,
+            // rangeEffect: rng,
+            // damageOverTimeEffect: dot
         } = EffectHelper;
 
         const { all, bows } = this;

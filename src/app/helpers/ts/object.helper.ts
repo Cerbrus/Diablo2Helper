@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import { ArrayHelper } from './array.helper';
 
 type DeepCopyable = Date | Array<any> | string | number | boolean | Record<any, any>;

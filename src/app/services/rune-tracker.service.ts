@@ -62,17 +62,17 @@ export class RuneTrackerService {
         amountNeeded = 1,
         runeWord?: IRuneWord
     ): boolean {
-        const runeToCraftItem = this.runeHelper.asItem(runeToCraft);
-        const craft = runeToCraftItem.name;
+        runeToCraft = this.runeHelper.asItem(runeToCraft);
+        const craft = runeToCraft.name;
 
         if (ownedRunes[craft] >= amountNeeded) {
             ownedRunes[craft] -= amountNeeded;
             return true;
         } else {
-            const missingCount = amountNeeded - ownedRunes[craft];
+            const missingCount = amountNeeded - (ownedRunes[craft] ?? 0);
             ownedRunes[craft] = 0;
 
-            const neededRunes = runeToCraftItem.craft?.runes;
+            const neededRunes = runeToCraft.craft?.runes;
 
             return !!neededRunes && ObjectHelper.every(
                 ArrayHelper.countItems(neededRunes),

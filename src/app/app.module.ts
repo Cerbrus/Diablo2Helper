@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Diablo2HelperComponent } from './components/diablo2-helper/diablo2-helper.component';
 import { FormatEffectComponent } from './components/format-effect/format-effect.component';
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
+import { InputGameSaveFileComponent } from './components/input-game-save-file/input-game-save-file.component';
 import { InputNumberCheckboxComponent } from './components/input-number-checkbox/input-number-checkbox.component';
 import { ListGemsComponent } from './components/list-gems/list-gems.component';
 import { ListRuneWordsFiltersComponent } from './components/list-rune-words-filters/list-rune-words-filters.component';
@@ -58,6 +59,7 @@ const components = [
     Diablo2HelperComponent,
     FormatEffectComponent,
     InputCheckboxComponent,
+    InputGameSaveFileComponent,
     InputNumberCheckboxComponent,
     ListGemsComponent,
     ListRuneWordsComponent,

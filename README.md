@@ -21,6 +21,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     -[ ] Add test to releases on the `develop` branch.
     -[ ] `RunewordFilterService.calculateCraftableRunes` testing
 -[ ] Fix UI on narrower screens.
+-[ ] CSS Grid table row hover.
+-[ ] Tutorial / tooltips.
 -[ ] Refactor `RuneTrackerService` into `RuneHelper`?
 -[ ] Parse save file?
 

@@ -41,6 +41,7 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
         }));
     }
 
+    // noinspection JSUnusedLocalSymbols
     protected applySort(changedSort?: ITable<IGem>): void {
         // this.applyChangedSort(
         //     {

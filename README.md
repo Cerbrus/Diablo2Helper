@@ -1,6 +1,6 @@
 # Diablo 2 Helper
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+Generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
 ## 💾 Stack
 <img alt="Angular" src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white">&nbsp;<!--

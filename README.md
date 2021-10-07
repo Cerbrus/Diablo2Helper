@@ -18,3 +18,11 @@ Generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.
 Icons:
 https://github.com/simple-icons/simple-icons/blob/develop/slugs.md
 -->
+
+## 🔗 Links
+
+| Title            | Link |
+|------------------|------|
+| Resource extract |https://www.reddit.com/r/diablo2/comments/mpa1yl/how_to_extract_item_textures_from_d2r_alpha/|
+| DC6 to PNG       |https://github.com/dschu012/dc6png|
+| CASC viewer      |http://www.zezula.net/en/casc/main.html|

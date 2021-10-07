@@ -2,7 +2,7 @@
     <ng-container *ngFor="let gemType of gemArray">
         <div class="table">
             <div class="table-row table-head">
-                <ui-table-head [label]="'gems.type.' + gemType.type" key="gemType"></ui-table-head>
+                <ui-table-head [labelKey]="'gems.type.' + gemType.type" key="gemType"></ui-table-head>
             </div>
             <div class="table-row table-body">
                 <div class="column-quality">{{ 'gems.quality.title' | translate }}</div>

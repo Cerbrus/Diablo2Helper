@@ -1,6 +1,6 @@
 <div [class.transition]="afterInit">
     <label (click)="toggle()">
-        {{ title | translate }}
+        {{ getLabel() }}
         <fa-icon [icon]="icon" [pull]="pull" [class.up]="collapsed"></fa-icon>
     </label>
     <div class="collapsible">

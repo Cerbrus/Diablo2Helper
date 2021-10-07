@@ -39,6 +39,10 @@ input {
 .clearable-input {
     position: relative;
 
+    input {
+        width: 100%;
+    }
+
     fa-icon {
         position: absolute;
         top: variables.$size-gap-small;
@@ -47,7 +51,7 @@ input {
         cursor: pointer;
         @include mixins.transition(color);
 
-        &:hover{
+        &:hover {
             color: variables.$theme-input-clear-hover;
         }
     }

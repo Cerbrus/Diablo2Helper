@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import settings from '../../assets/settings.json';
-import { ArrayHelper } from '../helpers';
+import { ArrayHelper, ObjectHelper } from '../helpers';
 import { IStorage } from '../interfaces/IStorage';
 import { GetValue, SaveValue } from '../types/storage';
 
@@ -28,10 +28,10 @@ export class StorageService {
     private getItem<T>(key: string): T {
         const stored = localStorage.getItem(`d2helper.${key}`);
 
-        if (stored === undefined || stored === null) {
+        if (!ObjectHelper.hasValue(stored)) {
             const defaultValue = this.defaultValues[key as keyof IStorage];
 
-            if (defaultValue !== undefined && defaultValue !== null)
+            if (ObjectHelper.hasValue(defaultValue))
                 return this.saveItem(key, defaultValue as T);
         }
 

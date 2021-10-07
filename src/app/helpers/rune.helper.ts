@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { RuneFactory } from '../factories/rune.factory';
 import { ITable } from '../interfaces';
 import { IGem } from '../interfaces/gem';
@@ -18,6 +19,11 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
 
         this.entitySort = this.storageService.get.runeSort();
         this.applySort();
+    }
+
+    public fromSaveItem(item: IItem): IRune | null {
+        const number = parseInt(item.type.replace('r', ''), 10);
+        return this.itemsArray.find(r => r.number === number) ?? null;
     }
 
     public getItem(rune: TRune): IRune {

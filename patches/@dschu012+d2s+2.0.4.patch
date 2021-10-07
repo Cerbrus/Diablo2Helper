@@ -1,0 +1,13 @@
+diff --git a/node_modules/@dschu012/d2s/lib/d2/attribute_enhancer.js b/node_modules/@dschu012/d2s/lib/d2/attribute_enhancer.js
+index cef817c..e1fadb0 100644
+--- a/node_modules/@dschu012/d2s/lib/d2/attribute_enhancer.js
++++ b/node_modules/@dschu012/d2s/lib/d2/attribute_enhancer.js
+@@ -163,7 +163,7 @@ function enhanceItem(item, constants, level, parent) {
+         else if (item.magical_name_ids && item.magical_name_ids.length === 6) {
+             for (var i = 0; i < 6; i++) {
+                 var id = item.magical_name_ids[i];
+-                if (id) {
++                if (id && constants.magic_prefixes[id]) {
+                     if (i % 5 == 0 && constants.magic_suffixes[id].tc) {
+                         item.transform_color = constants.magic_suffixes[id].tc;
+                     }

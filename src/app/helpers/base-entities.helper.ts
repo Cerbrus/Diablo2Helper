@@ -1,3 +1,4 @@
+import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { BaseEntityFactory } from '../factories/base-entity.factory';
 import { ITable } from '../interfaces';
 import { ItemOrArray } from '../types/helpers';
@@ -11,7 +12,7 @@ export abstract class BaseEntitiesHelper<TEntityMap,
 
     public get itemsArray(): Array<TEntity> {
         if (!this.itemsArrayCache)
-            this.itemsArrayCache = this.buildItemsArray();
+            this.itemsArrayCache = Object.values(this.getItems());
         return this.itemsArrayCache;
     }
 
@@ -31,9 +32,7 @@ export abstract class BaseEntitiesHelper<TEntityMap,
         return this.items;
     }
 
-    public buildItemsArray(): Array<TEntity> {
-        return Object.values(this.getItems());
-    }
+    public abstract fromSaveItem(item: IItem): TEntity | null;
 
     public abstract getItem(item: TType): TEntity;
 

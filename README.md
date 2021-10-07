@@ -2,6 +2,8 @@
 
 Generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
+Diablo 2 Save file (`.d2s`) parser: [@dschu012/d2s](https://www.npmjs.com/package/@dschu012/d2s)
+
 ## 💾 Stack
 <img alt="Angular" src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white">&nbsp;<!--
 --><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">&nbsp;<!--

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { isArray } from 'rxjs/internal-compatibility';
 import { GemFactory } from '../factories/gem.factory';
 import { ITable } from '../interfaces';
@@ -12,6 +13,13 @@ import { BaseEntitiesHelper } from './base-entities.helper';
 export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort> {
     constructor(gemFactory: GemFactory) {
         super(gemFactory);
+    }
+
+    public fromSaveItem(item: IItem): IGem | null {
+        const split = item.type_name.toLowerCase().split(' ');
+        return split.length >= 2
+            ? this.getItem(<TGem>[split[1], split[0]])
+            : null;
     }
 
     public getItem([type, quality]: TGem): IGem {

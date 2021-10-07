@@ -10,7 +10,8 @@
         "runeWords": "Runewords",
         "owned": "Owned",
         "darkMode": "Dark mode enabled",
-        "lightMode": "Dark mode disabled"
+        "lightMode": "Dark mode disabled",
+        "import": "Import character"
     },
     "labels": {
         "weapon": "Weapon",
@@ -34,6 +35,7 @@
         "search-placeholder": "Runeword name",
         "trackedRunes": "Runes in possession",
         "trackedRunesCount": "How many?",
+        "saveFile": "Diablo 2 save file (.d2s)",
         "sort": {
             "name": "Sort by name",
             "runes": "Sort by rune count",

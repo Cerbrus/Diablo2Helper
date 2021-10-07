@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { RuneWordFactory } from '../factories/runeword.factory';
 import { ITable } from '../interfaces';
 import { IRuneWord, IRuneWordMap } from '../interfaces/runeWord';
@@ -21,6 +22,12 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
 
         this.entitySort = this.storageService.get.runeWordSort();
         this.applySort();
+    }
+
+    public fromSaveItem(item: IItem): IRuneWord {
+        console.log(item.socketed_items);
+        throw new Error('TODO: Determine RuneWord');
+        return null as any;
     }
 
     public getItem(rune: TRuneWord): IRuneWord {

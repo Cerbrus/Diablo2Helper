@@ -1,9 +1,10 @@
 {
     "name": "rune-helper",
-    "version": "0.0.0",
+    "version": "0.1.4",
     "scripts": {
         "ng": "ng",
         "start": "ng serve --port 666",
+        "start_prod": "ng serve --port 666 --configuration production",
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
@@ -28,7 +29,6 @@
         "@fortawesome/free-solid-svg-icons": "^5.15.3",
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
-        "binary-parser": "^2.0.1",
         "patch-package": "^6.4.7",
         "rxjs": "~6.6.0",
         "tslib": "^2.3.0",

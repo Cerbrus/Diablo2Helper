@@ -18,6 +18,6 @@ export class Diablo2HelperComponent {
         translate.use(settings.defaultLanguage);
 
         translate.get('common.appTitle')
-            .subscribe(title => titleService.setTitle(environment.titlePrefix + title));
+            .subscribe(title => titleService.setTitle(`${title} [${environment.appVersion}]`));
     }
 }

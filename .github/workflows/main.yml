@@ -20,6 +20,22 @@ jobs:
             -   name: 🚚 Get latest code
                 uses: actions/checkout@v2
 
+            -   name: 🔊 Echo package.json
+                run: cat ./package.json
+            -   name: ⬆  Automated Version Bump
+                id: version-bump
+                uses: phips28/gh-action-bump-version@master
+                with:
+                    tag-prefix: 'v'
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+            -   name: 🔊 Echo package.json
+                run: cat ./package.json
+            -   name: 🔊 Echo new tag
+                env:
+                    NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+                run: echo "new tag $NEW_TAG"
+
             -   name: ⚙ Use Node.js 12
                 uses: actions/setup-node@v2-beta
                 with:

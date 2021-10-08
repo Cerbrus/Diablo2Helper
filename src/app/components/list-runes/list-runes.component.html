@@ -1,16 +1,15 @@
 <div class="table">
-    <div class="table-row table-head">
-        <ui-table-sort-control
-            *ngFor="let header of headers"
-            [header]="header"
-            [sort]="runeSort"
-            (onSort)="applySort($event)">
-        </ui-table-sort-control>
-        <ui-table-head label="labels.craft" key="craft"></ui-table-head>
-        <ui-table-head label="labels.socketEffect" key="effects"></ui-table-head>
-    </div>
-    <div class="table-row table-body">
-        <ng-container *ngFor="let rune of runeArraySorted">
+    <ui-table-sort-control
+        *ngFor="let header of headers"
+        [header]="header"
+        [sort]="runeSort"
+        (onSort)="applySort($event)">
+    </ui-table-sort-control>
+    <ui-table-head labelKey="labels.craft" key="craft"></ui-table-head>
+    <ui-table-head labelKey="labels.socketEffect" key="effects"></ui-table-head>
+
+    <div class="table-body">
+        <div class="table-row" *ngFor="let rune of runeArraySorted">
             <div class="column-name center-text">
                 #{{ rune.number }}
                 <br>
@@ -40,13 +39,12 @@
                 <format-effect title="shield"
                                [effects]="effects.shield"></format-effect>
                 <div>
-                        <span *ngIf="rune.iLvl">
-                            <strong>{{ 'labels.iLvl' | translate }}:</strong> {{ rune.iLvl }}
-                        </span>
-                    <strong>{{ 'labels.cLvl' | translate }}
-                        :</strong> {{ rune.cLvl || ('common.none' | translate) }}
+                    <span *ngIf="rune.iLvl">
+                        <strong>{{ 'labels.iLvl' | translate }}:</strong> {{ rune.iLvl }}
+                    </span>
+                    <strong>{{ 'labels.cLvl' | translate }}:</strong> {{ rune.cLvl || ('common.none' | translate) }}
                 </div>
             </div>
-        </ng-container>
+        </div>
     </div>
 </div>

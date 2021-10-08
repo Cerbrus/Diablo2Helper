@@ -1,37 +1,40 @@
 <div class="grid">
     <ng-container *ngFor="let gemType of gemArray">
         <div class="table">
-            <div class="table-row table-head">
-                <ui-table-head [label]="'gems.type.' + gemType.type" key="gemType"></ui-table-head>
-            </div>
-            <div class="table-row table-body">
-                <div class="column-quality">{{ 'gems.quality.title' | translate }}</div>
-                <div class="column-gem"></div>
-                <div class="column-effectWeapon">{{ 'labels.weapon' | translate }}</div>
-                <div class="column-effectArmorHelm">{{ 'labels.armorHelm' | translate }}</div>
-                <div class="column-effectShield">{{ 'labels.shield' | translate }}</div>
-                <div class="column-cLvl center-text">{{ 'labels.cLvl' | translate }}</div>
+            <ui-table-head key="gemType" [labelKey]="'gems.type.' + gemType.type"></ui-table-head>
 
-                <ng-container *ngFor="let gem of gemType.gems">
-                    <div class="column-quality">
-                        {{ 'gems.quality.' + gem.quality | translate }}
+            <ui-table-head key="quality" labelKey="gems.quality.title"></ui-table-head>
+            <ui-table-head key="owned" labelKey="labels.owned"></ui-table-head>
+            <ui-table-head key="effectWeapon" labelKey="labels.weapon"></ui-table-head>
+            <ui-table-head key="effectArmorHelm" labelKey="labels.armorHelm"></ui-table-head>
+            <ui-table-head key="effectShield" labelKey="labels.shield"></ui-table-head>
+            <ui-table-head key="cLvl" labelKey="labels.cLvl" class="center-text"></ui-table-head>
+
+            <div class="table-row" *ngFor="let gem of gemType.gems">
+                <div class="column-quality">
+                    {{ 'gems.quality.' + gem.quality | translate }}
+                </div>
+                <div class="column-gem">
+                    <sprite-gem [gem]="gem" [size]="24"></sprite-gem>
+                </div>
+                <div class="column-owned">
+                    <input-number-checkbox
+                        [(value)]="gem.owned"
+                        (valueChange)="gemOwned(gem)"
+                    ></input-number-checkbox>
+                </div>
+                <ng-container *ngVar="gem.effects as effects">
+                    <div class="column-effectWeapon">
+                        <format-effect [effects]="effects.weapon"></format-effect>
                     </div>
-                    <div class="column-gem">
-                        <sprite-gem [gem]="gem" [size]="24"></sprite-gem>
+                    <div class="column-effectArmorHelm">
+                        <format-effect [effects]="effects.armorHelm"></format-effect>
                     </div>
-                    <ng-container *ngVar="gem.effects as effects">
-                        <div class="column-effectWeapon">
-                            <format-effect [effects]="effects.weapon"></format-effect>
-                        </div>
-                        <div class="column-effectArmorHelm">
-                            <format-effect [effects]="effects.armorHelm"></format-effect>
-                        </div>
-                        <div class="column-effectShield">
-                            <format-effect [effects]="effects.shield"></format-effect>
-                        </div>
-                    </ng-container>
-                    <div class="column-cLvl center-text">{{ gem.cLvl }}</div>
+                    <div class="column-effectShield">
+                        <format-effect [effects]="effects.shield"></format-effect>
+                    </div>
                 </ng-container>
+                <div class="column-cLvl center-text">{{ gem.cLvl }}</div>
             </div>
         </div>
     </ng-container>

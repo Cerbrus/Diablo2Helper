@@ -2,6 +2,8 @@
 
 Generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
+Diablo 2 Save file (`.d2s`) parser: [@dschu012/d2s](https://www.npmjs.com/package/@dschu012/d2s)
+
 ## 💾 Stack
 <img alt="Angular" src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white">&nbsp;<!--
 --><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">&nbsp;<!--
@@ -18,3 +20,11 @@ Generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.
 Icons:
 https://github.com/simple-icons/simple-icons/blob/develop/slugs.md
 -->
+
+## 🔗 Links
+
+| Title            | Link |
+|------------------|------|
+| Resource extract |https://www.reddit.com/r/diablo2/comments/mpa1yl/how_to_extract_item_textures_from_d2r_alpha/|
+| DC6 to PNG       |https://github.com/dschu012/dc6png|
+| CASC viewer      |http://www.zezula.net/en/casc/main.html|

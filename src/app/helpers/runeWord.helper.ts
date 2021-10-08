@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { RuneWordFactory } from '../factories/runeword.factory';
 import { ITable } from '../interfaces';
 import { IRuneWord, IRuneWordMap } from '../interfaces/runeWord';
@@ -23,6 +24,13 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
         this.applySort();
     }
 
+    public fromSaveItem(item: IItem): IRuneWord | null {
+        const runesString = item.socketed_items
+            .map(i => this.runeHelper.fromSaveItem(i)?.name)
+            .join('|');
+        return this.itemsArray.find(runeWord => runeWord.runes.join('|') === runesString) ?? null;
+    }
+
     public getItem(rune: TRuneWord): IRuneWord {
         return this.getItems()[rune];
     }
@@ -39,7 +47,7 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
         return this.asItem(item).name;
     }
 
-    public saveRuneWordsOwned(): void {
+    public saveEntitiesOwned(): void {
         const owned = ArrayHelper.toRecordWithKey(
             this.itemsArray.filter(runeWord => runeWord.owned),
             runeWord => runeWord.name,
@@ -55,7 +63,7 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
                 cLvl: this.sortByCLvl.bind(this),
                 owned: this.sortByOwned.bind(this)
             },
-            'name' as TRuneWordSortKeys,
+            <TRuneWordSortKeys>'name',
             changedSort);
 
         this.storageService.save.runeWordSort(this.entitySort);

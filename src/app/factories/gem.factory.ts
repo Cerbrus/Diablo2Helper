@@ -4,7 +4,8 @@ import { EffectHelper } from '../helpers';
 import { IEffectBuilderParams, IEffectBuilders } from '../interfaces/effect';
 import { IGem, IGemMap, TGemQualityMap } from '../interfaces/gem';
 import { ISocketableEffects } from '../interfaces/socketable';
-import { GemQualities, TGemQuality, TGemType } from '../types/gem';
+import { StorageService } from '../services';
+import { GemQualities, GemQualityMap, TGem, TGemQuality, TGemType } from '../types/gem';
 import { BaseEntityFactory } from './base-entity.factory';
 
 @Injectable({ providedIn: 'root' })
@@ -17,11 +18,15 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
         perfect: 18
     };
 
-    constructor(private readonly translate: TranslateService) {
+    constructor(
+        private readonly storageService: StorageService,
+        private readonly translate: TranslateService
+    ) {
         super();
     }
 
     public buildItems(): IGemMap {
+        const owned = this.storageService.get.gemsOwned();
         const {
             integerEffect: int,
             percentageEffect: pct,
@@ -31,6 +36,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
         return {
             topaz: this.buildGemQualities(
                 'topaz',
+                owned,
                 {
                     weapon: ([min, max]) => rng('DamageLightning', min, max),
                     armorHelm: (value) => pct('MagicFind', value),
@@ -42,6 +48,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
                 }),
             amethyst: this.buildGemQualities(
                 'amethyst',
+                owned,
                 {
                     weapon: (value) => int('AttackRating', value),
                     armorHelm: (value) => int('StatStrength', value),
@@ -54,6 +61,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
             ),
             sapphire: this.buildGemQualities(
                 'sapphire',
+                owned,
                 {
                     weapon: ([min, max, duration]) => rng('DamageCold', min, max, duration),
                     armorHelm: (value) => int('StatMana', value),
@@ -66,6 +74,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
             ),
             ruby: this.buildGemQualities(
                 'ruby',
+                owned,
                 {
                     weapon: ([min, max]) => rng('DamageFire', min, max),
                     armorHelm: (value) => int('StatLife', value),
@@ -78,6 +87,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
             ),
             emerald: this.buildGemQualities(
                 'emerald',
+                owned,
                 {
                     weapon: ([value, duration]) => int('DamagePoison', value, duration),
                     armorHelm: (value) => int('StatDexterity', value),
@@ -90,6 +100,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
             ),
             diamond: this.buildGemQualities(
                 'diamond',
+                owned,
                 {
                     weapon: (value) => pct('DamageUndead', value),
                     armorHelm: (value) => int('AttackRating', value),
@@ -102,6 +113,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
             ),
             skull: this.buildGemQualities(
                 'skull',
+                owned,
                 {
                     weapon: ([life, mana]) => [pct('LeechLife', life), pct('LeechMana', mana)],
                     armorHelm: ([life, mana]) => [int('StatRegenLife', life), pct('StatRegenMana', mana)],
@@ -128,6 +140,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
     public buildGem<TType extends TGemType, TQuality extends TGemQuality>(
         quality: TQuality,
         type: TType,
+        owned: number,
         effects: ISocketableEffects
     ): IGem & { type: TType, quality: TQuality } {
         return this.setNewGemName({
@@ -141,19 +154,24 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
 
     private buildGemQualities<TType extends TGemType, W, A, S>(
         type: TType,
+        owned: Partial<Record<TGem, number>>,
         builders: IEffectBuilders<W, A, S>,
         { weapon, armorHelm, shield }: IEffectBuilderParams<W, A, S>
-    ): { [q in TGemQuality]: IGem & { type: TType, quality: q } } {
-        return GemQualities.reduce((gems, quality, index) => ({
-            ...gems,
-            [quality]: this.buildGem(
-                quality,
-                type,
-                {
-                    weapon: builders.weapon(weapon[index]),
-                    armorHelm: builders.armorHelm(armorHelm[index]),
-                    shield: builders.shield(shield[index])
-                })
-        }), {} as { [q in TGemQuality]: IGem & { type: TType, quality: q } });
+    ): GemQualityMap<TType> {
+        return GemQualities.reduce((gems, quality, index) => {
+            const key: TGem = `${quality}|${type}`;
+            return ({
+                ...gems,
+                [quality]: this.buildGem(
+                    quality,
+                    type,
+                    owned[key] ?? 0,
+                    {
+                        weapon: builders.weapon(weapon[index]),
+                        armorHelm: builders.armorHelm(armorHelm[index]),
+                        shield: builders.shield(shield[index])
+                    })
+            });
+        }, <GemQualityMap<TType>>{});
     }
 }

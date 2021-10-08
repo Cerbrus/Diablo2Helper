@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Diablo2HelperComponent } from './components/diablo2-helper/diablo2-helper.component';
 import { FormatEffectComponent } from './components/format-effect/format-effect.component';
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
+import { InputGameSaveFileComponent } from './components/input-game-save-file/input-game-save-file.component';
 import { InputNumberCheckboxComponent } from './components/input-number-checkbox/input-number-checkbox.component';
 import { ListGemsComponent } from './components/list-gems/list-gems.component';
 import { ListRuneWordsFiltersComponent } from './components/list-rune-words-filters/list-rune-words-filters.component';
@@ -20,11 +21,13 @@ import { RuneTrackingCountersComponent } from './components/rune-tracking-counte
 import { RuneTrackingSelectComponent } from './components/rune-tracking-select/rune-tracking-select.component';
 import { SpriteGemComponent } from './components/sprite-gem/sprite-gem.component';
 import { SpriteRuneComponent } from './components/sprite-rune/sprite-rune.component';
+import { TabCharacterImportComponent } from './components/tab-character-import/tab-character-import.component';
 import { TabRuneWordsComponent } from './components/tab-rune-words/tab-rune-words.component';
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
 import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
+import { UiTableRecordComponent } from './components/ui-table-record/ui-table-record.component';
 import { UiTableSortControlComponent } from './components/ui-table-sort-control/ui-table-sort-control.component';
 import { UiTabsComponent } from './components/ui-tabs/ui-tabs.component';
 
@@ -58,6 +61,7 @@ const components = [
     Diablo2HelperComponent,
     FormatEffectComponent,
     InputCheckboxComponent,
+    InputGameSaveFileComponent,
     InputNumberCheckboxComponent,
     ListGemsComponent,
     ListRuneWordsComponent,
@@ -68,11 +72,13 @@ const components = [
     RuneTrackingSelectComponent,
     SpriteGemComponent,
     SpriteRuneComponent,
+    TabCharacterImportComponent,
     TabRuneWordsComponent,
     ThemeSwitcherComponent,
     UiCollapsibleComponent,
     UiTabComponent,
     UiTableHeadComponent,
+    UiTableRecordComponent,
     UiTableSortControlComponent,
     UiTabsComponent
 ];
@@ -98,7 +104,8 @@ const components = [
             missingTranslationHandler: {
                 provide: MissingTranslationHandler,
                 useClass: LogMissingTranslationHandler
-            }
+            },
+            useDefaultLang: true
         })
     ],
     providers: [],

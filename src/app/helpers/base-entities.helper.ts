@@ -1,3 +1,4 @@
+import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { BaseEntityFactory } from '../factories/base-entity.factory';
 import { ITable } from '../interfaces';
 import { ItemOrArray } from '../types/helpers';
@@ -11,7 +12,7 @@ export abstract class BaseEntitiesHelper<TEntityMap,
 
     public get itemsArray(): Array<TEntity> {
         if (!this.itemsArrayCache)
-            this.itemsArrayCache = this.buildItemsArray();
+            this.itemsArrayCache = Object.values(this.getItems());
         return this.itemsArrayCache;
     }
 
@@ -31,15 +32,15 @@ export abstract class BaseEntitiesHelper<TEntityMap,
         return this.items;
     }
 
-    public buildItemsArray(): Array<TEntity> {
-        return Object.values(this.getItems());
-    }
+    public abstract fromSaveItem(item: IItem): TEntity | null;
 
     public abstract getItem(item: TType): TEntity;
 
     public abstract isItem<T>(item: any): item is TEntity;
 
     public abstract isType(item: any): item is TType;
+
+    public abstract saveEntitiesOwned(): void;
 
     public asItem(item: TType | TEntity): TEntity ;
     public asItem(item: Array<TType | TEntity>): Array<TEntity>;
@@ -77,10 +78,10 @@ export abstract class BaseEntitiesHelper<TEntityMap,
                 });
         }
 
-        const [key, activeSort] = (ObjectHelper.find(
+        const [key, activeSort] = <[TKey, ITable<TEntity>]>(ObjectHelper.find(
             this.entitySort,
             (key, current) =>
-                ![undefined, 'none'].includes(current.direction)) ?? []) as [TKey, ITable<TEntity>];
+                ![undefined, 'none'].includes(current.direction)) ?? []);
 
         const sortMethod = sortMethods [key ?? defaultMethod];
 

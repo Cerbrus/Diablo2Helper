@@ -1,5 +1,17 @@
+import { KeyValue } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { ArrayHelper, NumberHelper, ObjectHelper, RuneHelper, RuneWordHelper, StringHelper } from '../helpers';
+import {
+    ArrayHelper,
+    BaseEntitiesHelper,
+    GemHelper,
+    NumberHelper,
+    ObjectHelper,
+    RuneHelper,
+    RuneWordHelper,
+    StringHelper
+} from '../helpers';
+import { IGem } from '../interfaces/gem';
+import { IRune } from '../interfaces/rune';
 import { IRuneWord, IRuneWordFilters, IRuneWordMap } from '../interfaces/runeWord';
 import { TItem } from '../types';
 import { RuneWords, TRuneWord } from '../types/runeWord';
@@ -30,13 +42,39 @@ export class RunewordFilterService {
 
     constructor(
         private readonly storageService: StorageService,
-        private readonly runeTracker: RuneTrackerService,
+        private readonly gemHelper: GemHelper,
         private readonly runeHelper: RuneHelper,
-        private readonly runeWordHelper: RuneWordHelper
+        private readonly runeWordHelper: RuneWordHelper,
+        private readonly runeTracker: RuneTrackerService
     ) {
         this.filters = storageService.get.runeWordFilters();
         this.runeWords = runeWordHelper.getItems();
         this.calculateRuneWordVisibility();
+    }
+
+    public applySaveToFilters(
+        cLvl: number,
+        gems: Array<KeyValue<IGem, number>>,
+        runes: Array<KeyValue<IRune, number>>,
+        runeWords: Array<KeyValue<IRuneWord, number>>
+    ): void {
+        this.filters.cLvl = cLvl;
+
+        this.applyOwnedCount(this.gemHelper, gems);
+        this.applyOwnedCount(this.runeHelper, runes);
+        this.applyOwnedCount(this.runeWordHelper, runeWords);
+
+        this.saveFilters();
+    }
+
+    // noinspection JSMethodCanBeStatic
+    private applyOwnedCount(
+        helper: BaseEntitiesHelper<any, any, any, any>,
+        itemCounts: Array<KeyValue<{ owned?: number }, number>>
+    ): void {
+        helper.itemsArray.forEach(i => i.count = 0);
+        itemCounts.forEach(({ key, value }) => key.owned = value);
+        helper.saveEntitiesOwned();
     }
 
     public calculateRuneWordVisibility(): void {

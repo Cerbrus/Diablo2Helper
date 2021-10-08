@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import settings from '../../../assets/settings.json';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -13,6 +14,9 @@ export class Diablo2HelperComponent {
         titleService: Title,
         translate: TranslateService
     ) {
+        translate.setDefaultLang(settings.defaultLanguage);
+        translate.use(settings.defaultLanguage);
+
         translate.get('common.appTitle')
             .subscribe(title => titleService.setTitle(environment.titlePrefix + title));
     }

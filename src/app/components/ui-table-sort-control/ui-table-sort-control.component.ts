@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import {
     faSortAlphaDown,
@@ -19,8 +19,7 @@ import { ITable, ITableHeader, TableSortDirection, TableSortIcon } from '../../i
 @Component({
     selector: 'ui-table-sort-control',
     templateUrl: './ui-table-sort-control.component.html',
-    styleUrls: ['./ui-table-sort-control.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['./ui-table-sort-control.component.scss']
 })
 export class UiTableSortControlComponent<TSort, TEntity extends Record<string, ITable<TSort>>> {
     @Output()

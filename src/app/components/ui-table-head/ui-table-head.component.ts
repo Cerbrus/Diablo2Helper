@@ -1,16 +1,14 @@
 import { Component, HostBinding, Input } from '@angular/core';
+import { LabeledBaseComponent } from '../labeled-base.component';
 
 @Component({
     selector: 'ui-table-head',
     templateUrl: './ui-table-head.component.html',
     styleUrls: ['./ui-table-head.component.scss']
 })
-export class UiTableHeadComponent {
+export class UiTableHeadComponent extends LabeledBaseComponent {
     @Input()
     public key!: string;
-
-    @Input()
-    public label!: string;
 
     @HostBinding('class')
     public get cssClass(): string {

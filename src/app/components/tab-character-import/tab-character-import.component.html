@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="grid controls">
+        <label>{{ 'labels.import' | translate }}</label>
+        <input-game-save-file (onParse)="onParse($event)"></input-game-save-file>
+        <p>{{ 'labels.saveToFiltersHelp' | translate }}</p>
+        <button (click)="applySaveToFilters()"
+                [disabled]="!parseResult">{{ 'labels.saveToFilters' | translate }}</button>
+        <pre *ngIf="logText">{{ logText }}</pre>
+    </div>
+
+    <div class="grid" *ngIf="parseError">
+        <label>{{ 'common.error' | translate }}</label>
+        <div class="table table-error">
+            <ui-table-head labelKey="log.parseError"></ui-table-head>
+            <div class="column-error">
+                {{ parseError.error }}
+            </div>
+        </div>
+    </div>
+    <div class="grid" *ngIf="parseResult">
+        <label>{{ 'labels.imported' | translate }}</label>
+        <div class="table table-result">
+            <ui-table-head *ngIf="parseResult" labelKey="labels.character"></ui-table-head>
+            <ui-table-head *ngIf="gems" labelKey="common.gems"></ui-table-head>
+            <ui-table-head *ngIf="runes" labelKey="common.runes"></ui-table-head>
+            <ui-table-head *ngIf="runeWords" labelKey="common.runeWords"></ui-table-head>
+
+            <ui-table-record *ngIf="character"
+                             class="column-character"
+                             [record]="character"
+            ></ui-table-record>
+            <ui-table-record *ngIf="gems"
+                             class="column-gems"
+                             labelKey="common.gems"
+                             [record]="gems"
+                             sortBy="key"
+            ></ui-table-record>
+            <ui-table-record *ngIf="runes"
+                             class="column-runes"
+                             labelKey="common.runes"
+                             [record]="runes"
+                             sortBy="key"
+            ></ui-table-record>
+            <ui-table-record *ngIf="runeWords"
+                             class="column-runeWords"
+                             labelKey="common.runeWords"
+                             [record]="runeWords"
+                             sortBy="key"
+            ></ui-table-record>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 <div class="grid filters">
     <label class="text-l">{{ 'labels.filters' | translate }}</label>
 
-    <ui-collapsible title="labels.search">
+    <ui-collapsible labelKey="labels.search">
         <div class="clearable-input">
             <input type="text"
                    [(ngModel)]="filters.name"
@@ -13,18 +13,18 @@
         </div>
     </ui-collapsible>
 
-    <ui-collapsible title="labels.show">
-        <input-checkbox [labelKey]="'labels.showUnavailable'"
+    <ui-collapsible labelKey="labels.show">
+        <input-checkbox labelKey="labels.showUnavailable"
                         [(checked)]="filters.showUnavailable"
                         (click)="saveFilters()"
         ></input-checkbox>
-        <input-checkbox [labelKey]="'labels.showCraftable'"
+        <input-checkbox labelKey="labels.showCraftable"
                         [(checked)]="filters.showCraftable"
                         (click)="saveFilters()"
         ></input-checkbox>
     </ui-collapsible>
 
-    <ui-collapsible title="labels.maxClvl">
+    <ui-collapsible labelKey="labels.maxClvl">
         <input type="number"
                [(ngModel)]="filters.cLvl"
                [placeholder]="'labels.maxClvl' | translate"
@@ -34,7 +34,7 @@
                onClickSelect>
     </ui-collapsible>
 
-    <ui-collapsible title="labels.itemType">
+    <ui-collapsible labelKey="labels.itemType">
         <input-checkbox *ngFor="let itemType of itemTypes"
                         [labelKey]="'itemTypes.' + itemType"
                         [(checked)]="filters.itemTypes[itemType]"

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import settings from '../../assets/settings.json';
-import { ArrayHelper } from '../helpers';
+import { ArrayHelper, ObjectHelper } from '../helpers';
 import { IStorage } from '../interfaces/IStorage';
 import { GetValue, SaveValue } from '../types/storage';
 
@@ -9,13 +9,14 @@ export class StorageService {
     private readonly defaultValues: IStorage = <IStorage>settings.storageDefaults;
 
     private readonly storageKeys: Array<keyof IStorage> = [
-        'uiActiveTabs',
         'darkMode',
+        'gemsOwned',
         'runeSort',
         'runeWordFilters',
         'runeWordSort',
         'runeWordsOwned',
         'runesOwned',
+        'uiActiveTabs',
         'uiCollapsibleState'
     ];
 
@@ -28,11 +29,11 @@ export class StorageService {
     private getItem<T>(key: string): T {
         const stored = localStorage.getItem(`d2helper.${key}`);
 
-        if (stored === undefined || stored === null) {
-            const defaultValue = this.defaultValues[key as keyof IStorage];
+        if (!ObjectHelper.hasValue(stored)) {
+            const defaultValue = this.defaultValues[<keyof IStorage>key];
 
-            if (defaultValue !== undefined && defaultValue !== null)
-                return this.saveItem(key, defaultValue as T);
+            if (ObjectHelper.hasValue(defaultValue))
+                return this.saveItem(key, <T>defaultValue);
         }
 
         return stored ? JSON.parse(stored) : null;

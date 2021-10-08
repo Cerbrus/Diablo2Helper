@@ -1,3 +1,4 @@
+import { KeyValue } from '@angular/common';
 import { isArray } from 'rxjs/internal-compatibility';
 import { ItemOrArray, Key } from '../../types/helpers';
 
@@ -40,11 +41,24 @@ export class ArrayHelper {
                         [key]: getValue(item, record, index)
                     }
                     : record;
-            }, {} as Record<TKey, TValue>);
+            }, <Record<TKey, TValue>>{});
     }
 
-    public static countItems<TType extends Key>(items: ItemOrArray<TType>): Record<TType, number> {
+    public static countStringOccurrences<TType extends Key>(items: ItemOrArray<TType>): Record<TType, number> {
         return ArrayHelper.toRecord(ArrayHelper.toArray(items),
             (item, record) => (record[item] || 0) + 1);
+    }
+
+    public static countObjectOccurrences<TType>(items: ItemOrArray<TType>): Array<KeyValue<TType, number>> {
+        return ArrayHelper.toArray(items)
+            .reduce((result, item) => {
+                const kv = result.find(({ key }) => key === item);
+                if (kv)
+                    kv.value++;
+                else
+                    result.push({ key: item, value: 1 });
+
+                return result;
+            }, <Array<KeyValue<TType, number>>>[]);
     }
 }

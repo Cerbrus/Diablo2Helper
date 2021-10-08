@@ -1,19 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { LabeledBaseComponent } from '../labeled-base.component';
 
 @Component({
     selector: 'input-checkbox',
     templateUrl: './input-checkbox.component.html',
     styleUrls: ['./input-checkbox.component.scss']
 })
-export class InputCheckboxComponent {
-    @Input()
-    public label?: string;
-
-    @Input()
-    public labelKey?: string;
-
+export class InputCheckboxComponent extends LabeledBaseComponent {
     @Input()
     public isXl = false;
 
@@ -29,16 +24,13 @@ export class InputCheckboxComponent {
     public iconCheck = faCheck;
     public iconX = faTimes;
 
-    constructor(private readonly translate: TranslateService) {
+    constructor(translate: TranslateService) {
+        super(translate)
     }
 
     public onClick(): void {
         this.checked = !this.checked;
         this.checkedChange.emit(this.checked);
         this.click.emit();
-    }
-
-    public getLabel(): string | undefined {
-        return this.labelKey ? this.translate.instant(this.labelKey) : this.label;
     }
 }

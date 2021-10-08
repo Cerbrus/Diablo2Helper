@@ -1,17 +1,16 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { PullProp } from '@fortawesome/fontawesome-svg-core';
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from '../../services';
+import { LabeledBaseComponent } from '../labeled-base.component';
 
 @Component({
     selector: 'ui-collapsible',
     templateUrl: './ui-collapsible.component.html',
     styleUrls: ['./ui-collapsible.component.scss']
 })
-export class UiCollapsibleComponent implements AfterViewInit {
-    @Input()
-    public title!: string;
-
+export class UiCollapsibleComponent extends LabeledBaseComponent implements AfterViewInit {
     @Input()
     public collapsed = false;
 
@@ -26,12 +25,16 @@ export class UiCollapsibleComponent implements AfterViewInit {
     @ViewChild('wrapper')
     private wrapper!: ElementRef<HTMLDivElement>;
 
-    constructor(private readonly storageService: StorageService) {
+    constructor(
+        translate: TranslateService,
+        private readonly storageService: StorageService
+    ) {
+        super(translate);
     }
 
     public ngAfterViewInit(): void {
         const collapsed = this.storageService.get
-            .uiCollapsibleState()[this.title];
+            .uiCollapsibleState()[this.labelKey ?? this.getLabel()];
         this.setState(collapsed ?? false);
         this.afterInit = true;
     }
@@ -55,7 +58,7 @@ export class UiCollapsibleComponent implements AfterViewInit {
     private saveState(): void {
         const state = this.storageService.get
             .uiCollapsibleState();
-        state[this.title] = this.collapsed;
+        state[this.labelKey ?? this.getLabel()] = this.collapsed;
         this.storageService.save.uiCollapsibleState(state);
     }
 }

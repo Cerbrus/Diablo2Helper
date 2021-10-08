@@ -7,10 +7,10 @@
         "start_prod": "ng serve --port 666 --configuration production",
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
-        "test": "ng test",
+        "test": "ng test --source-map=false --watch=false --code-coverage",
         "patch": "npx patch-package @dschu012/d2s",
         "postinstall": "patch-package",
-        "preversion": "npm test",
+        "preversion": "npm test --source-map=false --watch=false --code-coverage",
         "version": "npm run build && git add -A dist",
         "postversion": "git push && git push --tags && rm -rf build/temp"
     },

@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from '../environments/environment';
 
 // Components
 import { Diablo2HelperComponent } from './components/diablo2-helper/diablo2-helper.component';
@@ -45,7 +46,7 @@ import { KeyValueTypedPipe } from './pipes/key-value-typed.pipe';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http, './assets/i18n/', `.json?v=${environment.appVersion}`);
 }
 
 const directives = [

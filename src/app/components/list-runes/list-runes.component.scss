@@ -22,11 +22,16 @@
         $offset: v.$size-gap * 5 + v.$size-tab-control + 1px + v.$size-gap-table * 2 + v.$size-header;
         max-height: calc(100vh - #{$offset});
         overflow-y: auto;
+    }
 
-        .column {
-            &-rune {
-                justify-items: center;
-            }
+    .column {
+        &-name {
+            display: grid;
+        }
+
+        &-rune {
+            display: grid;
+            justify-items: center;
         }
     }
 }

@@ -33,12 +33,12 @@ export class UiTableSortControlComponent<TSort, TEntity extends Record<string, I
 
     @HostBinding('colSpan')
     public get colSpan(): number | undefined {
-        return this.header.colSpan;
+        return this.header?.colSpan;
     }
 
     @HostBinding('class')
     public get cssClass(): string {
-        return `header-${this.header.key}`;
+        return `header-${this.header?.key}`;
     }
 
     private icons: Record<TableSortIcon, Record<'asc' | 'desc', IconDefinition>> = {
@@ -76,7 +76,7 @@ export class UiTableSortControlComponent<TSort, TEntity extends Record<string, I
     }
 
     public getSort(): ITable<TSort> {
-        return this.sort[this.header.key];
+        return this.header && this.sort[this.header.key];
     }
 
     private getDirection(): TableSortDirection {

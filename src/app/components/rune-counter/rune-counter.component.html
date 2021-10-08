@@ -5,6 +5,7 @@
 <input class="input"
        type="number"
        onClickSelect
+       *ngIf="rune"
        [(ngModel)]="rune.owned"
        (keyup)="onCountChange()"
        [max]="max"

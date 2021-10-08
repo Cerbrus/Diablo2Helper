@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslatePipe } from '@ngx-translate/core';
 import { TestModule } from '../../../testing/test-common.module';
 import { InputGameSaveFileComponent } from './input-game-save-file.component';
 

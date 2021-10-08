@@ -30,6 +30,9 @@ export class UiTabsComponent implements AfterContentInit {
     }
 
     public selectTab(tab: UiTabComponent): void {
+        if (!tab)
+            return;
+
         this.tabs.toArray().forEach(tab => tab.active = false);
         tab.active = true;
 

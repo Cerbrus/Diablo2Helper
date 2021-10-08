@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from '../environments/environment';
 
 // Components
 import { Diablo2HelperComponent } from './components/diablo2-helper/diablo2-helper.component';
@@ -21,8 +22,10 @@ import { RuneTrackingCountersComponent } from './components/rune-tracking-counte
 import { RuneTrackingSelectComponent } from './components/rune-tracking-select/rune-tracking-select.component';
 import { SpriteGemComponent } from './components/sprite-gem/sprite-gem.component';
 import { SpriteRuneComponent } from './components/sprite-rune/sprite-rune.component';
-import { TabCharacterImportComponent } from './components/tab-character-import/tab-character-import.component';
-import { TabRuneWordsComponent } from './components/tab-rune-words/tab-rune-words.component';
+import { TabPaneCharacterImportComponent } from './components/tab-pane-character-import/tab-pane-character-import.component';
+import { TabPaneGemsComponent } from './components/tab-pane-gems/tab-pane-gems.component';
+import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-pane-rune-words.component';
+import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
@@ -45,7 +48,7 @@ import { KeyValueTypedPipe } from './pipes/key-value-typed.pipe';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http, './assets/i18n/', `.json?v=${environment.appVersion}`);
 }
 
 const directives = [
@@ -72,8 +75,10 @@ const components = [
     RuneTrackingSelectComponent,
     SpriteGemComponent,
     SpriteRuneComponent,
-    TabCharacterImportComponent,
-    TabRuneWordsComponent,
+    TabPaneCharacterImportComponent,
+    TabPaneGemsComponent,
+    TabPaneRuneWordsComponent,
+    TabPaneRunesComponent,
     ThemeSwitcherComponent,
     UiCollapsibleComponent,
     UiTabComponent,

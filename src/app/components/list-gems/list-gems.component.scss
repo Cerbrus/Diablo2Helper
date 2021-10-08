@@ -1,3 +1,12 @@
+@use 'variables' as v;
+@use 'ui.table' as table;
+
+.grid {
+    $offset: v.$size-header + v.$size-gap * 4 + v.$size-gap-table;
+    max-height: calc(100vh - #{$offset});
+    overflow-y: auto;
+}
+
 .table {
     grid-template-columns: 90px 50px 90px repeat(3, 1fr) 90px;
 
@@ -9,5 +18,9 @@
         &-quality {
             grid-column: span 2;
         }
+    }
+
+    #{table.$td} {
+        display: grid;
     }
 }

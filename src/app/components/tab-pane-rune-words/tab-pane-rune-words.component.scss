@@ -1,6 +1,5 @@
 @use 'variables';
 
-
 :host {
     //$offset: variables.$size-gap * 4 + variables.$size-tab-control + 2px;
     //height: calc(100vh - #{$offset});

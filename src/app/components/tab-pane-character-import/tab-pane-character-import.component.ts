@@ -11,11 +11,11 @@ import { D2sParserService } from '../../services/d2s-parser.service';
 import { TError } from '../../types/TError';
 
 @Component({
-    selector: 'tab-character-import',
-    templateUrl: './tab-character-import.component.html',
-    styleUrls: ['./tab-character-import.component.scss']
+    selector: 'tab-pane-character-import',
+    templateUrl: './tab-pane-character-import.component.html',
+    styleUrls: ['./tab-pane-character-import.component.scss']
 })
-export class TabCharacterImportComponent {
+export class TabPaneCharacterImportComponent {
     public parseResult?: ID2S;
     public parseError?: TError<any>;
 

@@ -11,8 +11,12 @@ export abstract class BaseEntitiesHelper<TEntityMap,
     public entitySort!: TSort;
 
     public get itemsArray(): Array<TEntity> {
-        if (!this.itemsArrayCache)
+        if (!this.itemsArrayCache) {
             this.itemsArrayCache = Object.values(this.getItems());
+            if (!this.isItem(this.itemsArrayCache[0])) {
+                this.itemsArrayCache = this.itemsArrayCache.map(i => Object.values(i)).flat();
+            }
+        }
         return this.itemsArrayCache;
     }
 

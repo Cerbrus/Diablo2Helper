@@ -20,6 +20,6 @@ export class ListGemsComponent {
 
     public gemOwned(gem: IGem, amount?: number): void {
         if (amount) gem.owned = amount;
-        this.gemHelper.saveGemsOwned();
+        this.gemHelper.saveEntitiesOwned();
     }
 }

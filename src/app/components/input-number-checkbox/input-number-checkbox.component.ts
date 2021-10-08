@@ -12,6 +12,9 @@ export class InputNumberCheckboxComponent {
     @Output()
     public valueChange = new EventEmitter<number>();
 
+    @Input()
+    public small = false;
+
     public onCheck(): void {
         this.value = 1;
         this.onChange();

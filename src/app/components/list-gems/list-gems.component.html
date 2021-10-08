@@ -21,6 +21,7 @@
                     <input-number-checkbox
                         [(value)]="gem.owned"
                         (valueChange)="gemOwned(gem)"
+                        [small]="true"
                     ></input-number-checkbox>
                 </div>
                 <ng-container *ngVar="gem.effects as effects">

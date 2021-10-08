@@ -60,18 +60,11 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
     }
 
     public saveEntitiesOwned(): void {
-        const owned = ArrayHelper.toRecordWithKey(
-            this.itemsArray.filter(gem => gem.owned),
-            gem => this.getType(gem),
-            gem => gem.owned!);
-        this.storageService.save.gemsOwned(owned);
-    }
-
-    public saveGemsOwned(): void {
         const owned = ArrayHelper.toRecordWithKey<TGem, number, IGem>(
             this.itemsArray.filter(gem => gem.owned),
             gem => `${gem.quality}|${gem.type}`,
             gem => gem.owned!);
+
         this.storageService.save.gemsOwned(owned);
     }
 

@@ -146,6 +146,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
         return this.setNewGemName({
             type,
             quality,
+            owned,
             name: '',
             cLvl: this.qualityLevels[quality],
             effects

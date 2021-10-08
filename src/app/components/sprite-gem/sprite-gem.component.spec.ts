@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModule } from '../../../testing/test-common.module';
 import { SpriteGemComponent } from './sprite-gem.component';
 
 describe('DisplayGemComponent', () => {
@@ -7,6 +8,7 @@ describe('DisplayGemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+                imports: [TestModule],
                 declarations: [SpriteGemComponent]
             })
             .compileComponents();

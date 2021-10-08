@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModule } from '../../../testing/test-common.module';
 import { UiTableHeadComponent } from './ui-table-head.component';
 
 describe('UiTableHeadComponent', () => {
@@ -7,6 +8,7 @@ describe('UiTableHeadComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+                imports: [TestModule],
                 declarations: [UiTableHeadComponent]
             })
             .compileComponents();

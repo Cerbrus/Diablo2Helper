@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModule } from '../../../testing/test-common.module';
 import { InputGameSaveFileComponent } from './input-game-save-file.component';
 
 describe('InputGameSaveFileComponent', () => {
@@ -7,6 +8,7 @@ describe('InputGameSaveFileComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+                imports: [TestModule],
                 declarations: [InputGameSaveFileComponent]
             })
             .compileComponents();

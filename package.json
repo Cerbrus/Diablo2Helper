@@ -9,7 +9,10 @@
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "patch": "npx patch-package @dschu012/d2s",
-        "postinstall": "patch-package"
+        "postinstall": "patch-package",
+        "preversion": "npm test",
+        "version": "npm run build && git add -A dist",
+        "postversion": "git push && git push --tags && rm -rf build/temp"
     },
     "private": true,
     "dependencies": {

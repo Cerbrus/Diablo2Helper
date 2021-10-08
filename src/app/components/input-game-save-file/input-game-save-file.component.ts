@@ -19,11 +19,11 @@ export class InputGameSaveFileComponent {
     }
 
     public async onChange($event: Event): Promise<void> {
-        const files = ($event.target as HTMLInputElement).files;
+        const files = (<HTMLInputElement>$event.target).files;
         if (!files?.length)
             return;
 
-        this.file = files[0]
+        this.file = files[0];
 
         this.parseArrayBuffer(await this.file.arrayBuffer());
     }

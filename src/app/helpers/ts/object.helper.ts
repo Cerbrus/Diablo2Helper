@@ -12,7 +12,7 @@ export class ObjectHelper {
     public static entries<TKey extends string, TValue>(
         obj: { [key in TKey]?: TValue }
     ): Array<[TKey, TValue]> {
-        return Object.entries(obj) as Array<[TKey, TValue]>;
+        return <Array<[TKey, TValue]>>Object.entries(obj);
     }
 
     public static forEach<TKey extends string, TValue>(

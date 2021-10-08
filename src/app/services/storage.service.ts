@@ -30,10 +30,10 @@ export class StorageService {
         const stored = localStorage.getItem(`d2helper.${key}`);
 
         if (!ObjectHelper.hasValue(stored)) {
-            const defaultValue = this.defaultValues[key as keyof IStorage];
+            const defaultValue = this.defaultValues[<keyof IStorage>key];
 
             if (ObjectHelper.hasValue(defaultValue))
-                return this.saveItem(key, defaultValue as T);
+                return this.saveItem(key, <T>defaultValue);
         }
 
         return stored ? JSON.parse(stored) : null;

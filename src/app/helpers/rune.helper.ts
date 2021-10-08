@@ -62,7 +62,7 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
                 name: this.sortByName.bind(this),
                 owned: this.sortByOwned.bind(this)
             },
-            'number' as TRuneSortKeys,
+            <TRuneSortKeys>'number',
             changedSort);
 
         this.storageService.save.runeSort(this.entitySort);

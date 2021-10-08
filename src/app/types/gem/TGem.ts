@@ -1,3 +1,5 @@
+import { IGem } from '../../interfaces/gem';
+
 export type TGem = `${TGemQuality}|${TGemType}`;
 
 export const GemTypes: Array<TGemType> = [
@@ -17,3 +19,6 @@ export type TGemType =
 
 export type TGemQuality =
     'chipped' | 'flawed' | 'normal' | 'flawless' | 'perfect';
+
+
+export type GemQualityMap<TType> = { [q in TGemQuality]: IGem & { type: TType, quality: q } };

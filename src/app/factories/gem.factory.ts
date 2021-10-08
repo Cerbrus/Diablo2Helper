@@ -5,7 +5,7 @@ import { IEffectBuilderParams, IEffectBuilders } from '../interfaces/effect';
 import { IGem, IGemMap, TGemQualityMap } from '../interfaces/gem';
 import { ISocketableEffects } from '../interfaces/socketable';
 import { StorageService } from '../services';
-import { GemQualities, TGem, TGemQuality, TGemType } from '../types/gem';
+import { GemQualities, GemQualityMap, TGem, TGemQuality, TGemType } from '../types/gem';
 import { BaseEntityFactory } from './base-entity.factory';
 
 @Injectable({ providedIn: 'root' })
@@ -157,7 +157,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
         owned: Partial<Record<TGem, number>>,
         builders: IEffectBuilders<W, A, S>,
         { weapon, armorHelm, shield }: IEffectBuilderParams<W, A, S>
-    ): { [q in TGemQuality]: IGem & { type: TType, quality: q } } {
+    ): GemQualityMap<TType> {
         return GemQualities.reduce((gems, quality, index) => {
             const key: TGem = `${quality}|${type}`;
             return ({
@@ -172,6 +172,6 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
                         shield: builders.shield(shield[index])
                     })
             });
-        }, {} as { [q in TGemQuality]: IGem & { type: TType, quality: q } });
+        }, <GemQualityMap<TType>>{});
     }
 }

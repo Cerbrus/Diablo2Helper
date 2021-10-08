@@ -98,13 +98,13 @@ export abstract class TooltipBaseDirective {
 
     private setupContainer(): void {
         const { body } = this.document;
-        const containers = body.getElementsByClassName('tooltip-container');
+        const containers = <HTMLCollectionOf<HTMLDivElement>>body.getElementsByClassName('tooltip-container');
         if (!containers.length) {
             this.tooltipContainer = this.renderer.createElement('div');
             this.renderer.addClass(this.tooltipContainer, 'tooltip-container');
             this.renderer.appendChild(body, this.tooltipContainer);
         } else {
-            this.tooltipContainer = containers[0] as HTMLDivElement;
+            this.tooltipContainer = containers[0];
         }
     }
 }

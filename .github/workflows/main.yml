@@ -22,20 +22,12 @@ jobs:
 
             -   name: 🔊 Echo package.json
                 run: cat ./package.json
-            -   name: ⬆  Automated Version Bump (Master)
+            -   name: ⬆  Automated Version Bump
                 id: version-bump-live
                 uses: phips28/gh-action-bump-version@master
                 with:
                     tag-prefix: 'LIVE-v'
                     target-branch: 'master'
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-            -   name: ⬆  Automated Version Bump (Develop)
-                id: version-bump-dev
-                uses: phips28/gh-action-bump-version@master
-                with:
-                    tag-prefix: 'DEV-v'
-                    target-branch: 'develop'
                 env:
                     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
             -   name: 🔊 Echo package.json

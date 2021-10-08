@@ -34,7 +34,10 @@
                         "scripts": [],
                         "stylePreprocessorOptions": {
                             "includePaths": ["src/app/styles"]
-                        }
+                        },
+                        "allowedCommonJsDependencies": [
+                            "@dschu012/d2s"
+                        ]
                     },
                     "configurations": {
                         "production": {

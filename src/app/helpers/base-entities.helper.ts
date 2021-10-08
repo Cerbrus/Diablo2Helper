@@ -78,10 +78,10 @@ export abstract class BaseEntitiesHelper<TEntityMap,
                 });
         }
 
-        const [key, activeSort] = (ObjectHelper.find(
+        const [key, activeSort] = <[TKey, ITable<TEntity>]>(ObjectHelper.find(
             this.entitySort,
             (key, current) =>
-                ![undefined, 'none'].includes(current.direction)) ?? []) as [TKey, ITable<TEntity>];
+                ![undefined, 'none'].includes(current.direction)) ?? []);
 
         const sortMethod = sortMethods [key ?? defaultMethod];
 

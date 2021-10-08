@@ -55,11 +55,11 @@ export class TabCharacterImportComponent {
         resetValues.forEach(key => delete this[key]);
 
         if ('error' in result) {
-            console.log(result);
             this.parseError = result;
             this.log('log.parseError');
             return;
         }
+
         this.parseResult = result;
 
         const lastPlayed = new DatePipe(this.translate.currentLang)

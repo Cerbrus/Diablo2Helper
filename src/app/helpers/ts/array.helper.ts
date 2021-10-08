@@ -41,7 +41,7 @@ export class ArrayHelper {
                         [key]: getValue(item, record, index)
                     }
                     : record;
-            }, {} as Record<TKey, TValue>);
+            }, <Record<TKey, TValue>>{});
     }
 
     public static countStringOccurrences<TType extends Key>(items: ItemOrArray<TType>): Record<TType, number> {

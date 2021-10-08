@@ -24,10 +24,11 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
         this.applySort();
     }
 
-    public fromSaveItem(item: IItem): IRuneWord {
-        console.log(item, item.socketed_items);
-        throw new Error('TODO: Determine RuneWord');
-        return null as any;
+    public fromSaveItem(item: IItem): IRuneWord | null {
+        const runesString = item.socketed_items
+            .map(i => this.runeHelper.fromSaveItem(i)?.name)
+            .join('|');
+        return this.itemsArray.find(runeWord => runeWord.runes.join('|') === runesString) ?? null;
     }
 
     public getItem(rune: TRuneWord): IRuneWord {
@@ -62,7 +63,7 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
                 cLvl: this.sortByCLvl.bind(this),
                 owned: this.sortByOwned.bind(this)
             },
-            'name' as TRuneWordSortKeys,
+            <TRuneWordSortKeys>'name',
             changedSort);
 
         this.storageService.save.runeWordSort(this.entitySort);

@@ -50,7 +50,7 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
             !item.includes('|'))
             return false;
 
-        const split = this.splitType(item as TGem);
+        const split = this.splitType(<TGem>item);
         return GemQualities.includes(split[0]) && GemTypes.includes(split[1]);
     }
 
@@ -90,7 +90,7 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
         //         quality: this.sortByQuality.bind(this),
         //         owned: this.sortByOwned.bind(this)
         //     },
-        //     'type' as TGemSortKeys,
+        //     <TGemSortKeys>'type',
         //     changedSort);
         //
         //this.storageService.save.runeWordSort(this.entitySort);

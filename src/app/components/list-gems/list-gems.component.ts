@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { GemHelper } from '../../helpers';
-import { IGemMap, IGemType } from '../../interfaces/gem';
+import { IGem, IGemMap, IGemType } from '../../interfaces/gem';
 
 @Component({
     selector: 'list-gems',
@@ -16,5 +16,10 @@ export class ListGemsComponent {
     ) {
         this.gems = gemHelper.getItems();
         this.gemArray = gemHelper.buildGemArray();
+    }
+
+    public gemOwned(gem: IGem, amount?: number): void {
+        if (amount) gem.owned = amount;
+        this.gemHelper.saveGemsOwned();
     }
 }

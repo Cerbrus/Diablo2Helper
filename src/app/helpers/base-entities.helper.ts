@@ -40,6 +40,8 @@ export abstract class BaseEntitiesHelper<TEntityMap,
 
     public abstract isType(item: any): item is TType;
 
+    public abstract saveEntitiesOwned(): void;
+
     public asItem(item: TType | TEntity): TEntity ;
     public asItem(item: Array<TType | TEntity>): Array<TEntity>;
     public asItem(item: ItemOrArray<TType | TEntity>): ItemOrArray<TEntity> {

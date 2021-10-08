@@ -1,4 +1,10 @@
-<input type="file"
-       accept=".d2s"
-       [placeholder]="'labels.saveFile' | translate"
-       (change)="onChange($event)">
+<label class="button">
+    {{ 'labels.saveFile' | translate }}
+    <input type="file"
+           hidden
+           accept=".d2s"
+           (change)="onChange($event)">
+</label>
+<ul *ngIf="file">
+    <li>{{file.name}}</li>
+</ul>

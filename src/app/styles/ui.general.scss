@@ -12,6 +12,14 @@ body {
     //overflow: hidden;
 }
 
+p {
+    margin: variables.$size-gap 0;
+}
+
+.font-d2 {
+    font-family: variables.$font-family-exocet;
+}
+
 .center-text {
     text-align: center;
 }
@@ -25,4 +33,26 @@ $sizes: ('xs': 0.5rem, 's': 0.75rem, 'm': 1rem, 'l': 1.5rem, 'xl': 2rem);
 
 .hidden {
     display: none !important;
+}
+
+.block {
+    display: block;
+}
+
+ul,
+pre {
+    background: var(--theme-table-background);
+    margin: 0;
+    padding: variables.$size-gap;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 24px;
+
+    li::marker {
+        font-family: variables.$font-family-exocet;
+        content: '* ';
+    }
 }

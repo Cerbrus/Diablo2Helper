@@ -8,11 +8,14 @@ import { StorageService } from '../services';
 import { TGem } from '../types/gem';
 import { Runes, TRune, TRuneSort, TRuneSortKeys } from '../types/rune';
 import { BaseEntitiesHelper } from './base-entities.helper';
+import { GemHelper } from './gem.helper';
+import { ArrayHelper } from './ts';
 
 @Injectable({ providedIn: 'root' })
 export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRuneSort> {
     constructor(
         runeFactory: RuneFactory,
+        private gemHelper: GemHelper,
         private readonly storageService: StorageService
     ) {
         super(runeFactory);
@@ -35,11 +38,21 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
     }
 
     public isType(item: object | TGem | TRune): item is TRune {
-        return typeof item === 'string' && Runes.includes(item);
+        return typeof item === 'string'
+            && !this.gemHelper.isType(item)
+            && Runes.includes(item);
     }
 
     public getType(item: TRune | IRune): TRune {
         return this.asItem(item).name;
+    }
+
+    public saveEntitiesOwned(): void {
+        const owned = ArrayHelper.toRecordWithKey(
+            this.itemsArray.filter(rune => rune.owned),
+            rune => rune.name,
+            rune => rune.owned!);
+        this.storageService.save.runesOwned(owned);
     }
 
     public applySort(changedSort?: ITable<IRune>): void {

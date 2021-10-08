@@ -1,5 +1,5 @@
+import { KeyValue } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { ID2S, IItem } from '@dschu012/d2s/lib/d2/types';
 import {
     ArrayHelper,
     BaseEntitiesHelper,
@@ -10,6 +10,7 @@ import {
     RuneWordHelper,
     StringHelper
 } from '../helpers';
+import { IGem } from '../interfaces/gem';
 import { IRune } from '../interfaces/rune';
 import { IRuneWord, IRuneWordFilters, IRuneWordMap } from '../interfaces/runeWord';
 import { TItem } from '../types';
@@ -51,29 +52,29 @@ export class RunewordFilterService {
         this.calculateRuneWordVisibility();
     }
 
-    public applySaveToFilters(parsedData: ID2S): void {
-        this.filters.cLvl = parsedData.header.level;
-        const items = parsedData.items;
+    public applySaveToFilters(
+        cLvl: number,
+        gems: Array<KeyValue<IGem, number>>,
+        runes: Array<KeyValue<IRune, number>>,
+        runeWords: Array<KeyValue<IRuneWord, number>>
+    ): void {
+        this.filters.cLvl = cLvl;
 
-        this.applyToFilters(this.runeHelper, items.filter(i => i.categories?.includes('Rune')));
-        this.applyToFilters(this.runeWordHelper, items.filter(i => i.given_runeword));
+        this.applyOwnedCount(this.gemHelper, gems);
+        this.applyOwnedCount(this.runeHelper, runes);
+        this.applyOwnedCount(this.runeWordHelper, runeWords);
 
         this.saveFilters();
     }
 
-    private applyToFilters<TType extends string, TEntity extends IRune | IRuneWord>(
-        helper: BaseEntitiesHelper<Record<TType, TEntity>, TType, TEntity, any>,
-        itemsInSave: Array<IItem>
+    // noinspection JSMethodCanBeStatic
+    private applyOwnedCount(
+        helper: BaseEntitiesHelper<any, any, any, any>,
+        itemCounts: Array<KeyValue<{ owned?: number }, number>>
     ): void {
-        const items = helper.getItems();
-        const countableItems = itemsInSave
-            .map(i => <TType>helper.fromSaveItem(i)?.name)
-            .filter(ObjectHelper.hasValue);
-
-        ObjectHelper.forEach(ArrayHelper.countItems(countableItems),
-            (key, value) => {
-                items[key].owned = value;
-            });
+        helper.itemsArray.forEach(i => i.count = 0);
+        itemCounts.forEach(({ key, value }) => key.owned = value);
+        helper.saveEntitiesOwned();
     }
 
     public calculateRuneWordVisibility(): void {

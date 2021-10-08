@@ -304,5 +304,4 @@ export class RuneFactory extends BaseEntityFactory<IRuneMap> {
             }
         };
     }
-
 }

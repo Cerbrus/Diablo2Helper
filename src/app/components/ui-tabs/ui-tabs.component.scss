@@ -8,9 +8,11 @@
     &-tabs {
         margin-block-start: 0;
         margin-left: variables.$size-gap;
+        margin-bottom: 1px;
         box-sizing: border-box;
         height: variables.$size-tab-control;
-        margin-bottom: 1px;
+        padding: 0;
+        background: none;
 
         > li {
             float: left;
@@ -29,6 +31,10 @@
                 border: 1px solid transparent;
                 border-radius: variables.$size-gap-small variables.$size-gap-small 0 0;
                 line-height: variables.$size-tab-control;
+            }
+
+            &::marker {
+                content: '';
             }
 
             &:hover > a {

@@ -44,7 +44,7 @@ export class RuneTrackerService {
     }
 
     public areRunesOwned(runes: Array<TRune | IRune>): boolean {
-        const wishList = ArrayHelper.countItems(this.runeHelper.asType(runes));
+        const wishList = ArrayHelper.countStringOccurrences(this.runeHelper.asType(runes));
 
         return ObjectHelper.entries(wishList)
             .every((value: [TRune, number]) =>
@@ -75,7 +75,7 @@ export class RuneTrackerService {
             const neededRunes = runeToCraft.craft?.runes;
 
             return !!neededRunes && ObjectHelper.every(
-                ArrayHelper.countItems(neededRunes),
+                ArrayHelper.countStringOccurrences(neededRunes),
                 (requiredRune: TRune, amountForCraft: number) =>
                     this.hasOrCanCraftRune(ownedRunes, requiredRune, missingCount * amountForCraft, runeWord));
         }

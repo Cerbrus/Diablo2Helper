@@ -59,18 +59,26 @@ input {
 
 button,
 .button {
-    display: inline-block;
+    background: variables.$theme-button;
+    border-radius: variables.$size-gap-small;
+    border: none;
+    color: variables.$color-rune-name;
     cursor: pointer;
-    user-select: none;
+    display: inline-block;
     font-family: variables.$font-family-exocet;
     font-weight: bold;
-    text-align: center;
-    border-radius: variables.$size-gap-small;
     padding: variables.$size-gap-small variables.$size-gap;
-    background: variables.$theme-button;
+    text-align: center;
+    text-shadow: variables.$shadow-text;
+    user-select: none;
 
-    &:hover {
+    &:hover:not([disabled]) {
         background: variables.$theme-button-hover;
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+        cursor: no-drop;
     }
 }
 

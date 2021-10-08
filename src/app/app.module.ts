@@ -23,7 +23,9 @@ import { RuneTrackingSelectComponent } from './components/rune-tracking-select/r
 import { SpriteGemComponent } from './components/sprite-gem/sprite-gem.component';
 import { SpriteRuneComponent } from './components/sprite-rune/sprite-rune.component';
 import { TabPaneCharacterImportComponent } from './components/tab-pane-character-import/tab-pane-character-import.component';
+import { TabPaneGemsComponent } from './components/tab-pane-gems/tab-pane-gems.component';
 import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-pane-rune-words.component';
+import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
@@ -43,8 +45,6 @@ import { LogMissingTranslationHandler } from './handlers/log-missing-translation
 // Pipes
 import { AsArrayPipe } from './pipes/as-array.pipe';
 import { KeyValueTypedPipe } from './pipes/key-value-typed.pipe';
-import { TabPaneGemsComponent } from './components/tab-pane-gems/tab-pane-gems.component';
-import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -76,7 +76,9 @@ const components = [
     SpriteGemComponent,
     SpriteRuneComponent,
     TabPaneCharacterImportComponent,
+    TabPaneGemsComponent,
     TabPaneRuneWordsComponent,
+    TabPaneRunesComponent,
     ThemeSwitcherComponent,
     UiCollapsibleComponent,
     UiTabComponent,
@@ -90,9 +92,7 @@ const components = [
     declarations: [
         directives,
         pipes,
-        components,
-        TabPaneGemsComponent,
-        TabPaneRunesComponent
+        components
     ],
     imports: [
         BrowserModule,

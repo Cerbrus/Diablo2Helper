@@ -17,6 +17,11 @@ jobs:
         name: 🛠 Build & 🎉 Deploy
         runs-on: ubuntu-latest
         steps:
+            -   name: ⬆ Automated Version Bump
+                uses: phips28/gh-action-bump-version@v9.0.1
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
             -   name: 🚚 Get latest code
                 uses: actions/checkout@v2
 

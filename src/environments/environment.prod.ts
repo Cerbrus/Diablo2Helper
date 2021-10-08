@@ -1,6 +1,4 @@
-// noinspection JSUnusedGlobalSymbols
-
 export const environment = {
     production: true,
-    titlePrefix: ''
+    appVersion: require('../../package.json').version,
 };

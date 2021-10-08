@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TabRuneWordsComponent } from './tab-rune-words.component';
+import { TabPaneRuneWordsComponent } from './tab-pane-rune-words.component';
 
 describe('TabRuneWordsComponent', () => {
-    let component: TabRuneWordsComponent;
-    let fixture: ComponentFixture<TabRuneWordsComponent>;
+    let component: TabPaneRuneWordsComponent;
+    let fixture: ComponentFixture<TabPaneRuneWordsComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                declarations: [TabRuneWordsComponent]
+                declarations: [TabPaneRuneWordsComponent]
             })
             .compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TabRuneWordsComponent);
+        fixture = TestBed.createComponent(TabPaneRuneWordsComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

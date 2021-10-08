@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TabCharacterImportComponent } from './tab-character-import.component';
+import { TabPaneRunesComponent } from './tab-pane-runes.component';
 
-describe('TabCharacterImportComponent', () => {
-    let component: TabCharacterImportComponent;
-    let fixture: ComponentFixture<TabCharacterImportComponent>;
+describe('TabRunesComponent', () => {
+    let component: TabPaneRunesComponent;
+    let fixture: ComponentFixture<TabPaneRunesComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                declarations: [TabCharacterImportComponent]
+                declarations: [TabPaneRunesComponent]
             })
             .compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TabCharacterImportComponent);
+        fixture = TestBed.createComponent(TabPaneRunesComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

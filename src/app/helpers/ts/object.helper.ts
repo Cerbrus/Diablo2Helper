@@ -5,6 +5,10 @@ import { ArrayHelper } from './array.helper';
 type DeepCopyable = Date | Array<any> | string | number | boolean | Record<any, any>;
 
 export class ObjectHelper {
+    public static hasValue<TValue>(value: TValue | null | undefined): value is TValue {
+        return value !== null && value !== undefined;
+    }
+
     public static entries<TKey extends string, TValue>(
         obj: { [key in TKey]?: TValue }
     ): Array<[TKey, TValue]> {
@@ -82,9 +86,5 @@ export class ObjectHelper {
                 copy[key] = this.deepCopy(object[key]);
         }
         return copy;
-    }
-
-    public static hasValue<TValue>(value: TValue | null | undefined): value is TValue {
-        return value !== null && value !== undefined;
     }
 }

@@ -6,4 +6,5 @@ export interface IGem extends ISocketable<'Gem'> {
     quality: TGemQuality;
     name: string;
     effects: ISocketableEffects;
+    owned?: number;
 }

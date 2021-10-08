@@ -1,0 +1,11 @@
+<div class="grid" *ngIf="sortedRecord">
+    <div class="table">
+        <ui-table-head *ngIf="titleKeys" [labelKey]="titleKeys[0]" key="rune"></ui-table-head>
+        <ui-table-head *ngIf="titleKeys" [labelKey]="titleKeys[1]" key="owned"></ui-table-head>
+
+        <div class="table-row" *ngFor="let entry of sortedRecord">
+            <div class="column-rune">{{ getString(entry.key) }}</div>
+            <div class="column-count">{{ entry.value }}</div>
+        </div>
+    </div>
+</div>

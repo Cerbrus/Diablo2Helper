@@ -1,22 +1,25 @@
 @use 'variables' as v;
 
 .table {
-    $header-height: 45px;
-
-    &-row {
+    &,
+    &-body {
         grid-template-columns: 60px 50px 90px 80px 1fr;
     }
 
-    &-head {
-        height: $header-height;
+    ui-table-head,
+    ui-table-sort-control {
+        height: v.$size-header;
+    }
 
-        .header-name {
-            grid-column: span 2;
-        }
+    .header-name {
+        grid-column: span 2;
     }
 
     &-body {
-        $offset: v.$size-gap * 4 + v.$size-tab-control + 1px + v.$size-gap-table * 2 + $header-height;
+        display: grid;
+        grid-gap: v.$size-gap-table;
+        grid-column: span 5;
+        $offset: v.$size-gap * 5 + v.$size-tab-control + 1px + v.$size-gap-table * 2 + v.$size-header;
         max-height: calc(100vh - #{$offset});
         overflow-y: auto;
 

@@ -11,7 +11,7 @@
         "owned": "Owned",
         "darkMode": "Dark mode enabled",
         "lightMode": "Dark mode disabled",
-        "import": "Import character"
+        "error": "Error"
     },
     "labels": {
         "weapon": "Weapon",
@@ -32,10 +32,16 @@
         "itemType": "Item Type",
         "filters": "Filters",
         "search": "Search",
+        "selected": "Selected",
         "search-placeholder": "Runeword name",
         "trackedRunes": "Runes in possession",
         "trackedRunesCount": "How many?",
-        "saveFile": "Diablo 2 save file (.d2s)",
+        "saveFile": "Select Diablo 2 save file (.d2s)",
+        "import": "Import character",
+        "imported": "Imported character",
+        "character": "Character",
+        "saveToFilters": "Apply imported data",
+        "saveToFiltersHelp": "If you want to copy the parsed inventory and character data to filters and owned items:",
         "sort": {
             "name": "Sort by name",
             "runes": "Sort by rune count",
@@ -50,6 +56,19 @@
         "armor": "Armor: {{effect}}",
         "helms": "Helms: {{effect}}",
         "shields": "Shields: {{effect}}"
+    },
+    "character": {
+        "class": "Class",
+        "lastPlayed": "Last played",
+        "level": "Level",
+        "name": "Name"
+    },
+    "log": {
+        "foundGems": "Found {{length}} gems.",
+        "foundRunes": "Found {{length}} runes.",
+        "foundRuneWords": "Found {{length}} runeWords.",
+        "appliedSaveToFilters": "Applied save data to filters and owned items.",
+        "parseError": "This file could not be imported."
     },
     "runes": {
         "title": "{{name}} Rune"

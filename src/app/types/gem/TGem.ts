@@ -1,4 +1,4 @@
-export type TGem = [TGemType, TGemQuality];
+export type TGem = `${TGemQuality}|${TGemType}`;
 
 export const GemTypes: Array<TGemType> = [
     'ruby', 'sapphire', 'topaz',
@@ -17,4 +17,3 @@ export type TGemType =
 
 export type TGemQuality =
     'chipped' | 'flawed' | 'normal' | 'flawless' | 'perfect';
-

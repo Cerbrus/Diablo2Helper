@@ -25,7 +25,7 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
     }
 
     public fromSaveItem(item: IItem): IRuneWord {
-        console.log(item.socketed_items);
+        console.log(item, item.socketed_items);
         throw new Error('TODO: Determine RuneWord');
         return null as any;
     }
@@ -46,7 +46,7 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
         return this.asItem(item).name;
     }
 
-    public saveRuneWordsOwned(): void {
+    public saveEntitiesOwned(): void {
         const owned = ArrayHelper.toRecordWithKey(
             this.itemsArray.filter(runeWord => runeWord.owned),
             runeWord => runeWord.name,

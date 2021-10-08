@@ -9,13 +9,14 @@ export class StorageService {
     private readonly defaultValues: IStorage = <IStorage>settings.storageDefaults;
 
     private readonly storageKeys: Array<keyof IStorage> = [
-        'uiActiveTabs',
         'darkMode',
+        'gemsOwned',
         'runeSort',
         'runeWordFilters',
         'runeWordSort',
         'runeWordsOwned',
         'runesOwned',
+        'uiActiveTabs',
         'uiCollapsibleState'
     ];
 

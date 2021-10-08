@@ -2,6 +2,10 @@
 
 :host {
     cursor: pointer;
+    grid-auto-flow: column;
+    grid-template-columns: min-content;
+    font-weight: bold;
+    text-align: center;
 
     &:hover .sort-control:not(.enabled) {
         opacity: 0.6;

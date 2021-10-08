@@ -2,17 +2,9 @@
 @use 'mixins';
 
 .label {
-    font-family: variables.$font-family-exocet;
-    font-weight: bold;
-    color: variables.$color-rune-name;
-    text-shadow: variables.$shadow-text;
-    user-select: none;
-
-    padding: variables.$size-gap-small variables.$size-gap;
-    cursor: pointer;
     background: variables.$theme-checkbox;
-    border-radius: variables.$size-gap-small;
-    @include mixins.transition(background);
+    display: block;
+    user-select: none;
 
     &:hover {
         background: variables.$theme-checkbox-hover;
@@ -31,6 +23,8 @@
         align-items: center;
     }
 }
-:host{
+
+:host {
     display: block;
-    height: 100%;}
+    height: 100%;
+}

@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { RunewordFilterService } from '../../services';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ID2S } from '@dschu012/d2s/lib/d2/types';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { D2sParserService } from '../../services/d2s-parser.service';
+import { TError } from '../../types/TError';
 
 @Component({
     selector: 'input-game-save-file',
@@ -9,37 +11,34 @@ import { D2sParserService } from '../../services/d2s-parser.service';
     styleUrls: ['./input-game-save-file.component.scss']
 })
 export class InputGameSaveFileComponent {
-    constructor(
-        http: HttpClient,
-        private readonly d2sParserService: D2sParserService,
-        private readonly runeWordFilterService: RunewordFilterService
-    ) {
-        // TODO: Remove this
-        http.get('/assets/saves/Michiel.d2s', { responseType: 'arrayBuffer' as 'json' })
-            .subscribe((response) => {
-                if (response instanceof ArrayBuffer)
-                    this.parseArrayBuffer(response);
-                else
-                    throw new Error('Invalid response');
-            });
+    @Output()
+    public onParse = new EventEmitter<ID2S | TError<any>>();
+    public file?: File;
+
+    constructor(private readonly d2sParserService: D2sParserService) {
     }
 
     public async onChange($event: Event): Promise<void> {
-        const file = ($event.target as HTMLInputElement).files;
-        if (!file)
+        const files = ($event.target as HTMLInputElement).files;
+        if (!files?.length)
             return;
 
-        this.parseArrayBuffer(await file[0].arrayBuffer());
+        this.file = files[0]
+
+        this.parseArrayBuffer(await this.file.arrayBuffer());
     }
 
     private parseArrayBuffer(arrayBuffer: ArrayBuffer): void {
         this.d2sParserService.parseSave(arrayBuffer)
+            .pipe(catchError(error => {
+                console.error('Error parsing save file', error);
+                return of({ error, message: 'Error parsing save file' });
+            }))
             .subscribe(parseResult => {
                 if (!parseResult)
                     return;
 
-                console.log('parsed save', parseResult);
-                this.runeWordFilterService.applySaveToFilters(parseResult);
+                this.onParse.emit(parseResult);
             });
     }
 }

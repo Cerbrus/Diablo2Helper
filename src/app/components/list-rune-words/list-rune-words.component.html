@@ -1,51 +1,48 @@
 <label>{{ 'common.runeWords' | translate }}</label>
 
 <div class="table">
-    <div class="table-row table-head">
-        <ui-table-sort-control
-            *ngFor="let header of headers"
-            [header]="header"
-            [sort]="runeWordSort"
-            (onSort)="applySort($event)">
-        </ui-table-sort-control>
-    </div>
-    <div class="table-row table-body">
-        <ng-container *ngFor="let runeWord of runeWordArraySorted">
-            <div class="table-row" *ngVar="!showRuneWord(runeWord) as hidden" [class.hidden]="hidden">
-                <div class="column-owned">
-                    <input-number-checkbox
-                        [(value)]="runeWord.owned"
-                        (valueChange)="runeWordOwned(runeWord)"
-                    ></input-number-checkbox>
-                </div>
-                <div class="column-name">
-                    <strong>{{ runeWord.name }}</strong>
-                    <em>{{ runeNames(runeWord.runes) }}</em>
-                    <div>
-                        <ng-container *ngFor="let rune of runes(runeWord.runes); let last = last">
+    <ui-table-sort-control
+        *ngFor="let header of headers"
+        [header]="header"
+        [sort]="runeWordSort"
+        (onSort)="applySort($event)">
+    </ui-table-sort-control>
+
+    <ng-container *ngFor="let runeWord of runeWordArraySorted">
+        <div class="table-row" *ngVar="!showRuneWord(runeWord) as hidden" [class.hidden]="hidden">
+            <div class="column-owned">
+                <input-number-checkbox
+                    [(value)]="runeWord.owned"
+                    (valueChange)="runeWordOwned(runeWord)"
+                ></input-number-checkbox>
+            </div>
+            <div class="column-name">
+                <strong>{{ runeWord.name }}</strong>
+                <em>{{ runeNames(runeWord.runes) }}</em>
+                <div>
+                    <ng-container *ngFor="let rune of runes(runeWord.runes); let last = last">
                             <span [tooltipSocketable]="rune"
                                   [tooltipDelay]="2000"
                             >{{ rune.name }} ({{rune.number}})</span>
-                            <span *ngIf="!last"> + </span>
-                        </ng-container>
-                    </div>
-                    <span>{{ formatItemTypes(runeWord.itemTypes) + ' {' + runeWord.runes.length + '}' }}</span>
+                        <span *ngIf="!last"> + </span>
+                    </ng-container>
                 </div>
-                <div class="column-runes runes center-text"
-                     [class.runes-owned]="areRunesOwned(runeWord)"
-                     [class.runes-craftable]="canCraftRunes(runeWord)">
-                    <div>
-                        <sprite-rune *ngFor="let rune of runeWord.runes" [rune]="rune" [size]="32"></sprite-rune>
-                    </div>
-                </div>
-                <div class="column-effects" *ngVar="runeWord.effects as effects">
-                    <format-effect [effects]="effects" [lineBreak]="true"></format-effect>
-                    <div>
-                        <strong>{{ 'labels.cLvl' | translate }}:</strong>
-                        {{ runeWord.cLvl || ('common.none' | translate) }}
-                    </div>
+                <span>{{ formatItemTypes(runeWord.itemTypes) + ' {' + runeWord.runes.length + '}' }}</span>
+            </div>
+            <div class="column-runes runes center-text"
+                 [class.runes-owned]="areRunesOwned(runeWord)"
+                 [class.runes-craftable]="canCraftRunes(runeWord)">
+                <div>
+                    <sprite-rune *ngFor="let rune of runeWord.runes" [rune]="rune" [size]="32"></sprite-rune>
                 </div>
             </div>
-        </ng-container>
-    </div>
+            <div class="column-effects" *ngVar="runeWord.effects as effects">
+                <format-effect [effects]="effects" [lineBreak]="true"></format-effect>
+                <div>
+                    <strong>{{ 'labels.cLvl' | translate }}:</strong>
+                    {{ runeWord.cLvl || ('common.none' | translate) }}
+                </div>
+            </div>
+        </div>
+    </ng-container>
 </div>

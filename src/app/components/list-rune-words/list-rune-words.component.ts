@@ -68,7 +68,7 @@ export class ListRuneWordsComponent {
 
     public runeWordOwned(runeWord: IRuneWord, amount?: number): void {
         if (amount) runeWord.owned = amount;
-        this.runeWordHelper.saveRuneWordsOwned();
+        this.runeWordHelper.saveEntitiesOwned();
     }
 
     public formatItemTypes(itemTypes: ItemOrArray<TItem>): string {

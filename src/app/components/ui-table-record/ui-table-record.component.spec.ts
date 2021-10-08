@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UiTableRecordComponent } from './ui-table-record.component';
 
 describe('UiTableRecordComponent', () => {
-    let component: UiTableRecordComponent;
-    let fixture: ComponentFixture<UiTableRecordComponent>;
+    let component: UiTableRecordComponent<any, any>;
+    let fixture: ComponentFixture<UiTableRecordComponent<any, any>>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({

@@ -51,7 +51,7 @@
                 &,
                 &:hover,
                 &:focus {
-                    cursor: default;
+                    cursor: variables.$cursor-default;
                     border: 1px solid variables.$theme-tabs-border;
                     border-bottom-color: variables.$theme-background;
                 }

@@ -15,6 +15,7 @@ $theme-tabs-border: var(--theme-tabs-border);
 
 $theme-background: var(--theme-background);
 $theme-background-image: var(--theme-background-image);
+$theme-background-image-xl: var(--theme-background-image-xl);
 $theme-background-transparent: var(--theme-background-transparent);
 $theme-background-owned: var(--theme-background-owned);
 $theme-background-craftable: var(--theme-background-craftable);
@@ -36,6 +37,10 @@ $theme-button-hover: var(--theme-button-hover);
 
 $theme-table-background: var(--theme-table-background);
 $theme-table-background-hover: var(--theme-table-background-hover);
+
+$cursor-default: var(--cursor-default);
+$cursor-pointer: var(--cursor-pointer);
+$cursor-forbidden: var(--cursor-forbidden);
 
 $shadow-text: 1px 1px 2px black;
 

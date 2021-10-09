@@ -13,6 +13,7 @@ body {
 
 html {
     background: variables.$theme-background;
+    cursor: variables.$cursor-default;
 }
 
 body:before {
@@ -29,6 +30,20 @@ body:before {
     background-size: cover;
     opacity: variables.$theme-background-opacity;
     z-index: -1;
+
+    @media screen and (min-device-width: 1921px) {
+        background-image: variables.$theme-background-image-xl;
+    }
+}
+
+label {
+    cursor: variables.$cursor-default;
+}
+
+a,
+input,
+.pointer {
+    cursor: variables.$cursor-pointer;
 }
 
 p {

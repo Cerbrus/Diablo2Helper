@@ -6,6 +6,7 @@
     list-style: none;
 
     &-tabs {
+        display: inline-block;
         margin-block-start: 0;
         margin-left: variables.$size-gap;
         margin-right: variables.$size-gap;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import settings from '../../../assets/settings.json';
@@ -12,7 +12,8 @@ import { environment } from '../../../environments/environment';
 export class Diablo2HelperComponent {
     constructor(
         titleService: Title,
-        translate: TranslateService
+        translate: TranslateService,
+        public readonly viewRef: ViewContainerRef
     ) {
         translate.setDefaultLang(settings.defaultLanguage);
         translate.use(settings.defaultLanguage);

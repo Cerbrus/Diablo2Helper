@@ -1,4 +1,5 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Directive, ElementRef, HostBinding, HostListener, Inject, Input, Renderer2 } from '@angular/core';
 
 @Directive()
 export abstract class TooltipBaseDirective {
@@ -22,7 +23,7 @@ export abstract class TooltipBaseDirective {
         private readonly cssClass: string,
         private readonly elementRef: ElementRef<HTMLElement>,
         protected readonly renderer: Renderer2,
-        private document: Document) {
+        @Inject(DOCUMENT) private document: Document) {
         this.nativeElement.classList.add('pointer');
         this.setupContainer();
     }
@@ -71,7 +72,7 @@ export abstract class TooltipBaseDirective {
 
     private hideAllOtherTooltips(): void {
         if (!this.tooltip) return;
-        Array.from(document.querySelectorAll('.tooltip.show'))
+        Array.from(this.document.querySelectorAll('.tooltip.show'))
             .filter(element => element !== this.tooltip)
             .forEach(element => this.renderer.removeClass(element, 'show'));
     }

@@ -1,0 +1,18 @@
+@use 'variables';
+@use 'mixins';
+
+.tutorial-overlay {
+    position: absolute;
+    width: calc(100vw - 20px);
+    height: 100vh;
+    backdrop-filter: brightness(0.2) blur(2px);
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    opacity: 1;
+    @include mixins.transition(opacity, 0.5s, linear);
+
+    &.faded {
+        opacity: 0;
+    }
+}

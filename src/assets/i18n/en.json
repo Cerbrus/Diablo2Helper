@@ -64,6 +64,10 @@
         "helms": "Helms: {{effect}}",
         "shields": "Shields: {{effect}}"
     },
+    "tutorial": {
+        "button": "Open tutorial",
+        "close": "Close tutorial"
+    },
     "character": {
         "class": "Class",
         "lastPlayed": "Last played",

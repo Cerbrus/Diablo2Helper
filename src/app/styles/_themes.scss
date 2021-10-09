@@ -27,6 +27,8 @@
         --theme-checkbox: var(--color-gray-light);
         --theme-checkbox-hover: var(--color-gray-medium);
         --theme-checkbox-checked: var(--color-gray-dark);
+        --theme-background-image: url('/assets/images/endgame2_hd.png');
+        --theme-background-opacity: 0.6;
 
         --theme-input-background: var(--color-gray-light);
         --theme-input-border: var(--color-gray-medium);
@@ -50,6 +52,8 @@
         --theme-background-transparent: #{color.change(#222222, $alpha: 0.8)};
         --theme-background-owned: #{color.change(#00ff00, $alpha: 0.4)};
         --theme-background-craftable: #{color.change(#ff8800, $alpha: 0.4)};
+        --theme-background-image: url('/assets/images/endgame_hd.png');
+        --theme-background-opacity: 1;
 
         --theme-checkbox: var(--color-gray-dark);
         --theme-checkbox-hover: var(--color-gray-medium);

@@ -21,15 +21,15 @@ body:before {
     position: fixed;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/assets/images/endgame_hd.png');
+    width: 100vw;
+    height: 100vh;
+    background-image: variables.$theme-background-image;
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;
+    opacity: variables.$theme-background-opacity;
     z-index: -1;
 }
-
 
 p {
     margin: variables.$size-gap 0;

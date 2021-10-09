@@ -6,11 +6,30 @@ body {
     font-family: sans-serif;
     color: variables.$theme-text;
 
-    background: variables.$theme-background;
     transition: all 0.1s linear;
     //height: 100vh;
     //overflow: hidden;
 }
+
+html {
+    background: variables.$theme-background;
+}
+
+body:before {
+    content: ' ';
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/endgame_hd.png');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+    z-index: -1;
+}
+
 
 p {
     margin: variables.$size-gap 0;

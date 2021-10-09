@@ -46,6 +46,8 @@
             }
 
             &.active > a {
+                background-color: variables.$theme-background-transparent;
+
                 &,
                 &:hover,
                 &:focus {

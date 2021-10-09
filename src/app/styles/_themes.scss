@@ -20,6 +20,7 @@
         --theme-tabs-border: #aaaaaa;
 
         --theme-background: #ffffff;
+        --theme-background-transparent: #{color.change(#ffffff, $alpha: 0.8)};
         --theme-background-owned: #669933;
         --theme-background-craftable: #ffaa33;
 
@@ -46,6 +47,7 @@
         --theme-tabs-border: #dddddd;
 
         --theme-background: #222222;
+        --theme-background-transparent: #{color.change(#222222, $alpha: 0.8)};
         --theme-background-owned: #{color.change(#00ff00, $alpha: 0.4)};
         --theme-background-craftable: #{color.change(#ff8800, $alpha: 0.4)};
 

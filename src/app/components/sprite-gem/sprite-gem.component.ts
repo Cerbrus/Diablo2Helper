@@ -28,6 +28,6 @@ export class SpriteGemComponent extends SpriteBaseComponent {
     private getGemSprite(): string {
         const { type, quality } = this.gemItem;
         const qualityPrefix = quality !== 'normal' ? `${quality}_` : '';
-        return `/assets/images/gems/${qualityPrefix + type}.sprite.00.png`;
+        return `/assets/images/gems/${qualityPrefix + type}.png`;
     }
 }

@@ -3,7 +3,7 @@
 
 label {
     display: block;
-    cursor: pointer;
+    cursor: variables.$cursor-pointer;
     margin: variables.$size-gap-small 0;
 }
 

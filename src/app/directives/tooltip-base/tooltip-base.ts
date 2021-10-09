@@ -23,7 +23,7 @@ export abstract class TooltipBaseDirective {
         private readonly elementRef: ElementRef<HTMLElement>,
         protected readonly renderer: Renderer2,
         private document: Document) {
-        this.nativeElement.style.cursor = 'pointer';
+        this.nativeElement.classList.add('pointer');
         this.setupContainer();
     }
 

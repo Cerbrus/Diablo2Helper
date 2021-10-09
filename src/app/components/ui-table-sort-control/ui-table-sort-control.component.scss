@@ -1,7 +1,7 @@
 @use 'variables';
 
 :host {
-    cursor: pointer;
+    cursor: variables.$cursor-pointer;
     grid-auto-flow: column;
     grid-template-columns: min-content;
     font-weight: bold;
@@ -14,7 +14,7 @@
 
 .sort-control {
     user-select: none;
-    cursor: pointer;
+    cursor: variables.$cursor-pointer;
     opacity: 0.3;
 
     &.enabled {

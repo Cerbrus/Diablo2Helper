@@ -13,8 +13,7 @@
         "stats-display": "webpack-bundle-analyzer ./dist/Diablo2Helper/stats.json",
         "patch": "npx patch-package @dschu012/d2s",
         "postinstall": "patch-package",
-        "preversion": "npm test --source-map=false --watch=false --code-coverage",
-        "postversion": "git push && git push --tags && rm -rf build/temp"
+        "preversion": "npm test --source-map=false --watch=false --code-coverage"
     },
     "private": true,
     "dependencies": {

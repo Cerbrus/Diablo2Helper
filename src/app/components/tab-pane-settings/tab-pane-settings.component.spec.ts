@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestModule } from '../../../testing/test-common.module';
-import { UiTabsComponent } from './ui-tabs.component';
+import { TabPaneSettingsComponent } from './tab-pane-settings.component';
 
-describe('UiTabsComponent', () => {
-    let component: UiTabsComponent;
-    let fixture: ComponentFixture<UiTabsComponent>;
+describe('TabPaneSettingsComponent', () => {
+    let component: TabPaneSettingsComponent;
+    let fixture: ComponentFixture<TabPaneSettingsComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
                 imports: [TestModule],
-                declarations: [UiTabsComponent]
+                declarations: [TabPaneSettingsComponent]
             })
             .compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(UiTabsComponent);
+        fixture = TestBed.createComponent(TabPaneSettingsComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

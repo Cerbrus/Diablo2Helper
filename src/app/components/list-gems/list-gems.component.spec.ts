@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModule } from '../../../testing/test-common.module';
 import { ListGemsComponent } from './list-gems.component';
 
 describe('ListGemsComponent', () => {
@@ -7,6 +8,7 @@ describe('ListGemsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+                imports: [TestModule],
                 declarations: [ListGemsComponent]
             })
             .compileComponents();

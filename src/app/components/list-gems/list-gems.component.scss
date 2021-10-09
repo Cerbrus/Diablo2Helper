@@ -8,7 +8,7 @@
 }
 
 .table {
-    grid-template-columns: 90px 50px 90px repeat(3, 1fr) 90px;
+    grid-template-columns: 90px 40px 70px repeat(3, 1fr) 90px;
 
     .header {
         &-gemType {
@@ -22,5 +22,10 @@
 
     #{table.$td} {
         display: grid;
+    }
+
+    .column-gem{
+        display: block;
+        justify-content: center;
     }
 }

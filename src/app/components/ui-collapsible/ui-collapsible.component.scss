@@ -12,24 +12,17 @@ label {
     overflow: hidden;
 
     .wrapper {
+        margin-left: -10000px;
         grid-template-columns: none;
+        @include mixins.transition(margin-top);
     }
 }
 
 ::ng-deep fa-icon.up svg {
     transform: rotate(180deg);
+    @include mixins.transition(transform);
 
     &.fa-pull-left {
         transform: rotate(-180deg);
-    }
-}
-
-.transition {
-    .collapsible .wrapper {
-        @include mixins.transition(margin-top);
-    }
-
-    ::ng-deep fa-icon svg {
-        @include mixins.transition(transform);
     }
 }

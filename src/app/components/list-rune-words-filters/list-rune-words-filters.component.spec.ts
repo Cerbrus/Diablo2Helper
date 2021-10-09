@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModule } from '../../../testing/test-common.module';
 import { ListRuneWordsFiltersComponent } from './list-rune-words-filters.component';
 
 describe('ListRuneWordsFiltersComponent', () => {
@@ -7,6 +8,7 @@ describe('ListRuneWordsFiltersComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+                imports: [TestModule],
                 declarations: [ListRuneWordsFiltersComponent]
             })
             .compileComponents();

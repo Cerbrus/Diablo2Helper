@@ -1,8 +1,8 @@
-<fa-icon *ngIf="getSort()"
+<fa-icon *ngIf="getSort() && header"
          class="sort-control"
          [class.enabled]="isEnabled()"
          [icon]="getIcon()"
          pull="left"
          [title]="('labels.sort.' + header.key) | translate"
 ></fa-icon>
-<span>{{ header.title | translate }}</span>
+<span *ngIf="header">{{ header.title | translate }}</span>

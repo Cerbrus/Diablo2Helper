@@ -34,15 +34,18 @@
                         "scripts": [],
                         "stylePreprocessorOptions": {
                             "includePaths": ["src/app/styles"]
-                        }
+                        },
+                        "allowedCommonJsDependencies": [
+                            "@dschu012/d2s"
+                        ]
                     },
                     "configurations": {
                         "production": {
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "1mb",
+                                    "maximumError": "2mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
@@ -100,7 +103,10 @@
                         "styles": [
                             "src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["src/app/styles"]
+                        }
                     }
                 }
             }

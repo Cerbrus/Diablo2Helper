@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModule } from '../../../testing/test-common.module';
 import { TabPaneCharacterImportComponent } from './tab-pane-character-import.component';
 
 describe('TabCharacterImportComponent', () => {
@@ -7,6 +8,7 @@ describe('TabCharacterImportComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+                imports: [TestModule],
                 declarations: [TabPaneCharacterImportComponent]
             })
             .compileComponents();

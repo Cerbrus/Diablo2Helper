@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModule } from '../../../testing/test-common.module';
 import { RuneTrackingCountersComponent } from './rune-tracking-counters.component';
 
 describe('RuneTrackingCountersComponent', () => {
@@ -7,6 +8,7 @@ describe('RuneTrackingCountersComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+                imports: [TestModule],
                 declarations: [RuneTrackingCountersComponent]
             })
             .compileComponents();

@@ -5,6 +5,13 @@ table {
     width: 100%;
 }
 
+.column {
+    &-name,
+    &-runes {
+        display: grid;
+    }
+}
+
 .runes {
     &-craftable {
         background: variables.$theme-background-craftable;

@@ -6,7 +6,11 @@
         "types": [
             "jasmine",
             "node"
-        ]
+        ],
+        "paths": {
+            "@testing": ["src/testing/index"],
+            "@testing/*": ["src/testing/*"]
+        }
     },
     "files": [
         "src/test.ts",

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModule } from '../../../testing/test-common.module';
 import { TabPaneGemsComponent } from './tab-pane-gems.component';
 
 describe('TabGemsComponent', () => {
@@ -7,6 +8,7 @@ describe('TabGemsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+                imports: [TestModule],
                 declarations: [TabPaneGemsComponent]
             })
             .compileComponents();

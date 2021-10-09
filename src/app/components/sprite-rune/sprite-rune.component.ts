@@ -26,6 +26,6 @@ export class SpriteRuneComponent extends SpriteBaseComponent {
     }
 
     public getRuneSprite(): string {
-        return `/assets/images/runes/${this.runeItem.name.toLowerCase()}_rune.sprite.00.png`;
+        return this.runeItem && `/assets/images/runes/${this.runeItem.name.toLowerCase()}_rune.sprite.00.png`;
     }
 }

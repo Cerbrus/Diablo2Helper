@@ -36,7 +36,6 @@ export class UiCollapsibleComponent extends LabeledBaseComponent implements Afte
         const collapsed = this.storageService.get
             .uiCollapsibleState()[this.labelKey ?? this.getLabel()];
         this.setState(collapsed ?? false);
-        this.afterInit = true;
     }
 
     public toggle(): void {
@@ -48,9 +47,14 @@ export class UiCollapsibleComponent extends LabeledBaseComponent implements Afte
 
     private setState(newState: boolean): void {
         this.collapsed = newState;
+
         this.collapseMargin = this.collapsed
             ? `-${this.wrapper.nativeElement.clientHeight}px`
             : 0;
+
+        window.setTimeout(() => {
+            this.wrapper.nativeElement.style.marginLeft = '0px';
+        }, 100);
 
         this.saveState();
     }

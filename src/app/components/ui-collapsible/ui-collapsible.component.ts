@@ -20,8 +20,6 @@ export class UiCollapsibleComponent extends LabeledBaseComponent implements Afte
     public collapseMargin: string | 0 = 0;
     public icon = faAngleDoubleDown;
 
-    public afterInit = false;
-
     @ViewChild('wrapper')
     private wrapper!: ElementRef<HTMLDivElement>;
 

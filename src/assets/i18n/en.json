@@ -42,12 +42,16 @@
         "character": "Character",
         "saveToFilters": "Apply imported data",
         "saveToFiltersHelp": "If you want to copy the parsed inventory and character data to filters and owned items:",
-        "sort": {
+                "sort": {
             "name": "Sort by name",
             "runes": "Sort by rune count",
             "cLvl": "Sort by required level",
             "owned": "Sort by owned count"
         }
+    },
+    "settings": {
+        "title": "Settings",
+        "systemCursor": "Use system cursor"
     },
     "tooltip": {
         "canBeInsertedIntoSocket": "Can be Inserted into Socketed Items",

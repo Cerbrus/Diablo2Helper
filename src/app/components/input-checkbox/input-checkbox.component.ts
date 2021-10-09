@@ -13,6 +13,9 @@ export class InputCheckboxComponent extends LabeledBaseComponent {
     public isXl = false;
 
     @Input()
+    public showIcon = false;
+
+    @Input()
     public checked!: boolean | undefined;
 
     @Output()

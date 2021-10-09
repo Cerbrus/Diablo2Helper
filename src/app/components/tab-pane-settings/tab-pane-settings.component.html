@@ -1,0 +1,17 @@
+<div class="grid">
+    <label class="text-xl">{{ 'settings.title' | translate }}</label>
+
+    <input-checkbox labelKey="settings.systemCursor"
+                    [showIcon]="true"
+                    [(checked)]="settings.systemCursor"
+                    (click)="onChangeSystemCursor()"
+    ></input-checkbox>
+    <div></div>
+
+    <input-checkbox [label]="darkModeTitleKey | translate"
+                    [showIcon]="true"
+                    [(checked)]="settings.darkMode"
+                    (click)="onChangeDarkMode()"
+    ></input-checkbox>
+    <fa-icon [icon]="darkModeIcon" [title]="darkModeTitleKey | translate" size="lg"></fa-icon>
+</div>

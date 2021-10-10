@@ -23,7 +23,7 @@ export class UiSpriteRuneComponent extends SpriteBaseComponent {
 
     protected getBackground(): Record<'x' | 'y' | 'width' | 'height', number> {
         return {
-            x: (this.runeItem.number - 1) * -32,
+            x: ((this.runeItem?.number ?? 1) - 1) * -32,
             y: 0,
             width: 3234 * (this.size / 98),
             height: 98 * (this.size / 98)

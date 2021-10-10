@@ -1,7 +1,16 @@
 @use 'variables';
 @use 'mixins';
+@use 'sass:math';
 
 .wrapper {
+    $icon-scale: 0.5;
+    $icon-width: 162px * $icon-scale;
+    $icon-height: 104px * $icon-scale;
+    //noinspection CssInvalidFunction Not yet in the IDE
+    $icon-w: math.div($icon-width, 3);
+    //noinspection CssInvalidFunction Not yet in the IDE
+    $icon-h: math.div($icon-height, 2);
+
     user-select: none;
     font-family: variables.$font-family-exocet;
     font-weight: bold;
@@ -14,11 +23,12 @@
 
     .icon {
         display: inline-block;
-        width: 27px;
-        height: 26px;
+        width: $icon-w;
+        height: $icon-h;
         //noinspection CssUnknownTarget
         background: url('/assets/images/ui/buttons/checkbox.png');
-        background-position-y: -26px;
+        background-size: $icon-width $icon-height;
+        background-position-y: -$icon-h;
 
         + .label {
             line-height: 26px;
@@ -33,12 +43,12 @@
         }
 
         .icon {
-            background-position-x: -28px;
+            background-position-x: -$icon-w;
         }
     }
 
     &:active .icon {
-        background-position-x: -56px;
+        background-position-x: $icon-w * -2;
     }
 
     &.checked {

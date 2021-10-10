@@ -26,41 +26,24 @@ import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-
 import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
 import { TabPaneSettingsComponent } from './components/tab-pane-settings/tab-pane-settings.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
-import { UiSpriteAnimatedComponent } from './components/ui-sprite-animated/ui-sprite-animated.component';
-import { UiSpriteGemComponent } from './components/ui-sprite-gem/ui-sprite-gem.component';
-import { UiSpriteRuneComponent } from './components/ui-sprite-rune/ui-sprite-rune.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
 import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
 import { UiTableRecordComponent } from './components/ui-table-record/ui-table-record.component';
 import { UiTableSortControlComponent } from './components/ui-table-sort-control/ui-table-sort-control.component';
 import { UiTabsComponent } from './components/ui-tabs/ui-tabs.component';
 
-// Directives
-import { OnClickSelectDirective } from './directives/on-click-select/on-click-select.directive';
-import { TooltipSocketableDirective } from './directives/tooltip-socketable/tooltip-socketable.directive';
-import { VarDirective } from './directives/var/var.directive';
-
 // Handlers
 import { LogMissingTranslationHandler } from './handlers/log-missing-translations.handler';
 
-// Pipes
-import { AsArrayPipe } from './pipes/as-array.pipe';
-import { KeyValueTypedPipe } from './pipes/key-value-typed.pipe';
+// Modules
+import { SharedModule } from './shared.module';
+import { UiSpriteModule } from './ui-sprite.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', `.json?v=${environment.appVersion}`);
 }
 
-const directives = [
-    OnClickSelectDirective,
-    TooltipSocketableDirective,
-    VarDirective
-];
-const pipes = [
-    AsArrayPipe,
-    KeyValueTypedPipe
-];
 const components = [
     Diablo2HelperComponent,
     FormatEffectComponent,
@@ -80,9 +63,6 @@ const components = [
     TabPaneRunesComponent,
     TabPaneSettingsComponent,
     UiCollapsibleComponent,
-    UiSpriteAnimatedComponent,
-    UiSpriteGemComponent,
-    UiSpriteRuneComponent,
     UiTabComponent,
     UiTableHeadComponent,
     UiTableRecordComponent,
@@ -92,8 +72,6 @@ const components = [
 
 @NgModule({
     declarations: [
-        directives,
-        pipes,
         components
     ],
     imports: [
@@ -101,6 +79,8 @@ const components = [
         FontAwesomeModule,
         FormsModule,
         HttpClientModule,
+        SharedModule,
+        UiSpriteModule,
         TranslateModule.forRoot({
             defaultLanguage: 'en',
             loader: {

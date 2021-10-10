@@ -18,7 +18,7 @@ body {
 
 body:before {
     content: ' ';
-    display: block;
+    display: none;
     position: fixed;
     left: 0;
     top: 0;
@@ -34,6 +34,10 @@ body:before {
     @media screen and (min-device-width: 1921px) {
         background-image: variables.$theme-background-image-xl;
     }
+}
+
+html.theme-background body:before {
+    display: block;
 }
 
 label {

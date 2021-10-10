@@ -9,8 +9,6 @@
         "runeWord": "Runeword",
         "runeWords": "Runewords",
         "owned": "Owned",
-        "darkMode": "Dark mode enabled",
-        "lightMode": "Dark mode disabled",
         "error": "Error"
     },
     "labels": {
@@ -48,6 +46,15 @@
             "cLvl": "Sort by required level",
             "owned": "Sort by owned count"
         }
+    },
+    "settings": {
+        "title": "Settings",
+        "customCursorOff": "Using system cursor",
+        "customCursorOn": "Using custom cursor",
+        "darkModeOff": "Dark mode disabled",
+        "darkModeOn": "Dark mode enabled",
+        "enableBackgroundOff": "Background image disabled",
+        "enableBackgroundOn": "Background image enabled"
     },
     "tooltip": {
         "canBeInsertedIntoSocket": "Can be Inserted into Socketed Items",

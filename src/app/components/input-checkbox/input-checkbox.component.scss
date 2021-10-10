@@ -1,17 +1,64 @@
 @use 'variables';
 @use 'mixins';
+@use 'sass:math';
 
-.label {
-    background: variables.$theme-checkbox;
-    display: block;
+.wrapper {
+    $icon-scale: 0.5;
+    $icon-width: 162px * $icon-scale;
+    $icon-height: 104px * $icon-scale;
+    //noinspection CssInvalidFunction Not yet in the IDE
+    $icon-w: math.div($icon-width, 3);
+    //noinspection CssInvalidFunction Not yet in the IDE
+    $icon-h: math.div($icon-height, 2);
+
     user-select: none;
+    font-family: variables.$font-family-exocet;
+    font-weight: bold;
+    cursor: variables.$cursor-pointer;
+
+    &.button {
+        display: block;
+        background: variables.$theme-checkbox;
+    }
+
+    .icon {
+        display: inline-block;
+        width: $icon-w;
+        height: $icon-h;
+        //noinspection CssUnknownTarget
+        background: url('/assets/images/ui/buttons/checkbox.png');
+        background-size: $icon-width $icon-height;
+        background-position-y: -$icon-h;
+
+        + .label {
+            line-height: 26px;
+            vertical-align: top;
+            margin-left: variables.$size-gap;
+        }
+    }
 
     &:hover {
-        background: variables.$theme-checkbox-hover;
+        &.button {
+            background: variables.$theme-checkbox-hover;
+        }
+
+        .icon {
+            background-position-x: -$icon-w;
+        }
+    }
+
+    &:active .icon {
+        background-position-x: $icon-w * -2;
     }
 
     &.checked {
-        background: variables.$theme-checkbox-checked;
+        &.button {
+            background: variables.$theme-checkbox-checked;
+        }
+
+        .icon {
+            background-position-y: 0;
+        }
     }
 
     &.text-xl {

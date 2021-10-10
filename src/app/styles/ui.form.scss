@@ -48,7 +48,7 @@ input {
         top: variables.$size-gap-small;
         right: variables.$size-gap-small;
         color: variables.$theme-input-clear;
-        cursor: pointer;
+        cursor: variables.$cursor-pointer;
         @include mixins.transition(color);
 
         &:hover {
@@ -63,7 +63,7 @@ button,
     border-radius: variables.$size-gap-small;
     border: none;
     color: variables.$color-rune-name;
-    cursor: pointer;
+    cursor: variables.$cursor-pointer;
     display: inline-block;
     font-family: variables.$font-family-exocet;
     font-weight: bold;
@@ -78,7 +78,7 @@ button,
 
     &[disabled] {
         opacity: 0.5;
-        cursor: no-drop;
+        cursor: variables.$cursor-forbidden;
     }
 }
 

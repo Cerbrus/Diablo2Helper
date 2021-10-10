@@ -1,21 +1,28 @@
 @font-face {
-    font-family: Exocet;
-    src: url('Exocet_Heavy.woff') format('woff'),
-    url('Exocet_Heavy.woff2') format('woff2'),
-    url('Exocet_Heavy.ttf') format('truetype'),
-    url('Exocet_Heavy.otf') format('opentype'),
-    url('Exocet_Heavy.eot') format('embedded-opentype');
+    font-family: Exocet_Caps;
+    src: url('Exocet_Caps_Heavy.woff') format('woff'),
+    url('Exocet_Caps_Heavy.woff2') format('woff2'),
+    url('Exocet_Caps_Heavy.ttf') format('truetype'),
+    url('Exocet_Caps_Heavy.otf') format('opentype'),
+    url('Exocet_Caps_Heavy.eot') format('embedded-opentype');
     font-weight: bold;
 }
 
 @font-face {
-    font-family: Exocet;
-    src: url('Exocet_Light.woff') format('woff'),
-    url('Exocet_Light.woff2') format('woff2'),
-    url('Exocet_Light.ttf') format('truetype'),
-    url('Exocet_Light.otf') format('opentype'),
-    url('Exocet_Light.eot') format('embedded-opentype');
+    font-family: Exocet_Caps;
+    src: url('Exocet_Caps_Light.woff') format('woff'),
+    url('Exocet_Caps_Light.woff2') format('woff2'),
+    url('Exocet_Caps_Light.ttf') format('truetype'),
+    url('Exocet_Caps_Light.otf') format('opentype'),
+    url('Exocet_Caps_Light.eot') format('embedded-opentype');
     font-weight: normal;
+}
 
-
+@font-face {
+    font-family: Exocet;
+    src: url('ExocetBlizzardMixedCaps-Medium.woff') format('woff'),
+    url('ExocetBlizzardMixedCaps-Medium.woff2') format('woff2'),
+    url('ExocetBlizzardMixedCaps-Medium.ttf') format('truetype'),
+    url('ExocetBlizzardMixedCaps-Medium.otf') format('opentype'),
+    url('ExocetBlizzardMixedCaps-Medium.eot') format('embedded-opentype');
 }

@@ -6,10 +6,48 @@ body {
     font-family: sans-serif;
     color: variables.$theme-text;
 
-    background: variables.$theme-background;
     transition: all 0.1s linear;
     //height: 100vh;
     //overflow: hidden;
+}
+
+body {
+    background: variables.$theme-background;
+    cursor: variables.$cursor-default;
+}
+
+body:before {
+    content: ' ';
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: variables.$theme-background-image;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+    opacity: variables.$theme-background-opacity;
+    z-index: -1;
+
+    @media screen and (min-device-width: 1921px) {
+        background-image: variables.$theme-background-image-xl;
+    }
+}
+
+html.theme-background body:before {
+    display: block;
+}
+
+label {
+    cursor: variables.$cursor-default;
+}
+
+a,
+input,
+.pointer {
+    cursor: variables.$cursor-pointer;
 }
 
 p {

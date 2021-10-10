@@ -38,7 +38,7 @@ $input-height: $control-width;
     border: none;
     border-radius: 25%;
     padding: 0;
-    cursor: pointer;
+    cursor: variables.$cursor-pointer;
     user-select: initial;
     opacity: 1;
     @include mixins.transition(opacity);

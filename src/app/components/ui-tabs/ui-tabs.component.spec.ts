@@ -1,7 +1,5 @@
-import { QueryList } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestModule } from '../../../testing/test-common.module';
-import { UiTabComponent } from '../ui-tab/ui-tab.component';
 import { UiTabsComponent } from './ui-tabs.component';
 
 describe('UiTabsComponent', () => {

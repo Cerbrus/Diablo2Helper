@@ -20,13 +20,11 @@ import { ListRunesComponent } from './components/list-runes/list-runes.component
 import { RuneCounterComponent } from './components/rune-counter/rune-counter.component';
 import { RuneTrackingCountersComponent } from './components/rune-tracking-counters/rune-tracking-counters.component';
 import { RuneTrackingSelectComponent } from './components/rune-tracking-select/rune-tracking-select.component';
-import { SpriteGemComponent } from './components/sprite-gem/sprite-gem.component';
-import { SpriteRuneComponent } from './components/sprite-rune/sprite-rune.component';
 import { TabPaneCharacterImportComponent } from './components/tab-pane-character-import/tab-pane-character-import.component';
 import { TabPaneGemsComponent } from './components/tab-pane-gems/tab-pane-gems.component';
 import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-pane-rune-words.component';
 import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
-import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
+import { TabPaneSettingsComponent } from './components/tab-pane-settings/tab-pane-settings.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
 import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
@@ -34,32 +32,18 @@ import { UiTableRecordComponent } from './components/ui-table-record/ui-table-re
 import { UiTableSortControlComponent } from './components/ui-table-sort-control/ui-table-sort-control.component';
 import { UiTabsComponent } from './components/ui-tabs/ui-tabs.component';
 
-// Directives
-import { OnClickSelectDirective } from './directives/on-click-select/on-click-select.directive';
-import { TooltipSocketableDirective } from './directives/tooltip-socketable/tooltip-socketable.directive';
-import { VarDirective } from './directives/var/var.directive';
-
 // Handlers
 import { LogMissingTranslationHandler } from './handlers/log-missing-translations.handler';
 
-// Pipes
-import { AsArrayPipe } from './pipes/as-array.pipe';
-import { KeyValueTypedPipe } from './pipes/key-value-typed.pipe';
+// Modules
+import { SharedModule } from './shared.module';
+import { UiSpriteModule } from './ui-sprite.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', `.json?v=${environment.appVersion}`);
 }
 
-const directives = [
-    OnClickSelectDirective,
-    TooltipSocketableDirective,
-    VarDirective
-];
-const pipes = [
-    AsArrayPipe,
-    KeyValueTypedPipe
-];
 const components = [
     Diablo2HelperComponent,
     FormatEffectComponent,
@@ -73,13 +57,11 @@ const components = [
     RuneCounterComponent,
     RuneTrackingCountersComponent,
     RuneTrackingSelectComponent,
-    SpriteGemComponent,
-    SpriteRuneComponent,
     TabPaneCharacterImportComponent,
     TabPaneGemsComponent,
     TabPaneRuneWordsComponent,
     TabPaneRunesComponent,
-    ThemeSwitcherComponent,
+    TabPaneSettingsComponent,
     UiCollapsibleComponent,
     UiTabComponent,
     UiTableHeadComponent,
@@ -90,8 +72,6 @@ const components = [
 
 @NgModule({
     declarations: [
-        directives,
-        pipes,
         components
     ],
     imports: [
@@ -99,6 +79,8 @@ const components = [
         FontAwesomeModule,
         FormsModule,
         HttpClientModule,
+        SharedModule,
+        UiSpriteModule,
         TranslateModule.forRoot({
             defaultLanguage: 'en',
             loader: {

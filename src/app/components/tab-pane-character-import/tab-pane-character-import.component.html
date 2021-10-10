@@ -1,6 +1,6 @@
 <div class="row">
     <div class="grid controls">
-        <label>{{ 'labels.import' | translate }}</label>
+        <label class="text-xl">{{ 'labels.import' | translate }}</label>
         <input-game-save-file (onParse)="onParse($event)"></input-game-save-file>
         <p>{{ 'labels.saveToFiltersHelp' | translate }}</p>
         <button (click)="applySaveToFilters()"

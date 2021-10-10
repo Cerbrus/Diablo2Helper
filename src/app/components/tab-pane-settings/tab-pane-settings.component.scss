@@ -1,0 +1,7 @@
+.grid {
+    grid-template-columns: max-content auto;
+
+    label {
+        grid-column: span 2;
+    }
+}

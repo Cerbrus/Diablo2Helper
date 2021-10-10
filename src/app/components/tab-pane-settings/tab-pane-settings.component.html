@@ -1,0 +1,26 @@
+<div class="grid">
+    <label class="text-xl">{{ 'settings.title' | translate }}</label>
+
+    <input-checkbox [label]="getTitleKey('darkMode') | translate"
+                    [showIcon]="true"
+                    [(checked)]="settings.darkMode"
+                    (click)="onToggle('darkMode')"
+    ></input-checkbox>
+    <div></div>
+
+    <input-checkbox [label]="getTitleKey('enableBackground') | translate"
+                    [showIcon]="true"
+                    [(checked)]="settings.enableBackground"
+                    (click)="onToggle('enableBackground')"
+    ></input-checkbox>
+    <div></div>
+
+    <input-checkbox [label]="getTitleKey('customCursor') | translate"
+                    [showIcon]="true"
+                    [(checked)]="settings.customCursor"
+                    (click)="onToggle('customCursor')"
+    ></input-checkbox>
+    <ui-sprite-animated [width]="34.5" [height]="32"
+                        [frames]="16"
+                        sprite="oHand"></ui-sprite-animated>
+</div>

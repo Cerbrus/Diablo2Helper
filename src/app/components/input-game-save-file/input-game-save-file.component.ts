@@ -3,7 +3,7 @@ import { ID2S } from '@dschu012/d2s/lib/d2/types';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { D2sParserService } from '../../services/d2s-parser.service';
-import { TError } from '../../types/TError';
+import { TError } from '../../types';
 
 @Component({
     selector: 'input-game-save-file',

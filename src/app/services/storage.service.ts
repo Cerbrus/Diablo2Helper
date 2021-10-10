@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import settings from '../../assets/settings.json';
 import { ArrayHelper, ObjectHelper } from '../helpers';
-import { IStorage } from '../interfaces/IStorage';
+import { IStorage } from '../interfaces';
 import { GetValue, SaveValue } from '../types/storage';
 
 @Injectable({ providedIn: 'root' })
@@ -16,6 +16,7 @@ export class StorageService {
         'runeWordSort',
         'runeWordsOwned',
         'runesOwned',
+        'settings',
         'uiActiveTabs',
         'uiCollapsibleState'
     ];

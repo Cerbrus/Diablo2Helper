@@ -6,7 +6,9 @@
                     [(checked)]="settings.systemCursor"
                     (click)="onChangeSystemCursor()"
     ></input-checkbox>
-    <div></div>
+    <ui-sprite [width]="34.5" [height]="32"
+               [frames]="16"
+               sprite="ohand"></ui-sprite>
 
     <input-checkbox [label]="darkModeTitleKey | translate"
                     [showIcon]="true"

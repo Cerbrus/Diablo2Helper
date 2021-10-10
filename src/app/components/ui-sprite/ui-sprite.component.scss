@@ -1,0 +1,13 @@
+.sprite {
+    animation-name: sprite;
+    background-size: cover;
+}
+
+@keyframes sprite {
+    0% {
+        background-position: 0;
+    }
+    100% {
+        background-position: 100%;
+    }
+}

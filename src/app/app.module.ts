@@ -20,8 +20,6 @@ import { ListRunesComponent } from './components/list-runes/list-runes.component
 import { RuneCounterComponent } from './components/rune-counter/rune-counter.component';
 import { RuneTrackingCountersComponent } from './components/rune-tracking-counters/rune-tracking-counters.component';
 import { RuneTrackingSelectComponent } from './components/rune-tracking-select/rune-tracking-select.component';
-import { SpriteGemComponent } from './components/sprite-gem/sprite-gem.component';
-import { SpriteRuneComponent } from './components/sprite-rune/sprite-rune.component';
 import { TabPaneCharacterImportComponent } from './components/tab-pane-character-import/tab-pane-character-import.component';
 import { TabPaneGemsComponent } from './components/tab-pane-gems/tab-pane-gems.component';
 import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-pane-rune-words.component';
@@ -29,6 +27,8 @@ import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-rune
 import { TabPaneSettingsComponent } from './components/tab-pane-settings/tab-pane-settings.component';
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
+import { UiSpriteGemComponent } from './components/ui-sprite-gem/ui-sprite-gem.component';
+import { UiSpriteRuneComponent } from './components/ui-sprite-rune/ui-sprite-rune.component';
 import { UiSpriteComponent } from './components/ui-sprite/ui-sprite.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
 import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
@@ -75,8 +75,6 @@ const components = [
     RuneCounterComponent,
     RuneTrackingCountersComponent,
     RuneTrackingSelectComponent,
-    SpriteGemComponent,
-    SpriteRuneComponent,
     TabPaneCharacterImportComponent,
     TabPaneGemsComponent,
     TabPaneRuneWordsComponent,
@@ -85,6 +83,8 @@ const components = [
     ThemeSwitcherComponent,
     UiCollapsibleComponent,
     UiSpriteComponent,
+    UiSpriteGemComponent,
+    UiSpriteRuneComponent,
     UiTabComponent,
     UiTableHeadComponent,
     UiTableRecordComponent,

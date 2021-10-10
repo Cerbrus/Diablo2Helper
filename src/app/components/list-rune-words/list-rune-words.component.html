@@ -33,7 +33,7 @@
                  [class.runes-owned]="areRunesOwned(runeWord)"
                  [class.runes-craftable]="canCraftRunes(runeWord)">
                 <div>
-                    <sprite-rune *ngFor="let rune of runeWord.runes" [rune]="rune" [size]="32"></sprite-rune>
+                    <ui-sprite-rune *ngFor="let rune of runeWord.runes" [rune]="rune" [size]="32"></ui-sprite-rune>
                 </div>
             </div>
             <div class="column-effects" *ngVar="runeWord.effects as effects">

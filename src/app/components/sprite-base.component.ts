@@ -3,24 +3,30 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({ template: '' })
 export abstract class SpriteBaseComponent {
-    name!: string;
-    sprite!: string;
+    public name!: string;
+    public sprite!: string;
 
     @Input()
-    size = 64;
+    public size = 64;
 
     protected constructor(protected readonly translate: TranslateService) {
     }
 
+    protected abstract getBackgroundX(): number;
+
+    protected abstract getBackgroundY(): number;
+
     @HostBinding('style')
-    get style(): Partial<CSSStyleDeclaration> {
+    public get style(): Partial<CSSStyleDeclaration> {
         return this.getStyle();
     }
 
     public getStyle(): Partial<CSSStyleDeclaration> {
         return {
             width: `${this.size}px`,
-            height: `${this.size}px`
+            height: `${this.size}px`,
+            backgroundPositionX: `${this.getBackgroundX()}px`,
+            backgroundPositionY: `${this.getBackgroundY()}px`
         };
     }
 }

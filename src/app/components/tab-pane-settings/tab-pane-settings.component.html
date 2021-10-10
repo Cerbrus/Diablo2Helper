@@ -6,14 +6,20 @@
                     [(checked)]="settings.darkMode"
                     (click)="onToggle('darkMode')"
     ></input-checkbox>
-    <div></div>
+    <ui-sprite-skill [class]="this.settings.darkMode ? 'assassin' : 'sorceress'"
+                     [skill]="this.settings.darkMode ? 'Shadow Master' : 'Lightning'"
+                     [isDown]="true"
+                     [size]="32"></ui-sprite-skill>
 
     <input-checkbox [label]="getTitleKey('enableBackground') | translate"
                     [showIcon]="true"
                     [(checked)]="settings.enableBackground"
                     (click)="onToggle('enableBackground')"
     ></input-checkbox>
-    <div></div>
+    <ui-sprite-skill [class]="this.settings.enableBackground ? 'paladin' : 'barbarian'"
+                     [skill]="this.settings.enableBackground ? 'Conversion' : 'Concentrate'"
+                     [isDown]="true"
+                     [size]="32"></ui-sprite-skill>
 
     <input-checkbox [label]="getTitleKey('customCursor') | translate"
                     [showIcon]="true"

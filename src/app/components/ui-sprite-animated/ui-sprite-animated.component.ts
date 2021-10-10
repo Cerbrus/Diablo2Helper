@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'ui-sprite',
-    templateUrl: './ui-sprite.component.html',
-    styleUrls: ['./ui-sprite.component.scss']
+    selector: 'ui-sprite-animated',
+    templateUrl: './ui-sprite-animated.component.html',
+    styleUrls: ['./ui-sprite-animated.component.scss']
 })
-export class UiSpriteComponent {
+export class UiSpriteAnimatedComponent {
     @Input()
     public sprite!: string;
 

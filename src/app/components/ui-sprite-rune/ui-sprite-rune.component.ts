@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { RuneHelper } from '../../helpers';
 import { IRune } from '../../interfaces/rune';
 import { TRune } from '../../types/rune';
@@ -18,10 +17,8 @@ export class UiSpriteRuneComponent extends SpriteBaseComponent {
         this.runeItem = this.runeHelper.asItem(rune);
     }
 
-    constructor(
-        private readonly runeHelper: RuneHelper,
-        translate: TranslateService) {
-        super(translate);
+    constructor(private readonly runeHelper: RuneHelper) {
+        super();
     }
 
     protected getBackgroundX = () => (this.runeItem.number - 1) * -32;

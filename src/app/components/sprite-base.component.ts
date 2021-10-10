@@ -1,5 +1,4 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({ template: '' })
 export abstract class SpriteBaseComponent {
@@ -8,9 +7,6 @@ export abstract class SpriteBaseComponent {
 
     @Input()
     public size = 64;
-
-    protected constructor(protected readonly translate: TranslateService) {
-    }
 
     protected abstract getBackgroundX(): number;
 

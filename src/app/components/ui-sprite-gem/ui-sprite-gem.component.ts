@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { GemHelper } from '../../helpers';
 import { IGem } from '../../interfaces/gem';
 import { GemQualities, GemTypes, TGem } from '../../types/gem';
@@ -18,10 +17,8 @@ export class UiSpriteGemComponent extends SpriteBaseComponent {
         this.gemItem = this.gemHelper.asItem(gem);
     }
 
-    constructor(
-        translate: TranslateService,
-        private readonly gemHelper: GemHelper) {
-        super(translate);
+    constructor(private readonly gemHelper: GemHelper) {
+        super();
     }
 
     protected getBackgroundX = () => GemQualities.indexOf(this.gemItem.quality) * -this.size;

@@ -8,7 +8,7 @@ import { IRune } from '../../interfaces/rune';
 import { IRuneWord } from '../../interfaces/runeWord';
 import { RunewordFilterService } from '../../services';
 import { D2sParserService } from '../../services/d2s-parser.service';
-import { TError } from '../../types/TError';
+import { TError } from '../../types';
 
 @Component({
     selector: 'tab-pane-character-import',

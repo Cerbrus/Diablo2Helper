@@ -1,19 +1,26 @@
 <div class="grid">
     <label class="text-xl">{{ 'settings.title' | translate }}</label>
 
-    <input-checkbox labelKey="settings.systemCursor"
+    <input-checkbox [label]="getTitleKey('darkMode') | translate"
                     [showIcon]="true"
-                    [(checked)]="settings.systemCursor"
-                    (click)="onChangeSystemCursor()"
+                    [(checked)]="settings.darkMode"
+                    (click)="onToggle('darkMode')"
+    ></input-checkbox>
+    <div></div>
+
+    <input-checkbox [label]="getTitleKey('enableBackground') | translate"
+                    [showIcon]="true"
+                    [(checked)]="settings.enableBackground"
+                    (click)="onToggle('enableBackground')"
+    ></input-checkbox>
+    <div></div>
+
+    <input-checkbox [label]="getTitleKey('customCursor') | translate"
+                    [showIcon]="true"
+                    [(checked)]="settings.customCursor"
+                    (click)="onToggle('customCursor')"
     ></input-checkbox>
     <ui-sprite-animated [width]="34.5" [height]="32"
                         [frames]="16"
-                        sprite="ohand"></ui-sprite-animated>
-
-    <input-checkbox [label]="darkModeTitleKey | translate"
-                    [showIcon]="true"
-                    [(checked)]="settings.darkMode"
-                    (click)="onChangeDarkMode()"
-    ></input-checkbox>
-    <fa-icon [icon]="darkModeIcon" [title]="darkModeTitleKey | translate" size="lg"></fa-icon>
+                        sprite="oHand"></ui-sprite-animated>
 </div>

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
-import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { ISettings } from '../../interfaces';
 import { StorageService } from '../../services';
 
@@ -12,35 +10,27 @@ import { StorageService } from '../../services';
 export class TabPaneSettingsComponent {
     public settings: ISettings;
 
-    public get darkModeIcon(): IconDefinition {
-        return this.settings.darkMode ? faMoon : faSun;
-    }
-
-    public get darkModeTitleKey(): string {
-        return this.settings.darkMode ? 'common.darkMode' : 'common.lightMode';
-    }
-
     constructor(private readonly storageService: StorageService) {
         this.settings = storageService.get.settings();
         this.applySettings();
     }
 
-    public onChangeDarkMode(): void {
-        this.settings.darkMode = !this.settings.darkMode;
-        this.applySettings();
+    public getTitleKey(key: keyof ISettings) {
+        return `settings.${key}${this.settings[key] ? 'On' : 'Off'}`;
     }
 
-    public onChangeSystemCursor(): void {
-        this.settings.systemCursor = !this.settings.systemCursor;
+    public onToggle(key: keyof ISettings): void {
+        this.settings[key] = !this.settings[key];
         this.applySettings();
     }
 
     private applySettings(): void {
         const { settings } = this;
         const classList = document.getElementsByTagName('html')[0].classList;
-        classList.toggle('system-cursor', settings.systemCursor);
+        classList.toggle('custom-cursor', settings.customCursor);
         classList.toggle('theme-dark', settings.darkMode);
         classList.toggle('theme-light', !settings.darkMode);
+        classList.toggle('theme-background', settings.enableBackground);
 
         this.storageService.save.settings(settings);
     }

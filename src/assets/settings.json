@@ -2,8 +2,9 @@
     "defaultLanguage": "en",
     "storageDefaults": {
         "settings": {
+            "customCursor": true,
             "darkMode": true,
-            "systemCursor": false
+            "enableBackground": true
         },
         "runeSort": {
             "name": {"key": "name", "icon": "alpha"},

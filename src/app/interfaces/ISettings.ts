@@ -1,4 +1,5 @@
 export interface ISettings {
+    customCursor: boolean;
     darkMode: boolean;
-    systemCursor: boolean;
+    enableBackground: boolean;
 }

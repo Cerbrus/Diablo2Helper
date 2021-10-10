@@ -29,6 +29,7 @@ import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-rune
 import { TabPaneSettingsComponent } from './components/tab-pane-settings/tab-pane-settings.component';
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
+import { UiSpriteComponent } from './components/ui-sprite/ui-sprite.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
 import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
 import { UiTableRecordComponent } from './components/ui-table-record/ui-table-record.component';
@@ -83,6 +84,7 @@ const components = [
     TabPaneSettingsComponent,
     ThemeSwitcherComponent,
     UiCollapsibleComponent,
+    UiSpriteComponent,
     UiTabComponent,
     UiTableHeadComponent,
     UiTableRecordComponent,

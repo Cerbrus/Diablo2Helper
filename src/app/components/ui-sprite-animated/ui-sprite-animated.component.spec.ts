@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestModule } from '../../../testing/test-common.module';
-import { ThemeSwitcherComponent } from './theme-switcher.component';
+import { UiSpriteAnimatedComponent } from './ui-sprite-animated.component';
 
-describe('ThemeSwitcherComponent', () => {
-    let component: ThemeSwitcherComponent;
-    let fixture: ComponentFixture<ThemeSwitcherComponent>;
+describe('UiSpriteComponent', () => {
+    let component: UiSpriteAnimatedComponent;
+    let fixture: ComponentFixture<UiSpriteAnimatedComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
                 imports: [TestModule],
-                declarations: [ThemeSwitcherComponent]
+                declarations: [UiSpriteAnimatedComponent]
             })
             .compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ThemeSwitcherComponent);
+        fixture = TestBed.createComponent(UiSpriteAnimatedComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

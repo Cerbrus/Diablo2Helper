@@ -25,11 +25,10 @@ import { TabPaneGemsComponent } from './components/tab-pane-gems/tab-pane-gems.c
 import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-pane-rune-words.component';
 import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
 import { TabPaneSettingsComponent } from './components/tab-pane-settings/tab-pane-settings.component';
-import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
+import { UiSpriteAnimatedComponent } from './components/ui-sprite-animated/ui-sprite-animated.component';
 import { UiSpriteGemComponent } from './components/ui-sprite-gem/ui-sprite-gem.component';
 import { UiSpriteRuneComponent } from './components/ui-sprite-rune/ui-sprite-rune.component';
-import { UiSpriteComponent } from './components/ui-sprite/ui-sprite.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
 import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
 import { UiTableRecordComponent } from './components/ui-table-record/ui-table-record.component';
@@ -80,9 +79,8 @@ const components = [
     TabPaneRuneWordsComponent,
     TabPaneRunesComponent,
     TabPaneSettingsComponent,
-    ThemeSwitcherComponent,
     UiCollapsibleComponent,
-    UiSpriteComponent,
+    UiSpriteAnimatedComponent,
     UiSpriteGemComponent,
     UiSpriteRuneComponent,
     UiTabComponent,

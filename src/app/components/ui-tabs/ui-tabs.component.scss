@@ -8,6 +8,7 @@
     &-tabs {
         margin-block-start: 0;
         margin-left: variables.$size-gap;
+        margin-right: variables.$size-gap;
         margin-bottom: 1px;
         box-sizing: border-box;
         height: variables.$size-tab-control;
@@ -45,6 +46,10 @@
                 &:focus {
                     border: 1px solid variables.$theme-tabs-border;
                 }
+            }
+
+            &.right {
+                float: right;
             }
 
             &.active > a {

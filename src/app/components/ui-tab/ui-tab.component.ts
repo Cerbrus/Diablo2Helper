@@ -11,4 +11,7 @@ export class UiTabComponent {
 
     @Input()
     public active = false;
+
+    @Input()
+    public right = false;
 }

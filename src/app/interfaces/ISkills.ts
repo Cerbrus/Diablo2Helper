@@ -32,5 +32,5 @@ export type ISkillArray<C extends TClass> = {
 }
 
 export type ISkillArrayUi<C extends TClassUi> = {
-    [key in C]: Array<(ISkillUi)[key]>
+    [key in C]: Array<ISkillUi[key]>
 }

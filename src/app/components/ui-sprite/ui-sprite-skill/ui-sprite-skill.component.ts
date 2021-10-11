@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { ISkillUi } from '../../../interfaces';
 import { ClassesUi, SkillsUi, TClassUi } from '../../../types';
 import { SpriteBaseComponent } from '../sprite-base.component';
 
 @Component({
     selector: 'ui-sprite-skill',
-    templateUrl: './ui-sprite-skill.component.html'
+    templateUrl: './ui-sprite-skill.component.html',
+    styleUrls: ['./ui-sprite-skill.component.scss']
 })
 export class UiSpriteSkillComponent<TClass extends TClassUi, TSkill extends ISkillUi[TClass]> extends SpriteBaseComponent {
     @Input()
@@ -13,6 +14,11 @@ export class UiSpriteSkillComponent<TClass extends TClassUi, TSkill extends ISki
 
     @Input()
     public skill?: TSkill;
+
+    @HostBinding('title')
+    public get title(): string | null {
+        return this.skill ?? (SkillsUi[this.class] && SkillsUi[this.class][this.index]);
+    }
 
     @Input()
     public index = 0;

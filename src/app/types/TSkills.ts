@@ -11,11 +11,12 @@ export const Skills: ISkillArray<TClass> = {
         'Dopplezon', 'Evade', 'Fend', 'Freezing Arrow', 'Valkyrie', 'Pierce', 'Lightning Strike', 'Lightning Fury'
     ],
     assassin: [
-        'Fire Trauma', 'Claw Mastery', 'Psychic Hammer', 'Tiger Strike', 'Dragon Talon', 'Shock Field',
-        'Blade Sentinel', 'Quickness', 'Fists of Fire', 'Dragon Claw', 'Charged Bolt Sentry', 'Wake of Fire Sentry',
-        'Weapon Block', 'Cloak of Shadows', 'Cobra Strike', 'Blade Fury', 'Fade', 'Shadow Warrior',
-        'Claws of Thunder', 'Dragon Tail', 'Lightning Sentry', 'Inferno Sentry', 'Mind Blast', 'Blades of Ice',
-        'Dragon Flight', 'Death Sentry', 'Blade Shield', 'Venom', 'Shadow Master', 'Royal Strike'
+        'Fire Blast', 'Shock Web', 'Blade Sentinel', 'Charged Bolt Sentry', 'Wake of Fire', 'Blade Fury',
+        'Lightning Sentry', 'Wake of Inferno', 'Death Sentry', 'Blade Shield', 'Claw Mastery', 'Psychic Hammer',
+        'Cloak of Shadows', 'Weapon Block', 'Venom', 'Fade', 'Shadow Master', 'Mind Blast', 'Burst of Speed',
+        'Shadow Warrior', 'Tiger Strike', 'Dragon Talon', 'Fists of Fire', 'Dragon Claw', 'Dragon Tail', 'Cobra Strike',
+        'Blades of Ice', 'Dragon Flight', 'Phoenix Strike', 'Claws of Thunder'
+
     ],
     barbarian: [
         'Bash', 'Sword Mastery', 'Axe Mastery', 'Mace Mastery', 'Howl', 'Find Potion', 'Leap', 'Double Swing',
@@ -25,11 +26,10 @@ export const Skills: ISkillArray<TClass> = {
         'Battle Command'
     ],
     druid: [
-        'Raven', 'Plague Poppy', 'Wearwolf', 'Shape Shifting', 'Firestorm', 'Oak Sage', 'Summon Spirit Wolf',
-        'Wearbear', 'Molten Boulder', 'Arctic Blast', 'Cycle of Life', 'Feral Rage', 'Maul', 'Eruption',
-        'Cyclone Armor', 'Heart of Wolverine', 'Summon Fenris', 'Rabies', 'Fire Claws', 'Twister', 'Vines',
-        'Hunger', 'Shock Wave', 'Volcano', 'Tornado', 'Spirit of Barbs', 'Summon Grizzly', 'Fury', 'Armageddon',
-        'Hurricane'
+        'Raven', 'Poison Creeper', 'Spirit of Barbs', 'Summon Spirit Wolf', 'Carrion Vine', 'Heart of Wolverine',
+        'Summon Dire Wolf', 'Solar Creeper', 'Oak Sage', 'Summon Grizzly', 'Werewolf', 'Werebear', 'Rabies',
+        'Fire Claws', 'Shock Wave', 'Fury', 'Firestorm', 'Molten Boulder', 'Arctic Blast', 'Fissure', 'Cyclone Armor',
+        'Twister', 'Volcano', 'Tornado', 'Hurricane', 'Armageddon', 'Lycanthropy', 'Feral Rage', 'Maul', 'Hunger'
     ],
     necromancer: [
         'Amplify Damage', 'Teeth', 'Bone Armor', 'Skeleton Mastery', 'Raise Skeleton', 'Dim Vision', 'Weaken',
@@ -89,11 +89,11 @@ export type TSkillAmazon =
     'Lightning Strike' | 'Lightning Fury';
 
 export type TSkillAssassin =
-    'Fire Trauma' | 'Claw Mastery' | 'Psychic Hammer' | 'Tiger Strike' | 'Dragon Talon' | 'Shock Field' |
-    'Blade Sentinel' | 'Quickness' | 'Fists of Fire' | 'Dragon Claw' | 'Charged Bolt Sentry' | 'Wake of Fire Sentry' |
-    'Weapon Block' | 'Cloak of Shadows' | 'Cobra Strike' | 'Blade Fury' | 'Fade' | 'Shadow Warrior' |
-    'Claws of Thunder' | 'Dragon Tail' | 'Lightning Sentry' | 'Inferno Sentry' | 'Mind Blast' | 'Blades of Ice' |
-    'Dragon Flight' | 'Death Sentry' | 'Blade Shield' | 'Venom' | 'Shadow Master' | 'Royal Strike';
+    'Fire Blast' | 'Shock Web' | 'Blade Sentinel' | 'Charged Bolt Sentry' | 'Wake of Fire' | 'Blade Fury' |
+    'Lightning Sentry' | 'Wake of Inferno' | 'Death Sentry' | 'Blade Shield' | 'Claw Mastery' | 'Psychic Hammer' |
+    'Cloak of Shadows' | 'Weapon Block' | 'Venom' | 'Fade' | 'Shadow Master' | 'Mind Blast' | 'Burst of Speed' |
+    'Shadow Warrior' | 'Tiger Strike' | 'Dragon Talon' | 'Fists of Fire' | 'Dragon Claw' | 'Dragon Tail' |
+    'Cobra Strike' | 'Blades of Ice' | 'Dragon Flight' | 'Phoenix Strike' | 'Claws of Thunder';
 
 export type TSkillBarbarian =
     'Bash' | 'Sword Mastery' | 'Axe Mastery' | 'Mace Mastery' | 'Howl' | 'Find Potion' | 'Leap' | 'Double Swing' |
@@ -103,11 +103,11 @@ export type TSkillBarbarian =
     'Battle Command';
 
 export type TSkillDruid =
-    'Raven' | 'Plague Poppy' | 'Wearwolf' | 'Shape Shifting' | 'Firestorm' | 'Oak Sage' | 'Summon Spirit Wolf' |
-    'Wearbear' | 'Molten Boulder' | 'Arctic Blast' | 'Cycle of Life' | 'Feral Rage' | 'Maul' | 'Eruption' |
-    'Cyclone Armor' | 'Heart of Wolverine' | 'Summon Fenris' | 'Rabies' | 'Fire Claws' | 'Twister' | 'Vines' |
-    'Hunger' | 'Shock Wave' | 'Volcano' | 'Tornado' | 'Spirit of Barbs' | 'Summon Grizzly' | 'Fury' | 'Armageddon' |
-    'Hurricane';
+    'Raven' | 'Poison Creeper' | 'Spirit of Barbs' | 'Summon Spirit Wolf' | 'Carrion Vine' | 'Heart of Wolverine' |
+    'Summon Dire Wolf' | 'Solar Creeper' | 'Oak Sage' | 'Summon Grizzly' | 'Werewolf' | 'Werebear' | 'Rabies' |
+    'Fire Claws' | 'Shock Wave' | 'Fury' | 'Firestorm' | 'Molten Boulder' | 'Arctic Blast' | 'Fissure' |
+    'Cyclone Armor' | 'Twister' | 'Volcano' | 'Tornado' | 'Hurricane' | 'Armageddon' | 'Lycanthropy' | 'Feral Rage' |
+    'Maul' | 'Hunger';
 
 export type TSkillNecromancer =
     'Amplify Damage' | 'Teeth' | 'Bone Armor' | 'Skeleton Mastery' | 'Raise Skeleton' | 'Dim Vision' | 'Weaken' |
@@ -136,3 +136,4 @@ export type TSkillHireling =
 // noinspection TypeScriptDuplicateUnionOrIntersectionType
 export type TSkillUi = 'Blank' | 'Attack' | 'Unsummon' | 'Throw' | null | 'Left Hand Swing' | 'Left Hand Throw' |
     'Scroll of Identify' | null | 'Scroll of Town Portal';
+

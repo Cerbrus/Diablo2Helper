@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ObjectHelper } from '../../helpers';
+import { ISkillUi } from '../../interfaces';
 import { ClassesUi, SkillsUi, TClassUi } from '../../types';
 
 @Component({
@@ -10,7 +12,7 @@ export class TabPaneDevComponent {
     public class: TClassUi = 'amazon';
     public skillIndex = 0;
     public isDown = false;
-    public skills = SkillsUi;
+    public skills = ObjectHelper.deepCopy(SkillsUi);
     public skillsString?: string;
 
     public autoCompleteClass(): void {
@@ -21,6 +23,23 @@ export class TabPaneDevComponent {
         }
     }
 
+    public autoCompleteSkill<TCurrentClass extends TClassUi>(): void {
+        const currentClass: TCurrentClass = <TCurrentClass>this.class;
+        const currentSkill = this.skills[currentClass][this.skillIndex]?.toLowerCase();
+        if (!currentSkill)
+            return;
+
+        const currentClassSkills = (<Array<ISkillUi[TCurrentClass]>>SkillsUi[currentClass]);
+        const matches = currentClassSkills.filter(s => {
+            const skill = s?.toLowerCase();
+            return skill && (skill.startsWith(currentSkill) || currentSkill.startsWith(skill));
+        });
+
+        if (matches.length === 1) {
+            this.skills[currentClass][this.skillIndex] = matches[0];
+        }
+    }
+
     public getMax(): number {
         const max = ['ui', 'hireling'].includes(this.class) ? 18 : 29;
         this.skillIndex = Math.min(this.skillIndex, max);
@@ -28,7 +47,7 @@ export class TabPaneDevComponent {
     }
 
     public stringifySkills(): void {
-        this.skillsString = JSON.stringify(SkillsUi)
+        this.skillsString = JSON.stringify(this.skills)
             .replace(/ +/, ' ')
             .replace(/{/g, '{\r\n')
             .replace(/([}\]])/g, '\r\n$1')

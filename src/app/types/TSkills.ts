@@ -34,9 +34,9 @@ export const Skills: ISkillArray<TClass> = {
     necromancer: [
         'Amplify Damage', 'Teeth', 'Bone Armor', 'Skeleton Mastery', 'Raise Skeleton', 'Dim Vision', 'Weaken',
         'Poison Dagger', 'Corpse Explosion', 'Clay Golem', 'Iron Maiden', 'Terror', 'Bone Wall', 'Golem Mastery',
-        'Raise Skeletal Mage', 'Confuse', 'Life Tap', 'Poison Explosion', 'Bone Spear', 'BloodGolem', 'Attract',
-        'Decrepify', 'Bone Prison', 'Summon Resist', 'IronGolem', 'Lower Resist', 'Poison Nova', 'Bone Spirit',
-        'FireGolem', 'Revive'
+        'Raise Skeletal Mage', 'Confuse', 'Life Tap', 'Poison Explosion', 'Bone Spear', 'Blood Golem', 'Attract',
+        'Decrepify', 'Bone Prison', 'Summon Resist', 'Iron Golem', 'Lower Resist', 'Poison Nova', 'Bone Spirit',
+        'Fire Golem', 'Revive'
     ],
     paladin: [
         'Sacrifice', 'Smite', 'Might', 'Prayer', 'Resist Fire', 'Holy Bolt', 'Holy Fire', 'Thorns', 'Defiance',
@@ -64,6 +64,22 @@ export const SkillsUi: ISkillArrayUi<TClassUi> = {
         'Scroll of Identify', null, 'Scroll of Town Portal'
     ]
 };
+
+export const SkillsAll = [
+    ...SkillsUi.amazon,
+    ...SkillsUi.assassin,
+    ...SkillsUi.barbarian,
+    ...SkillsUi.druid,
+    ...SkillsUi.necromancer,
+    ...SkillsUi.paladin,
+    ...SkillsUi.sorceress
+];
+
+export const SkillsAllUi = [
+    ...SkillsAll,
+    ...SkillsUi.hireling,
+    ...SkillsUi.ui
+];
 
 export type TSkillAmazon =
     'Magic Arrow' | 'Fire Arrow' | 'Inner Sight' | 'Critical Strike' | 'Jab' | 'Cold Arrow' | 'Multiple Shot' |
@@ -96,9 +112,9 @@ export type TSkillDruid =
 export type TSkillNecromancer =
     'Amplify Damage' | 'Teeth' | 'Bone Armor' | 'Skeleton Mastery' | 'Raise Skeleton' | 'Dim Vision' | 'Weaken' |
     'Poison Dagger' | 'Corpse Explosion' | 'Clay Golem' | 'Iron Maiden' | 'Terror' | 'Bone Wall' | 'Golem Mastery' |
-    'Raise Skeletal Mage' | 'Confuse' | 'Life Tap' | 'Poison Explosion' | 'Bone Spear' | 'BloodGolem' | 'Attract' |
-    'Decrepify' | 'Bone Prison' | 'Summon Resist' | 'IronGolem' | 'Lower Resist' | 'Poison Nova' | 'Bone Spirit' |
-    'FireGolem' | 'Revive';
+    'Raise Skeletal Mage' | 'Confuse' | 'Life Tap' | 'Poison Explosion' | 'Bone Spear' | 'Blood Golem' | 'Attract' |
+    'Decrepify' | 'Bone Prison' | 'Summon Resist' | 'Iron Golem' | 'Lower Resist' | 'Poison Nova' | 'Bone Spirit' |
+    'Fire Golem' | 'Revive';
 
 export type TSkillPaladin =
     'Sacrifice' | 'Smite' | 'Might' | 'Prayer' | 'Resist Fire' | 'Holy Bolt' | 'Holy Fire' | 'Thorns' | 'Defiance' |

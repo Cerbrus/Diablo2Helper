@@ -26,13 +26,14 @@ export class UiSpriteSkillComponent<TClass extends TClassUi, TSkill extends ISki
     }
 
     protected getBackground(): Record<'x' | 'y' | 'width' | 'height', number> {
+        const hasDown = this.class !== 'hireling';
         const index = this.skill
             ? (<Array<ISkillUi[TClass]>>SkillsUi[this.class]).indexOf(this.skill)
             : this.index;
 
         return {
-            x: (index * 2 + (this.isDown ? 1 : 0)) * -this.size,
-            y: ClassesUi.indexOf(this.class) * -this.size,
+            x: -this.size * (index * (hasDown ? 2 : 1) + (hasDown && this.isDown ? 1 : 0)),
+            y: -this.size * ClassesUi.indexOf(this.class),
             width: 7919 * (this.size / 132),
             height: 1170 * (this.size / 130)
         };

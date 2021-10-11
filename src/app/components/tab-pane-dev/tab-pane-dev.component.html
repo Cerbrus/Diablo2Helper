@@ -1,0 +1,24 @@
+<div class="grid skills">
+    <div class="row">
+        <div class="grid">
+            <div class="row">
+                <ui-sprite-skill [class]="class"
+                                 [index]="skillIndex"
+                                 [isDown]="isDown"
+                                 [size]="64"
+                ></ui-sprite-skill>
+                <input-checkbox [(checked)]="isDown"
+                                [showIcon]="true"
+                ></input-checkbox>
+            </div>
+            <button (click)="stringifySkills()">Get skills data</button>
+        </div>
+        <div class="grid">
+            <input type="text" [(ngModel)]="class" (keyup)="autoCompleteClass()" onClickSelect>
+            <input type="number" [(ngModel)]="skillIndex" min="0" [max]="getMax()" onClickSelect>
+
+            <input type="text" [(ngModel)]="skills[class] && skills[class][skillIndex]" onClickSelect>
+        </div>
+    </div>
+    <pre *ngIf="skillsString" onClickSelect class="pointer">{{ skillsString }}</pre>
+</div>

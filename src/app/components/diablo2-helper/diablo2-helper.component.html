@@ -14,4 +14,7 @@
     <ui-tab tabTitle="settings.title" [right]="true">
         <tab-pane-settings></tab-pane-settings>
     </ui-tab>
+    <ui-tab tabTitle="labels.dev" *ngIf="!environment.production" [right]="true">
+        <tab-pane-dev></tab-pane-dev>
+    </ui-tab>
 </ui-tabs>

@@ -21,6 +21,7 @@ import { RuneCounterComponent } from './components/rune-counter/rune-counter.com
 import { RuneTrackingCountersComponent } from './components/rune-tracking-counters/rune-tracking-counters.component';
 import { RuneTrackingSelectComponent } from './components/rune-tracking-select/rune-tracking-select.component';
 import { TabPaneCharacterImportComponent } from './components/tab-pane-character-import/tab-pane-character-import.component';
+import { TabPaneDevComponent } from './components/tab-pane-dev/tab-pane-dev.component';
 import { TabPaneGemsComponent } from './components/tab-pane-gems/tab-pane-gems.component';
 import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-pane-rune-words.component';
 import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
@@ -58,6 +59,7 @@ const components = [
     RuneTrackingCountersComponent,
     RuneTrackingSelectComponent,
     TabPaneCharacterImportComponent,
+    TabPaneDevComponent,
     TabPaneGemsComponent,
     TabPaneRuneWordsComponent,
     TabPaneRunesComponent,

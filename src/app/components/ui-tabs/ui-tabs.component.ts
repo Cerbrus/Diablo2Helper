@@ -29,7 +29,8 @@ export class UiTabsComponent implements AfterContentInit {
             this.selectTab(this.tabs.first);
     }
 
-    public selectTab(tab: UiTabComponent): void {
+    public selectTab(tab: UiTabComponent, $event?: MouseEvent): void {
+        $event?.preventDefault();
         if (!tab)
             return;
 

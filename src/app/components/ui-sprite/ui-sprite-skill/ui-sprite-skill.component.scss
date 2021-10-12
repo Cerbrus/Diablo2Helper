@@ -1,0 +1,5 @@
+@use 'variables';
+
+:host {
+    cursor: variables.$cursor-pointer;
+}

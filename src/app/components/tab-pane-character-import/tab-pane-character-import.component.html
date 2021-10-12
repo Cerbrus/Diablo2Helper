@@ -20,15 +20,15 @@
     <div class="grid" *ngIf="parseResult">
         <label>{{ 'labels.imported' | translate }}</label>
         <div class="table table-result">
-            <ui-table-head *ngIf="parseResult" labelKey="labels.character"></ui-table-head>
-            <ui-table-head *ngIf="gems" labelKey="common.gems"></ui-table-head>
-            <ui-table-head *ngIf="runes" labelKey="common.runes"></ui-table-head>
-            <ui-table-head *ngIf="runeWords" labelKey="common.runeWords"></ui-table-head>
+            <ui-table-head [label]="'labels.character' | translate"></ui-table-head>
+            <ui-table-head *ngIf="gems" [label]="'common.gems' | translate"></ui-table-head>
+            <ui-table-head *ngIf="runes" [label]="'common.runes' | translate"></ui-table-head>
+            <ui-table-head *ngIf="runeWords" [label]="'common.runeWords' | translate"></ui-table-head>
 
-            <ui-table-record *ngIf="character"
-                             class="column-character"
-                             [record]="character"
-            ></ui-table-record>
+            <div class="column-character">
+                <ui-table-record *ngIf="character" [record]="character"></ui-table-record>
+                <ui-sprite-class [class]="getClass()"></ui-sprite-class>
+            </div>
             <ui-table-record *ngIf="gems"
                              class="column-gems"
                              labelKey="common.gems"

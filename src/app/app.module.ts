@@ -21,11 +21,13 @@ import { RuneCounterComponent } from './components/rune-counter/rune-counter.com
 import { RuneTrackingCountersComponent } from './components/rune-tracking-counters/rune-tracking-counters.component';
 import { RuneTrackingSelectComponent } from './components/rune-tracking-select/rune-tracking-select.component';
 import { TabPaneCharacterImportComponent } from './components/tab-pane-character-import/tab-pane-character-import.component';
+import { TabPaneDevComponent } from './components/tab-pane-dev/tab-pane-dev.component';
 import { TabPaneGemsComponent } from './components/tab-pane-gems/tab-pane-gems.component';
 import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-pane-rune-words.component';
 import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
 import { TabPaneSettingsComponent } from './components/tab-pane-settings/tab-pane-settings.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
+import { UiSpriteClassComponent } from './components/ui-sprite/ui-sprite-class/ui-sprite-class.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
 import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
 import { UiTableRecordComponent } from './components/ui-table-record/ui-table-record.component';
@@ -58,11 +60,13 @@ const components = [
     RuneTrackingCountersComponent,
     RuneTrackingSelectComponent,
     TabPaneCharacterImportComponent,
+    TabPaneDevComponent,
     TabPaneGemsComponent,
     TabPaneRuneWordsComponent,
     TabPaneRunesComponent,
     TabPaneSettingsComponent,
     UiCollapsibleComponent,
+    UiSpriteClassComponent,
     UiTabComponent,
     UiTableHeadComponent,
     UiTableRecordComponent,

@@ -15,6 +15,18 @@ export class ObjectHelper {
         return <Array<[TKey, TValue]>>Object.entries(obj);
     }
 
+    public static keys<TKey extends string>(
+        obj: { [key in TKey]?: any }
+    ): Array<TKey> {
+        return <Array<TKey>>Object.keys(obj);
+    }
+
+    public static values<TValue>(
+        obj: { [key in string]?: TValue }
+    ): Array<TValue> {
+        return <Array<TValue>>Object.values(obj);
+    }
+
     public static forEach<TKey extends string, TValue>(
         object: Record<TKey, TValue>,
         iterator: (key: TKey, value: TValue, index: number, array: Array<[TKey, TValue]>) => void
@@ -25,6 +37,19 @@ export class ObjectHelper {
                 index: number,
                 array: Array<[TKey, TValue]>
             ) => iterator(key, value, index, array));
+    }
+
+    public static map<TKey extends string, TValue, TResult>(
+        object: Record<TKey, TValue>,
+        toValue: (key: TKey, value: TValue, index: number, object: Record<TKey, TResult>) => TResult
+    ): Record<TKey, TResult> {
+        const result = <Record<TKey, TResult>>{};
+        ObjectHelper.forEach(
+            object,
+            (key, value, index) => {
+                result[key] = toValue(key, value, index, result);
+            });
+        return result;
     }
 
     public static every<TKey extends string, TValue>(

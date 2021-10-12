@@ -1,0 +1,20 @@
+.skills {
+    grid-template-columns: auto;
+
+    pre {
+        white-space: pre-wrap;
+    }
+}
+
+.logo {
+    display: grid;
+    justify-items: center;
+
+    .background {
+        position: absolute;
+    }
+
+    .foreground {
+        z-index: 1;
+    }
+}

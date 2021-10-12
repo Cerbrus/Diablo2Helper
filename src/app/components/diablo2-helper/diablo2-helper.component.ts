@@ -10,6 +10,8 @@ import { environment } from '../../../environments/environment';
     styleUrls: ['./diablo2-helper.component.scss']
 })
 export class Diablo2HelperComponent {
+    public environment = environment;
+
     constructor(
         titleService: Title,
         translate: TranslateService

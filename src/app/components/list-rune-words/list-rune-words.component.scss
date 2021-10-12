@@ -6,9 +6,15 @@ table {
 }
 
 .column {
-    &-name,
+    &-name .details,
     &-runes {
         display: grid;
+    }
+
+    &-name {
+        display: grid;
+        grid-template-rows: auto min-content;
+        align-content: space-between;
     }
 }
 

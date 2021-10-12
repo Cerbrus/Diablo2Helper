@@ -73,7 +73,7 @@ export class RuneFactory extends BaseEntityFactory<IRuneMap> {
             Ith: {
                 name: 'Ith', number: 6, cLvl: 15,
                 effects: {
-                    weapon: int('MaxDamage', 9),
+                    weapon: int('DamageMaximum', 9),
                     armorHelm: pct('DamageToMana', 15)
                 },
                 craft: { runes: repeat('Eth', 3) }

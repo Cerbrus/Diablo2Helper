@@ -17,7 +17,7 @@ export class FormatEffectComponent {
     public title?: string;
 
     @Input()
-    public effects!: ItemOrArray<IEffect>;
+    public effects!: ItemOrArray<IEffect | string>;
 
     @Input()
     public lineBreak = false;

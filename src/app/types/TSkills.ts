@@ -1,4 +1,4 @@
-// noinspection SpellCheckingInspection
+// noinspection SpellCheckingInspection,JSUnusedGlobalSymbols
 
 import { ISkillArray, ISkillArrayUi } from '../interfaces';
 import { TClass, TClassUi } from './TClass';

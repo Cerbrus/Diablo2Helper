@@ -8,7 +8,7 @@ import { IRune } from '../../interfaces/rune';
 import { IRuneWord } from '../../interfaces/runeWord';
 import { RunewordFilterService } from '../../services';
 import { D2sParserService } from '../../services/d2s-parser.service';
-import { TError } from '../../types';
+import { TClass, TError } from '../../types';
 
 @Component({
     selector: 'tab-pane-character-import',
@@ -25,6 +25,10 @@ export class TabPaneCharacterImportComponent {
     public runeWords?: Array<KeyValue<IRuneWord, number>>;
 
     public logText?: string;
+
+    public getClass(): TClass | undefined {
+        return <TClass>this.parseResult?.header?.class?.toLowerCase();
+    }
 
     constructor(
         private readonly translate: TranslateService,

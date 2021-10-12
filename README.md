@@ -26,5 +26,5 @@ https://github.com/simple-icons/simple-icons/blob/develop/slugs.md
 | Title            | Link |
 |------------------|------|
 | Resource extract |https://www.reddit.com/r/diablo2/comments/mpa1yl/how_to_extract_item_textures_from_d2r_alpha/|
-| DC6 to PNG       |https://github.com/dschu012/dc6png|
+| DC6 to PNG       |https://github.com/dschu012/dc6png <br/>`\Diablo II Resurrected Extract\data\data\global\ui\frontend> dc6png -p ../../palette/fechar/pal.dat -f **/*.dc6 -v`|
 | CASC viewer      |http://www.zezula.net/en/casc/main.html|

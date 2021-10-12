@@ -25,7 +25,8 @@
                     [(checked)]="settings.customCursor"
                     (click)="onToggle('customCursor')"
     ></input-checkbox>
-    <ui-sprite-animated [width]="34.5" [height]="32"
+    <ui-sprite-animated [scale]="0.25"
                         [frames]="16"
+                        [animation]="{ direction: 'alternate' }"
                         sprite="oHand"></ui-sprite-animated>
 </div>

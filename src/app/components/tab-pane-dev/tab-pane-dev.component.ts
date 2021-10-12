@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ObjectHelper } from '../../helpers';
 import { ISkillUi } from '../../interfaces';
-import { ClassesUi, SkillsUi, TClassUi } from '../../types';
+import { ClassesUi, SkillsUi, TClass, TClassUi } from '../../types';
 
 @Component({
     selector: 'tab-pane-dev',
@@ -21,6 +21,12 @@ export class TabPaneDevComponent {
             this.class = matches[0];
             this.skillIndex = 0;
         }
+    }
+
+    public get characterClass(): TClass | undefined {
+        return this.class !== 'ui' && this.class !== 'hireling'
+            ? this.class
+            : undefined;
     }
 
     public autoCompleteSkill<TCurrentClass extends TClassUi>(): void {

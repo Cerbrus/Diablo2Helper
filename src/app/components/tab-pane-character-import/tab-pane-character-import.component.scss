@@ -27,6 +27,13 @@ $size-controls: 340px;
         grid-template-rows: 28px auto;
     }
 
+    .column-character {
+        padding: 0 0 variables.$size-gap 0;
+        display: grid;
+        justify-items: center;
+        align-content: start;
+    }
+
     ui-table-record {
         padding: 0;
         height: 100%;

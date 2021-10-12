@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { ISettings } from '../../interfaces';
 import { StorageService } from '../../services';
 
@@ -8,6 +9,8 @@ import { StorageService } from '../../services';
     styleUrls: ['./tab-pane-settings.component.scss']
 })
 export class TabPaneSettingsComponent {
+    public environment = environment;
+
     public settings: ISettings;
 
     constructor(private readonly storageService: StorageService) {

@@ -1,7 +1,10 @@
+@use 'variables';
+
 .grid {
     grid-template-columns: max-content auto;
 
-    label {
-        grid-column: span 2;
+    .version {
+        font-family: variables.$font-family-exocet;
+        text-align: right;
     }
 }

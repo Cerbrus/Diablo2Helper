@@ -137,3 +137,11 @@ export type TSkillHireling =
 export type TSkillUi = 'Blank' | 'Attack' | 'Unsummon' | 'Throw' | null | 'Left Hand Swing' | 'Left Hand Throw' |
     'Scroll of Identify' | null | 'Scroll of Town Portal';
 
+export type TSkill = TSkillAmazon | TSkillAssassin | TSkillBarbarian | TSkillDruid |
+    TSkillNecromancer | TSkillPaladin | TSkillSorceress;
+
+export type TSkillGroup =
+    'Bow and Crossbow Skills' |
+    'Fire Skills' |
+    'Offensive Auras' |
+    'Poison and Bone Skills';

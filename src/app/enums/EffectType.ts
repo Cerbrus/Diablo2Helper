@@ -3,5 +3,6 @@ export enum EffectType {
     Stat = 1,
     Resistance = 2,
     Defense = 3,
-    Damage = 4
+    Damage = 4,
+    Skill = 5
 }

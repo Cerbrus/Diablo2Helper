@@ -50,6 +50,16 @@ input,
     cursor: variables.$cursor-pointer;
 }
 
+a {
+    color: variables.$color-rune-name;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
+}
+
 p {
     margin: variables.$size-gap 0;
 }

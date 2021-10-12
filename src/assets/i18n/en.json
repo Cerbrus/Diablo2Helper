@@ -1,6 +1,9 @@
 {
     "common": {
         "appTitle": "Diablo 2 Helper",
+        "by": "by",
+        "author": "Cerbrus",
+        "authorUrl": "https://github.com/Cerbrus",
         "none": "None",
         "rune": "Rune",
         "runes": "Runes",

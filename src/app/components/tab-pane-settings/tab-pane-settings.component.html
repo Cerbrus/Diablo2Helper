@@ -1,5 +1,13 @@
 <div class="grid">
     <label class="text-xl">{{ 'settings.title' | translate }}</label>
+    <div class="version">
+        {{ 'common.appTitle' | translate }}
+        {{ environment.appVersion }}
+        {{ 'common.by' | translate }}
+        <a [href]="'common.authorUrl' | translate" target="_blank">
+            {{ 'common.author' | translate }}
+        </a>
+    </div>
 
     <input-checkbox [label]="getTitleKey('darkMode') | translate"
                     [showIcon]="true"

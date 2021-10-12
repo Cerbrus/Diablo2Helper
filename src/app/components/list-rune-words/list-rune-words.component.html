@@ -17,17 +17,23 @@
                 ></input-number-checkbox>
             </div>
             <div class="column-name">
-                <strong>{{ runeWord.name }}</strong>
-                <em>{{ runeNames(runeWord.runes) }}</em>
-                <div>
-                    <ng-container *ngFor="let rune of runes(runeWord.runes); let last = last">
+                <div class="details">
+                    <strong>{{ runeWord.name }}</strong>
+                    <em>{{ runeNames(runeWord.runes) }}</em>
+                    <div>
+                        <ng-container *ngFor="let rune of runes(runeWord.runes); let last = last">
                             <span [tooltipSocketable]="rune"
                                   [tooltipDelay]="2000"
                             >{{ rune.name }} ({{rune.number}})</span>
-                        <span *ngIf="!last"> + </span>
-                    </ng-container>
+                            <span *ngIf="!last"> + </span>
+                        </ng-container>
+                    </div>
+                    <span>{{ formatItemTypes(runeWord.itemTypes) + ' {' + runeWord.runes.length + '}' }}</span>
                 </div>
-                <span>{{ formatItemTypes(runeWord.itemTypes) + ' {' + runeWord.runes.length + '}' }}</span>
+                <div>
+                    <strong>{{ 'labels.cLvl' | translate }}:</strong>
+                    {{ runeWord.cLvl || ('common.none' | translate) }}
+                </div>
             </div>
             <div class="column-runes runes center-text"
                  [class.runes-owned]="areRunesOwned(runeWord)"
@@ -38,10 +44,6 @@
             </div>
             <div class="column-effects" *ngVar="runeWord.effects as effects">
                 <format-effect [effects]="effects" [lineBreak]="true"></format-effect>
-                <div>
-                    <strong>{{ 'labels.cLvl' | translate }}:</strong>
-                    {{ runeWord.cLvl || ('common.none' | translate) }}
-                </div>
             </div>
         </div>
     </ng-container>

@@ -40,11 +40,15 @@ export class EffectHelper {
         };
     }
 
-    public formatEffects(effects: ItemOrArray<IEffect>, lineBreak = false): string {
+    public formatEffects(effects: ItemOrArray<IEffect | string>, lineBreak = false): string {
         if (!isArray(effects))
             effects = [effects];
 
-        return effects.map(effect => this.translate.instant(`effects.${effect.description}`, effect.value))
+        return effects.map(effect => {
+                return typeof effect === 'string'
+                    ? effect.replace(/[\r\n]+/g, lineBreak ? '\r\n' : ', ')
+                    : this.translate.instant(`effects.${effect.description}`, effect.value);
+            })
             .join(lineBreak ? '\r\n' : ', ');
     }
 
@@ -96,6 +100,7 @@ export class EffectHelper {
         DamageDemons: EffectType.Damage,
         DamageFire: EffectType.Damage,
         DamageLightning: EffectType.Damage,
+        DamageMaximum: EffectType.Damage,
         DamageMinimum: EffectType.Damage,
         DamagePoison: EffectType.Damage,
         DamageTaken: EffectType.Damage,
@@ -112,7 +117,6 @@ export class EffectHelper {
         LowerStaminaDrain: EffectType.Other,
         MagicFind: EffectType.Other,
 
-        MaxDamage: EffectType.Damage,
         MaxLife: EffectType.Stat,
 
         OnKillMana: EffectType.Other,

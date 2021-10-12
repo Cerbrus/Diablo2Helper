@@ -8,7 +8,7 @@ import { IRune } from '../rune';
 export interface IRuneWord {
     name: TRuneWord;
     cLvl: number;
-    effects: ItemOrArray<IEffect>;
+    effects: ItemOrArray<IEffect | string>;
     runes: Array<TRune | IRune>;
     itemTypes: ItemOrArray<TItem>;
     owned?: number;

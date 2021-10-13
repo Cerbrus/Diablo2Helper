@@ -28,10 +28,28 @@ table {
     }
 }
 
-.table {
-    grid-template-columns:  90px 220px 130px 1fr;
+.table-wrapper {
+    position: relative;
+
+    > .table {
+        grid-template-columns: 90px 220px 130px 1fr;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .table-body {
+        height: calc(100% - #{variables.$size-header + variables.$size-gap-table});
+        grid-column: span 4;
+        grid-template-columns: 90px 220px 130px 1fr;
+        position: absolute;
+        top: variables.$size-header + variables.$size-gap-table;
+        width: 100%;
+        overflow-y: auto;
+    }
 
     ui-table-sort-control {
         height: variables.$size-header;
+        box-sizing: border-box;
     }
 }

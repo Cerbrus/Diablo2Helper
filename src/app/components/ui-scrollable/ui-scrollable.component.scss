@@ -1,0 +1,110 @@
+@use 'variables';
+@use 'mixins';
+
+:host {
+    position: relative;
+    display: flex;
+    overflow: auto;
+    z-index: 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        background: transparent;
+        width: 0;
+        height: 0;
+    }
+}
+
+.content {
+    position: relative;
+    z-index: 0;
+    height: fit-content;
+    width: 100%;
+}
+
+.bars {
+    position: sticky;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    margin-right: -100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.2;
+
+    @include mixins.transition(opacity);
+
+    &:hover,
+    &:active {
+        opacity: 1;
+    }
+}
+
+.bar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    pointer-events: auto;
+    cursor: variables.$cursor-pointer;
+
+    &_vertical {
+        top: 0;
+        width: 18px;
+        background: url('/assets/images/ui/scroll/scrollbar_middle.png');
+        background-size: contain;
+        margin: variables.$size-gap-small 0;
+
+        &:before,
+        &:after {
+            content: ' ';
+            display: block;
+            background: url('/assets/images/ui/scroll/scrollbar_end.png') no-repeat;
+            background-size: contain;
+            width: 18px;
+            height: 18px;
+        }
+
+        &:before {
+            position: absolute;
+            top: - variables.$size-gap-small;
+        }
+
+        &:after {
+            position: absolute;
+            bottom: - variables.$size-gap-small;
+            transform: scaleY(-1);
+        }
+    }
+
+    &_horizontal {
+        left: 0;
+    }
+
+    &_has-horizontal {
+        bottom: 8px;
+    }
+
+    &_has-vertical {
+        right: 8px;
+    }
+}
+
+.thumb {
+    position: absolute;
+    pointer-events: auto;
+    width: 18px;
+    height: 28px;
+    background: url('/assets/images/ui/scroll/thumb.png') no-repeat center;
+    z-index: 1;
+
+    .bar_vertical & {
+        right: 0;
+        background-size: 13px 16.5px;
+    }
+
+    .bar_horizontal & {
+        bottom: 0;
+        transform: rotate(90deg);
+    }
+}

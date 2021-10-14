@@ -1,9 +1,7 @@
 @use 'variables';
 @use 'mixins';
 
-table {
-    width: 100%;
-}
+$table-columns: 90px 220px 130px 1fr;
 
 .column {
     &-name .details,
@@ -31,32 +29,24 @@ table {
 .table-wrapper {
     position: relative;
 
-    > .table {
-        grid-template-columns: 90px 220px 130px 1fr;
+    .table {
+        grid-template-columns: $table-columns;
+        grid-template-rows: 45px auto;
         position: absolute;
         width: 100%;
         height: 100%;
     }
 
     .table-body {
-        height: calc(100% - #{variables.$size-header + variables.$size-gap-table});
         grid-column: span 4;
-        grid-template-columns: 90px 220px 130px 1fr;
-        position: absolute;
-        top: variables.$size-header + variables.$size-gap-table;
-        width: 100%;
-        overflow-y: auto;
+    }
+}
 
-        scrollbar-width:thin;
-        scrollbar-color: red url('/assets/images/ui/buttons/checkbox.png');
-        &::-webkit-scrollbar {
-            width: 10px;
-            background: red;
-        }
-        &::-webkit-scrollbar-thumb {
-            width: 10px;
-            background: url('/assets/images/ui/buttons/checkbox.png');
-        }
+::ng-deep list-rune-words {
+    [ui-scrollable] .content {
+        display: grid;
+        grid-template-columns: $table-columns;
+        grid-gap: variables.$size-gap-table;
     }
 
     ui-table-sort-control {

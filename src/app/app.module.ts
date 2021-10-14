@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ResizeObserverModule } from '@ng-web-apis/resize-observer';
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NG_EVENT_PLUGINS } from '@tinkoff/ng-event-plugins';
 import { environment } from '../environments/environment';
 
 // Components
@@ -27,6 +29,7 @@ import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-
 import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
 import { TabPaneSettingsComponent } from './components/tab-pane-settings/tab-pane-settings.component';
 import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
+import { UiScrollableComponent } from './components/ui-scrollable/ui-scrollable.component';
 import { UiSpriteClassComponent } from './components/ui-sprite/ui-sprite-class/ui-sprite-class.component';
 import { UiTabComponent } from './components/ui-tab/ui-tab.component';
 import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
@@ -66,6 +69,7 @@ const components = [
     TabPaneRunesComponent,
     TabPaneSettingsComponent,
     UiCollapsibleComponent,
+    UiScrollableComponent,
     UiSpriteClassComponent,
     UiTabComponent,
     UiTableHeadComponent,
@@ -83,6 +87,7 @@ const components = [
         FontAwesomeModule,
         FormsModule,
         HttpClientModule,
+        ResizeObserverModule,
         SharedModule,
         UiSpriteModule,
         TranslateModule.forRoot({
@@ -99,7 +104,7 @@ const components = [
             useDefaultLang: true
         })
     ],
-    providers: [],
+    providers: [NG_EVENT_PLUGINS],
     bootstrap: [Diablo2HelperComponent],
     entryComponents: [Diablo2HelperComponent]
 })

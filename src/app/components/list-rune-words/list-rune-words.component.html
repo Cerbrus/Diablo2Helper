@@ -9,7 +9,7 @@
             (onSort)="applySort($event)">
         </ui-table-sort-control>
 
-        <div class="table-body table">
+        <div class="table-body" ui-scrollable>
             <ng-container *ngFor="let runeWord of runeWordArraySorted">
                 <div class="table-row" *ngVar="!showRuneWord(runeWord) as hidden" [class.hidden]="hidden">
                     <div class="column-owned">

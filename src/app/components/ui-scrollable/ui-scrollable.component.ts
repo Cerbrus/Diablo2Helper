@@ -24,28 +24,18 @@ export class UiScrollableComponent {
     @Input('scroll-height')
     public height?: string;
 
-    private readonly thumbHeight = 28;
+    private readonly thumbHeight = 15;
 
     constructor(@Inject(ElementRef) readonly elementRef: ElementRef<HTMLElement>) {
     }
 
     public get verticalScrolled(): number {
-        const {
-            scrollTop,
-            scrollHeight,
-            clientHeight
-        } = this.elementRef.nativeElement;
-
+        const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
         return scrollTop / (scrollHeight - clientHeight);
     }
 
     public get horizontalScrolled(): number {
-        const {
-            scrollLeft,
-            scrollWidth,
-            clientWidth
-        } = this.elementRef.nativeElement;
-
+        const { scrollLeft, scrollWidth, clientWidth } = this.elementRef.nativeElement;
         return scrollLeft / (scrollWidth - clientWidth);
     }
 
@@ -61,13 +51,11 @@ export class UiScrollableComponent {
 
     public get verticalSize(): number {
         const { clientHeight, scrollHeight } = this.elementRef.nativeElement;
-
         return Math.ceil((clientHeight / scrollHeight) * 100);
     }
 
     public get horizontalSize(): number {
         const { clientWidth, scrollWidth } = this.elementRef.nativeElement;
-
         return Math.ceil((clientWidth / scrollWidth) * 100);
     }
 
@@ -93,19 +81,20 @@ export class UiScrollableComponent {
     }
 
     public verticalClick($event: MouseEvent) {
-        const bar = this.getScrollbar($event);
-        this.onVertical((($event.offsetY - 14) / bar.clientHeight) * this.elementRef.nativeElement.scrollHeight);
+        const bar = <HTMLElement>$event.target;
+        if (!bar.classList.contains('bar'))
+            return;
+
+        const { scrollHeight, clientHeight } = this.elementRef.nativeElement;
+        this.onVertical(($event.offsetY / bar.clientHeight) * (scrollHeight - clientHeight));
     }
 
     public horizontalClick($event: MouseEvent) {
-        const bar = this.getScrollbar($event);
-        this.onHorizontal((($event.offsetX - 14) / bar.clientWidth) * this.elementRef.nativeElement.scrollWidth);
-    }
+        const bar = <HTMLElement>$event.target;
+        if (!bar.classList.contains('bar'))
+            return;
 
-    private getScrollbar($event: MouseEvent): HTMLElement {
-        const scrollbar = <HTMLElement>$event.target;
-        return scrollbar.classList.contains('thumb') && scrollbar.parentElement
-            ? scrollbar.parentElement
-            : scrollbar;
+        const { scrollWidth, clientWidth } = this.elementRef.nativeElement;
+        this.onHorizontal(($event.offsetX / bar.clientWidth) * (scrollWidth - clientWidth));
     }
 }

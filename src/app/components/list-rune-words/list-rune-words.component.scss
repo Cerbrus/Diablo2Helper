@@ -31,7 +31,6 @@ $table-columns: 90px 220px 130px 1fr;
 
     .table {
         grid-template-columns: $table-columns;
-        grid-template-rows: 45px auto;
         position: absolute;
         width: 100%;
         height: 100%;

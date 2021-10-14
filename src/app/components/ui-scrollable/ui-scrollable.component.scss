@@ -42,51 +42,93 @@
 }
 
 .bar {
+    $bar-end: 14px;
+    $bar-width: 18px;
+
     position: absolute;
     right: 0;
     bottom: 0;
     pointer-events: auto;
     cursor: variables.$cursor-pointer;
 
+    &_vertical,
+    &_horizontal {
+        background-size: contain;
+
+        .up,
+        .down {
+            background-image: url('/assets/images/ui/scroll/scrollbar_end.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: $bar-width;
+            height: $bar-end;
+
+            &:before {
+                content: " ";
+                display: block;
+                position: relative;
+                top: 3px;
+                left: 4px;
+                background-image: url('/assets/images/ui/scroll/button_up.png');
+                background-repeat: no-repeat;
+                background-size: 43px 10px;
+                width: 10px;
+                height: 10px;
+            }
+
+            &:hover:before {
+                background-position-x: -11px;
+            }
+        }
+    }
+
     &_vertical {
         top: 0;
-        width: 18px;
-        background: url('/assets/images/ui/scroll/scrollbar_middle.png');
-        background-size: contain;
-        margin: variables.$size-gap-small 0;
+        width: $bar-width;
+        background-image: url('/assets/images/ui/scroll/scrollbar_middle.png');
+        margin: $bar-end 0;
 
-        &:before,
-        &:after {
-            content: ' ';
-            display: block;
-            background: url('/assets/images/ui/scroll/scrollbar_end.png') no-repeat;
-            background-size: contain;
-            width: 18px;
-            height: 18px;
+        .up {
+            position: absolute;
+            top: -$bar-end;
         }
 
-        &:before {
+        .down {
             position: absolute;
-            top: - variables.$size-gap-small;
-        }
-
-        &:after {
-            position: absolute;
-            bottom: - variables.$size-gap-small;
+            bottom: -$bar-end;
             transform: scaleY(-1);
         }
     }
 
     &_horizontal {
         left: 0;
+        height: $bar-width;
+        background-image: url('/assets/images/ui/scroll/scrollbar_middle_horizontal.png');
+        margin: 0 $bar-end;
+
+        .up,
+        .down {
+            position: absolute;
+            top: 2px;
+        }
+
+        .up {
+            left: -$bar-end;
+            transform: rotate(270deg);
+        }
+
+        .down {
+            right: -$bar-end;
+            transform: rotate(90deg);
+        }
     }
 
     &_has-horizontal {
-        bottom: 8px;
+        bottom: $bar-end;
     }
 
     &_has-vertical {
-        right: 8px;
+        right: $bar-end;
     }
 }
 
@@ -94,9 +136,14 @@
     position: absolute;
     pointer-events: auto;
     width: 18px;
-    height: 28px;
+    height: 15px;
     background: url('/assets/images/ui/scroll/thumb.png') no-repeat center;
     z-index: 1;
+
+    .bar_vertical &,
+    .bar_horizontal & {
+        background-size: 13px 16.5px;
+    }
 
     .bar_vertical & {
         right: 0;
@@ -104,7 +151,8 @@
     }
 
     .bar_horizontal & {
-        bottom: 0;
+        bottom: 2px;
+        background-size: 13px 16.5px;
         transform: rotate(90deg);
     }
 }

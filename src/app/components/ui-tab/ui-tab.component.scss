@@ -5,4 +5,10 @@
     border: 1px solid variables.$theme-tabs-border;
     border-radius: variables.$size-gap;
     background-color: variables.$theme-background-transparent;
+
+
+    $offset: variables.$size-gap * 4 + variables.$size-tab-control + variables.$size-gap-small;
+    height: calc(100vh - #{$offset});
+    //box-sizing: border-box;
+    //overflow: hidden;
 }

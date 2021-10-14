@@ -95,7 +95,7 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
                     `+15% Increased Attack Speed`,
                     pct('DamageEnhanced', 120),
                     int('AttackRating', 200),
-                    rng('DamageCold', 3, 14, 3),
+                    rng('DamageColdDuration', 3, 14, 3),
                     pct('ChanceCrushingBlow', 40),
                     int('KnockBack'),
                     int('StatVitality', 10),
@@ -248,8 +248,8 @@ Fires Explosive Arrows or Bolts (15)`,
                     int('Indestructible'),
                     `100% Chance To Cast Level 44 Chain Lightning When You Die
 25% Chance To Cast Level 18 Glacial Spike On Attack`,
-                    pct('DamageEnhancedRange', 300, 385), `
-20% Bonus To Attack Rating`,
+                    pct('DamageEnhancedRange', 300, 385),
+                    `20% Bonus To Attack Rating`,
                     int('AttackRating', 50),
                     rng('DamageLightning', 1, 50),
                     pct('LeechMana', 7),
@@ -305,8 +305,8 @@ Fires Explosive Arrows or Bolts (15)`,
                     aura(12, 'Holy Freeze'),
                     skillAll(2),
                     `+45% Increased Attack Speed`,
-                    pct('DamageEnhancedRange', 330, 370), `
--40-60% To Enemy Cold Resistance (varies)
+                    pct('DamageEnhancedRange', 330, 370),
+                    `-40-60% To Enemy Cold Resistance (varies)
 20% Deadly Strike`,
                     pct('ChanceOpenWounds', 25),
                     int('PreventMonsterHealing'),
@@ -431,7 +431,7 @@ Increase Maximum Life 5%`,
                     pct('LeechLife', 7),
                     pct('ChanceCrushingBlow', 20),
                     `Hit Blinds Target`,
-                    int('ChanceBlind'),
+                    int('Blind'),
                     `Slows Target By 33%
 Replenish Mana 16%`,
                     int('CannotBeFrozen'),
@@ -769,7 +769,9 @@ All Resistances +30-40 (varies)`,
                 effects: [
                     `20% Chance To Cast Level 15 Decrepify On Striking`,
                     auraRange(16, 18, 'Sanctuary'),
-                    pct('DefenseTarget', -50), rng('DamageFire', 150, 210), rng('DamageCold', 130, 180),
+                    pct('DefenseTarget', -50),
+                    rng('DamageFire', 150, 210),
+                    rng('DamageCold', 130, 180),
                     pct('LeechLife', 7),
                     `Slain Monsters Rest In Peace
 +200-250 Defense Vs. Missile (varies)`,
@@ -925,7 +927,7 @@ Requirements -15%`
 +40% Faster Hit Recovery`,
                     pct('DamageEnhanced', 370),
                     pct('DefenseTarget', -25),
-                    rng('DamageCold', 3, 14, 3),
+                    rng('DamageColdDuration', 3, 14, 3),
                     `-25% To Enemy Fire Resistance`,
                     pct('ChanceCrushingBlow', 40),
                     `+200-300 Defense (varies)`,
@@ -941,8 +943,8 @@ Requirements -20%`
                 ...runes('Dol', 'Ort', 'Eld', 'Lem'),
                 effects: [
                     `+25% Increased Attack Speed`,
-                    pct('DamageEnhancedRange', 160, 210), `
-50-80% Bonus To Attack Rating (varies)`,
+                    pct('DamageEnhancedRange', 160, 210),
+                    `50-80% Bonus To Attack Rating (varies)`,
                     pct('DamageUndead', 75),
                     int('ARUndead', 50),
                     rng('DamageLightning', 1, 50),
@@ -976,8 +978,8 @@ Hit Causes Monster To Flee 25%`,
                     `100% Chance To Cast level 40 Blaze When You Level-up
 40% Chance To Cast Level 22 Firestorm On Striking`,
                     auraRange(10, 15, 'Redemption'),
-                    pct('DamageEnhancedRange', 350, 400), `
--28% To Enemy Fire Resistance
+                    pct('DamageEnhancedRange', 350, 400),
+                    `-28% To Enemy Fire Resistance
 +350-400 Defense Vs. Missile (varies)
 +15-21 Fire Absorb (varies)
 Weapons`,
@@ -1167,7 +1169,7 @@ Shields`,
                     int('Thorns', 14),
                     `Swords`,
                     rng('DamageLightning', 1, 50),
-                    rng('DamageCold', 3, 14, 3),
+                    rng('DamageColdDuration', 3, 14, 3),
                     int('DamagePoison', 75, 5),
                     pct('LeechLife', 7)
                 ]
@@ -1331,7 +1333,6 @@ Shields`,
 +40% Increased Attack Speed
 +15% Faster Hit Recovery`,
                     pct('DamageEnhancedRange', 120, 160),
-                    rng('DamageEnhancedRange', 120, 160),
                     pct('DefenseTarget', -50),
                     int('AttackRating', 50),
                     `Hit Blinds Target`,

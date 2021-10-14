@@ -5,6 +5,7 @@ export const Effects: Array<TEffect> = [
     'ARDemons',
     'ARUndead',
     'AttackRating',
+    'Blind',
     'Blocking',
     'CannotBeFrozen',
     'ChanceBlind',
@@ -73,6 +74,7 @@ export type TEffect =
     'ARDemons' |
     'ARUndead' |
     'AttackRating' |
+    'Blind' |
     'Blocking' |
     'CannotBeFrozen' |
     'ChanceBlind' |
@@ -83,6 +85,7 @@ export type TEffect =
     'ChanceOpenWounds' |
     'Damage' |
     'DamageCold' |
+    'DamageColdDuration' |
     'DamageDemons' |
     'DamageEnhanced' |
     'DamageEnhancedRange' |

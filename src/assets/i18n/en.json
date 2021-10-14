@@ -60,6 +60,8 @@
         "title": "Settings",
         "customCursorOff": "Using system cursor",
         "customCursorOn": "Using custom cursor",
+        "customCursorLargeOff": "Using small custom cursor",
+        "customCursorLargeOn": "Using large custom cursor",
         "darkModeOff": "Dark mode disabled",
         "darkModeOn": "Dark mode enabled",
         "enableBackgroundOff": "Background image disabled",

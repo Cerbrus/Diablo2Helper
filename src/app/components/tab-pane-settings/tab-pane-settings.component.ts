@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { ObjectHelper } from '../../helpers';
 import { ISettings } from '../../interfaces';
 import { StorageService } from '../../services';
 
@@ -30,10 +31,14 @@ export class TabPaneSettingsComponent {
     private applySettings(): void {
         const { settings } = this;
         const classList = document.getElementsByTagName('html')[0].classList;
-        classList.toggle('custom-cursor', settings.customCursor);
-        classList.toggle('theme-dark', settings.darkMode);
-        classList.toggle('theme-light', !settings.darkMode);
-        classList.toggle('theme-background', settings.enableBackground);
+
+        ObjectHelper.forEach({
+            'custom-cursor': settings.customCursor && !settings.customCursorLarge,
+            'custom-cursor-large': settings.customCursor && settings.customCursorLarge,
+            'theme-dark': settings.darkMode,
+            'theme-light': !settings.darkMode,
+            'theme-background': settings.enableBackground
+        }, (className: string, value: boolean) => classList.toggle(className, value));
 
         this.storageService.save.settings(settings);
     }

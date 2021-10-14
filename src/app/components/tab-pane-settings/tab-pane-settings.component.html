@@ -37,6 +37,18 @@
                         [frames]="16"
                         [animation]="{ direction: 'alternate' }"
                         sprite="oHand"></ui-sprite-animated>
+
+    <ng-container *ngIf="settings.customCursor">
+        <input-checkbox [label]="getTitleKey('customCursorLarge') | translate"
+                        [showIcon]="true"
+                        [(checked)]="settings.customCursorLarge"
+                        (click)="onToggle('customCursorLarge')"
+        ></input-checkbox>
+        <ui-sprite-animated [scale]="0.25"
+                            [frames]="16"
+                            [animation]="{ direction: 'alternate' }"
+                            sprite="oHand"></ui-sprite-animated>
+    </ng-container>
 </div>
 
 

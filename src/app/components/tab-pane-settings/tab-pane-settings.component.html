@@ -38,28 +38,30 @@
                         [animation]="{ direction: 'alternate' }"
                         sprite="oHand"></ui-sprite-animated>
 
-    <ng-container *ngIf="settings.customCursor">
-        <input-checkbox [label]="getTitleKey('customCursorLarge') | translate"
-                        [showIcon]="true"
-                        [(checked)]="settings.customCursorLarge"
-                        (click)="onToggle('customCursorLarge')"
-        ></input-checkbox>
-        <ui-sprite-animated [scale]="0.25"
-                            [frames]="16"
-                            [animation]="{ direction: 'alternate' }"
-                            sprite="oHand"></ui-sprite-animated>
-    </ng-container>
+    <input-checkbox class="child"
+                    *ngIf="settings.customCursor"
+                    [label]="getTitleKey('customCursorLarge') | translate"
+                    [showIcon]="true"
+                    [(checked)]="settings.customCursorLarge"
+                    (click)="onToggle('customCursorLarge')"
+    ></input-checkbox>
+    <ui-sprite-animated *ngIf="settings.customCursor"
+                        [scale]="0.25"
+                        [frames]="16"
+                        [animation]="{ direction: 'alternate' }"
+                        sprite="oHand"></ui-sprite-animated>
 </div>
 
 
 <p class="issues">
     {{ 'common.issueSubmit' | translate }}
     <a [href]="('common.repositoryUrl' | translate) + '/issues/new?template=bug_report.md'" target="_blank">
+        <fa-icon [icon]="bug"></fa-icon>
         {{ 'common.issueBugReport' | translate }}
     </a>
     {{ 'common.or' | translate }}
-    <a [href]="('common.repositoryUrl' | translate) + '/issues/new?template=feature_request.md'"
-       target="_blank">
+    <a [href]="('common.repositoryUrl' | translate) + '/issues/new?template=feature_request.md'" target="_blank">
+        <fa-icon [icon]="lightbulb"></fa-icon>
         {{ 'common.issueFeatureRequest' | translate }}
     </a>
 </p>

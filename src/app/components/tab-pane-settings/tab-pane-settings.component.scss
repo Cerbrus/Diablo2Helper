@@ -27,5 +27,18 @@ label {
 
 .checkboxes {
     grid-area: checkboxes;
-    grid-template-columns: max-content auto;
+    grid-template-columns: max-content min-content max-content auto;
+}
+
+input-checkbox {
+    grid-column: 1;
+
+    &.child {
+        margin-left: variables.$size-gap * 2;
+    }
+}
+
+ui-sprite-skill,
+ui-sprite-animated {
+    grid-column: 2;
 }

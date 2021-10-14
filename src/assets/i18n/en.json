@@ -16,8 +16,8 @@
         "error": "Error",
         "issueSubmit": "Submit a",
         "or": "or",
-        "issueBugReport": "🐛 Bug report",
-        "issueFeatureRequest": "💡 Feature Request"
+        "issueBugReport": "Bug report",
+        "issueFeatureRequest": "Feature Request"
     },
     "labels": {
         "armorHelm": "Armor/Helm",

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
+import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
+import { faBug } from '@fortawesome/free-solid-svg-icons';
 import { environment } from '../../../environments/environment';
 import { ObjectHelper } from '../../helpers';
 import { ISettings } from '../../interfaces';
@@ -13,6 +16,9 @@ export class TabPaneSettingsComponent {
     public environment = environment;
 
     public settings: ISettings;
+
+    public bug : IconDefinition = faBug;
+    public lightbulb : IconDefinition = faLightbulb;
 
     constructor(private readonly storageService: StorageService) {
         this.settings = storageService.get.settings();

@@ -4,6 +4,7 @@
         "by": "by",
         "author": "Cerbrus",
         "authorUrl": "https://github.com/Cerbrus",
+        "repositoryUrl": "https://github.com/Cerbrus/Diablo2Helper",
         "none": "None",
         "rune": "Rune",
         "runes": "Runes",
@@ -12,7 +13,11 @@
         "runeWord": "Runeword",
         "runeWords": "Runewords",
         "owned": "Owned",
-        "error": "Error"
+        "error": "Error",
+        "issueSubmit": "Submit a",
+        "or": "or",
+        "issueBugReport": "🐛 Bug report",
+        "issueFeatureRequest": "💡 Feature Request"
     },
     "labels": {
         "armorHelm": "Armor/Helm",

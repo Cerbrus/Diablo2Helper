@@ -1,14 +1,14 @@
-<div class="grid">
-    <label class="text-xl">{{ 'settings.title' | translate }}</label>
-    <div class="version">
-        {{ 'common.appTitle' | translate }}
-        {{ environment.appVersion }}
-        {{ 'common.by' | translate }}
-        <a [href]="'common.authorUrl' | translate" target="_blank">
-            {{ 'common.author' | translate }}
-        </a>
-    </div>
+<label class="text-xl">{{ 'settings.title' | translate }}</label>
+<div class="version">
+    {{ 'common.appTitle' | translate }}
+    {{ environment.appVersion }}
+    {{ 'common.by' | translate }}
+    <a [href]="'common.authorUrl' | translate" target="_blank">
+        {{ 'common.author' | translate }}
+    </a>
+</div>
 
+<div class="checkboxes grid">
     <input-checkbox [label]="getTitleKey('darkMode') | translate"
                     [showIcon]="true"
                     [(checked)]="settings.darkMode"
@@ -38,3 +38,16 @@
                         [animation]="{ direction: 'alternate' }"
                         sprite="oHand"></ui-sprite-animated>
 </div>
+
+
+<p class="issues">
+    {{ 'common.issueSubmit' | translate }}
+    <a [href]="('common.repositoryUrl' | translate) + '/issues/new?template=bug_report.md'" target="_blank">
+        {{ 'common.issueBugReport' | translate }}
+    </a>
+    {{ 'common.or' | translate }}
+    <a [href]="('common.repositoryUrl' | translate) + '/issues/new?template=feature_request.md'"
+       target="_blank">
+        {{ 'common.issueFeatureRequest' | translate }}
+    </a>
+</p>

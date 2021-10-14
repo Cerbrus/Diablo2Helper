@@ -1,10 +1,31 @@
 @use 'variables';
 
-.grid {
-    grid-template-columns: max-content auto;
+:host {
+    font-family: variables.$font-family-exocet;
+    display: grid;
+    grid-template-columns: auto max-content;
+    grid-template-rows: min-content min-content;
+    grid-template-areas:
+    "label  version"
+    "checkboxes  issues"
+}
 
-    .version {
-        font-family: variables.$font-family-exocet;
-        text-align: right;
-    }
+label {
+    grid-area: label;
+}
+
+.version {
+    grid-area: version;
+    text-align: right;
+}
+
+.issues {
+    grid-area: issues;
+    text-align: right;
+    align-self: end;
+}
+
+.checkboxes {
+    grid-area: checkboxes;
+    grid-template-columns: max-content auto;
 }

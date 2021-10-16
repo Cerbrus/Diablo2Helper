@@ -1,6 +1,6 @@
 {
     "name": "rune-helper",
-    "version": "0.1.10-1",
+    "version": "0.1.10-2",
     "scripts": {
         "ng": "ng",
         "start": "ng serve --port 666",

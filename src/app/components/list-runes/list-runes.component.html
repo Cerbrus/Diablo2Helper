@@ -8,7 +8,7 @@
     <ui-table-head labelKey="labels.craft" key="craft"></ui-table-head>
     <ui-table-head labelKey="labels.socketEffect" key="effects"></ui-table-head>
 
-    <div class="table-body">
+    <div class="table-body" ui-scrollable>
         <div class="table-row" *ngFor="let rune of runeArraySorted">
             <div class="column-name center-text">
                 #{{ rune.number }}

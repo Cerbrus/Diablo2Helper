@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ITabOptions } from '../../interfaces/ui';
 
 @Component({
     selector: 'ui-tab',
@@ -6,12 +7,6 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./ui-tab.component.scss']
 })
 export class UiTabComponent {
-    @Input('tabTitle')
-    public title!: string;
-
     @Input()
-    public active = false;
-
-    @Input()
-    public right = false;
+    public options!: ITabOptions;
 }

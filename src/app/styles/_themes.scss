@@ -1,15 +1,24 @@
 @use 'sass:color';
 
-//noinspection CssUnknownTarget
+@mixin cursor($name, $image, $fallback) {
+    #{'--cursor-' + $name}: url('#{'/assets/images/ui/cursor/' + $image + '.png'}') 5 5, $fallback;
+}
+
 :root {
     --cursor-default: auto;
     --cursor-pointer: pointer;
     --cursor-forbidden: no-drop;
 
     &.custom-cursor {
-        --cursor-default: url('/assets/images/ui/cursor/default.png') 5 5, auto;
-        --cursor-pointer: url('/assets/images/ui/cursor/pointer.png') 5 5, pointer;
-        --cursor-forbidden: url('/assets/images/ui/cursor/forbidden.png') 5 5, no-drop;
+        @include cursor(default, default_s, auto);
+        @include cursor(pointer, pointer_s, pointer);
+        @include cursor(forbidden, forbidden_s, no-drop);
+
+        &-large {
+            @include cursor(default, default, auto);
+            @include cursor(pointer, pointer, pointer);
+            @include cursor(forbidden, forbidden, no-drop);
+        }
     }
 
     &.theme {

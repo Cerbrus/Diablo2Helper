@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ArrayHelper, RuneHelper, RuneWordHelper } from '../../helpers';
-import { ITable, ITableHeader } from '../../interfaces';
 import { IRune } from '../../interfaces/rune';
 import { IRuneWord } from '../../interfaces/runeWord';
+import { ITable, ITableHeader } from '../../interfaces/ui';
 import { RuneTrackerService, RunewordFilterService } from '../../services';
 import { TItem } from '../../types';
 import { ItemOrArray } from '../../types/helpers';

@@ -1,9 +1,7 @@
 @use 'variables';
 @use 'mixins';
 
-table {
-    width: 100%;
-}
+$table-columns: 90px 220px 130px 1fr;
 
 .column {
     &-name .details,
@@ -28,10 +26,39 @@ table {
     }
 }
 
-.table {
-    grid-template-columns:  90px 220px 130px 1fr;
+.table-wrapper {
+    position: relative;
+    min-width: 1000px;
+
+    .table {
+        grid-template-columns: $table-columns;
+        grid-template-rows: variables.$size-header auto;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .table-body {
+        grid-column: span 4;
+    }
+}
+
+::ng-deep list-rune-words {
+    .table-body[ui-scrollable] .content {
+        display: grid;
+        grid-template-columns: $table-columns;
+        grid-gap: variables.$size-gap-table;
+    }
 
     ui-table-sort-control {
         height: variables.$size-header;
+        box-sizing: border-box;
+    }
+
+    ui-scrollable{
+        .content,
+        .table-wrapper{
+            height: 100% !important;
+        }
     }
 }

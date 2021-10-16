@@ -14,7 +14,7 @@ import {
     faSortNumericUp,
     faSortNumericUpAlt
 } from '@fortawesome/free-solid-svg-icons';
-import { ITable, ITableHeader, TableSortDirection, TableSortIcon } from '../../interfaces';
+import { ITable, ITableHeader, TableSortDirection, TableSortIcon } from '../../interfaces/ui';
 
 @Component({
     selector: 'ui-table-sort-control',

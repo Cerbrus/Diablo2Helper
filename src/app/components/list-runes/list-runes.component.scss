@@ -1,27 +1,18 @@
 @use 'variables' as v;
 
-.table {
-    &,
-    &-body {
-        grid-template-columns: 60px 50px 90px 80px 1fr;
-    }
+$table-columns: 60px 50px 90px 80px 1fr;
 
-    ui-table-head,
-    ui-table-sort-control {
-        height: v.$size-header;
-    }
+.table {
+    grid-template-columns: $table-columns;
 
     .header-name {
         grid-column: span 2;
     }
 
     &-body {
-        display: grid;
-        grid-gap: v.$size-gap-table;
         grid-column: span 5;
-        $offset: v.$size-gap * 5 + v.$size-tab-control + 1px + v.$size-gap-table * 2 + v.$size-header;
+        $offset: v.$size-gap * 3 + v.$size-tab-control + 1px + v.$size-gap-table * 2 + v.$size-header;
         max-height: calc(100vh - #{$offset});
-        overflow-y: auto;
     }
 
     .column {
@@ -34,4 +25,10 @@
             justify-items: center;
         }
     }
+}
+
+::ng-deep list-runes [ui-scrollable] .content {
+    display: grid;
+    grid-template-columns: $table-columns;
+    grid-gap: v.$size-gap-table;
 }

@@ -1,0 +1,37 @@
+<div class="bars">
+    <div
+        *ngIf="hasVerticalBar"
+        class="bar bar_vertical"
+        [class.bar_has-horizontal]="hasHorizontalBar"
+        [class]="'bar_vertical_' + vertical"
+        (click)="verticalClick($event)"
+    >
+        <div class="up" (click)="onVertical(0)"></div>
+        <div
+            class="thumb pointer"
+            ui-draggable="vertical"
+            [style.top.%]="verticalPosition"
+            (dragged)="onVertical($event)"
+        ></div>
+        <div class="down" (click)="onVertical(9999)"></div>
+    </div>
+    <div
+        *ngIf="hasHorizontalBar"
+        class="bar bar_horizontal"
+        [class.bar_has-vertical]="hasVerticalBar"
+        [class]="'bar_horizontal_' + horizontal"
+        (click)="horizontalClick($event)"
+    >
+        <div class="up" (click)="onHorizontal(0)"></div>
+        <div
+            class="thumb pointer"
+            ui-draggable="horizontal"
+            [style.left.%]="horizontalPosition"
+            (dragged)="onHorizontal($event)"
+        ></div>
+        <div class="down" (click)="onHorizontal(9999)"></div>
+    </div>
+</div>
+<div class="content" (waResizeObserver)="onScroll()">
+    <ng-content></ng-content>
+</div>

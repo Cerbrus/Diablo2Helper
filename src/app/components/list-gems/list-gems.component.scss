@@ -1,10 +1,8 @@
-@use 'variables' as v;
+@use 'variables';
 @use 'ui.table' as table;
 
 .grid {
-    $offset: v.$size-header + v.$size-gap * 4 + v.$size-gap-table;
-    max-height: calc(100vh - #{$offset});
-    overflow-y: auto;
+    height: 100%;
 }
 
 .table {
@@ -24,8 +22,16 @@
         display: grid;
     }
 
-    .column-gem{
+    .column-gem {
         display: block;
         justify-content: center;
+    }
+}
+
+::ng-deep list-gems {
+    [ui-scrollable] .content {
+        display: grid;
+        grid-gap: variables.$size-gap;
+        width: auto;
     }
 }

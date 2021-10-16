@@ -5,6 +5,7 @@ import { ISettings } from './';
 import { IRuneWordFilters } from './runeWord';
 
 export interface IStorage {
+    appVersion: string;
     darkMode: boolean;
     gemsOwned: Partial<Record<TGem, number>>;
     runeSort: TRuneSort;

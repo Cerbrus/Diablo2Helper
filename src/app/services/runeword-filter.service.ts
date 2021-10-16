@@ -155,7 +155,7 @@ export class RunewordFilterService {
             if (this.filters.name && !StringHelper.includesStripped(runeWord.name, this.filters.name, true))
                 return false;
 
-            if (this.filters.cLvl && (runeWord.cLvl > this.filters.cLvl))
+            if (this.filters.cLvl && runeWord.cLvl > this.filters.cLvl)
                 return false;
 
             const enabledFilters = ObjectHelper.entries(this.filters.itemTypes)

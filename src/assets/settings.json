@@ -1,6 +1,7 @@
 {
     "defaultLanguage": "en",
     "storageDefaults": {
+        "appVersion": "",
         "settings": {
             "customCursor": true,
             "customCursorLarge": true,

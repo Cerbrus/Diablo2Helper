@@ -1,10 +1,44 @@
 @use 'variables';
 
-.grid {
-    grid-template-columns: max-content auto;
+:host {
+    font-family: variables.$font-family-exocet;
+    display: grid;
+    grid-template-columns: auto max-content;
+    grid-template-rows: min-content min-content;
+    grid-template-areas:
+    "label  version"
+    "checkboxes  issues"
+}
 
-    .version {
-        font-family: variables.$font-family-exocet;
-        text-align: right;
+label {
+    grid-area: label;
+}
+
+.version {
+    grid-area: version;
+    text-align: right;
+}
+
+.issues {
+    grid-area: issues;
+    text-align: right;
+    align-self: end;
+}
+
+.checkboxes {
+    grid-area: checkboxes;
+    grid-template-columns: max-content min-content max-content auto;
+}
+
+input-checkbox {
+    grid-column: 1;
+
+    &.child {
+        margin-left: variables.$size-gap * 2;
     }
+}
+
+ui-sprite-skill,
+ui-sprite-animated {
+    grid-column: 2;
 }

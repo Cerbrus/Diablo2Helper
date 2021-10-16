@@ -9,8 +9,13 @@ import { ItemOrArray } from '../../types/helpers';
     styleUrls: ['./format-effect.component.scss']
 })
 export class FormatEffectComponent {
-    get formattedEffects(): string {
-        return this.effectHelper.formatEffects(this.effects, this.lineBreak);
+    private formatted?: string | null;
+
+    get formattedEffects(): string | null {
+        if (!this.formatted)
+            this.formatted = this.effectHelper.formatEffects(this.effects, this.lineBreak);
+
+        return this.formatted;
     }
 
     @Input()

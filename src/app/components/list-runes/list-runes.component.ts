@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RuneHelper } from '../../helpers';
-import { ITable, ITableHeader } from '../../interfaces';
 import { IRune, IRuneMap } from '../../interfaces/rune';
+import { ITable, ITableHeader } from '../../interfaces/ui';
 import { RuneTrackerService, RunewordFilterService } from '../../services';
 import { TRuneSort } from '../../types/rune';
 

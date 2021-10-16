@@ -1,14 +1,14 @@
-<div class="grid">
-    <label class="text-xl">{{ 'settings.title' | translate }}</label>
-    <div class="version">
-        {{ 'common.appTitle' | translate }}
-        {{ environment.appVersion }}
-        {{ 'common.by' | translate }}
-        <a [href]="'common.authorUrl' | translate" target="_blank">
-            {{ 'common.author' | translate }}
-        </a>
-    </div>
+<label class="text-xl">{{ 'settings.title' | translate }}</label>
+<div class="version">
+    {{ 'common.appTitle' | translate }}
+    {{ environment.appVersion }}
+    {{ 'common.by' | translate }}
+    <a [href]="'common.authorUrl' | translate" target="_blank">
+        {{ 'common.author' | translate }}
+    </a>
+</div>
 
+<div class="checkboxes grid">
     <input-checkbox [label]="getTitleKey('darkMode') | translate"
                     [showIcon]="true"
                     [(checked)]="settings.darkMode"
@@ -37,4 +37,31 @@
                         [frames]="16"
                         [animation]="{ direction: 'alternate' }"
                         sprite="oHand"></ui-sprite-animated>
+
+    <input-checkbox class="child"
+                    *ngIf="settings.customCursor"
+                    [label]="getTitleKey('customCursorLarge') | translate"
+                    [showIcon]="true"
+                    [(checked)]="settings.customCursorLarge"
+                    (click)="onToggle('customCursorLarge')"
+    ></input-checkbox>
+    <ui-sprite-animated *ngIf="settings.customCursor"
+                        [scale]="0.25"
+                        [frames]="16"
+                        [animation]="{ direction: 'alternate' }"
+                        sprite="oHand"></ui-sprite-animated>
 </div>
+
+
+<p class="issues">
+    {{ 'common.issueSubmit' | translate }}
+    <a [href]="('common.repositoryUrl' | translate) + '/issues/new?template=bug_report.md'" target="_blank">
+        <fa-icon [icon]="bug"></fa-icon>
+        {{ 'common.issueBugReport' | translate }}
+    </a>
+    {{ 'common.or' | translate }}
+    <a [href]="('common.repositoryUrl' | translate) + '/issues/new?template=feature_request.md'" target="_blank">
+        <fa-icon [icon]="lightBulb"></fa-icon>
+        {{ 'common.issueFeatureRequest' | translate }}
+    </a>
+</p>

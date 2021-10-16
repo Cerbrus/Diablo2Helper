@@ -3,3 +3,4 @@ export * from './IEffectBuilder';
 export * from './IEffectValue';
 export * from './IEffectValueMinMax';
 export * from './IEffectValueNumber';
+export * from './IEffectValueSkill';

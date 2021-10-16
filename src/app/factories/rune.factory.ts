@@ -108,7 +108,7 @@ export class RuneFactory extends BaseEntityFactory<IRuneMap> {
             Thul: {
                 name: 'Thul', number: 10, cLvl: 23,
                 effects: {
-                    weapon: rng('DamageCold', 3, 14, 3),
+                    weapon: rng('DamageColdDuration', 3, 14, 3),
                     armorHelm: pct('ResistCold', 30),
                     shield: pct('ResistCold', 35)
                 },

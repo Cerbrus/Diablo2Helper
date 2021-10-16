@@ -3,6 +3,7 @@
     "storageDefaults": {
         "settings": {
             "customCursor": true,
+            "customCursorLarge": true,
             "darkMode": true,
             "enableBackground": true
         },

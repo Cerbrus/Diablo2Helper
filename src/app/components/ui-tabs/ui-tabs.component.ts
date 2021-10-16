@@ -22,22 +22,23 @@ export class UiTabsComponent implements AfterContentInit {
     public ngAfterContentInit(): void {
         const activeTabTitle = this.getActiveTabs()[this.name];
         if (activeTabTitle) {
-            this.tabs.forEach(t => t.active = t.title === activeTabTitle);
+            this.tabs.forEach(t => t.options.active = t.options.title === activeTabTitle);
         }
-        const activeTabs = this.tabs.filter((tab) => tab.active);
+        const activeTabs = this.tabs.filter((tab) => tab.options.active ?? false);
         if (activeTabs.length === 0)
             this.selectTab(this.tabs.first);
     }
 
-    public selectTab(tab: UiTabComponent): void {
+    public selectTab(tab: UiTabComponent, $event?: MouseEvent): void {
+        $event?.preventDefault();
         if (!tab)
             return;
 
-        this.tabs.toArray().forEach(tab => tab.active = false);
-        tab.active = true;
+        this.tabs.toArray().forEach(tab => tab.options.active = false);
+        tab.options.active = true;
 
         const activeTabs = this.getActiveTabs();
-        activeTabs[this.name] = tab.title;
+        activeTabs[this.name] = tab.options.title;
         this.storageService.save.uiActiveTabs(activeTabs);
     }
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { RuneFactory } from '../factories/rune.factory';
-import { ITable } from '../interfaces';
 import { IGem } from '../interfaces/gem';
 import { IRune, IRuneMap } from '../interfaces/rune';
+import { ITable } from '../interfaces/ui';
 import { StorageService } from '../services';
 import { TGem } from '../types/gem';
 import { Runes, TRune, TRuneSort, TRuneSortKeys } from '../types/rune';

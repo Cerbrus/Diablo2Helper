@@ -3,6 +3,7 @@
         *ngIf="hasVerticalBar"
         class="bar bar_vertical"
         [class.bar_has-horizontal]="hasHorizontalBar"
+        [class]="'bar_vertical_' + vertical"
         (click)="verticalClick($event)"
     >
         <div class="up" (click)="onVertical(0)"></div>
@@ -18,6 +19,7 @@
         *ngIf="hasHorizontalBar"
         class="bar bar_horizontal"
         [class.bar_has-vertical]="hasVerticalBar"
+        [class]="'bar_horizontal_' + horizontal"
         (click)="horizontalClick($event)"
     >
         <div class="up" (click)="onHorizontal(0)"></div>

@@ -21,8 +21,8 @@ export class DraggableDirective {
             event.preventDefault();
 
             const clientRect = event.target.getBoundingClientRect();
-            const offsetVertical = this.getOffsetVertical(event, clientRect);
-            const offsetHorizontal = this.getOffsetHorizontal(event, clientRect);
+            const offsetVertical = DraggableDirective.getOffsetVertical(event, clientRect);
+            const offsetHorizontal = DraggableDirective.getOffsetHorizontal(event, clientRect);
 
             return fromEvent<MouseEvent>(this.documentRef, 'mousemove').pipe(
                 map(event => this.getScrolled(event, offsetVertical, offsetHorizontal)),
@@ -59,11 +59,11 @@ export class DraggableDirective {
             : maxLeft * scrolledLeft;
     }
 
-    private getOffsetVertical({ clientY }: MouseEvent, { top, height }: ClientRect): number {
+    private static getOffsetVertical({ clientY }: MouseEvent, { top, height }: ClientRect): number {
         return (clientY - top) / height;
     }
 
-    private getOffsetHorizontal({ clientX }: MouseEvent, { left, width }: ClientRect): number {
+    private static getOffsetHorizontal({ clientX }: MouseEvent, { left, width }: ClientRect): number {
         return (clientX - left) / width;
     }
 }

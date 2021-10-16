@@ -8,12 +8,13 @@ import {
     Input
 } from '@angular/core';
 
+type TShadow = '0' | '20px' | '-20px';
+
 @Component({
     selector: 'ui-scrollable, [ui-scrollable]',
     templateUrl: './ui-scrollable.component.html',
     styleUrls: ['./ui-scrollable.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
-    // encapsulation: ViewEncapsulation.None
 })
 export class UiScrollableComponent {
     @HostBinding('style.width')
@@ -23,6 +24,12 @@ export class UiScrollableComponent {
     @HostBinding('style.height')
     @Input('scroll-height')
     public height?: string;
+
+    @Input()
+    public horizontal: 'top' | 'bottom' | 'none' | 'child' = 'bottom';
+
+    @Input()
+    public vertical: 'left' | 'right' | 'none' | 'child' = 'right';
 
     private readonly thumbHeight = 15;
 
@@ -60,11 +67,11 @@ export class UiScrollableComponent {
     }
 
     public get hasVerticalBar(): boolean {
-        return this.verticalSize < 100;
+        return this.vertical !== 'none' && this.verticalSize < 100;
     }
 
     public get hasHorizontalBar(): boolean {
-        return this.horizontalSize < 100;
+        return this.horizontal !== 'none' && this.horizontalSize < 100;
     }
 
     @HostListener('scroll')
@@ -74,14 +81,20 @@ export class UiScrollableComponent {
 
     @HostBinding('style.--scroll-shadow')
     public get boxShadow(): string {
-        const shadows = [];
-        const { scrollHeight, scrollTop, clientHeight } = this.elementRef.nativeElement;
+        const shadows: Array<`inset ${TShadow} ${TShadow} 20px -20px #000000`> = [];
+        const {
+            scrollHeight, scrollTop, clientHeight,
+            scrollWidth, scrollLeft, clientWidth
+        } = this.elementRef.nativeElement;
+
         if (scrollTop > 0)
-            shadows.push('inset 0 20px 20px -20px #000000');
-
-        if (clientHeight + scrollTop < scrollHeight)
-            shadows.push('inset 0 -20px 20px -20px #000000');
-
+            shadows.push(UiScrollableComponent.shadow(0, 1));
+        if (clientHeight + scrollTop < scrollHeight - 5)
+            shadows.push(UiScrollableComponent.shadow(0, -1));
+        if (scrollLeft > 0)
+            shadows.push(UiScrollableComponent.shadow(1, 0));
+        if (clientWidth + scrollLeft < scrollWidth - 5)
+            shadows.push(UiScrollableComponent.shadow(-1, 0));
 
         return shadows.join(', ');
     }
@@ -110,5 +123,13 @@ export class UiScrollableComponent {
 
         const { scrollWidth, clientWidth } = this.elementRef.nativeElement;
         this.onHorizontal(($event.offsetX / bar.clientWidth) * (scrollWidth - clientWidth));
+    }
+
+    private static shadow(horizontal: 1 | -1 | 0, vertical: 1 | -1 | 0):
+        `inset ${TShadow} ${TShadow} 20px -20px #000000` {
+        const h = <TShadow>(horizontal ? horizontal * 20 + 'px' : 0);
+        const v = <TShadow>(vertical ? vertical * 20 + 'px' : 0);
+
+        return `inset ${h} ${v} 20px -20px #000000`;
     }
 }

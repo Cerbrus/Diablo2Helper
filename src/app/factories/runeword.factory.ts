@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import { Injectable } from '@angular/core';
 import { EffectHelper, GemHelper, ObjectHelper, RuneHelper } from '../helpers';
 import { IRuneWordMap } from '../interfaces/runeWord';
@@ -381,7 +383,7 @@ Shields`,
                     `+35% Increased Attack Speed
 +320-380% Damage To Demons (varies)`,
                     pct('DamageUndead', 280),
-                    int('DamagePoison', 75, 5),
+                    dot('DamagePoison', 75, 5),
                     pct('LeechLife', 7),
                     int('PreventMonsterHealing'),
                     `+5-10 To All Attributes (varies)`,
@@ -635,7 +637,7 @@ All Resistances +30-40 (varies)`,
                     pct('DefenseTarget', -25),
                     rng('DamageFire', 5, 30),
                     rng('DamageLightning', 21, 110),
-                    int('DamagePoison', 75, 5),
+                    dot('DamagePoison', 75, 5),
                     skillClass(3, 'Holy Shock', 'paladin'),
                     `+5% to Maximum Lightning Resist`,
                     pct('ResistLightning', 60),
@@ -706,7 +708,7 @@ All Resistances +30-40 (varies)`,
                     int('DamageMinimum', 9),
                     `180-250% Bonus to Attack Rating (varies)`,
                     rng('DamageFire', 5, 30),
-                    int('DamagePoison', 75, 5),
+                    dot('DamagePoison', 75, 5),
                     `+1-6 To Critical Strike (varies)
 +5 To All Attributes`,
                     int('OnKillMana', 2),
@@ -1170,7 +1172,7 @@ Shields`,
                     `Swords`,
                     rng('DamageLightning', 1, 50),
                     rng('DamageColdDuration', 3, 14, 3),
-                    int('DamagePoison', 75, 5),
+                    dot('DamagePoison', 75, 5),
                     pct('LeechLife', 7)
                 ]
             },
@@ -1269,7 +1271,7 @@ Shields`,
                 ...runes('Tal', 'Dol', 'Mal'),
                 effects: [
                     int('Piercing'),
-                    int('DamagePoison', 273, 6),
+                    dot('DamagePoison', 273, 6),
                     pct('LeechMana', 7),
                     int('PreventMonsterHealing'),
                     `Hit Causes Monster To Flee 25%`,

@@ -30,7 +30,7 @@ export class EffectHelper {
     public static damageOverTimeEffect = (description: TEffect, Effect: number | undefined, duration: number) =>
         EffectHelper.buildEffect(description, Effect, '', duration);
 
-    public static rangeEffect = (description: TEffect, min: number, max: number, duration?: number):IEffect => ({
+    public static rangeEffect = (description: TEffect, min: number, max: number, duration?: number): IEffect => ({
         ...EffectHelper.buildEffect(description, min, ''),
         value: { min, max, sign: '+', duration }
     });
@@ -86,7 +86,7 @@ export class EffectHelper {
                 }
 
                 const { value } = effect;
-                if (this.isSkillEffect(value) && value.classRestriction) {
+                if (EffectHelper.isSkillEffect(value) && value.classRestriction) {
                     value.class = this.translate.instant(`character.classes.${value.classRestriction}`);
                 }
                 return this.translate.instant(`effects.${effect.description}`, value);
@@ -94,7 +94,7 @@ export class EffectHelper {
             .join(lineBreak ? '\r\n' : ', ');
     }
 
-    private isSkillEffect(value?: number | IEffectValueNumber | IEffectValueMinMax | IEffectValueSkill): value is IEffectValueSkill {
+    private static isSkillEffect(value?: number | IEffectValueNumber | IEffectValueMinMax | IEffectValueSkill): value is IEffectValueSkill {
         return !!value &&
             typeof value !== 'number' &&
             'skill' in value;

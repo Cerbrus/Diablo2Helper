@@ -6,6 +6,7 @@
     display: flex;
     overflow: auto;
     z-index: 0;
+    //noinspection CssUnknownProperty
     scrollbar-width: none;
     -ms-overflow-style: none;
 
@@ -13,18 +14,6 @@
         background: transparent;
         width: 0;
         height: 0;
-    }
-
-    &:after {
-        position: sticky;
-        display: block;
-        content: " ";
-        width: 100%;
-        margin-left: -100%;
-        top: 0;
-        pointer-events: none;
-
-        box-shadow: var(--scroll-shadow);
     }
 }
 
@@ -43,13 +32,18 @@
     margin-right: -100%;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.2;
 
-    @include mixins.transition(opacity);
-
-    &:hover,
-    &:active {
-        opacity: 1;
+    &:after {
+        position: absolute;
+        display: block;
+        content: " ";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        margin: 0;
+        pointer-events: none;
+        box-shadow: var(--scroll-shadow);
     }
 }
 
@@ -58,15 +52,19 @@
     $bar-width: 18px;
 
     position: absolute;
-    right: 0;
-    bottom: 0;
     pointer-events: auto;
     cursor: variables.$cursor-pointer;
+    opacity: 0.2;
+
+    @include mixins.transition(opacity);
+
+    &:hover,
+    &:active {
+        opacity: 1;
+    }
 
     &_vertical,
     &_horizontal {
-        background-size: contain;
-
         .up,
         .down {
             background-image: url('/assets/images/ui/scroll/scrollbar_end.png');
@@ -98,7 +96,17 @@
         top: 0;
         width: $bar-width;
         background-image: url('/assets/images/ui/scroll/scrollbar_middle.png');
+        background-size: 18px 416px;
         margin: $bar-end 0;
+        bottom: 0;
+
+        &_left {
+            left: 0;
+        }
+
+        &_right {
+            right: 0;
+        }
 
         .up {
             position: absolute;
@@ -116,7 +124,17 @@
         left: 0;
         height: $bar-width;
         background-image: url('/assets/images/ui/scroll/scrollbar_middle_horizontal.png');
+        background-size: 416px 18px;
         margin: 0 $bar-end;
+        right: 0;
+
+        &_top {
+            top: 0;
+        }
+
+        &_bottom {
+            bottom: 0;
+        }
 
         .up,
         .down {

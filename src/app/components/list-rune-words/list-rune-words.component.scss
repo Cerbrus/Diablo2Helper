@@ -28,6 +28,7 @@ $table-columns: 90px 220px 130px 1fr;
 
 .table-wrapper {
     position: relative;
+    min-width: 1000px;
 
     .table {
         grid-template-columns: $table-columns;
@@ -43,7 +44,7 @@ $table-columns: 90px 220px 130px 1fr;
 }
 
 ::ng-deep list-rune-words {
-    [ui-scrollable] .content {
+    .table-body[ui-scrollable] .content {
         display: grid;
         grid-template-columns: $table-columns;
         grid-gap: variables.$size-gap-table;
@@ -52,5 +53,12 @@ $table-columns: 90px 220px 130px 1fr;
     ui-table-sort-control {
         height: variables.$size-header;
         box-sizing: border-box;
+    }
+
+    ui-scrollable{
+        .content,
+        .table-wrapper{
+            height: 100% !important;
+        }
     }
 }

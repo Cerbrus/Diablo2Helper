@@ -18,7 +18,7 @@ export class TabPaneSettingsComponent {
     public settings: ISettings;
 
     public bug : IconDefinition = faBug;
-    public lightbulb : IconDefinition = faLightbulb;
+    public lightBulb : IconDefinition = faLightbulb;
 
     constructor(private readonly storageService: StorageService) {
         this.settings = storageService.get.settings();

@@ -1,20 +1,20 @@
 <ui-tabs name="index">
-    <ui-tab tabTitle="common.runeWords" class="runeWords">
+    <ui-tab [options]="{ title: 'common.runeWords' }" class="runeWords">
         <tab-pane-rune-words></tab-pane-rune-words>
     </ui-tab>
-    <ui-tab tabTitle="common.runes">
+    <ui-tab [options]="{ title: 'common.runes' }">
         <tab-pane-runes></tab-pane-runes>
     </ui-tab>
-    <ui-tab tabTitle="common.gems">
+    <ui-tab [options]="{ title: 'common.gems' }">
         <tab-pane-gems></tab-pane-gems>
     </ui-tab>
-    <ui-tab tabTitle="labels.import">
+    <ui-tab [options]="{ title: 'labels.import' }">
         <tab-pane-character-import></tab-pane-character-import>
     </ui-tab>
-    <ui-tab tabTitle="settings.title" [right]="true">
+    <ui-tab [options]="{ title: 'settings.title', right: true, fillHeight: false }">
         <tab-pane-settings></tab-pane-settings>
     </ui-tab>
-    <ui-tab tabTitle="labels.dev" *ngIf="!environment.production" [right]="true">
+    <ui-tab [options]="{ title: 'labels.dev', right: true, fillHeight: false }" *ngIf="!environment.production">
         <tab-pane-dev></tab-pane-dev>
     </ui-tab>
 </ui-tabs>

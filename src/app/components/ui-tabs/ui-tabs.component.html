@@ -1,6 +1,9 @@
 <ul class="nav nav-tabs">
-    <li *ngFor="let tab of tabs" (click)="selectTab(tab, $event)" [class.active]="tab.active" [class.right]="tab.right">
-        <a href="#">{{ tab.title | translate }}</a>
+    <li *ngFor="let tab of tabs"
+        (click)="selectTab(tab, $event)"
+        [class.active]="tab.options.active"
+        [class.right]="tab.options.right">
+        <a href="#">{{ tab.options.title | translate }}</a>
     </li>
 </ul>
 <ng-content></ng-content>

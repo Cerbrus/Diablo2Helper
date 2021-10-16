@@ -35,7 +35,7 @@ export class TabPaneDevComponent {
         if (!currentSkill)
             return;
 
-        const currentClassSkills = (<Array<ISkillUi[TCurrentClass]>>SkillsUi[currentClass]);
+        const currentClassSkills = <Array<ISkillUi[TCurrentClass]>>SkillsUi[currentClass];
         const matches = currentClassSkills.filter(s => {
             const skill = s?.toLowerCase();
             return skill && (skill.startsWith(currentSkill) || currentSkill.startsWith(skill));

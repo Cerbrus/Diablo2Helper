@@ -24,7 +24,7 @@ export class UiTabsComponent implements AfterContentInit {
         if (activeTabTitle) {
             this.tabs.forEach(t => t.options.active = t.options.title === activeTabTitle);
         }
-        const activeTabs = this.tabs.filter((tab) => tab.options.active ?? false);
+        const activeTabs = this.tabs.filter(tab => tab.options.active ?? false);
         if (activeTabs.length === 0)
             this.selectTab(this.tabs.first);
     }

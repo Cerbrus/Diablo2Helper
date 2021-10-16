@@ -23,7 +23,7 @@ export abstract class LabeledBaseComponent {
         if (this.labelKey)
             this.translate.get(this.labelKey)
                 .pipe(takeLast(1))
-                .subscribe((result) => this.labelTranslated = result);
+                .subscribe(result => this.labelTranslated = result);
 
         return <string>(this.labelKey ?? this.label);
     }

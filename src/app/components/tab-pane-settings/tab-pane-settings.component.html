@@ -55,12 +55,12 @@
 
 <p class="issues">
     {{ 'common.issueSubmit' | translate }}
-    <a [href]="('common.repositoryUrl' | translate) + '/issues/new?template=bug_report.md'" target="_blank">
+    <a target="_blank" routerLink="/issue/bug_report">
         <fa-icon [icon]="bug"></fa-icon>
         {{ 'common.issueBugReport' | translate }}
     </a>
     {{ 'common.or' | translate }}
-    <a [href]="('common.repositoryUrl' | translate) + '/issues/new?template=feature_request.md'" target="_blank">
+    <a target="_blank" routerLink="/issue/feature_request">
         <fa-icon [icon]="lightBulb"></fa-icon>
         {{ 'common.issueFeatureRequest' | translate }}
     </a>

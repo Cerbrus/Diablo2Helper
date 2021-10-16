@@ -10,6 +10,7 @@ import { NG_EVENT_PLUGINS } from '@tinkoff/ng-event-plugins';
 import { environment } from '../environments/environment';
 
 // Components
+import { AppComponent } from './components/app/app.component';
 import { Diablo2HelperComponent } from './components/diablo2-helper/diablo2-helper.component';
 import { FormatEffectComponent } from './components/format-effect/format-effect.component';
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
@@ -19,6 +20,7 @@ import { ListGemsComponent } from './components/list-gems/list-gems.component';
 import { ListRuneWordsFiltersComponent } from './components/list-rune-words-filters/list-rune-words-filters.component';
 import { ListRuneWordsComponent } from './components/list-rune-words/list-rune-words.component';
 import { ListRunesComponent } from './components/list-runes/list-runes.component';
+import { ReportIssueComponent } from './components/report-issue/report-issue.component';
 import { RuneCounterComponent } from './components/rune-counter/rune-counter.component';
 import { RuneTrackingCountersComponent } from './components/rune-tracking-counters/rune-tracking-counters.component';
 import { RuneTrackingSelectComponent } from './components/rune-tracking-select/rune-tracking-select.component';
@@ -41,6 +43,7 @@ import { UiTabsComponent } from './components/ui-tabs/ui-tabs.component';
 import { LogMissingTranslationHandler } from './handlers/log-missing-translations.handler';
 
 // Modules
+import { RoutingModule } from './routing/routing.module';
 import { SharedModule } from './shared.module';
 import { UiSpriteModule } from './ui-sprite.module';
 
@@ -50,6 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 const components = [
+    AppComponent,
     Diablo2HelperComponent,
     FormatEffectComponent,
     InputCheckboxComponent,
@@ -59,6 +63,7 @@ const components = [
     ListRuneWordsComponent,
     ListRuneWordsFiltersComponent,
     ListRunesComponent,
+    ReportIssueComponent,
     RuneCounterComponent,
     RuneTrackingCountersComponent,
     RuneTrackingSelectComponent,
@@ -83,6 +88,7 @@ const components = [
         components
     ],
     imports: [
+        RoutingModule,
         BrowserModule,
         FontAwesomeModule,
         FormsModule,
@@ -105,8 +111,8 @@ const components = [
         })
     ],
     providers: [NG_EVENT_PLUGINS],
-    bootstrap: [Diablo2HelperComponent],
-    entryComponents: [Diablo2HelperComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [AppComponent]
 })
 export class AppModule {
 }

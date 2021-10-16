@@ -1,4 +1,5 @@
 import { AfterContentInit, Component, ContentChildren, Input, QueryList } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../../services';
 import { UiTabComponent } from '../ui-tab/ui-tab.component';
 
@@ -15,14 +16,15 @@ export class UiTabsComponent implements AfterContentInit {
     public name!: string;
 
     constructor(
-        private readonly storageService: StorageService
-    ) {
+        private readonly storageService: StorageService,
+        private readonly router: Router,
+        private readonly activatedRoute: ActivatedRoute) {
     }
 
     public ngAfterContentInit(): void {
-        const activeTabTitle = this.getActiveTabs()[this.name];
-        if (activeTabTitle) {
-            this.tabs.forEach(t => t.options.active = t.options.title === activeTabTitle);
+        const activeTabKey = this.getActiveTabs()[this.name];
+        if (activeTabKey) {
+            this.tabs.forEach(t => t.options.active = t.options.key === activeTabKey);
         }
         const activeTabs = this.tabs.filter(tab => tab.options.active ?? false);
         if (activeTabs.length === 0)
@@ -37,8 +39,15 @@ export class UiTabsComponent implements AfterContentInit {
         this.tabs.toArray().forEach(tab => tab.options.active = false);
         tab.options.active = true;
 
+        // noinspection JSIgnoredPromiseFromCall
+        this.router.navigate(
+            ['/' + tab.options.key],
+            {
+                relativeTo: this.activatedRoute
+            });
+
         const activeTabs = this.getActiveTabs();
-        activeTabs[this.name] = tab.options.title;
+        activeTabs[this.name] = tab.options.key;
         this.storageService.save.uiActiveTabs(activeTabs);
     }
 

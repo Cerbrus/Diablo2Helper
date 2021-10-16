@@ -14,6 +14,18 @@
         width: 0;
         height: 0;
     }
+
+    &:after {
+        position: sticky;
+        display: block;
+        content: " ";
+        width: 100%;
+        margin-left: -100%;
+        top: 0;
+        pointer-events: none;
+
+        box-shadow: var(--scroll-shadow);
+    }
 }
 
 .content {

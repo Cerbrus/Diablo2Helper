@@ -72,6 +72,20 @@ export class UiScrollableComponent {
         // just to trigger change detection
     }
 
+    @HostBinding('style.--scroll-shadow')
+    public get boxShadow(): string {
+        const shadows = [];
+        const { scrollHeight, scrollTop, clientHeight } = this.elementRef.nativeElement;
+        if (scrollTop > 0)
+            shadows.push('inset 0 20px 20px -20px #000000');
+
+        if (clientHeight + scrollTop < scrollHeight)
+            shadows.push('inset 0 -20px 20px -20px #000000');
+
+
+        return shadows.join(', ');
+    }
+
     public onVertical(scrollTop: number) {
         this.elementRef.nativeElement.scrollTop = scrollTop;
     }

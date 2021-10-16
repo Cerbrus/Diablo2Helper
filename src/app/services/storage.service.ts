@@ -25,7 +25,7 @@ export class StorageService {
             .forEach(key => {
                 this.remove[key]();
             });
-        
+
         this.save.appVersion(currentVersion);
     }
 

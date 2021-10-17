@@ -6,6 +6,7 @@ import { GemHelper, RuneHelper, RuneWordHelper } from '../../helpers';
 import { IGem } from '../../interfaces/gem';
 import { IRune } from '../../interfaces/rune';
 import { IRuneWord } from '../../interfaces/runeWord';
+import { ITabPaneComponent } from '../../interfaces/ui';
 import { RunewordFilterService } from '../../services';
 import { D2sParserService } from '../../services/d2s-parser.service';
 import { TError } from '../../types';
@@ -16,7 +17,7 @@ import { TClass } from '../../types/player';
     templateUrl: './tab-pane-character-import.component.html',
     styleUrls: ['./tab-pane-character-import.component.scss']
 })
-export class TabPaneCharacterImportComponent {
+export class TabPaneCharacterImportComponent implements ITabPaneComponent {
     public parseResult?: ID2S;
     public parseError?: TError<any>;
 

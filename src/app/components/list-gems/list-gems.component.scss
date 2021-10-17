@@ -6,7 +6,7 @@
 }
 
 .table {
-    grid-template-columns: 90px 40px 70px repeat(3, 1fr) 90px;
+    grid-template-columns: 90px 40px 70px repeat(3, auto) 90px;
 
     .header {
         &-gemType {

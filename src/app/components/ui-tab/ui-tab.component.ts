@@ -7,6 +7,20 @@ import { ITabOptions } from '../../interfaces/ui';
     styleUrls: ['./ui-tab.component.scss']
 })
 export class UiTabComponent {
+    private defaultOptions: Omit<ITabOptions, 'title' | 'key'> = {
+        active: false,
+        fillHeight: true,
+        right: false
+    };
+
     @Input()
-    public options!: ITabOptions;
+    public get options(): ITabOptions {
+        return this.tabOptions;
+    }
+
+    public set options(value: ITabOptions) {
+        this.tabOptions = { ...this.defaultOptions, ...value };
+    }
+
+    public tabOptions!: ITabOptions;
 }

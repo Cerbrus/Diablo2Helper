@@ -5,6 +5,7 @@ import { faBug } from '@fortawesome/free-solid-svg-icons';
 import { environment } from '../../../environments/environment';
 import { ObjectHelper } from '../../helpers';
 import { ISettings } from '../../interfaces';
+import { ITabPaneComponent } from '../../interfaces/ui';
 import { StorageService } from '../../services';
 
 @Component({
@@ -12,7 +13,7 @@ import { StorageService } from '../../services';
     templateUrl: './tab-pane-settings.component.html',
     styleUrls: ['./tab-pane-settings.component.scss']
 })
-export class TabPaneSettingsComponent {
+export class TabPaneSettingsComponent implements ITabPaneComponent {
     public environment = environment;
 
     public settings: ISettings;

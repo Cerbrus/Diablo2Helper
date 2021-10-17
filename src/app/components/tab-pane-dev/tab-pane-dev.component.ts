@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ObjectHelper } from '../../helpers';
 import { ISkillUi } from '../../interfaces/player';
+import { ITabPaneComponent } from '../../interfaces/ui';
 import { ClassesUi, SkillsUi, TClass, TClassUi } from '../../types/player';
 
 @Component({
@@ -8,7 +9,7 @@ import { ClassesUi, SkillsUi, TClass, TClassUi } from '../../types/player';
     templateUrl: './tab-pane-dev.component.html',
     styleUrls: ['./tab-pane-dev.component.scss']
 })
-export class TabPaneDevComponent {
+export class TabPaneDevComponent implements ITabPaneComponent {
     public class: TClassUi = 'amazon';
     public skillIndex = 0;
     public isDown = false;

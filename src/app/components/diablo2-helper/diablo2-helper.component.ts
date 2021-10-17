@@ -3,6 +3,13 @@ import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import settings from '../../../assets/settings.json';
 import { environment } from '../../../environments/environment';
+import { ITab } from '../../interfaces/ui';
+import { TabPaneCharacterImportComponent } from '../tab-pane-character-import/tab-pane-character-import.component';
+import { TabPaneDevComponent } from '../tab-pane-dev/tab-pane-dev.component';
+import { TabPaneGemsComponent } from '../tab-pane-gems/tab-pane-gems.component';
+import { TabPaneRuneWordsComponent } from '../tab-pane-rune-words/tab-pane-rune-words.component';
+import { TabPaneRunesComponent } from '../tab-pane-runes/tab-pane-runes.component';
+import { TabPaneSettingsComponent } from '../tab-pane-settings/tab-pane-settings.component';
 
 @Component({
     selector: 'diablo2helper',
@@ -11,6 +18,35 @@ import { environment } from '../../../environments/environment';
 })
 export class Diablo2HelperComponent {
     public environment = environment;
+
+    public tabs: Array<ITab> = [
+        {
+            component: TabPaneRuneWordsComponent,
+            options: { title: 'common.runeWords', key: 'runewords' },
+            cssClass: 'runeWords'
+        },
+        {
+            component: TabPaneRunesComponent,
+            options: { title: 'common.runes', key: 'runes' }
+        },
+        {
+            component: TabPaneGemsComponent,
+            options: { title: 'common.gems', key: 'gems' }
+        },
+        {
+            component: TabPaneCharacterImportComponent,
+            options: { title: 'labels.import', key: 'import', fillHeight: false }
+        },
+        {
+            component: TabPaneSettingsComponent,
+            options: { title: 'settings.title', key: 'settings', right: true, fillHeight: false }
+        },
+        {
+            component: TabPaneDevComponent,
+            options: { title: 'labels.dev', key: 'dev', right: true, fillHeight: false },
+            hide: this.environment.production
+        }
+    ];
 
     constructor(
         titleService: Title,

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ITabPaneComponent } from '../../interfaces/ui';
 import { RunewordFilterService } from '../../services';
 
 @Component({
@@ -6,7 +7,7 @@ import { RunewordFilterService } from '../../services';
     templateUrl: './tab-pane-rune-words.component.html',
     styleUrls: ['./tab-pane-rune-words.component.scss']
 })
-export class TabPaneRuneWordsComponent {
+export class TabPaneRuneWordsComponent implements ITabPaneComponent {
     constructor(
         private readonly runeWordFilterService: RunewordFilterService
     ) {

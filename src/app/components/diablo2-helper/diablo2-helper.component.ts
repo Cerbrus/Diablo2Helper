@@ -4,12 +4,14 @@ import { TranslateService } from '@ngx-translate/core';
 import settings from '../../../assets/settings.json';
 import { environment } from '../../../environments/environment';
 import { ITab } from '../../interfaces/ui';
-import { TabPaneCharacterImportComponent } from '../tab-pane-character-import/tab-pane-character-import.component';
-import { TabPaneDevComponent } from '../tab-pane-dev/tab-pane-dev.component';
-import { TabPaneGemsComponent } from '../tab-pane-gems/tab-pane-gems.component';
-import { TabPaneRuneWordsComponent } from '../tab-pane-rune-words/tab-pane-rune-words.component';
-import { TabPaneRunesComponent } from '../tab-pane-runes/tab-pane-runes.component';
-import { TabPaneSettingsComponent } from '../tab-pane-settings/tab-pane-settings.component';
+import {
+    TabPaneCharacterImportComponent,
+    TabPaneDevComponent,
+    TabPaneGemsComponent,
+    TabPaneRunesComponent,
+    TabPaneRuneWordsComponent,
+    TabPaneSettingsComponent
+} from '../-tab-pane';
 
 @Component({
     selector: 'diablo2helper',

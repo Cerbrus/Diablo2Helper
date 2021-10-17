@@ -1,51 +1,68 @@
+// Angular modules
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+
+// External modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ResizeObserverModule } from '@ng-web-apis/resize-observer';
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NG_EVENT_PLUGINS } from '@tinkoff/ng-event-plugins';
+
+// Environment
 import { environment } from '../environments/environment';
 
 // Components
+import { InputCheckboxComponent, InputGameSaveFileComponent, InputNumberCheckboxComponent } from './components/-input';
+import {
+    ListGemsComponent,
+    ListRunesComponent,
+    ListRuneWordsComponent,
+    ListRuneWordsFiltersComponent
+} from './components/-list';
+import {
+    TabPaneCharacterImportComponent,
+    TabPaneDevComponent,
+    TabPaneGemsComponent,
+    TabPaneRunesComponent,
+    TabPaneRuneWordsComponent,
+    TabPaneSettingsComponent
+} from './components/-tab-pane';
+import {
+    UiCollapsibleComponent,
+    UiFormatEffectComponent,
+    UiScrollableComponent,
+    UiSpriteAnimatedComponent,
+    UiSpriteClassComponent,
+    UiSpriteGemComponent,
+    UiSpriteRuneComponent,
+    UiSpriteSkillComponent,
+    UiTabComponent,
+    UiTableHeadComponent,
+    UiTableRecordComponent,
+    UiTableSortControlComponent,
+    UiTabsComponent
+} from './components/-ui';
 import { AppComponent } from './components/app/app.component';
 import { Diablo2HelperComponent } from './components/diablo2-helper/diablo2-helper.component';
-import { FormatEffectComponent } from './components/format-effect/format-effect.component';
-import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
-import { InputGameSaveFileComponent } from './components/input-game-save-file/input-game-save-file.component';
-import { InputNumberCheckboxComponent } from './components/input-number-checkbox/input-number-checkbox.component';
-import { ListGemsComponent } from './components/list-gems/list-gems.component';
-import { ListRuneWordsFiltersComponent } from './components/list-rune-words-filters/list-rune-words-filters.component';
-import { ListRuneWordsComponent } from './components/list-rune-words/list-rune-words.component';
-import { ListRunesComponent } from './components/list-runes/list-runes.component';
 import { ReportIssueComponent } from './components/report-issue/report-issue.component';
 import { RuneCounterComponent } from './components/rune-counter/rune-counter.component';
 import { RuneTrackingCountersComponent } from './components/rune-tracking-counters/rune-tracking-counters.component';
 import { RuneTrackingSelectComponent } from './components/rune-tracking-select/rune-tracking-select.component';
-import { TabPaneCharacterImportComponent } from './components/tab-pane-character-import/tab-pane-character-import.component';
-import { TabPaneDevComponent } from './components/tab-pane-dev/tab-pane-dev.component';
-import { TabPaneGemsComponent } from './components/tab-pane-gems/tab-pane-gems.component';
-import { TabPaneRuneWordsComponent } from './components/tab-pane-rune-words/tab-pane-rune-words.component';
-import { TabPaneRunesComponent } from './components/tab-pane-runes/tab-pane-runes.component';
-import { TabPaneSettingsComponent } from './components/tab-pane-settings/tab-pane-settings.component';
-import { UiCollapsibleComponent } from './components/ui-collapsible/ui-collapsible.component';
-import { UiScrollableComponent } from './components/ui-scrollable/ui-scrollable.component';
-import { UiSpriteClassComponent } from './components/ui-sprite/ui-sprite-class/ui-sprite-class.component';
-import { UiTabComponent } from './components/ui-tab/ui-tab.component';
-import { UiTableHeadComponent } from './components/ui-table-head/ui-table-head.component';
-import { UiTableRecordComponent } from './components/ui-table-record/ui-table-record.component';
-import { UiTableSortControlComponent } from './components/ui-table-sort-control/ui-table-sort-control.component';
-import { UiTabsComponent } from './components/ui-tabs/ui-tabs.component';
+
+// Directives
+import { DraggableDirective, OnClickSelectDirective, TooltipSocketableDirective, VarDirective } from './directives';
 
 // Handlers
 import { LogMissingTranslationHandler } from './handlers/log-missing-translations.handler';
 
+// Pipes
+import { AsArrayPipe, KeyValueTypedPipe } from './pipes';
+
 // Modules
 import { RoutingModule } from './routing/routing.module';
-import { SharedModule } from './shared.module';
-import { UiSpriteModule } from './ui-sprite.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -55,7 +72,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 const components = [
     AppComponent,
     Diablo2HelperComponent,
-    FormatEffectComponent,
     InputCheckboxComponent,
     InputGameSaveFileComponent,
     InputNumberCheckboxComponent,
@@ -74,8 +90,13 @@ const components = [
     TabPaneRunesComponent,
     TabPaneSettingsComponent,
     UiCollapsibleComponent,
+    UiFormatEffectComponent,
     UiScrollableComponent,
+    UiSpriteAnimatedComponent,
     UiSpriteClassComponent,
+    UiSpriteGemComponent,
+    UiSpriteRuneComponent,
+    UiSpriteSkillComponent,
     UiTabComponent,
     UiTableHeadComponent,
     UiTableRecordComponent,
@@ -83,19 +104,31 @@ const components = [
     UiTabsComponent
 ];
 
+const directives = [
+    DraggableDirective,
+    OnClickSelectDirective,
+    TooltipSocketableDirective,
+    VarDirective
+];
+
+const pipes = [
+    AsArrayPipe,
+    KeyValueTypedPipe
+];
+
 @NgModule({
     declarations: [
-        components
+        components,
+        directives,
+        pipes
     ],
     imports: [
-        RoutingModule,
         BrowserModule,
         FontAwesomeModule,
         FormsModule,
         HttpClientModule,
         ResizeObserverModule,
-        SharedModule,
-        UiSpriteModule,
+        RoutingModule,
         TranslateModule.forRoot({
             defaultLanguage: 'en',
             loader: {

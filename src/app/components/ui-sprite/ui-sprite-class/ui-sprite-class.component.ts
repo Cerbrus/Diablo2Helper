@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Classes, TClass } from '../../../types';
 import { TSpriteAnimation } from '../../../types/animation';
+import { Classes, TClass } from '../../../types/player';
 
 @Component({
     selector: 'ui-sprite-class',

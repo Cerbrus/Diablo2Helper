@@ -1,4 +1,4 @@
-import { TClass, TSkill, TSkillGroup } from '../../types';
+import { TClass, TSkill, TSkillGroup } from '../../types/player';
 
 export interface IEffectValueSkill {
     count: number;

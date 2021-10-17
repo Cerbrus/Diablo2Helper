@@ -17,8 +17,10 @@ export class UiTabsComponent implements AfterContentInit {
 
     constructor(
         private readonly storageService: StorageService,
+        private readonly route: ActivatedRoute,
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute) {
+        this.setActiveTabFromRoute();
     }
 
     public ngAfterContentInit(): void {
@@ -31,6 +33,18 @@ export class UiTabsComponent implements AfterContentInit {
             this.selectTab(this.tabs.first);
     }
 
+    private setActiveTabFromRoute(): void {
+        const tab = this.route.snapshot.params.tab;
+        if (!tab)
+            return;
+
+        const [name, key] = tab.split(':');
+
+        const activeTabs = this.storageService.get.uiActiveTabs();
+        activeTabs[name] = key;
+        this.storageService.save.uiActiveTabs(activeTabs);
+    }
+
     public selectTab(tab: UiTabComponent, $event?: MouseEvent): void {
         $event?.preventDefault();
         if (!tab)
@@ -41,7 +55,7 @@ export class UiTabsComponent implements AfterContentInit {
 
         // noinspection JSIgnoredPromiseFromCall
         this.router.navigate(
-            ['/' + tab.options.key],
+            [`/${this.name}:${tab.options.key}`],
             {
                 relativeTo: this.activatedRoute
             });

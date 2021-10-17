@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ObjectHelper } from '../../helpers';
-import { ISkillUi } from '../../interfaces';
-import { ClassesUi, SkillsUi, TClass, TClassUi } from '../../types';
+import { ISkillUi } from '../../interfaces/player';
+import { ClassesUi, SkillsUi, TClass, TClassUi } from '../../types/player';
 
 @Component({
     selector: 'tab-pane-dev',

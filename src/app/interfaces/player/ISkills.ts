@@ -10,7 +10,7 @@ import {
     TSkillPaladin,
     TSkillSorceress,
     TSkillUi
-} from '../types';
+} from '../../types/player';
 
 interface ISkill {
     amazon: TSkillAmazon;

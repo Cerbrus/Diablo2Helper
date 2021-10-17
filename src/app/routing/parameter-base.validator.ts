@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 @Injectable()
-export abstract class CanActivateBase implements CanActivate {
+export abstract class ParameterValidatorBase implements CanActivate {
     protected constructor(private readonly router: Router) {
     }
 

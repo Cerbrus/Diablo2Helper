@@ -4,8 +4,9 @@ import { isArray } from 'rxjs/internal-compatibility';
 import { EffectType } from '../enums/EffectType';
 import { IEffect, IEffectValueMinMax, IEffectValueNumber, IEffectValueSkill } from '../interfaces/effect';
 import { ISocketableEffects } from '../interfaces/socketable';
-import { TClass, TEffect, TSkill, TSkillGroup } from '../types';
+import { TEffect } from '../types';
 import { ItemOrArray } from '../types/helpers';
+import { TClass, TSkill, TSkillGroup } from '../types/player';
 
 export type EffectRowConfig = { title: string, key: keyof ISocketableEffects }
 

@@ -19,8 +19,10 @@ export class UiTabComponent {
     }
 
     public set options(value: ITabOptions) {
-        this.tabOptions = { ...this.defaultOptions, ...value };
+        const copy = { ...value };
+        this.tabOptions = value;
+        Object.assign(this.tabOptions, this.defaultOptions, copy);
     }
 
-    public tabOptions!: ITabOptions;
+    public tabOptions: ITabOptions = { title: '', key: '' };
 }

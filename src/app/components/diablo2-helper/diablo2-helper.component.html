@@ -1,9 +1,1 @@
-<ui-tabs [name]="''">
-    <ng-container *ngFor="let tab of tabs">
-        <ui-tab *ngIf="!tab.hide"
-                [options]="tab.options"
-                [class]="tab.cssClass">
-            <ng-container *ngComponentOutlet="tab.component"></ng-container>
-        </ui-tab>
-    </ng-container>
-</ui-tabs>
+<ui-tabs [name]="''" [tabs]="tabs"></ui-tabs>

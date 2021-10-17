@@ -1,7 +1,7 @@
-import { AfterContentInit, Component, ContentChildren, Input, QueryList } from '@angular/core';
+import { AfterContentInit, Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ITab } from '../../interfaces/ui';
 import { StorageService } from '../../services';
-import { UiTabComponent } from '../ui-tab/ui-tab.component';
 
 @Component({
     selector: 'ui-tabs',
@@ -9,11 +9,11 @@ import { UiTabComponent } from '../ui-tab/ui-tab.component';
     styleUrls: ['./ui-tabs.component.scss']
 })
 export class UiTabsComponent implements AfterContentInit {
-    @ContentChildren(UiTabComponent)
-    public tabs!: QueryList<UiTabComponent>;
-
     @Input()
     public name!: string;
+
+    @Input('tabs')
+    tabsConfig!: Array<ITab>;
 
     constructor(
         private readonly storageService: StorageService,
@@ -26,11 +26,11 @@ export class UiTabsComponent implements AfterContentInit {
     public ngAfterContentInit(): void {
         const activeTabKey = this.getActiveTabs()[this.name];
         if (activeTabKey) {
-            this.tabs.forEach(t => t.options.active = t.options.key === activeTabKey);
+            this.tabsConfig.forEach(t => t.options.active = t.options.key === activeTabKey);
         }
-        const activeTabs = this.tabs.filter(tab => tab.options.active ?? false);
+        const activeTabs = this.tabsConfig.filter(tab => tab.options.active ?? false);
         if (activeTabs.length === 0)
-            this.selectTab(this.tabs.first);
+            this.selectTab(this.tabsConfig[0]);
     }
 
     private setActiveTabFromRoute(): void {
@@ -45,12 +45,12 @@ export class UiTabsComponent implements AfterContentInit {
         this.storageService.save.uiActiveTabs(activeTabs);
     }
 
-    public selectTab(tab: UiTabComponent, $event?: MouseEvent): void {
+    public selectTab(tab: ITab, $event?: MouseEvent): void {
         $event?.preventDefault();
         if (!tab)
             return;
 
-        this.tabs.toArray().forEach(tab => tab.options.active = false);
+        this.tabsConfig.forEach(tab => tab.options.active = false);
         tab.options.active = true;
 
         // noinspection JSIgnoredPromiseFromCall

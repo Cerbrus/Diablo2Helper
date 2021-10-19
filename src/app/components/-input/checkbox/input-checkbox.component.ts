@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { LabeledBaseComponent } from '../../labeled-base.component';
+import { LabeledBaseComponent } from '../../../modules/shared';
 
 @Component({
     selector: 'input-checkbox',

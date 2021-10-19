@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import settings from '../../../assets/settings.json';
-import { environment } from '../../../environments/environment';
-import { ITab } from '../../interfaces/ui';
 import {
     TabPaneCharacterImportComponent,
     TabPaneDevComponent,
@@ -12,6 +9,9 @@ import {
     TabPaneRuneWordsComponent,
     TabPaneSettingsComponent
 } from '../-tab-pane';
+import settings from '../../../assets/settings.json';
+import { environment } from '../../../environments/environment';
+import { ITab } from '../../interfaces/ui';
 
 @Component({
     selector: 'diablo2helper',

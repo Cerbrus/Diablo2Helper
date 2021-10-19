@@ -1,6 +1,6 @@
 // Angular modules
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NG_EVENT_PLUGINS } from '@tinkoff/ng-event-plugins';
 
 // Directives
-import {  OnClickSelectDirective, TooltipSocketableDirective, VarDirective } from './directives';
+import { OnClickSelectDirective, TooltipSocketableDirective, VarDirective } from './directives';
 
 // Pipes
 import { AsArrayPipe, KeyValueTypedPipe } from './pipes';
@@ -51,4 +51,5 @@ const modules = [
     ],
     providers: [NG_EVENT_PLUGINS]
 })
-export class SharedModule {}
+export class SharedModule {
+}

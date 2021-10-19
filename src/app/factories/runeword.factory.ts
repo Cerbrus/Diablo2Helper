@@ -1,6 +1,7 @@
 // noinspection SpellCheckingInspection
 
 import { Injectable } from '@angular/core';
+import { EffectOptions, EffectType } from '../enums';
 import { EffectHelper, GemHelper, ObjectHelper, RuneHelper } from '../helpers';
 import { IRuneWordMap } from '../interfaces/runeWord';
 import { StorageService } from '../services';
@@ -34,27 +35,10 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
 
     public buildItems(): IRuneWordMap {
         const owned = this.storageService.get.runeWordsOwned();
-        // const gems = this.gemHelper.getItems();
-
-        // const { repeat } = ArrayHelper;
-        // const rune = this.runeHelper.getItem.bind(this.runeHelper);
-        const {
-            damageOverTimeEffect: dot,
-            integerEffect: int,
-            percentageEffect: pct,
-            rangeEffect: rng,
-            skillAllEffect: skillAll,
-            skillAuraEffect: aura,
-            skillAuraRangeEffect: auraRange,
-            skillChargesEffect: charge,
-            skillClassEffect: skillClass,
-            skillEffect: skill,
-            skillGroupEffect: skillGroup,
-            skillRangeEffect: skillRange
-        } = EffectHelper;
 
         const { all, bows } = this;
         const runes = this.runes.bind(this);
+        const effect = EffectHelper.effect;
 
         const runeWords: IRuneWordMap = {
             'Ancient\'s Pledge': {
@@ -62,12 +46,12 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
                 itemTypes: all('shield'),
                 ...runes('Ral', 'Ort', 'Tal'),
                 effects: [
-                    `+50% Enhanced Defense
-Cold Resist +43%
-Lightning Resist +48%
-Fire Resist +48%
-Poison Resist +48%
-10% Damage Taken Goes to Mana`
+                    effect('stat.defenseEnhanced', '+50%'),
+                    effect('resist.cold', '+43%'),
+                    effect('resist.lightning', '+48%'),
+                    effect('resist.fire', '+48%'),
+                    effect('resist.poison', '+48%'),
+                    effect('effect.damageToMana', '10%')
                 ]
             },
             Beast: {
@@ -75,18 +59,18 @@ Poison Resist +48%
                 itemTypes: ['axe', 'hammer', 'scepter'],
                 ...runes('Ber', 'Tir', 'Um', 'Mal', 'Lum'),
                 effects: [
-                    `Level 9 Fanaticism Aura When Equipped
-+40% Increased Attack Speed
-+240-270% Enhanced Damage (varies)
-20% Chance of Crushing Blow
-25% Chance of Open Wounds
-+3 To Werebear
-+3 To Lycanthropy
-Prevent Monster Heal
-+25-40 To Strength (varies)
-+10 To Energy
-+2 To Mana After Each Kill
-Level 13 Summon Grizzly (5 Charges)`
+                    effect('skill.aura', 9, { skill: 'Fanaticism' }),
+                    effect('stat.attackSpeed', '+40%'),
+                    effect('damage.enhanced', '+240-270%', EffectOptions.Varies),
+                    effect('chance.crushingBlow', '20%'),
+                    effect('chance.openWounds', '25%'),
+                    effect('skill.skill', 3, { skill: 'Werebear' }),
+                    effect('skill.skill', 3, { skill: 'Lycanthropy' }),
+                    'effect.preventHeal',
+                    effect('stat.strength', '+25-40', EffectOptions.Varies),
+                    effect('stat.energy', '+10'),
+                    effect('on.kill.mana', '+2'),
+                    effect('skill.charges', 5, { skill: 'Summon Grizzly', level: 13 })
                 ]
             },
             Black: {
@@ -94,15 +78,15 @@ Level 13 Summon Grizzly (5 Charges)`
                 itemTypes: ['club', 'mace', 'hammer'],
                 ...runes('Thul', 'Io', 'Nef'),
                 effects: [
-                    `+15% Increased Attack Speed
-+120% Enhanced Damage
-+200 to Attack Rating
-Adds 3-14 Cold Damage (3 sec)
-40% Chance of Crushing Blow
-Knockback
-+10 to Vitality
-Magic Damage Reduced By 2
-Level 4 Corpse Explosion (12 Charges)`
+                    effect('stat.attackSpeed', '+15%'),
+                    effect('damage.enhanced', '+120%'),
+                    effect('stat.attackRating', '+200'),
+                    effect('damage.cold', '3-14'),
+                    effect('chance.crushingBlow', '40%'),
+                    effect('effect.knockback', EffectType.Effect),
+                    effect('stat.vitality', '+10'),
+                    effect('absorb.damageMagic', 2),
+                    effect('skill.charges', 12, { skill: 'Corpse Explosion', level: 4 })
                 ]
             },
             Bone: {
@@ -110,12 +94,12 @@ Level 4 Corpse Explosion (12 Charges)`
                 itemTypes: 'armorBody',
                 ...runes('Sol', 'Um', 'Um'),
                 effects: [
-                    `15% Chance To Cast level 10 Bone Armor When Struck
-15% Chance To Cast level 10 Bone Spear On Striking
-+2 To Necromancer Skill Levels
-+100-150 To Mana (varies)
-All Resistances +30
-Damage Reduced By 7`
+                    effect('chance.struck', '15%', { level: 10, skill: 'Bone Armor' }),
+                    effect('chance.strike', '15%', { level: 10, skill: 'Bone Spear' }),
+                    effect('skill.levels', 2, { class: 'necromancer' }),
+                    effect('stat.mana', '+100-150', EffectOptions.Varies),
+                    effect('resist.all', '+30'),
+                    effect('absorb.damage', 7)
                 ]
             },
             Bramble: {
@@ -123,17 +107,17 @@ Damage Reduced By 7`
                 itemTypes: 'armorBody',
                 ...runes('Ral', 'Ohm', 'Sur', 'Eth'),
                 effects: [
-                    `Level 15-21 Thorns Aura When Equipped (varies)
-+50% Faster Hit Recovery
-+25-50% To Poison Skill Damage (varies)
-+300 Defense
-Increase Maximum Mana 5%
-Regenerate Mana 15%
-+5% To Maximum Cold Resist
-Fire Resist +30%
-Poison Resist +100%
-+13 Life After Each Kill
-Level 13 Spirit of Barbs (33 Charges)`
+                    effect('skill.aura', '15-21', EffectOptions.Varies, { skill: 'Thorns' }),
+                    effect('stat.rateHitRecovery', '+50%'),
+                    effect('damage.poisonSkill', '+25-50%', EffectOptions.Varies),
+                    effect('stat.defense', '+300'),
+                    effect('stat.maxMana', '5%'),
+                    effect('effect.regenerateMana', '15%'),
+                    effect('resist.maxCold', '+5%'),
+                    effect('resist.fire', '+30%'),
+                    effect('resist.poison', '+100%'),
+                    effect('on.kill.life', '+13'),
+                    effect('skill.charges', 33, { skill: 'Spirit of Barbs', level: 13 })
                 ]
             },
             Brand: {
@@ -141,16 +125,16 @@ Level 13 Spirit of Barbs (33 Charges)`
                 itemTypes: bows,
                 ...runes('Jah', 'Lo', 'Mal', 'Gul'),
                 effects: [
-                    `35% Chance To Cast Level 14 Amplify Damage When Struck
-100% Chance To Cast Level 18 Bone Spear On Striking
-Fires Explosive Arrows or Bolts (15)
-+260-340% Enhanced Damage (varies)
-Ignore Target's Defense
-20% Bonus to Attack Rating
-+280-330% Damage To Demons (varies)
-20% Deadly Strike
-Prevent Monster Heal
-Knockback`
+                    effect('chance.struck', '35%', { level: 14, skill: 'Amplify Damage' }),
+                    effect('chance.strike', '100%', { level: 18, skill: 'Bone Spear' }),
+                    'effect.explosiveProjectile',
+                    effect('damage.enhanced', '+260-340%', EffectOptions.Varies),
+                    'effect.ignoreDefense',
+                    effect('stat.attackRatingBonus', '20%'),
+                    effect('damage.demon', '+280-330%', EffectOptions.Varies),
+                    effect('chance.deadlyStrike', '20%'),
+                    'effect.preventHeal',
+                    'effect.knockback'
                 ]
             },
             'Breath of the Dying': {
@@ -158,20 +142,20 @@ Knockback`
                 itemTypes: all('weaponsRanged', 'weaponsMelee'),
                 ...runes('Vex', 'Hel', 'El', 'Eld', 'Zod', 'Eth'),
                 effects: [
-                    `50% Chance To Cast Level 20 Poison Nova When You Kill An Enemy
-Indestructible
-+60% Increased Attack Speed
-+350-400% Enhanced Damage (varies)
--25% Target Defense
-+50 To Attack Rating
-+200% Damage To Undead
-+50 To Attack Rating Against Undead
-7% Mana Stolen Per Hit
-12-15% Life Stolen Per Hit (varies)
-Prevent Monster Heal
-+30 To All Attributes
-+1 To Light Radius
-Requirements -20%`
+                    effect('chance.kill', '50%', { level: 20, skill: 'Poison Nova' }),
+                    'effect.indestructible',
+                    effect('stat.attackSpeed', '+60%'),
+                    effect('damage.enhanced', '+350-400%', EffectOptions.Varies),
+                    effect('effect.targetDefense', '-25%'),
+                    effect('stat.attackRating', '+50'),
+                    effect('damage.undead', '+200%'),
+                    effect('stat.attackRatingUndead', '+50'),
+                    effect('on.hit.stealMana', '7%'),
+                    effect('on.hit.stealLife', '12-15%', EffectOptions.Varies),
+                    'effect.preventHeal',
+                    effect('stat.all', '+30'),
+                    effect('stat.lightRadius', '+1'),
+                    effect('effect.requirements', '-20%')
                 ]
             },
             'Call to Arms': {
@@ -179,17 +163,17 @@ Requirements -20%`
                 itemTypes: all('weaponsRanged', 'weaponsMelee'),
                 ...runes('Amn', 'Ral', 'Mal', 'Ist', 'Ohm'),
                 effects: [
-                    `+1 To All Skills
-+40% Increased Attack Speed
-+240-290% Enhanced Damage (varies)
-Adds 5-30 Fire Damage
-7% Life Stolen Per Hit
-+2-6 To Battle Command (varies)
-+1-6 To Battle Orders (varies)
-+1-4 To Battle Cry (varies)
-Prevent Monster Heal
-Replenish Life +12
-30% Better Chance of Getting Magic Items`
+                    effect('skill.skill', '+1', { skill: 'All Skills' }),
+                    effect('stat.attackSpeed', '+40%'),
+                    effect('damage.enhanced', '+240-290%', EffectOptions.Varies),
+                    effect('damage.fire', '5-30'),
+                    effect('on.hit.stealLife', '7%'),
+                    effect('skill.skill', '+2-6', EffectOptions.Varies, { skill: 'Battle Command' }),
+                    effect('skill.skill', '+1-6', EffectOptions.Varies, { skill: 'Battle Orders' }),
+                    effect('skill.skill', '+1-4', EffectOptions.Varies, { skill: 'Battle Cry' }),
+                    'effect.preventHeal',
+                    effect('effect.replenishLife', '+12'),
+                    effect('effect.MF', '30%')
                 ]
             },
             'Chains of Honor': {
@@ -197,16 +181,16 @@ Replenish Life +12
                 itemTypes: 'armorBody',
                 ...runes('Dol', 'Um', 'Ber', 'Ist'),
                 effects: [
-                    `+2 To All Skills
-+200% Damage To Demons
-+100% Damage To Undead
-8% Life Stolen Per Hit
-+70% Enhanced Defense
-+20 To Strength
-Replenish Life +7
-All Resistances +65
-Damage Reduced By 8%
-25% Better Chance of Getting Magic Items`
+                    effect('skill.skill', '+2', { skill: 'All Skills' }),
+                    effect('damage.demon', '+200%'),
+                    effect('damage.undead', '+100%'),
+                    effect('on.hit.stealLife', '8%'),
+                    effect('stat.defenseEnhanced', '+70%'),
+                    effect('stat.strength', '+20'),
+                    effect('effect.replenishLife', '+7'),
+                    effect('resist.all', '+65'),
+                    effect('absorb.damage', '8%'),
+                    effect('effect.MF', '25%')
                 ]
             },
             Chaos: {
@@ -214,15 +198,15 @@ Damage Reduced By 8%
                 itemTypes: 'claw',
                 ...runes('Fal', 'Ohm', 'Um'),
                 effects: [
-                    `9% Chance To Cast Level 11 Frozen Orb On Striking
-11% Chance To Cast Level 9 Charged Bolt On Striking
-+35% Increased Attacked Speed
-+240-290% Enhanced Damage (varies)
-Adds 216-471 Magic Damage
-25% Chance of Open Wounds
-+1 To Whirlwind
-+10 To Strength
-+15 Life After Each Demon Kill`
+                    effect('chance.strike', '9%', { level: 11, skill: 'Frozen Orb' }),
+                    effect('chance.strike', '11%', { level: 9, skill: 'Charged Bolt' }),
+                    effect('stat.attackSpeed', '+35%'),
+                    effect('damage.enhanced', '+240-290%', EffectOptions.Varies),
+                    effect('damage.magic', '216-471'),
+                    effect('chance.openWounds', '25%'),
+                    effect('skill.skill', '+1', { skill: 'Whirlwind' }),
+                    effect('stat.strength', '+10'),
+                    effect('on.kill.lifeDemon', '+15')
                 ]
             },
             'Crescent Moon': {
@@ -230,16 +214,16 @@ Adds 216-471 Magic Damage
                 itemTypes: ['axe', 'poleArm', 'sword'],
                 ...runes('Shael', 'Um', 'Tir'),
                 effects: [
-                    `10% Chance To Cast Level 17 Chain Lightning On Striking
-7% Chance To Cast Level 13 Static Field On Striking
-+20% Increased Attack Speed
-+180-220% Enhanced Damage (varies)
-Ignore Target's Defense
--35% To Enemy Lightning Resistance
-25% Chance of Open Wounds
-+9-11 Magic Absorb (varies)
-+2 To Mana After Each Kill
-Level 18 Summon Spirit Wolf (30 Charges)`
+                    effect('chance.strike', '10%', { level: 17, skill: 'Chain Lightning' }),
+                    effect('chance.strike', '7%', { level: 13, skill: 'Static Field' }),
+                    effect('stat.attackSpeed', '+20%'),
+                    effect('damage.enhanced', '+180-220%', EffectOptions.Varies),
+                    'effect.ignoreDefense',
+                    effect('resist.enemyLightning', '-35%'),
+                    effect('chance.openWounds', '25%'),
+                    effect('absorb.magic', '+9-11', EffectOptions.Varies),
+                    effect('on.kill.mana', '+2'),
+                    effect('skill.charges', 30, { skill: 'Summon Spirit Wolf', level: 18 })
                 ]
             },
             Death: {
@@ -247,19 +231,19 @@ Level 18 Summon Spirit Wolf (30 Charges)`
                 itemTypes: ['sword', 'axe'],
                 ...runes('Hel', 'El', 'Vex', 'Ort', 'Gul'),
                 effects: [
-                    `Indestructible
-100% Chance To Cast Level 44 Chain Lightning When You Die
-25% Chance To Cast Level 18 Glacial Spike On Attack
-+300-385% Enhanced Damage (varies)
-20% Bonus To Attack Rating
-+50 To Attack Rating
-Adds 1-50 Lightning Damage
-7% Mana Stolen Per Hit
-50% Chance of Crushing Blow
-(0.5*Clvl)% Deadly Strike (Based on Character Level)
-+1 To Light Radius
-Level 22 Blood Golem (15 Charges)
-Requirements -20%`
+                    'effect.indestructible',
+                    effect('chance.die', '100%', { level: 44, skill: 'Chain Lightning' }),
+                    effect('chance.attack', '25%', { level: 18, skill: 'Glacial Spike' }),
+                    effect('damage.enhanced', '+300-385%', EffectOptions.Varies),
+                    effect('stat.attackRatingBonus', '20%'),
+                    effect('stat.attackRating', '+50'),
+                    effect('damage.lightning', '1-50'),
+                    effect('on.hit.stealMana', '7%'),
+                    effect('chance.crushingBlow', '50%'),
+                    effect('chance.deadlyStrike', '(0.5*Clvl)%', EffectOptions.CharLvl),
+                    effect('stat.lightRadius', '+1'),
+                    effect('skill.charges', 15, { skill: 'Blood Golem', level: 22 }),
+                    effect('effect.requirements', '-20%')
                 ]
             },
             Delirium: {
@@ -267,16 +251,16 @@ Requirements -20%`
                 itemTypes: all('armorHead'),
                 ...runes('Lem', 'Ist', 'Io'),
                 effects: [
-                    `1% Chance To Cast lvl 50 Delirium When Struck
-6% Chance To Cast lvl 14 Mind Blast When Struck
-14% Chance To Cast lvl 13 Terror When Struck
-11% Chance To Cast lvl 18 Confuse On Striking
-+2 To All Skills
-+261 Defense
-+10 To Vitality
-50% Extra Gold From Monsters
-25% Better Chance of Getting Magic Items
-Level 17 Attract (60 Charges)`
+                    effect('chance.struck', '1%', { level: 50, skill: 'Delirium' }),
+                    effect('chance.struck', '6%', { level: 14, skill: 'Mind Blast' }),
+                    effect('chance.struck', '14%', { level: 13, skill: 'Terror' }),
+                    effect('chance.strike', '11%', { level: 18, skill: 'Confuse' }),
+                    effect('skill.skill', '+2', { skill: 'All Skills' }),
+                    effect('stat.defense', '+261'),
+                    effect('stat.vitality', '+10'),
+                    effect('effect.GF', '50%'),
+                    effect('effect.MF', '25%'),
+                    effect('skill.charges', 60, { skill: 'Attract', level: 17 })
                 ]
             },
             Destruction: {
@@ -284,18 +268,18 @@ Level 17 Attract (60 Charges)`
                 itemTypes: ['poleArm', 'sword'],
                 ...runes('Vex', 'Lo', 'Ber', 'Jah', 'Ko'),
                 effects: [
-                    `23% Chance To Cast Level 12 Volcano On Striking
-5% Chance To Cast Level 23 Molten Boulder On Striking
-100% Chance To Cast level 45 Meteor When You Die
-15% Chance To Cast Level 22 Nova On Attack
-+350% Enhanced Damage
-Ignore Target's Defense
-Adds 100-180 Magic Damage
-7% Mana Stolen Per Hit
-20% Chance Of Crushing Blow
-20% Deadly Strike
-Prevent Monster Heal
-+10 To Dexterity`
+                    effect('chance.strike', '23%', { level: 12, skill: 'Volcano' }),
+                    effect('chance.strike', '5%', { level: 23, skill: 'Molten Boulder' }),
+                    effect('chance.die', '100%', { level: 45, skill: 'Meteor' }),
+                    effect('chance.attack', '15%', { level: 22, skill: 'Nova' }),
+                    effect('damage.enhanced', '+350%'),
+                    'effect.ignoreDefense',
+                    effect('damage.magic', '100-180'),
+                    effect('on.hit.stealMana', '7%'),
+                    effect('chance.crushingBlow', '20%'),
+                    effect('chance.deadlyStrike', '20%'),
+                    'effect.preventHeal',
+                    effect('stat.dexterity', '+10')
                 ]
             },
             Doom: {
@@ -303,17 +287,17 @@ Prevent Monster Heal
                 itemTypes: ['axe', 'hammer', 'poleArm'],
                 ...runes('Hel', 'Ohm', 'Um', 'Lo', 'Cham'),
                 effects: [
-                    `5% Chance To Cast Level 18 Volcano On Striking
-Level 12 Holy Freeze Aura When Equipped
-+2 To All Skills
-+45% Increased Attack Speed
-+330-370% Enhanced Damage (varies)
--40-60% To Enemy Cold Resistance (varies)
-20% Deadly Strike
-25% Chance of Open Wounds
-Prevent Monster Heal
-Freezes Target +3
-Requirements -20%`
+                    effect('chance.strike', '5%', { level: 18, skill: 'Volcano' }),
+                    effect('skill.aura', 12, { skill: 'Holy Freeze' }),
+                    effect('skill.skill', '+2', { skill: 'All Skills' }),
+                    effect('stat.attackSpeed', '+45%'),
+                    effect('damage.enhanced', '+330-370%', EffectOptions.Varies),
+                    effect('resist.enemyCold', '-40-60%', EffectOptions.Varies),
+                    effect('chance.deadlyStrike', '20%'),
+                    effect('chance.openWounds', '25%'),
+                    'effect.preventHeal',
+                    effect('effect.freezeAmount', '+3'),
+                    effect('effect.requirements', '-20%')
                 ]
             },
             Dragon: {
@@ -321,20 +305,20 @@ Requirements -20%`
                 itemTypes: all('armorBody', 'shield'),
                 ...runes('Sur', 'Lo', 'Sol'),
                 effects: [
-                    `Both
-20% Chance to Cast Level 18 Venom When Struck
-12% Chance To Cast Level 15 Hydra On Striking
-Level 14 Holy Fire Aura When Equipped
-+360 Defense
-+230 Defense Vs. Missile
-+3-5 To All Attributes (varies)
-+(0.375*Clvl) To Strength (Based on Character Level)
-+5% To Maximum Lightning Resist
-Damage Reduced by 7
-Armor
-Increase Maximum Mana 5%
-Shields
-+50 To Mana`
+                    'appliesTo.both',
+                    effect('chance.struck', '20%', { level: 18, skill: 'Venom' }),
+                    effect('chance.strike', '12%', { level: 15, skill: 'Hydra' }),
+                    effect('skill.aura', 14, { skill: 'Holy Fire' }),
+                    effect('stat.defense', '+360'),
+                    effect('effect.defenseMissile', '+230'),
+                    effect('stat.all', '+3-5', EffectOptions.Varies),
+                    effect('stat.strength', '+(0.375*Clvl)', EffectOptions.CharLvl),
+                    effect('resist.maxLightning', '+5%'),
+                    effect('absorb.damage', 7),
+                    'appliesTo.armor',
+                    effect('stat.maxMana', '5%'),
+                    'appliesTo.shields',
+                    effect('stat.mana', '+50')
                 ]
             },
             Dream: {
@@ -342,20 +326,20 @@ Shields
                 itemTypes: all('shield', 'armorHead'),
                 ...runes('Io', 'Jah', 'Pul'),
                 effects: [
-                    `Both
-10% Chance To Cast Level 15 Confuse When Struck
-Level 15 Holy Shock Aura When Equipped
-+20-30% Faster Hit Recovery (varies)
-+30% Enhanced Defense
-+150-220 Defense (varies)
-+10 To Vitality
-+(0.625*Clvl) To Mana (Based On Character Level)
-All Resistances +5-20 (varies)
-12-25% Better Chance of Getting Magic Items (varies)
-Headgear
-Increase Maximum Life 5%
-Shields
-+50 To Life`
+                    'appliesTo.both',
+                    effect('chance.struck', '10%', { level: 15, skill: 'Confuse' }),
+                    effect('skill.aura', 15, { skill: 'Holy Shock' }),
+                    effect('stat.rateHitRecovery', '+20-30%', EffectOptions.Varies),
+                    effect('stat.defenseEnhanced', '+30%'),
+                    effect('stat.defense', '+150-220', EffectOptions.Varies),
+                    effect('stat.vitality', '+10'),
+                    effect('stat.mana', '+(0.625*Clvl)', EffectOptions.CharLvl),
+                    effect('resist.all', '+5-20', EffectOptions.Varies),
+                    effect('effect.MF', '12-25%', EffectOptions.Varies),
+                    'appliesTo.headgear',
+                    effect('stat.maxLife', '5%'),
+                    'appliesTo.shields',
+                    effect('stat.life', '+50')
                 ]
             },
             Duress: {
@@ -363,17 +347,17 @@ Shields
                 itemTypes: 'armorBody',
                 ...runes('Shael', 'Um', 'Thul'),
                 effects: [
-                    `40% faster hit Recovery
-+10-20% Enhanced Damage (varies)
-Adds 37-133 Cold Damage
-15% Crushing Blow
-33% Open Wounds
-+150-200% Enhanced Defense (varies)
--20% Slower Stamina Drain
-Cold Resist +45%
-Lightning Resist +15%
-Fire Resist +15%
-Poison Resist +15%`
+                    effect('stat.rateHitRecovery', '40%'),
+                    effect('damage.enhanced', '+10-20%', EffectOptions.Varies),
+                    effect('damage.cold', '37-133'),
+                    effect('chance.crushingBlow', '15%'),
+                    effect('chance.openWounds', '33%'),
+                    effect('stat.defenseEnhanced', '+150-200%', EffectOptions.Varies),
+                    effect('effect.staminaDrain', '-20%'),
+                    effect('resist.cold', '+45%'),
+                    effect('resist.lightning', '+15%'),
+                    effect('resist.fire', '+15%'),
+                    effect('resist.poison', '+15%')
                 ]
             },
             Edge: {
@@ -381,16 +365,16 @@ Poison Resist +15%`
                 itemTypes: bows,
                 ...runes('Tir', 'Tal', 'Amn'),
                 effects: [
-                    `Level 15 Thorns Aura When Equipped
-+35% Increased Attack Speed
-+320-380% Damage To Demons (varies)
-+280% Damage To Undead
-+75 Poison Damage Over 5 Seconds
-7% Life Stolen Per Hit
-Prevent Monster Heal
-+5-10 To All Attributes (varies)
-+2 To Mana After Each Kill
-Reduces All Vendor Prices 15%`
+                    effect('skill.aura', 15, { skill: 'Thorns' }),
+                    effect('stat.attackSpeed', '+35%'),
+                    effect('damage.demon', '+320-380%', EffectOptions.Varies),
+                    effect('damage.undead', '+280%'),
+                    effect('damage.poison', '+75', { duration: 5 }),
+                    effect('on.hit.stealLife', '7%'),
+                    'effect.preventHeal',
+                    effect('stat.all', '+5-10', EffectOptions.Varies),
+                    effect('on.kill.mana', '+2'),
+                    effect('effect.discount', '15%')
                 ]
             },
             Enigma: {
@@ -398,16 +382,16 @@ Reduces All Vendor Prices 15%`
                 itemTypes: 'armorBody',
                 ...runes('Jah', 'Ith', 'Ber'),
                 effects: [
-                    `+2 To All Skills
-+45% Faster Run/Walk
-+1 To Teleport
-+750-775 Defense (Varies)
-+(0.75*Clvl) To Strength (Based On Character Level)
-Increase Maximum Life 5%
-Damage Reduced By 8%
-+14 Life After Each Kill
-15% Damage Taken Goes To Mana
-(1*Clvl)% Better Chance of Getting Magic Items (Based On Character Level)`
+                    effect('skill.skill', '+2', { skill: 'All Skills' }),
+                    effect('stat.runSpeed', '+45%'),
+                    effect('skill.skill', '+1', { skill: 'Teleport' }),
+                    effect('stat.defense', '+750-775', EffectOptions.Varies),
+                    effect('stat.strength', '+(0.75*Clvl)', EffectOptions.CharLvl),
+                    effect('stat.maxLife', '5%'),
+                    effect('absorb.damage', '8%'),
+                    effect('on.kill.life', '+14'),
+                    effect('effect.damageToMana', '15%'),
+                    effect('effect.MF', '(1*Clvl)%', EffectOptions.CharLvl)
                 ]
             },
             Enlightenment: {
@@ -415,13 +399,13 @@ Damage Reduced By 8%
                 itemTypes: 'armorBody',
                 ...runes('Pul', 'Ral', 'Sol'),
                 effects: [
-                    `5% Chance To Cast Level 15 Blaze When Struck
-5% Chance To Cast level 15 Fire Ball On Striking
-+2 To Sorceress Skill Levels
-+1 To Warmth
-+30% Enhanced Defense
-Fire Resist +30%
-Damage Reduced By 7`
+                    effect('chance.struck', '5%', { level: 15, skill: 'Blaze' }),
+                    effect('chance.strike', '5%', { level: 15, skill: 'Fire Ball' }),
+                    effect('skill.levels', '+2', { class: 'sorceress' }),
+                    effect('skill.skill', '+1', { skill: 'Warmth' }),
+                    effect('stat.defenseEnhanced', '+30%'),
+                    effect('resist.fire', '+30%'),
+                    effect('absorb.damage', 7)
                 ]
             },
             Eternity: {
@@ -429,17 +413,17 @@ Damage Reduced By 7`
                 itemTypes: all('weaponsMelee'),
                 ...runes('Amn', 'Ber', 'Ist', 'Sol', 'Sur'),
                 effects: [
-                    `Indestructible
-+260-310% Enhanced Damage (varies)
-+9 To Minimum Damage
-7% Life Stolen Per Hit
-20% Chance of Crushing Blow
-Hit Blinds Target
-Slows Target By 33%
-Replenish Mana 16%
-Cannot Be Frozen
-30% Better Chance Of Getting Magic Items
-Level 8 Revive (88 Charges)`
+                    'effect.indestructible',
+                    effect('damage.enhanced', '+260-310%', EffectOptions.Varies),
+                    effect('damage.min', '+9'),
+                    effect('on.hit.stealLife', '7%'),
+                    effect('chance.crushingBlow', '20%'),
+                    'on.hit.blind',
+                    effect('effect.slow', '33%'),
+                    effect('effect.replenishMana', '16%'),
+                    'absorb.freeze',
+                    effect('effect.MF', '30%'),
+                    effect('skill.charges', 88, { skill: 'Revive', level: 8 })
                 ]
             },
             Exile: {
@@ -447,17 +431,17 @@ Level 8 Revive (88 Charges)`
                 itemTypes: 'paladinShield',
                 ...runes('Vex', 'Ohm', 'Ist', 'Dol'),
                 effects: [
-                    `15% Chance To Cast Level 5 Life Tap On Striking
-Level 13-16 Defiance Aura When Equipped (varies)
-+2 To Offensive Auras (Paladin Only)
-+30% Faster Block Rate
-Freezes Target
-+220-260% Enhanced Defense (varies)
-Replenish Life +7
-+5% To Maximum Cold Resist
-+5% To Maximum Fire Resist
-25% Better Chance Of Getting Magic Items
-Repairs 1 Durability every 4 seconds`
+                    effect('chance.strike', '15%', { level: 5, skill: 'Life Tap' }),
+                    effect('skill.aura', '13-16', EffectOptions.Varies, { skill: 'Defiance' }),
+                    effect('skill.class', '+2', { skill: 'Offensive Auras', class: 'paladin' }),
+                    effect('stat.rateBlock', '+30%'),
+                    'effect.freeze',
+                    effect('stat.defenseEnhanced', '+220-260%', EffectOptions.Varies),
+                    effect('effect.replenishLife', '+7'),
+                    effect('resist.maxCold', '+5%'),
+                    effect('resist.maxFire', '+5%'),
+                    effect('effect.MF', '25%'),
+                    'effect.repair'
                 ]
             },
             Faith: {
@@ -465,17 +449,17 @@ Repairs 1 Durability every 4 seconds`
                 itemTypes: bows,
                 ...runes('Ohm', 'Jah', 'Lem', 'Eld'),
                 effects: [
-                    `Level 12-15 Fanaticism Aura When Equipped (varies)
-+1-2 To All Skills (varies)
-+330% Enhanced Damage
-Ignore Target's Defense
-300% Bonus To Attack Rating
-+75% Damage To Undead
-+50 To Attack Rating Against Undead
-+120 Fire Damage
-All Resistances +15
-10% Reanimate As: Returned
-75% Extra Gold From Monsters`
+                    effect('skill.aura', '12-15', EffectOptions.Varies, { skill: 'Fanaticism' }),
+                    effect('skill.skill', '+1-2', EffectOptions.Varies, { skill: 'All Skills' }),
+                    effect('damage.enhanced', '+330%'),
+                    'effect.ignoreDefense',
+                    effect('stat.attackRatingBonus', '300%'),
+                    effect('damage.undead', '+75%'),
+                    effect('stat.attackRatingUndead', '+50'),
+                    effect('damage.fireShort', '+120'),
+                    effect('resist.all', '+15'),
+                    effect('effect.reanimate', '10%'),
+                    effect('effect.GF', '75%')
                 ]
             },
             Famine: {
@@ -483,16 +467,16 @@ All Resistances +15
                 itemTypes: ['axe', 'hammer'],
                 ...runes('Fal', 'Ohm', 'Ort', 'Jah'),
                 effects: [
-                    `+30% Increased Attack Speed
-+320-370% Enhanced Damage (varies)
-Ignore Target's Defense
-Adds 180-200 Magic Damage
-Adds 50-200 Fire Damage
-Adds 51-250 Lightning Damage
-Adds 50-200 Cold Damage
-12% Life Stolen Per Hit
-Prevent Monster Heal
-+10 To Strength`
+                    effect('stat.attackSpeed', '+30%'),
+                    effect('damage.enhanced', '+320-370%', EffectOptions.Varies),
+                    'effect.ignoreDefense',
+                    effect('damage.magic', '180-200'),
+                    effect('damage.fire', '50-200'),
+                    effect('damage.lightning', '51-250'),
+                    effect('damage.cold', '50-200'),
+                    effect('on.hit.stealLife', '12%'),
+                    'effect.preventHeal',
+                    effect('stat.strength', '+10')
                 ]
             },
             Fortitude: {
@@ -500,25 +484,25 @@ Prevent Monster Heal
                 itemTypes: all('weaponsRanged', 'weaponsMelee', 'armorBody'),
                 ...runes('El', 'Sol', 'Dol', 'Lo'),
                 effects: [
-                    `Both
-20% Chance To Cast Level 15 Chilling Armor when Struck
-+25% Faster Cast Rate
-+300% Enhanced Damage
-+200% Enhanced Defense
-+((8-12)*0.125*Clvl) To Life (Based on Character Level) (varies)
-All Resistances +25-30 (varies)
-12% Damage Taken Goes To Mana
-+1 To Light Radius
-Weapons
-+9 To Minimum Damage
-+50 To Attack Rating
-20% Deadly Strike
-Hit Causes Monster To Flee 25%
-Armor
-+15 Defense
-Replenish Life +7
-+5% To Maximum Lightning Resist
-Damage Reduced By 7`
+                    'appliesTo.both',
+                    effect('chance.struck', '20%', { level: 15, skill: 'Chilling Armor' }),
+                    effect('stat.rateCast', '+25%'),
+                    effect('damage.enhanced', '+300%'),
+                    effect('stat.defenseEnhanced', '+200%'),
+                    effect('stat.life', '+((8-12)*0.125*Clvl)', EffectOptions.CharLvl | EffectOptions.Varies),
+                    effect('resist.all', '+25-30', EffectOptions.Varies),
+                    effect('effect.damageToMana', '12%'),
+                    effect('stat.lightRadius', '+1'),
+                    'appliesTo.weapons',
+                    effect('damage.min', '+9'),
+                    effect('stat.attackRating', '+50'),
+                    effect('chance.deadlyStrike', '20%'),
+                    effect('on.hit.fear', '25%'),
+                    'appliesTo.armor',
+                    effect('stat.defense', '+15'),
+                    effect('effect.replenishLife', '+7'),
+                    effect('resist.maxLightning', '+5%'),
+                    effect('absorb.damage', 7)
                 ]
             },
             Fury: {
@@ -526,16 +510,16 @@ Damage Reduced By 7`
                 itemTypes: all('weaponsMelee'),
                 ...runes('Jah', 'Gul', 'Eth'),
                 effects: [
-                    `40% Increased Attack Speed
-+209% Enhanced Damage
-Ignores Target Defense
--25% Target Defense
-20% Bonus to Attack Rating
-6% Life Stolen Per Hit
-33% Chance Of Deadly Strike
-66% Chance Of Open Wounds
-+5 To Frenzy (Barbarian Only)
-Prevent Monster Heal`
+                    effect('stat.attackSpeed', '40%'),
+                    effect('damage.enhanced', '+209%'),
+                    'effect.ignoreDefense',
+                    effect('effect.targetDefense', '-25%'),
+                    effect('stat.attackRatingBonus', '20% '),
+                    effect('on.hit.stealLife', '6%'),
+                    effect('chance.deadlyStrike', '33%'),
+                    effect('chance.openWounds', '66%'),
+                    effect('skill.class', '+5', { skill: 'Frenzy', class: 'barbarian' }),
+                    'effect.preventHeal'
                 ]
             },
             Gloom: {
@@ -543,14 +527,14 @@ Prevent Monster Heal`
                 itemTypes: 'armorBody',
                 ...runes('Fal', 'Um', 'Pul'),
                 effects: [
-                    `15% Chance To Cast Level 3 Dim Vision When Struck
-+10% Faster Hit Recovery
-+200-260% Enhanced Defense (varies)
-+10 To Strength
-All Resistances +45
-Half Freeze Duration
-5% Damage Taken Goes To Mana
--3 To Light Radius`
+                    effect('chance.struck', '15%', { level: 3, skill: 'Dim Vision' }),
+                    effect('stat.rateHitRecovery', '+10%'),
+                    effect('stat.defenseEnhanced', '+200-260%', EffectOptions.Varies),
+                    effect('stat.strength', '+10'),
+                    effect('resist.all', '+45'),
+                    'absorb.freezeHalf',
+                    effect('effect.damageToMana', '5%'),
+                    effect('stat.lightRadius', -3)
                 ]
             },
             Grief: {
@@ -558,18 +542,18 @@ Half Freeze Duration
                 itemTypes: ['sword', 'axe'],
                 ...runes('Eth', 'Tir', 'Lo', 'Mal', 'Ral'),
                 effects: [
-                    `35% Chance To Cast Level 15 Venom On Striking
-+30-40% Increased Attack Speed (varies)
-Damage +340-400 (varies)
-Ignore Target's Defense
--25% Target Defense
-+(1.875*Clvl)% Damage To Demons (Based on Character Level)
-Adds 5-30 Fire Damage
--20-25% To Enemy Poison Resistance (varies)
-20% Deadly Strike
-Prevent Monster Heal
-+2 To Mana After Each Kill
-+10-15 Life After Each Kill (varies)`
+                    effect('chance.strike', '35%', { level: 15, skill: 'Venom' }),
+                    effect('stat.attackSpeed', '+30-40%', EffectOptions.Varies),
+                    effect('damage.damage', '+340-400', EffectOptions.Varies),
+                    'effect.ignoreDefense',
+                    effect('effect.targetDefense', '-25%'),
+                    effect('damage.demon', '+(1.875*Clvl)%', EffectOptions.CharLvl),
+                    effect('damage.fire', '5-30'),
+                    effect('resist.enemyPoison', '-20-25%', EffectOptions.Varies),
+                    effect('chance.deadlyStrike', '20%'),
+                    'effect.preventHeal',
+                    effect('on.kill.mana', '+2'),
+                    effect('on.kill.life', '+10-15', EffectOptions.Varies)
                 ]
             },
             'Hand of Justice': {
@@ -577,17 +561,17 @@ Prevent Monster Heal
                 itemTypes: all('weaponsRanged', 'weaponsMelee'),
                 ...runes('Sur', 'Cham', 'Amn', 'Lo'),
                 effects: [
-                    `100% Chance To Cast Level 36 Blaze When You Level-Up
-100% Chance To Cast Level 48 Meteor When You Die
-Level 16 Holy Fire Aura When Equipped
-+33% Increased Attack Speed
-+280-330% Enhanced Damage (varies)
-Ignore Target's Defense
--20% To Enemy Fire Resistance
-7% Life Stolen Per Hit
-20% Deadly Strike
-Hit Blinds Target
-Freezes Target +3`
+                    effect('chance.level', '100%', { level: 36, skill: 'Blaze' }),
+                    effect('chance.die', '100%', { level: 48, skill: 'Meteor' }),
+                    effect('skill.aura', 16, { skill: 'Holy Fire' }),
+                    effect('stat.attackSpeed', '+33%'),
+                    effect('damage.enhanced', '+280-330%', EffectOptions.Varies),
+                    'effect.ignoreDefense',
+                    effect('resist.enemyFire', '-20%'),
+                    effect('on.hit.stealLife', '7%'),
+                    effect('chance.deadlyStrike', '20%'),
+                    'on.hit.blind',
+                    effect('effect.freezeAmount', '+3')
                 ]
             },
             Harmony: {
@@ -595,19 +579,19 @@ Freezes Target +3`
                 itemTypes: bows,
                 ...runes('Tir', 'Ith', 'Sol', 'Ko'),
                 effects: [
-                    `Level 10 Vigor Aura When Equipped
-+200-275% Enhanced Damage (varies)
-+9 To Minimum Damage
-+9 To Maximum Damage
-Adds 55-160 Fire Damage
-Adds 55-160 Lightning Damage
-Adds 55-160 Cold Damage
-+2-6 To Valkyrie (varies)
-+10 To Dexterity
-Regenerate Mana 20%
-+2 To Mana After Each Kill
-+2 To Light Radius
-Level 20 Revive (25 Charges)`
+                    effect('skill.aura', 10, { skill: 'Vigor' }),
+                    effect('damage.enhanced', '+200-275%', EffectOptions.Varies),
+                    effect('damage.min', '+9'),
+                    effect('damage.max', '+9'),
+                    effect('damage.fire', '55-160'),
+                    effect('damage.lightning', '55-160'),
+                    effect('damage.cold', '55-160'),
+                    effect('skill.skill', '+2-6', EffectOptions.Varies, { skill: 'Valkyrie' }),
+                    effect('stat.dexterity', '+10'),
+                    effect('effect.regenerateMana', '20%'),
+                    effect('on.kill.mana', '+2'),
+                    effect('stat.lightRadius', '+2'),
+                    effect('skill.charges', 25, { skill: 'Revive', level: 20 })
                 ]
             },
             'Heart of the Oak': {
@@ -615,18 +599,18 @@ Level 20 Revive (25 Charges)`
                 itemTypes: ['stave', 'mace'],
                 ...runes('Ko', 'Vex', 'Pul', 'Thul'),
                 effects: [
-                    `+3 To All Skills
-+40% Faster Cast Rate
-+75% Damage To Demons
-+100 To Attack Rating Against Demons
-Adds 3-14 Cold Damage
-7% Mana Stolen Per Hit
-+10 To Dexterity
-Replenish Life +20
-Increase Maximum Mana 15%
-All Resistances +30-40 (varies)
-Level 4 Oak Sage (25 Charges)
-Level 14 Raven (60 Charges)`
+                    effect('skill.skill', '+3', { skill: 'All Skills' }),
+                    effect('stat.rateCast', '+40%'),
+                    effect('damage.demon', '+75%'),
+                    effect('stat.attackRatingDemon', '+100'),
+                    effect('damage.cold', '3-14'),
+                    effect('on.hit.stealMana', '7%'),
+                    effect('stat.dexterity', '+10'),
+                    effect('effect.replenishLife', '+20'),
+                    effect('stat.maxMana', '15%'),
+                    effect('resist.all', '+30-40', EffectOptions.Varies),
+                    effect('skill.charges', 25, { skill: 'Oak Sage', level: 4 }),
+                    effect('skill.charges', 60, { skill: 'Raven', level: 14 })
                 ]
             },
             'Holy Thunder': {
@@ -634,16 +618,16 @@ Level 14 Raven (60 Charges)`
                 itemTypes: 'scepter',
                 ...runes('Eth', 'Ral', 'Ort', 'Tal'),
                 effects: [
-                    `+60% Enhanced Damage
-+10 to Maximum Damage
--25% Target Defense
-Adds 5-30 Fire Damage
-Adds 21-110 Lightning Damage
-+75 Poison Damage over 5 secs
-+3 to Holy Shock (Paladin Only)
-+5% to Maximum Lightning Resist
-Lightning Resist +60%
-Level 7 Chain Lightning (60 charges)`
+                    effect('damage.enhanced', '+60%'),
+                    effect('damage.max', '+10'),
+                    effect('effect.targetDefense', '-25%'),
+                    effect('damage.fire', '5-30'),
+                    effect('damage.lightning', '21-110'),
+                    effect('damage.poison', '+75', { duration: 5 }),
+                    effect('skill.class', '+3', { skill: 'Holy Shock', class: 'paladin' }),
+                    effect('resist.maxLightning', '+5%'),
+                    effect('resist.lightning', '+60%'),
+                    effect('skill.charges', 60, { skill: 'Chain Lightning', level: 7 })
                 ]
             },
             Honor: {
@@ -651,17 +635,17 @@ Level 7 Chain Lightning (60 charges)`
                 itemTypes: 'weaponsMelee',
                 ...runes('Amn', 'El', 'Ith', 'Tir', 'Sol'),
                 effects: [
-                    `+1 to all skills
-+160% Enhanced Damage
-+9 to Minimum Damage
-+9 to Maximum Damage
-+250 Attack Rating
-7% Life Stolen per Hit
-25% Deadly Strike
-+10 to Strength
-Replenish life +10
-+2 to Mana after each Kill
-+1 to Light Radius`
+                    effect('skill.skill', '+1', { skill: 'All Skills' }),
+                    effect('damage.enhanced', '+160%'),
+                    effect('damage.min', '+9'),
+                    effect('damage.max', '+9'),
+                    effect('stat.attackRating', '+250'),
+                    effect('on.hit.stealLife', '7%'),
+                    effect('chance.deadlyStrike', '25%'),
+                    effect('stat.strength', '+10'),
+                    effect('effect.replenishLife', '+10'),
+                    effect('on.kill.mana', '+2'),
+                    effect('stat.lightRadius', '+1')
                 ]
             },
             Ice: {
@@ -669,17 +653,17 @@ Replenish life +10
                 itemTypes: bows,
                 ...runes('Amn', 'Shael', 'Jah', 'Lo'),
                 effects: [
-                    `100% Chance To Cast Level 40 Blizzard When You Level-up
-25% Chance To Cast Level 22 Frost Nova On Striking
-Level 18 Holy Freeze Aura When Equipped
-+20% Increased Attack Speed
-+140-210% Enhanced Damage (varies)
-Ignore Target's Defense
-+25-30% To Cold Skill Damage (varies)
-7% Life Stolen Per Hit
--20% To Enemy Cold Resistance
-20% Deadly Strike
-(3.125*Clvl)% Extra Gold From Monsters (Based on Character Level)`
+                    effect('chance.level', '100%', { level: 40, skill: 'Blizzard' }),
+                    effect('chance.strike', '25%', { level: 22, skill: 'Frost Nova' }),
+                    effect('skill.aura', 18, { skill: 'Holy Freeze' }),
+                    effect('stat.attackSpeed', '+20%'),
+                    effect('damage.enhanced', '+140-210%', EffectOptions.Varies),
+                    'effect.ignoreDefense',
+                    effect('damage.coldSkill', '+25-30%', EffectOptions.Varies),
+                    effect('on.hit.stealLife', '7%'),
+                    effect('resist.enemyCold', '-20%'),
+                    effect('chance.deadlyStrike', '20%'),
+                    effect('effect.GF', '(3.125*Clvl)%', EffectOptions.CharLvl)
                 ]
             },
             Infinity: {
@@ -687,16 +671,16 @@ Ignore Target's Defense
                 itemTypes: 'poleArm',
                 ...runes('Ber', 'Mal', 'Ber', 'Ist'),
                 effects: [
-                    `50% Chance To Cast Level 20 Chain Lightning When You Kill An Enemy
-Level 12 Conviction Aura When Equipped
-+35% Faster Run/Walk
-+255-325% Enhanced Damage (varies)
--(45-55)% To Enemy Lightning Resistance (varies)
-40% Chance of Crushing Blow
-Prevent Monster Heal
-+(0.5*Clvl) To Vitality (Based on Character Level)
-30% Better Chance of Getting Magic Items
-Level 21 Cyclone Armor (30 Charges)`
+                    effect('chance.kill', '50%', { level: 20, skill: 'Chain Lightning' }),
+                    effect('skill.aura', 12, { skill: 'Conviction' }),
+                    effect('stat.runSpeed', '+35%'),
+                    effect('damage.enhanced', '+255-325%', EffectOptions.Varies),
+                    effect('resist.enemyLightning', '-(45-55)%', EffectOptions.Varies),
+                    effect('chance.crushingBlow', '40%'),
+                    'effect.preventHeal',
+                    effect('stat.vitality', '+(0.5*Clvl)', EffectOptions.CharLvl),
+                    effect('effect.MF', '30%'),
+                    effect('skill.charges', 30, { skill: 'Cyclone Armor', level: 21 })
                 ]
             },
             Insight: {
@@ -704,17 +688,17 @@ Level 21 Cyclone Armor (30 Charges)`
                 itemTypes: ['poleArm', 'stave'],
                 ...runes('Ral', 'Tir', 'Tal', 'Sol'),
                 effects: [
-                    `Level 12-17 Meditation Aura When Equipped (varies)
-+35% Faster Cast Rate
-+200-260% Enhanced Damage (varies)
-+9 To Minimum Damage
-180-250% Bonus to Attack Rating (varies)
-Adds 5-30 Fire Damage
-+75 Poison Damage Over 5 Seconds
-+1-6 To Critical Strike (varies)
-+5 To All Attributes
-+2 To Mana After Each Kill
-23% Better Chance of Getting Magic Items`
+                    effect('skill.aura', '12-17', EffectOptions.Varies, { skill: 'Meditation' }),
+                    effect('stat.rateCast', '+35%'),
+                    effect('damage.enhanced', '+200-260%', EffectOptions.Varies),
+                    effect('damage.min', '+9'),
+                    effect('stat.attackRatingBonus', '180-250%', EffectOptions.Varies),
+                    effect('damage.fire', '5-30'),
+                    effect('damage.poison', '+75', { duration: 5 }),
+                    effect('skill.skill', '+1-6', EffectOptions.Varies, { skill: 'Critical Strike' }),
+                    effect('stat.all', '+5'),
+                    effect('on.kill.mana', '+2'),
+                    effect('effect.MF', '23%')
                 ]
             },
             'King\'s Grace': {
@@ -722,15 +706,15 @@ Adds 5-30 Fire Damage
                 itemTypes: ['sword', 'scepter'],
                 ...runes('Amn', 'Ral', 'Thul'),
                 effects: [
-                    `+100% Enhanced Damage
-+150 to Attack Rating
-+100% Damage to Demons
-+100 to Attack Rating against Demons
-+50% Damage to Undead
-+100 to Attack Rating against Undead
-Adds 5-30 Fire Damage
-Adds 3-14 Cold damage
-7% Life stolen per hit`
+                    effect('damage.enhanced', '+100%'),
+                    effect('stat.attackRating', '+150'),
+                    effect('damage.demon', '+100%'),
+                    effect('stat.attackRatingDemon', '+100'),
+                    effect('damage.undead', '+50%'),
+                    effect('stat.attackRatingUndead', '+100'),
+                    effect('damage.fire', '5-30'),
+                    effect('damage.cold', '3-14'),
+                    effect('on.hit.stealLife', '7%')
                 ]
             },
             Kingslayer: {
@@ -738,16 +722,16 @@ Adds 3-14 Cold damage
                 itemTypes: ['sword', 'axe'],
                 ...runes('Mal', 'Um', 'Gul', 'Fal'),
                 effects: [
-                    `+30% Increased Attack Speed
-+230-270% Enhanced Damage (varies)
--25% Target Defense
-20% Bonus To Attack Rating
-33% Chance of Crushing Blow
-50% Chance of Open Wounds
-+1 To Vengeance
-Prevent Monster Heal
-+10 To Strength
-40% Extra Gold From Monsters`
+                    effect('stat.attackSpeed', '+30%'),
+                    effect('damage.enhanced', '+230-270%', EffectOptions.Varies),
+                    effect('effect.targetDefense', '-25%'),
+                    effect('stat.attackRatingBonus', '20%'),
+                    effect('chance.crushingBlow', '33%'),
+                    effect('chance.openWounds', '50%'),
+                    effect('skill.skill', '+1', { skill: 'Vengeance' }),
+                    'effect.preventHeal',
+                    effect('stat.strength', '+10'),
+                    effect('effect.GF', '40%')
                 ]
             },
             'Last Wish': {
@@ -755,16 +739,16 @@ Prevent Monster Heal
                 itemTypes: ['axe', 'hammer', 'sword'],
                 ...runes('Jah', 'Mal', 'Jah', 'Sur', 'Jah', 'Ber'),
                 effects: [
-                    `6% Chance To Cast Level 11 Fade When Struck
-10% Chance To Cast Level 18 Life Tap On Striking
-20% Chance To Cast Level 20 Charged Bolt On Attack
-Level 17 Might Aura When Equipped
-+330-375% Enhanced Damage (varies)
-Ignore Target's Defense
-60-70% Chance of Crushing Blow (varies)
-Prevent Monster Heal
-Hit Blinds Target
-(0.5*Clvl)% Chance of Getting Magic Items (Based on Character Level)`
+                    effect('chance.struck', '6%', { level: 11, skill: 'Fade' }),
+                    effect('chance.strike', '10%', { level: 18, skill: 'Life Tap' }),
+                    effect('chance.attack', '20%', { level: 20, skill: 'Charged Bolt' }),
+                    effect('skill.aura', 17, { skill: 'Might' }),
+                    effect('damage.enhanced', '+330-375%', EffectOptions.Varies),
+                    'effect.ignoreDefense',
+                    effect('chance.crushingBlow', '60-70%', EffectOptions.Varies),
+                    'effect.preventHeal',
+                    'on.hit.blind',
+                    effect('effect.MF', '(0.5*Clvl)%', EffectOptions.CharLvl)
                 ]
             },
             Lawbringer: {
@@ -772,16 +756,16 @@ Hit Blinds Target
                 itemTypes: ['hammer', 'scepter', 'sword'],
                 ...runes('Amn', 'Lem', 'Ko'),
                 effects: [
-                    `20% Chance To Cast Level 15 Decrepify On Striking
-Level 16-18 Sanctuary Aura When Equipped (varies)
--50% Target Defense
-Adds 150-210 Fire Damage
-Adds 130-180 Cold Damage
-7% Life Stolen Per Hit
-Slain Monsters Rest In Peace
-+200-250 Defense Vs. Missile (varies)
-+10 To Dexterity
-75% Extra Gold From Monsters`
+                    effect('chance.strike', '20%', { level: 15, skill: 'Decrepify' }),
+                    effect('skill.aura', '16-18', EffectOptions.Varies, { skill: 'Sanctuary' }),
+                    effect('effect.targetDefense', '-50%'),
+                    effect('damage.fire', '150-210'),
+                    effect('damage.cold', '130-180'),
+                    effect('on.hit.stealLife', '7%'),
+                    'effect.rip',
+                    effect('effect.defenseMissile', '+200-250', EffectOptions.Varies),
+                    effect('stat.dexterity', '+10'),
+                    effect('effect.GF', '75%')
                 ]
             },
             Leaf: {
@@ -789,14 +773,14 @@ Slain Monsters Rest In Peace
                 itemTypes: 'stave',
                 ...runes('Tir', 'Ral'),
                 effects: [
-                    `+3 to Fire Skills
-Adds 5-30 Fire Damage
-+3 to Inferno (Sorceress Only)
-+3 to Warmth (Sorceress Only)
-+3 to Fire Bolt (Sorceress Only)
-+(2*Clvl) Defence (Based on Character Level)
-Cold Resist +33%
-+2 to Mana after each Kill`
+                    effect('skill.skill', '+3', { skill: 'Fire Skills' }),
+                    effect('damage.fire', '5-30'),
+                    effect('skill.class', '+3', { skill: 'Inferno', class: 'sorceress' }),
+                    effect('skill.class', '+3', { skill: 'Warmth', class: 'sorceress' }),
+                    effect('skill.class', '+3', { skill: 'Fire Bolt', class: 'sorceress' }),
+                    effect('stat.defense', '+(2*Clvl)', EffectOptions.CharLvl),
+                    effect('resist.cold', '+33%'),
+                    effect('on.kill.mana', '+2')
                 ]
             },
             Lionheart: {
@@ -804,14 +788,14 @@ Cold Resist +33%
                 itemTypes: 'armorBody',
                 ...runes('Hel', 'Lum', 'Fal'),
                 effects: [
-                    `+20% Enhanced Damage
-+25 To Strength
-+15 To Dexterity
-+20 To Vitality
-+10 To Energy
-+50 To Life
-All Resistances +30
-Requirements -15%`
+                    effect('damage.enhanced', '+20%'),
+                    effect('stat.strength', '+25'),
+                    effect('stat.dexterity', '+15'),
+                    effect('stat.vitality', '+20'),
+                    effect('stat.energy', '+10'),
+                    effect('stat.life', '+50'),
+                    effect('resist.all', '+30'),
+                    effect('effect.requirements', '-15%')
                 ]
             },
             Lore: {
@@ -819,12 +803,12 @@ Requirements -15%`
                 itemTypes: all('armorHead'),
                 ...runes('Ort', 'Sol'),
                 effects: [
-                    `+1 to All Skills
-+10 to Energy
-Lightning Resist +30%
-Damage Reduced by 7
-+2 to Mana after each Kill
-+2 to Light Radius`
+                    effect('skill.skill', '+1', { skill: 'All Skills' }),
+                    effect('stat.energy', '+10'),
+                    effect('resist.lightning', '+30%'),
+                    effect('absorb.damage', 7),
+                    effect('on.kill.mana', '+2'),
+                    effect('stat.lightRadius', '+2')
                 ]
             },
             Malice: {
@@ -832,14 +816,14 @@ Damage Reduced by 7
                 itemTypes: all('weaponsMelee'),
                 ...runes('Ith', 'El', 'Eth'),
                 effects: [
-                    `+33% Enhanced Damage
-+9 to Maximum Damage
--25% Target Defense
-+50 to Attack Rating
-100% Chance of Open wounds
-Prevent Monster Heal
--100 to Monster Defense Per Hit
-Drain Life -5`
+                    effect('damage.enhanced', '+33%'),
+                    effect('damage.max', '+9'),
+                    effect('effect.targetDefense', '-25%'),
+                    effect('stat.attackRating', '+50'),
+                    effect('chance.openWounds', '100%'),
+                    'effect.preventHeal',
+                    effect('on.hit.defenseMonster', -100),
+                    effect('effect.drainLife', -5)
                 ]
             },
             Melody: {
@@ -847,15 +831,15 @@ Drain Life -5`
                 itemTypes: bows,
                 ...runes('Shael', 'Ko', 'Nef'),
                 effects: [
-                    `+3 To Bow and Crossbow Skills (Amazon Only)
-+20% Increased Attack Speed
-+50% Enhanced Damage
-+300% Damage To Undead
-+3 To Slow Missiles (Amazon Only)
-+3 To Dodge (Amazon Only)
-+3 To Critical Strike (Amazon Only)
-Knockback
-+10 To Dexterity`
+                    effect('skill.class', '+3', { skill: 'Bow and Crossbow Skills', class: 'amazon' }),
+                    effect('stat.attackSpeed', '+20%'),
+                    effect('damage.enhanced', '+50%'),
+                    effect('damage.undead', '+300%'),
+                    effect('skill.class', '+3', { skill: 'Slow Missiles', class: 'amazon' }),
+                    effect('skill.class', '+3', { skill: 'Dodge', class: 'amazon' }),
+                    effect('skill.class', '+3', { skill: 'Critical Strike', class: 'amazon' }),
+                    'effect.knockback',
+                    effect('stat.dexterity', '+10')
                 ]
             },
             Memory: {
@@ -863,17 +847,17 @@ Knockback
                 itemTypes: 'stave',
                 ...runes('Lum', 'Io', 'Sol', 'Eth'),
                 effects: [
-                    `+3 To Sorceress Skill Levels
-+33% Faster Cast Rate
-+9 To Minimum Damage
--25% Target Defence
-+3 To Energy Shield (Sorceress Only)
-+2 To Static Field (Sorceress Only)
-+50% Enhanced Defense
-+10 Vitality
-+10 Energy
-Increase Maximum Mana 20%
-Magic Damage Reduced By 7`
+                    effect('skill.levels', '+3', { class: 'sorceress' }),
+                    effect('stat.rateCast', '+33%'),
+                    effect('damage.min', '+9'),
+                    effect('stat.defense', '-25% Target'),
+                    effect('skill.class', '+3', { skill: 'Energy Shield', class: 'sorceress' }),
+                    effect('skill.class', '+2', { skill: 'Static Field', class: 'sorceress' }),
+                    effect('stat.defenseEnhanced', '+50%'),
+                    effect('stat.vitality', '+10'),
+                    effect('stat.energy', '+10'),
+                    effect('stat.maxMana', '20%'),
+                    effect('absorb.damageMagic', 7)
                 ]
             },
             Myth: {
@@ -881,13 +865,13 @@ Magic Damage Reduced By 7`
                 itemTypes: 'armorBody',
                 ...runes('Hel', 'Amn', 'Nef'),
                 effects: [
-                    `3% Chance To Cast Level 1 Howl When Struck
-10% Chance To Cast Level 1 Taunt On Striking
-+2 To Barbarian Skill Levels
-+30 Defense Vs. Missile
-Replenish Life +10
-Attacker Takes Damage of 14
-Requirements -15%`
+                    effect('chance.struck', '3%', { level: 1, skill: 'Howl' }),
+                    effect('chance.strike', '10%', { level: 1, skill: 'Taunt' }),
+                    effect('skill.levels', '+3', { class: 'barbarian' }),
+                    effect('effect.defenseMissile', '+30'),
+                    effect('effect.replenishLife', '+10'),
+                    effect('effect.thorns', 14),
+                    effect('effect.requirements', '-15%')
                 ]
             },
             Nadir: {
@@ -895,14 +879,14 @@ Requirements -15%`
                 itemTypes: all('armorHead'),
                 ...runes('Nef', 'Tir'),
                 effects: [
-                    `+50% Enhanced Defense
-+10 Defense
-+30 Defense vs. Missile
-+5 to Strength
-+2 to Mana after each Kill
--33% Extra Gold from Monsters
--3 to Light Radius
-Level 13 Cloak of Shadows (9 charges)`
+                    effect('stat.defenseEnhanced', '+50%'),
+                    effect('stat.defense', '+10'),
+                    effect('effect.defenseMissile', '+30'),
+                    effect('stat.strength', '+5'),
+                    effect('on.kill.mana', '+2'),
+                    effect('effect.GF', '-33%'),
+                    effect('stat.lightRadius', -3),
+                    effect('skill.charges', 9, { skill: 'Cloak of Shadows', level: 13 })
                 ]
             },
             Oath: {
@@ -910,17 +894,17 @@ Level 13 Cloak of Shadows (9 charges)`
                 itemTypes: ['axe', 'mace', 'sword'],
                 ...runes('Shael', 'Pul', 'Mal', 'Lum'),
                 effects: [
-                    `Indestructible
-30% Chance To Cast Level 20 Bone Spirit On Striking
-+50% Increased Attack Speed
-+210-340% Enhanced Damage (varies)
-+75% Damage To Demons
-+100 To Attack Rating Against Demons
-Prevent Monster Heal
-+10 To Energy
-+10-15 Magic Absorb (varies)
-Level 16 Heart of Wolverine (20 Charges)
-Level 17 Iron Golem (14 Charges)`
+                    'effect.indestructible',
+                    effect('chance.strike', '30%', { level: 20, skill: 'Bone Spirit' }),
+                    effect('stat.attackSpeed', '+50%'),
+                    effect('damage.enhanced', '+210-340%', EffectOptions.Varies),
+                    effect('damage.demon', '+75%'),
+                    effect('stat.attackRatingDemon', '+100'),
+                    'effect.preventHeal',
+                    effect('stat.energy', '+10'),
+                    effect('absorb.magic', '+10-15', EffectOptions.Varies),
+                    effect('skill.charges', 20, { skill: 'Heart of Wolverine', level: 16 }),
+                    effect('skill.charges', 14, { skill: 'Iron Golem', level: 17 })
                 ]
             },
             Obedience: {
@@ -928,18 +912,18 @@ Level 17 Iron Golem (14 Charges)`
                 itemTypes: 'poleArm',
                 ...runes('Hel', 'Ko', 'Thul', 'Eth', 'Fal'),
                 effects: [
-                    `30% Chance To Cast Level 21 Enchant When You Kill An Enemy
-+40% Faster Hit Recovery
-+370% Enhanced Damage
--25% Target Defense
-Adds 3-14 Cold Damage (3 Seconds Duration,Normal)
--25% To Enemy Fire Resistance
-40% Chance of Crushing Blow
-+200-300 Defense (varies)
-+10 To Strength
-+10 To Dexterity
-All Resistances +20-30 (varies)
-Requirements -20%`
+                    effect('chance.kill', '30%', { level: 21, skill: 'Enchant' }),
+                    effect('stat.rateHitRecovery', '+40%'),
+                    effect('damage.enhanced', '+370%'),
+                    effect('effect.targetDefense', '-25%'),
+                    effect('damage.cold', '3-14'),
+                    effect('resist.enemyFire', '-25%'),
+                    effect('chance.crushingBlow', '40%'),
+                    effect('stat.defense', '+200-300', EffectOptions.Varies),
+                    effect('stat.strength', '+10'),
+                    effect('stat.dexterity', '+10'),
+                    effect('resist.all', '+20-30', EffectOptions.Varies),
+                    effect('effect.requirements', '-20%')
                 ]
             },
             Passion: {
@@ -947,18 +931,18 @@ Requirements -20%`
                 itemTypes: all('weaponsRanged', 'weaponsMelee'),
                 ...runes('Dol', 'Ort', 'Eld', 'Lem'),
                 effects: [
-                    `+25% Increased Attack Speed
-+160-210% Enhanced Damage (varies)
-50-80% Bonus To Attack Rating (varies)
-+75% Damage To Undead
-+50 To Attack Rating Against Undead
-Adds 1-50 Lightning Damage
-+1 To Berserk
-+1 To Zeal
-Hit Blinds Target +10
-Hit Causes Monster To Flee 25%
-75% Extra Gold From Monsters
-Level 3 Heart of Wolverine (12 Charges)`
+                    effect('stat.attackSpeed', '+25%'),
+                    effect('damage.enhanced', '+160-210%', EffectOptions.Varies),
+                    effect('stat.attackRatingBonus', '50-80%', EffectOptions.Varies),
+                    effect('damage.undead', '+75%'),
+                    effect('stat.attackRatingUndead', '+50'),
+                    effect('damage.lightning', '1-50'),
+                    effect('skill.skill', '+1', { skill: 'Berserk' }),
+                    effect('skill.skill', '+1', { skill: 'Zeal' }),
+                    effect('on.hit.blindValue', '+10'),
+                    effect('on.hit.fear', '25%'),
+                    effect('effect.GF', '75%'),
+                    effect('skill.charges', 12, { skill: 'Heart of Wolverine', level: 3 })
                 ]
             },
             Peace: {
@@ -966,13 +950,13 @@ Level 3 Heart of Wolverine (12 Charges)`
                 itemTypes: 'armorBody',
                 ...runes('Shael', 'Thul', 'Amn'),
                 effects: [
-                    `4% Chance To Cast Level 5 Slow Missiles When Struck
-2% Chance To Cast level 15 Valkyrie On Striking
-+2 To Amazon Skill Levels
-+20% Faster Hit Recovery
-+2 To Critical Strike
-Cold Resist +30%
-Attacker Takes Damage of 14`
+                    effect('chance.struck', '4%', { level: 5, skill: 'Slow Missiles' }),
+                    effect('chance.strike', '2%', { level: 15, skill: 'Valkyrie' }),
+                    effect('skill.levels', '+2', { class: 'amazon' }),
+                    effect('stat.rateHitRecovery', '+20%'),
+                    effect('skill.skill', '+2', { skill: 'Critical Strike' }),
+                    effect('resist.cold', '+30%'),
+                    effect('effect.thorns', 14)
                 ]
             },
             Phoenix: {
@@ -980,22 +964,22 @@ Attacker Takes Damage of 14`
                 itemTypes: all('weaponsRanged', 'weaponsMelee', 'shield'),
                 ...runes('Vex', 'Vex', 'Lo', 'Jah'),
                 effects: [
-                    `Both
-100% Chance To Cast level 40 Blaze When You Level-up
-40% Chance To Cast Level 22 Firestorm On Striking
-Level 10-15 Redemption Aura When Equipped (varies)
-+350-400% Enhanced Damage (varies)
--28% To Enemy Fire Resistance
-+350-400 Defense Vs. Missile (varies)
-+15-21 Fire Absorb (varies)
-Weapons
-Ignores Target's Defense
-14% Mana Stolen Per Hit
-20% Deadly Strike
-Shields
-+50 To Life
-+5% To Maximum Lightning Resist
-+10% To Maximum Fire Resist`
+                    'appliesTo.both',
+                    effect('chance.level', '100%', { level: 40, skill: 'Blaze' }),
+                    effect('chance.strike', '40%', { level: 22, skill: 'Firestorm' }),
+                    effect('skill.aura', '10-15', EffectOptions.Varies, { skill: 'Redemption' }),
+                    effect('damage.enhanced', '+350-400%', EffectOptions.Varies),
+                    effect('resist.enemyFire', '-28%'),
+                    effect('effect.defenseMissile', '+350-400', EffectOptions.Varies),
+                    effect('absorb.fire', '+15-21', EffectOptions.Varies),
+                    'appliesTo.weapons',
+                    'effect.ignoreDefense',
+                    effect('on.hit.stealMana', '14%'),
+                    effect('chance.deadlyStrike', '20%'),
+                    'appliesTo.shields',
+                    effect('stat.life', '+50'),
+                    effect('resist.maxLightning', '+5%'),
+                    effect('resist.maxFire', '+10%')
                 ]
             },
             Pride: {
@@ -1003,17 +987,17 @@ Shields
                 itemTypes: 'poleArm',
                 ...runes('Cham', 'Sur', 'Io', 'Lo'),
                 effects: [
-                    `25% Chance To Cast Level 17 Fire Wall When Struck
-Level 16-20 Concentration Aura When Equipped (varies)
-260-300% Bonus To Attack Rating (varies)
-+(1*Clvl)% Damage To Demons (Based on Character Level)
-Adds 50-280 Lightning Damage
-20% Deadly Strike
-Hit Blinds Target
-Freezes Target +3
-+10 To Vitality
-Replenish Life +8
-(1.875*Clvl)% Extra Gold From Monsters (Based on Character Level)`
+                    effect('chance.struck', '25%', { level: 17, skill: 'Fire Wall' }),
+                    effect('skill.aura', '16-20', EffectOptions.Varies, { skill: 'Concentration' }),
+                    effect('stat.attackRatingBonus', '260-300%', EffectOptions.Varies),
+                    effect('damage.demon', '+(1*Clvl)%', EffectOptions.CharLvl),
+                    effect('damage.lightning', '50-280'),
+                    effect('chance.deadlyStrike', '20%'),
+                    'on.hit.blind',
+                    effect('effect.freezeAmount', '+3'),
+                    effect('stat.vitality', '+10'),
+                    effect('effect.replenishLife', '+8'),
+                    effect('effect.GF', '(1.875*Clvl)%', EffectOptions.CharLvl)
                 ]
             },
             Principle: {
@@ -1021,13 +1005,13 @@ Replenish Life +8
                 itemTypes: 'armorBody',
                 ...runes('Ral', 'Gul', 'Eld'),
                 effects: [
-                    `100% Chance To Cast Level 5 Holy Bolt On Striking
-+2 To Paladin Skill Levels
-+50% Damage to Undead
-+100-150 to Life (varies)
-15% Slower Stamina Drain
-+5% To Maximum Poison Resist
-Fire Resist +30%`
+                    effect('chance.strike', '100%', { level: 5, skill: 'Holy Bolt' }),
+                    effect('skill.levels', '+2', { class: 'paladin' }),
+                    effect('damage.undead', '+50%'),
+                    effect('stat.life', '+100-150', EffectOptions.Varies),
+                    effect('effect.staminaDrain', '15%'),
+                    effect('resist.maxPoison', '+5%'),
+                    effect('resist.fire', '+30%')
                 ]
             },
             Prudence: {
@@ -1035,14 +1019,14 @@ Fire Resist +30%`
                 itemTypes: 'armorBody',
                 ...runes('Mal', 'Tir'),
                 effects: [
-                    `+25% Faster Hit Recovery
-+140-170% Enhanced Defense (varies)
-All Resistances +25-35 (varies)
-Damage Reduced by 3
-Magic Damage Reduced by 17
-+2 To Mana After Each Kill
-+1 To Light Radius
-Repairs Durability 1 In 4 Seconds`
+                    effect('stat.rateHitRecovery', '+25%'),
+                    effect('stat.defenseEnhanced', '+140-170%', EffectOptions.Varies),
+                    effect('resist.all', '+25-35', EffectOptions.Varies),
+                    effect('absorb.damage', 3),
+                    effect('absorb.damageMagic', 17),
+                    effect('on.kill.mana', '+2'),
+                    effect('stat.lightRadius', '+1'),
+                    'effect.repair'
                 ]
             },
             Radiance: {
@@ -1050,15 +1034,15 @@ Repairs Durability 1 In 4 Seconds`
                 itemTypes: all('armorHead'),
                 ...runes('Nef', 'Sol', 'Ith'),
                 effects: [
-                    `+75% Enhanced Defense
-+30 Defense vs. Missiles
-+10 to Vitality
-+10 to Energy
-+33 to Mana
-Damage Reduced by 7
-Magic Damage Reduced by 3
-15% Damage Taken Goes to Mana
-+5 to Light Radius`
+                    effect('stat.defenseEnhanced', '+75%'),
+                    effect('effect.defenseMissile', '+30'),
+                    effect('stat.vitality', '+10'),
+                    effect('stat.energy', '+10'),
+                    effect('stat.mana', '+33'),
+                    effect('absorb.damage', 7),
+                    effect('absorb.damageMagic', 3),
+                    effect('effect.damageToMana', '15%'),
+                    effect('stat.lightRadius', '+5')
                 ]
             },
             Rain: {
@@ -1066,13 +1050,13 @@ Magic Damage Reduced by 3
                 itemTypes: 'armorBody',
                 ...runes('Ort', 'Mal', 'Ith'),
                 effects: [
-                    `5% Chance To Cast Level 15 Cyclone Armor When Struck
-5% Chance To Cast Level 15 Twister On Striking
-+2 To Druid Skills
-+100-150 To Mana (varies)
-Lightning Resist +30%
-Magic Damage Reduced By 7
-15% Damage Taken Goes to Mana`
+                    effect('chance.struck', '5%', { level: 15, skill: 'Cyclone Armor' }),
+                    effect('chance.strike', '5%', { level: 15, skill: 'Twister' }),
+                    effect('skill.levels', '+2', { class: 'druid' }),
+                    effect('stat.mana', '+100-150', EffectOptions.Varies),
+                    effect('resist.lightning', '+30%'),
+                    effect('absorb.damageMagic', 7),
+                    effect('effect.damageToMana', '15%')
                 ]
             },
             Rhyme: {
@@ -1080,13 +1064,13 @@ Magic Damage Reduced By 7
                 itemTypes: all('shield'),
                 ...runes('Shael', 'Eth'),
                 effects: [
-                    `+40% Faster Block Rate
-20% Increased Chance of Blocking
-Regenerate Mana 15%
-All Resistances +25
-Cannot be Frozen
-50% Extra Gold from Monsters
-25% Better Chance of Getting Magic Items`
+                    effect('stat.rateBlock', '+40%'),
+                    effect('stat.block', '20%'),
+                    effect('effect.regenerateMana', '15%'),
+                    effect('resist.all', '+25'),
+                    'absorb.freeze',
+                    effect('effect.GF', '50%'),
+                    effect('effect.MF', '25%')
                 ]
             },
             Rift: {
@@ -1094,17 +1078,17 @@ Cannot be Frozen
                 itemTypes: ['poleArm', 'scepter'],
                 ...runes('Hel', 'Ko', 'Lem', 'Gul'),
                 effects: [
-                    `20% Chance To Cast Level 16 Tornado On Striking
-16% Chance To Cast Level 21 Frozen Orb On Attack
-20% Bonus To Attack Rating
-Adds 160-250 Magic Damage
-Adds 60-180 Fire Damage
-+5-10 To All Attributes (varies)
-+10 To Dexterity
-38% Damage Taken Goes To Mana
-75% Extra Gold From Monsters
-Level 15 Iron Maiden (40 Charges)
-Requirements -20%`
+                    effect('chance.strike', '20%', { level: 16, skill: 'Tornado' }),
+                    effect('chance.attack', '16%', { level: 21, skill: 'Frozen Orb' }),
+                    effect('stat.attackRatingBonus', '20%'),
+                    effect('damage.magic', '160-250'),
+                    effect('damage.fire', '60-180'),
+                    effect('stat.all', '+5-10', EffectOptions.Varies),
+                    effect('stat.dexterity', '+10'),
+                    effect('effect.damageToMana', '38%'),
+                    effect('effect.GF', '75%'),
+                    effect('skill.charges', 40, { skill: 'Iron Maiden', level: 15 }),
+                    effect('effect.requirements', '-20%')
                 ]
             },
             Sanctuary: {
@@ -1112,15 +1096,15 @@ Requirements -20%`
                 itemTypes: 'shield',
                 ...runes('Ko', 'Ko', 'Mal'),
                 effects: [
-                    `+20% Faster Hit Recovery
-+20% Faster Block Rate
-20% Increased Chance of Blocking
-+130-160% Enhanced Defense (varies)
-+250 Defense vs. Missile
-+20 To Dexterity
-All Resistances +50-70 (varies)
-Magic Damage Reduced By 7
-Level 12 Slow Missiles (60 Charges)`
+                    effect('stat.rateHitRecovery', '+20%'),
+                    effect('stat.rateBlock', '+20%'),
+                    effect('stat.block', '20%'),
+                    effect('stat.defenseEnhanced', '+130-160%', EffectOptions.Varies),
+                    effect('effect.defenseMissile', '+250'),
+                    effect('stat.dexterity', '+20'),
+                    effect('resist.all', '+50-70', EffectOptions.Varies),
+                    effect('absorb.damageMagic', 7),
+                    effect('skill.charges', 60, { skill: 'Slow Missiles', level: 12 })
                 ]
             },
             Silence: {
@@ -1128,19 +1112,19 @@ Level 12 Slow Missiles (60 Charges)`
                 itemTypes: all('weaponsRanged', 'weaponsMelee'),
                 ...runes('Dol', 'Eld', 'Hel', 'Ist', 'Tir', 'Vex'),
                 effects: [
-                    `+2 to All Skills
-+20% Increased Attack Speed
-+20% Faster Hit Recovery
-+200% Enhanced Damage
-+75% Damage To Undead
-+50 to Attack Rating Against Undead
-11% Mana Stolen Per Hit
-Hit Blinds Target +33
-Hit Causes Monster to Flee 25%
-All Resistances +75
-+2 to Mana After Each Kill
-30% Better Chance of Getting Magic Items
-Requirements -20%`
+                    effect('skill.skill', '+2', { skill: 'All Skills' }),
+                    effect('stat.attackSpeed', '+20%'),
+                    effect('stat.rateHitRecovery', '+20%'),
+                    effect('damage.enhanced', '+200%'),
+                    effect('damage.undead', '+75%'),
+                    effect('stat.attackRatingUndead', '+50'),
+                    effect('on.hit.stealMana', '11%'),
+                    effect('on.hit.blindValue', '+33'),
+                    effect('on.hit.fear', '25%'),
+                    effect('resist.all', '+75'),
+                    effect('on.kill.mana', '+2'),
+                    effect('effect.MF', '30%'),
+                    effect('effect.requirements', '-20%')
                 ]
             },
             Smoke: {
@@ -1148,13 +1132,13 @@ Requirements -20%`
                 itemTypes: 'armorBody',
                 ...runes('Nef', 'Lum'),
                 effects: [
-                    `+20% Faster Hit Recovery
-+75% Enhanced Defense
-+280 Defense vs. Missiles
-+10 to Energy
-All Resistances +50
--1 to Light Radius
-Level 6 Weaken (18 charges)`
+                    effect('stat.rateHitRecovery', '+20%'),
+                    effect('stat.defenseEnhanced', '+75%'),
+                    effect('effect.defenseMissile', '+280'),
+                    effect('stat.energy', '+10'),
+                    effect('resist.all', '+50'),
+                    effect('stat.lightRadius', -1),
+                    effect('skill.charges', 18, { skill: 'Weaken', level: 6 })
                 ]
             },
             Spirit: {
@@ -1162,24 +1146,24 @@ Level 6 Weaken (18 charges)`
                 itemTypes: ['sword', 'shield'],
                 ...runes('Tal', 'Thul', 'Ort', 'Amn'),
                 effects: [
-                    `Both
-+2 To All Skills
-+25-35% Faster Cast Rate (varies)
-+55% Faster Hit Recovery
-+250 Defense Vs. Missile
-+22 To Vitality
-+89-112 To Mana (varies)
-+3-8 Magic Absorb (varies)
-Shields
-Cold Resist +35%
-Lightning Resist +35%
-Poison Resist +35%
-Attacker Takes Damage of 14
-Swords
-Adds 1-50 Lightning Damage
-Adds 3-14 Cold Damage (3 Sec,Normal)
-+75 Poison Damage Over 5 Seconds
-7% Life Stolen Per Hit`
+                    'appliesTo.both',
+                    effect('skill.skill', '+2', { skill: 'All Skills' }),
+                    effect('stat.rateCast', '+25-35%', EffectOptions.Varies),
+                    effect('stat.rateHitRecovery', '+55%'),
+                    effect('effect.defenseMissile', '+250'),
+                    effect('stat.vitality', '+22'),
+                    effect('stat.mana', '+89-112', EffectOptions.Varies),
+                    effect('absorb.magic', '+3-8', EffectOptions.Varies),
+                    'appliesTo.shields',
+                    effect('resist.cold', '+35%'),
+                    effect('resist.lightning', '+35%'),
+                    effect('resist.poison', '+35%'),
+                    effect('effect.thorns', 14),
+                    'appliesTo.swords',
+                    effect('damage.lightning', '1-50'),
+                    effect('damage.cold', '3-14'),
+                    effect('damage.poison', '+75', { duration: 5 }),
+                    effect('on.hit.stealLife', '7%')
                 ]
             },
             Splendor: {
@@ -1187,15 +1171,15 @@ Adds 3-14 Cold Damage (3 Sec,Normal)
                 itemTypes: 'shield',
                 ...runes('Eth', 'Lum'),
                 effects: [
-                    `+1 To All Skills
-+10% Faster Cast Rate
-+20% Faster Block Rate
-+60-100% Enhanced Defense (varies)
-+10 To Energy
-Regenerate Mana 15%
-50% Extra Gold From Monsters
-20% Better Chance of Getting Magic Items
-+3 To Light Radius`
+                    effect('skill.skill', '+1', { skill: 'All Skills' }),
+                    effect('stat.rateCast', '+10%'),
+                    effect('stat.rateBlock', '+20%'),
+                    effect('stat.defenseEnhanced', '+60-100%', EffectOptions.Varies),
+                    effect('stat.energy', '+10'),
+                    effect('effect.regenerateMana', '15%'),
+                    effect('effect.GF', '50%'),
+                    effect('effect.MF', '20%'),
+                    effect('stat.lightRadius', '+3')
                 ]
             },
             Stealth: {
@@ -1203,14 +1187,14 @@ Regenerate Mana 15%
                 itemTypes: 'armorBody',
                 ...runes('Tal', 'Eth'),
                 effects: [
-                    `+25% Faster Run/Walk
-+25% Faster Casting Rate
-+25% Faster Hit Recovery
-+6 to Dexterity
-Regenerate Mana 15%
-+15 Maximum Stamina
-Poison Resist +30%
-Magic Damage Reduced by 3`
+                    effect('stat.runSpeed', '+25%'),
+                    effect('stat.rateCast', '+25%'),
+                    effect('stat.rateHitRecovery', '+25%'),
+                    effect('stat.dexterity', '+6'),
+                    effect('effect.regenerateMana', '15%'),
+                    effect('stat.maxStamina', '+15'),
+                    effect('resist.poison', '+30%'),
+                    effect('absorb.damageMagic', 3)
                 ]
             },
             Steel: {
@@ -1218,14 +1202,14 @@ Magic Damage Reduced by 3`
                 itemTypes: ['sword', 'axe', 'mace'],
                 ...runes('Tir', 'El'),
                 effects: [
-                    `+25% Increased Attack Speed
-+20% Enhanced Damage
-+3 to Minimum Damage
-+3 to Maximum Damage
-+50 to Attack Rating
-50% Chance of Open Wounds
-+2 to Mana after each Kill
-+1 to Light Radius`
+                    effect('stat.attackSpeed', '+25%'),
+                    effect('damage.enhanced', '+20%'),
+                    effect('damage.min', '+3'),
+                    effect('damage.max', '+3'),
+                    effect('stat.attackRating', '+50'),
+                    effect('chance.openWounds', '50%'),
+                    effect('on.kill.mana', '+2'),
+                    effect('stat.lightRadius', '+1')
                 ]
             },
             Stone: {
@@ -1233,15 +1217,15 @@ Magic Damage Reduced by 3`
                 itemTypes: 'armorBody',
                 ...runes('Shael', 'Um', 'Pul', 'Lum'),
                 effects: [
-                    `+60% Faster Hit Recovery
-+250-290% Enhanced Defense (varies)
-+300 Defense Vs. Missile
-+16 To Strength
-+16 To Vitality
-+10 To Energy
-All Resistances +15
-Level 16 Molten Boulder (80 Charges)
-Level 16 Clay Golem (16 Charges)`
+                    effect('stat.rateHitRecovery', '+60%'),
+                    effect('stat.defenseEnhanced', '+250-290%', EffectOptions.Varies),
+                    effect('effect.defenseMissile', '+300'),
+                    effect('stat.strength', '+16'),
+                    effect('stat.vitality', '+16'),
+                    effect('stat.energy', '+10'),
+                    effect('resist.all', '+15'),
+                    effect('skill.charges', 80, { skill: 'Molten Boulder', level: 16 }),
+                    effect('skill.charges', 16, { skill: 'Clay Golem', level: 16 })
                 ]
             },
             Strength: {
@@ -1249,12 +1233,12 @@ Level 16 Clay Golem (16 Charges)`
                 itemTypes: all('weaponsMelee'),
                 ...runes('Amn', 'Tir'),
                 effects: [
-                    `+35% Enhanced Damage
-7% Life stolen per hit
-25% Chance of Crushing Blow
-+20 to Strength
-+10 to Vitality
-+2 to Mana after each Kill`
+                    effect('damage.enhanced', '+35%'),
+                    effect('on.hit.stealLife', '7%'),
+                    effect('chance.crushingBlow', '25%'),
+                    effect('stat.strength', '+20'),
+                    effect('stat.vitality', '+10'),
+                    effect('on.kill.mana', '+2')
                 ]
             },
             Treachery: {
@@ -1262,13 +1246,13 @@ Level 16 Clay Golem (16 Charges)`
                 itemTypes: 'armorBody',
                 ...runes('Shael', 'Thul', 'Lem'),
                 effects: [
-                    `5% Chance To Cast Level 15 Fade When Struck
-25% Chance To Cast level 15 Venom On Striking
-+2 To Assassin Skills
-+45% Increased Attack Speed
-+20% Faster Hit Recovery
-Cold Resist +30%
-50% Extra Gold From Monsters`
+                    effect('chance.struck', '5%', { level: 15, skill: 'Fade' }),
+                    effect('chance.strike', '25%', { level: 15, skill: 'Venom' }),
+                    effect('skill.levels', '+2', { class: 'assassin' }),
+                    effect('stat.attackSpeed', '+45%'),
+                    effect('stat.rateHitRecovery', '+20%'),
+                    effect('resist.cold', '+30%'),
+                    effect('effect.GF', '50%')
                 ]
             },
             Venom: {
@@ -1276,13 +1260,13 @@ Cold Resist +30%
                 itemTypes: all('weaponsRanged', 'weaponsMelee'),
                 ...runes('Tal', 'Dol', 'Mal'),
                 effects: [
-                    `Ignore Target's Defense
-+273 Poison Damage Over 6 Seconds
-7% Mana Stolen Per Hit
-Prevent Monster Heal
-Hit Causes Monster To Flee 25%
-Level 13 Poison Nova (11 Charges)
-Level 15 Poison Explosion (27 Charges)`
+                    'effect.ignoreDefense',
+                    effect('damage.poison', '+273', { duration: 6 }),
+                    effect('on.hit.stealMana', '7%'),
+                    'effect.preventHeal',
+                    effect('on.hit.fear', '25%'),
+                    effect('skill.charges', 11, { skill: 'Poison Nova', level: 13 }),
+                    effect('skill.charges', 27, { skill: 'Poison Explosion', level: 15 })
                 ]
             },
             'Voice of Reason': {
@@ -1290,18 +1274,18 @@ Level 15 Poison Explosion (27 Charges)`
                 itemTypes: ['mace', 'sword'],
                 ...runes('Lem', 'Ko', 'El', 'Eld'),
                 effects: [
-                    `15% Chance To Cast Level 13 Frozen Orb On Striking
-18% Chance To Cast Level 20 Ice Blast On Striking
-+50 To Attack Rating
-+220-350% Damage To Demons (varies)
-+355-375% Damage To Undead (varies)
-+50 To Attack Rating Against Undead
-Adds 100-220 Cold Damage
--24% To Enemy Cold Resistance
-+10 To Dexterity
-Cannot Be Frozen
-75% Extra Gold From Monsters
-+1 To Light Radius`
+                    effect('chance.strike', '15%', { level: 13, skill: 'Frozen Orb' }),
+                    effect('chance.strike', '18%', { level: 20, skill: 'Ice Blast' }),
+                    effect('stat.attackRating', '+50'),
+                    effect('damage.demon', '+220-350%', EffectOptions.Varies),
+                    effect('damage.undead', '+355-375%', EffectOptions.Varies),
+                    effect('stat.attackRatingUndead', '+50'),
+                    effect('damage.cold', '100-220'),
+                    effect('resist.enemyCold', '-24%'),
+                    effect('stat.dexterity', '+10'),
+                    'absorb.freeze',
+                    effect('effect.GF', '75%'),
+                    effect('stat.lightRadius', '+1')
                 ]
             },
             Wealth: {
@@ -1309,10 +1293,10 @@ Cannot Be Frozen
                 itemTypes: 'armorBody',
                 ...runes('Lem', 'Ko', 'Tir'),
                 effects: [
-                    `+10 to Dexterity
-+2 to Mana After Each Kill
-300% Extra Gold From Monsters
-100% Better Chance of Getting Magic Items`
+                    effect('stat.dexterity', '+10'),
+                    effect('on.kill.mana', '+2'),
+                    effect('effect.GF', '300%'),
+                    effect('effect.MF', '100%')
                 ]
             },
             White: {
@@ -1320,15 +1304,15 @@ Cannot Be Frozen
                 itemTypes: 'wand',
                 ...runes('Dol', 'Io'),
                 effects: [
-                    `+3 to Poison and Bone Skills (Necromancer Only)
-+20% Faster Cast Rate
-+2 to Bone Spear (Necromancer Only)
-+4 to Skeleton Mastery (Necromancer Only)
-+3 to Bone Armor (Necromancer Only)
-Hit causes monster to flee 25%
-+10 to vitality
-+13 to mana
-Magic Damage Reduced by 4`
+                    effect('skill.class', '+3', { skill: 'Poison and Bone Skills', class: 'necromancer' }),
+                    effect('stat.rateCast', '+20%'),
+                    effect('skill.class', '+3', { skill: 'Bone Spear', class: 'necromancer' }),
+                    effect('skill.class', '+3', { skill: 'Skeleton Mastery', class: 'necromancer' }),
+                    effect('skill.class', '+3', { skill: 'Bone Armor', class: 'necromancer' }),
+                    effect('on.hit.fear', '25%'),
+                    effect('stat.vitality', '+10'),
+                    effect('stat.mana', '+13'),
+                    effect('absorb.damageMagic', 4)
                 ]
             },
             Wind: {
@@ -1336,16 +1320,16 @@ Magic Damage Reduced by 4`
                 itemTypes: all('weaponsMelee'),
                 ...runes('Sur', 'El'),
                 effects: [
-                    `10% Chance To Cast Level 9 Tornado On Striking
-+20% Faster Run/Walk
-+40% Increased Attack Speed
-+15% Faster Hit Recovery
-+120-160% Enhanced Damage (varies)
--50% Target Defense
-+50 To Attack Rating
-Hit Blinds Target
-+1 To Light Radius
-Level 13 Twister (127 Charges)`
+                    effect('chance.strike', '10%', { level: 9, skill: 'Tornado' }),
+                    effect('stat.runSpeed', '+20%'),
+                    effect('stat.attackSpeed', '+40%'),
+                    effect('stat.rateHitRecovery', '+15%'),
+                    effect('damage.enhanced', '+120-160%', EffectOptions.Varies),
+                    effect('effect.targetDefense', '-50%'),
+                    effect('stat.attackRating', '+50'),
+                    'on.hit.blind',
+                    effect('stat.lightRadius', '+1'),
+                    effect('skill.charges', 127, { skill: 'Twister', level: 13 })
                 ]
             },
             Wrath: {
@@ -1353,17 +1337,17 @@ Level 13 Twister (127 Charges)`
                 itemTypes: bows,
                 ...runes('Pul', 'Lum', 'Ber', 'Mal'),
                 effects: [
-                    `30% Chance To Cast Level 1 Decrepify On Striking
-5% Chance To Cast Level 10 Life Tap On Striking
-+375% Damage To Demons
-+100 To Attack Rating Against Demons
-+250-300% Damage To Undead (varies)
-Adds 85-120 Magic Damage
-Adds 41-240 Lightning Damage
-20% Chance of Crushing Blow
-Prevent Monster Heal
-+10 To Energy
-Cannot Be Frozen`
+                    effect('chance.strike', '30%', { level: 1, skill: 'Decrepify' }),
+                    effect('chance.strike', '5%', { level: 10, skill: 'Life Tap' }),
+                    effect('damage.demon', '+375%'),
+                    effect('stat.attackRatingDemon', '+100'),
+                    effect('damage.undead', '+250-300%', EffectOptions.Varies),
+                    effect('damage.magic', '85-120'),
+                    effect('damage.lightning', '41-240'),
+                    effect('chance.crushingBlow', '20%'),
+                    'effect.preventHeal',
+                    effect('stat.energy', '+10'),
+                    'absorb.freeze'
                 ]
             },
             Zephyr: {
@@ -1371,14 +1355,14 @@ Cannot Be Frozen`
                 itemTypes: bows,
                 ...runes('Ort', 'Eth'),
                 effects: [
-                    `7% Chance to Cast Level 1 Twister When Struck
-+25% Faster Run/Walk
-+25% Increased Attack Speed
-+33% Enhanced Damage
--25% Target Defense
-+66 to Attack Rating
-Adds 1-50 lightning damage
-+25 Defense`
+                    effect('chance.struck', '7%', { level: 1, skill: 'Twister' }),
+                    effect('stat.runSpeed', '+25%'),
+                    effect('stat.attackSpeed', '+25%'),
+                    effect('damage.enhanced', '+33%'),
+                    effect('effect.targetDefense', '-25%'),
+                    effect('stat.attackRating', '+66'),
+                    effect('damage.lightning', '1-50'),
+                    effect('stat.defense', '+25')
                 ]
             }
         };

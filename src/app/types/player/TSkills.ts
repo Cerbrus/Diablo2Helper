@@ -141,7 +141,11 @@ export type TSkill = TSkillAmazon | TSkillAssassin | TSkillBarbarian | TSkillDru
     TSkillNecromancer | TSkillPaladin | TSkillSorceress;
 
 export type TSkillGroup =
+    'All Skills' |
     'Bow and Crossbow Skills' |
     'Fire Skills' |
     'Offensive Auras' |
     'Poison and Bone Skills';
+
+export type TSkillRuneWord =
+    'Delirium';

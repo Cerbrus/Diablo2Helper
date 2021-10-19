@@ -1,4 +1,4 @@
-import { TItem } from '../../types';
+import { TEffectApplication, TEffectKey, TItem } from '../../types';
 import { ItemOrArray } from '../../types/helpers';
 import { TRune } from '../../types/rune';
 import { TRuneWord } from '../../types/runeWord';
@@ -8,7 +8,7 @@ import { IRune } from '../rune';
 export interface IRuneWord {
     name: TRuneWord;
     cLvl: number;
-    effects: ItemOrArray<IEffect | string>;
+    effects: ItemOrArray<IEffect | TEffectKey | TEffectApplication>;
     runes: Array<TRune | IRune>;
     itemTypes: ItemOrArray<TItem>;
     owned?: number;

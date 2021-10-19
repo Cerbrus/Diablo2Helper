@@ -15,8 +15,10 @@ export class LogMissingTranslationHandler implements MissingTranslationHandler {
         if (this.translate == null)
             this.translate = this.injector.get(TranslateService);
 
-        if (!Object.keys(this.translate.store.translations).length ||
-            this.missingKeys.includes(key))
+        if (this.missingKeys.includes(key))
+            return `[${key}]`;
+
+        if (!Object.keys(this.translate.store.translations).length)
             return key;
 
         this.missingKeys.push(key);
@@ -38,7 +40,7 @@ export class LogMissingTranslationHandler implements MissingTranslationHandler {
         const s = count > 1 ? 's' : '';
 
         console.groupCollapsed(`Translation${s} missing for ${count} key${s}:`);
-        console.info(this.missingKeys.join('\n'));
+        console.info(this.missingKeys.sort((a, b) => a.localeCompare(b)).join('\n'));
         console.groupEnd();
 
         this.missingKeys = [];

@@ -27,48 +27,45 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
 
     public buildItems(): IGemMap {
         const owned = this.storageService.get.gemsOwned();
-        const {
-            integerEffect: int,
-            percentageEffect: pct,
-            rangeEffect: rng
-        } = EffectHelper;
+        const effect = EffectHelper.effect;
 
         return {
-            topaz: this.buildGemQualities(
-                'topaz',
-                owned,
-                {
-                    weapon: ([min, max]) => rng('DamageLightning', min, max),
-                    armorHelm: value => pct('MagicFind', value),
-                    shield: value => pct('ResistLightning', value)
-                }, {
-                    weapon: [[1, 8], [1, 14], [1, 22], [1, 30], [1, 40]],
-                    armorHelm: [9, 13, 16, 20, 24],
-                    shield: [12, 16, 22, 28, 40]
-                }),
             amethyst: this.buildGemQualities(
                 'amethyst',
                 owned,
                 {
-                    weapon: value => int('AttackRating', value),
-                    armorHelm: value => int('StatStrength', value),
-                    shield: value => int('StatDefense', value)
+                    weapon: value => effect('stat.attackRating', `+${value}`),
+                    armorHelm: value => effect('stat.strength', `+${value}`),
+                    shield: value => effect('stat.defense', `+${value}`)
                 }, {
                     weapon: [40, 60, 80, 100, 150],
                     armorHelm: [3, 4, 6, 8, 10],
                     shield: [8, 12, 18, 24, 30]
                 }
             ),
-            sapphire: this.buildGemQualities(
-                'sapphire',
+            diamond: this.buildGemQualities(
+                'diamond',
                 owned,
                 {
-                    weapon: ([min, max, duration]) => rng('DamageCold', min, max, duration),
-                    armorHelm: value => int('StatMana', value),
-                    shield: value => pct('ResistCold', value)
+                    weapon: value => effect('damage.undead', `+${value}%`),
+                    armorHelm: value => effect('stat.attackRating', `+${value}`),
+                    shield: value => effect('resist.all', `+${value}%`)
                 }, {
-                    weapon: [[1, 3, 1], [3, 5, 1.4], [4, 7, 2], [6, 10, 2.4], [10, 14, 3]],
-                    armorHelm: [10, 17, 24, 31, 38],
+                    weapon: [28, 34, 44, 54, 68],
+                    armorHelm: [20, 40, 60, 80, 100],
+                    shield: [6, 8, 11, 14, 19]
+                }
+            ),
+            emerald: this.buildGemQualities(
+                'emerald',
+                owned,
+                {
+                    weapon: ([value, duration]) => effect('damage.poison', `+${value}`, { duration }),
+                    armorHelm: value => effect('stat.dexterity', `+${value}`),
+                    shield: value => effect('resist.poison', `+${value}%`)
+                }, {
+                    weapon: [[10, 3], [20, 4], [40, 5], [60, 6], [100, 7]],
+                    armorHelm: [3, 4, 6, 8, 10],
                     shield: [12, 16, 22, 28, 40]
                 }
             ),
@@ -76,48 +73,53 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
                 'ruby',
                 owned,
                 {
-                    weapon: ([min, max]) => rng('DamageFire', min, max),
-                    armorHelm: value => int('StatLife', value),
-                    shield: value => pct('ResistFire', value)
+                    weapon: ([min, max]) => effect('damage.fire', `+${min}-${max}`),
+                    armorHelm: value => effect('stat.life', `+${value}`),
+                    shield: value => effect('resist.fire', `+${value}%`)
                 }, {
                     weapon: [[3, 4], [5, 8], [8, 12], [10, 16], [15, 20]],
                     armorHelm: [10, 17, 24, 31, 38],
                     shield: [12, 16, 22, 28, 40]
                 }
             ),
-            emerald: this.buildGemQualities(
-                'emerald',
+            sapphire: this.buildGemQualities(
+                'sapphire',
                 owned,
                 {
-                    weapon: ([value, duration]) => int('DamagePoison', value, duration),
-                    armorHelm: value => int('StatDexterity', value),
-                    shield: value => pct('ResistPoison', value)
+                    weapon: ([min, max]) => effect('damage.cold', `+${min}-${max}`),
+                    armorHelm: value => effect('stat.mana', `+${value}`),
+                    shield: value => effect('resist.cold', `+${value}%`)
                 }, {
-                    weapon: [[10, 3], [20, 4], [40, 5], [60, 6], [100, 7]],
-                    armorHelm: [3, 4, 6, 8, 10],
+                    weapon: [[1, 3], [3, 5], [4, 7], [6, 10], [10, 14]],
+                    armorHelm: [10, 17, 24, 31, 38],
                     shield: [12, 16, 22, 28, 40]
                 }
             ),
-            diamond: this.buildGemQualities(
-                'diamond',
+            topaz: this.buildGemQualities(
+                'topaz',
                 owned,
                 {
-                    weapon: value => pct('DamageUndead', value),
-                    armorHelm: value => int('AttackRating', value),
-                    shield: value => pct('ResistAll', value)
+                    weapon: ([min, max]) => effect('damage.lightning', `${min}-${max}`),
+                    armorHelm: value => effect('effect.MF', `+${value}%`),
+                    shield: value => effect('resist.lightning', `+${value}%`)
                 }, {
-                    weapon: [28, 34, 44, 54, 68],
-                    armorHelm: [20, 40, 60, 80, 100],
-                    shield: [6, 8, 11, 14, 19]
-                }
-            ),
+                    weapon: [[1 - 8], [1 - 14], [1 - 22], [1 - 30], [1 - 40]],
+                    armorHelm: [9, 13, 16, 20, 24],
+                    shield: [12, 16, 22, 28, 40]
+                }),
             skull: this.buildGemQualities(
                 'skull',
                 owned,
                 {
-                    weapon: ([life, mana]) => [pct('LeechLife', life), pct('LeechMana', mana)],
-                    armorHelm: ([life, mana]) => [int('StatRegenLife', life), pct('StatRegenMana', mana)],
-                    shield: value => int('Thorns', value)
+                    weapon: ([life, mana]) => [
+                        effect('on.hit.stealLife', `${life}%`),
+                        effect('on.hit.stealMana', `${mana}%`)
+                    ],
+                    armorHelm: ([life, mana]) => [
+                        effect('effect.replenishLife', `+${life}`),
+                        effect('effect.replenishMana', `${mana}%`)
+                    ],
+                    shield: value => effect('effect.thorns', value)
                 }, {
                     weapon: [[2, 1], [2, 2], [3, 2], [3, 3], [4, 3]],
                     armorHelm: [[2, 8], [3, 8], [3, 12], [4, 12], [5, 19]],

@@ -42,3 +42,7 @@ ui-sprite-skill,
 ui-sprite-animated {
     grid-column: 2;
 }
+
+a span{
+    margin-left: variables.$size-gap;
+}

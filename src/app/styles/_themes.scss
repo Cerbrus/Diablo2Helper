@@ -31,7 +31,7 @@
             --color-gray-medium: #666666;
             --color-gray-light: #999999;
             --color-gray-lightest: #cccccc;
-            --color-gray-dark-transparent: #{color.change(#000000, $alpha: 0.8)};
+            --color-gray-dark-transparent: #{color.change(#000000, $alpha: 0.9)};
             --color-gray-medium-transparent: #{color.change(#000000, $alpha: 0.6)};
             --color-gray-light-transparent: #{color.change(#000000, $alpha: 0.4)};
         }

@@ -68,8 +68,12 @@ export class EffectHelper {
         const varies = this.translate.instant('effect.suffix.varies');
 
         return effects.map(effect => {
-                if (typeof effect === 'string')
-                    return this.translate.instant(`effect.${effect}`);
+                if (typeof effect === 'string'){
+                    const translated =this.translate.instant(`effect.${effect}`);
+                    return effect.startsWith('appliesTo')
+                        ? `<strong>${translated}</strong>`
+                        : translated;
+                }
 
                 const { parameters: parameters } = effect;
                 if (parameters?.class) parameters.class = this.translate.instant(`character.classes.${parameters?.class}`);

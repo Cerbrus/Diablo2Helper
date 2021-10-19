@@ -76,7 +76,7 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
                 ...runes('Ber', 'Tir', 'Um', 'Mal', 'Lum'),
                 effects: [
                     aura(9, 'Fanaticism'),
-                    `+40% Increased Attack Speed`,
+                    pct('AttackSpeed', 40),
                     pct('DamageEnhancedRange', 240, 270),
                     pct('ChanceCrushingBlow', 20),
                     pct('ChanceOpenWounds', 25),
@@ -94,7 +94,7 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
                 itemTypes: ['club', 'mace', 'hammer'],
                 ...runes('Thul', 'Io', 'Nef'),
                 effects: [
-                    `+15% Increased Attack Speed`,
+                    pct('AttackSpeed', 15),
                     pct('DamageEnhanced', 120),
                     int('AttackRating', 200),
                     rng('DamageColdDuration', 3, 14, 3),
@@ -160,7 +160,7 @@ Fires Explosive Arrows or Bolts (15)`,
                 effects: [
                     `50% Chance To Cast Level 20 Poison Nova When You Kill An Enemy`,
                     int('Indestructible'),
-                    `+60% Increased Attack Speed`,
+                    pct('AttackSpeed', 60),
                     pct('DamageEnhancedRange', 350, 400),
                     pct('DefenseTarget', -25),
                     int('AttackRating', 50),
@@ -180,7 +180,7 @@ Fires Explosive Arrows or Bolts (15)`,
                 ...runes('Amn', 'Ral', 'Mal', 'Ist', 'Ohm'),
                 effects: [
                     skillAll(1),
-                    `+40% Increased Attack Speed`,
+                    pct('AttackSpeed', 40),
                     pct('DamageEnhancedRange', 240, 290),
                     rng('DamageFire', 5, 30),
                     pct('LeechLife', 7),
@@ -232,7 +232,7 @@ Fires Explosive Arrows or Bolts (15)`,
                 effects: [
                     `10% Chance To Cast Level 17 Chain Lightning On Striking
 7% Chance To Cast Level 13 Static Field On Striking
-+20% Increased Attack Speed`,
+`,pct('AttackSpeed', 20),
                     pct('DamageEnhancedRange', 180, 220),
                     int('Piercing'),
                     `-35% To Enemy Lightning Resistance`,
@@ -306,7 +306,7 @@ Fires Explosive Arrows or Bolts (15)`,
                     `5% Chance To Cast Level 18 Volcano On Striking`,
                     aura(12, 'Holy Freeze'),
                     skillAll(2),
-                    `+45% Increased Attack Speed`,
+                    pct('AttackSpeed', 45),
                     pct('DamageEnhancedRange', 330, 370),
                     `-40-60% To Enemy Cold Resistance (varies)
 20% Deadly Strike`,
@@ -380,7 +380,7 @@ Shields`,
                 ...runes('Tir', 'Tal', 'Amn'),
                 effects: [
                     aura(15, 'Thorns'),
-                    `+35% Increased Attack Speed
+                    pct('AttackSpeed', 35),`
 +320-380% Damage To Demons (varies)`,
                     pct('DamageUndead', 280),
                     dot('DamagePoison', 75, 5),
@@ -482,7 +482,7 @@ Replenish Life +7
                 itemTypes: ['axe', 'hammer'],
                 ...runes('Fal', 'Ohm', 'Ort', 'Jah'),
                 effects: [
-                    `+30% Increased Attack Speed`,
+                    pct('AttackSpeed', 30),
                     pct('DamageEnhancedRange', 320, 370),
                     int('Piercing'),
                     rng('DamageMagic', 180, 200), rng('DamageFire', 50, 200), rng('DamageLightning', 51, 250),
@@ -578,7 +578,7 @@ Damage +340-400 (varies)`,
 100% Chance To Cast Level 48 Meteor When You Die`,
                     aura(16, 'Holy Fire'),
                     `
-+33% Increased Attack Speed`,
+`,pct('AttackSpeed', 33),
                     pct('DamageEnhancedRange', 280, 330),
                     int('Piercing'),
                     `-20% To Enemy Fire Resistance`,
@@ -594,7 +594,7 @@ Freezes Target +3`
                 ...runes('Tir', 'Ith', 'Sol', 'Ko'),
                 effects: [
                     aura(10, 'Vigor'),
-                    ``,
+
                     pct('DamageEnhancedRange', 200, 275),
                     int('DamageMinimum', 9),
                     int('DamageMaximum', 9), rng('DamageFire', 55, 160), rng('DamageLightning', 55, 160),
@@ -670,7 +670,7 @@ All Resistances +30-40 (varies)`,
                     `100% Chance To Cast Level 40 Blizzard When You Level-up
 25% Chance To Cast Level 22 Frost Nova On Striking`,
                     aura(18, 'Holy Freeze'),
-                    `+20% Increased Attack Speed`,
+                    pct('AttackSpeed', 20),
                     pct('DamageEnhancedRange', 140, 210),
                     int('Piercing'),
                     `+25-30% To Cold Skill Damage (varies)`,
@@ -735,7 +735,7 @@ All Resistances +30-40 (varies)`,
                 itemTypes: ['sword', 'axe'],
                 ...runes('Mal', 'Um', 'Gul', 'Fal'),
                 effects: [
-                    `+30% Increased Attack Speed`,
+                    pct('AttackSpeed', 30),
                     pct('DamageEnhancedRange', 230, 270),
                     pct('DefenseTarget', -25),
                     `20% Bonus To Attack Rating`,
@@ -845,7 +845,7 @@ Drain Life -5`
                 ...runes('Shael', 'Ko', 'Nef'),
                 effects: [
                     skillGroup(3, 'Bow and Crossbow Skills', 'amazon'),
-                    `+20% Increased Attack Speed`,
+                    pct('AttackSpeed', 20),
                     pct('DamageEnhanced', 50),
                     pct('DamageUndead', 300),
                     skillClass(3, 'Slow Missiles', 'amazon'),
@@ -909,7 +909,7 @@ Requirements -15%`
                 effects: [
                     int('Indestructible'),
                     `30% Chance To Cast Level 20 Bone Spirit On Striking
-+50% Increased Attack Speed`,
+`,pct('AttackSpeed', 50),
                     pct('DamageEnhancedRange', 210, 340),
                     pct('DamageDemons', 75),
                     int('ARDemons', 100),
@@ -944,7 +944,7 @@ Requirements -20%`
                 itemTypes: all('weaponsRanged', 'weaponsMelee'),
                 ...runes('Dol', 'Ort', 'Eld', 'Lem'),
                 effects: [
-                    `+25% Increased Attack Speed`,
+                    pct('AttackSpeed', 25),
                     pct('DamageEnhancedRange', 160, 210),
                     `50-80% Bonus To Attack Rating (varies)`,
                     pct('DamageUndead', 75),
@@ -1124,7 +1124,7 @@ All Resistances +25-35 (varies)`,
                 ...runes('Dol', 'Eld', 'Hel', 'Ist', 'Tir', 'Vex'),
                 effects: [
                     skillAll(2),
-                    `+20% Increased Attack Speed
+                    pct('AttackSpeed', 20),`
 +20% Faster Hit Recovery`,
                     pct('DamageEnhanced', 200),
                     pct('DamageUndead', 75),
@@ -1212,7 +1212,7 @@ Shields`,
                 itemTypes: ['sword', 'axe', 'mace'],
                 ...runes('Tir', 'El'),
                 effects: [
-                    `+25% Increased Attack Speed`,
+                    pct('AttackSpeed', 25),
                     pct('DamageEnhanced', 20),
                     int('DamageMinimum', 3),
                     int('DamageMaximum', 3),
@@ -1259,7 +1259,7 @@ Shields`,
                     `5% Chance To Cast Level 15 Fade When Struck
 25% Chance To Cast level 15 Venom On Striking`,
                     skillAll(2, 'assassin'),
-                    `+45% Increased Attack Speed
+                    pct('AttackSpeed', 45),`
 +20% Faster Hit Recovery`,
                     pct('ResistCold', 30),
                     pct('ExtraGold', 50)
@@ -1332,7 +1332,7 @@ Shields`,
                 effects: [
                     `10% Chance To Cast Level 9 Tornado On Striking
 +20% Faster Run/Walk
-+40% Increased Attack Speed
+`,pct('AttackSpeed', 40),`
 +15% Faster Hit Recovery`,
                     pct('DamageEnhancedRange', 120, 160),
                     pct('DefenseTarget', -50),
@@ -1366,7 +1366,7 @@ Shields`,
                 effects: [
                     `7% Chance to Cast Level 1 Twister When Struck
 +25% Faster Run/Walk
-+25% Increased Attack Speed`,
+`,pct('AttackSpeed', 25),
                     pct('DamageEnhanced', 33),
                     pct('DamageEnhanced', 33),
                     pct('DefenseTarget', -25),

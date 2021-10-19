@@ -74,6 +74,7 @@ export type TEffect =
     'ARDemons' |
     'ARUndead' |
     'AttackRating' |
+    'AttackSpeed' |
     'Blind' |
     'Blocking' |
     'CannotBeFrozen' |

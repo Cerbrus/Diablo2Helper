@@ -7,6 +7,12 @@ describe('ReportIssueComponent', () => {
     let fixture: ComponentFixture<ReportIssueComponent>;
 
     beforeEach(async () => {
+        spyOn(ReportIssueComponent.prototype, 'openIssue')
+            .and
+            .callFake(() => {
+                console.log('openIssue should not be called, as it reloads the page.');
+            });
+
         await TestBed.configureTestingModule({
                 imports: [TestModule],
                 declarations: [ReportIssueComponent]

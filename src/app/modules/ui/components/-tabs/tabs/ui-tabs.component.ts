@@ -28,8 +28,8 @@ export class UiTabsComponent implements AfterContentInit {
         if (activeTabKey) {
             this.tabsConfig.forEach(t => t.options.active = t.options.key === activeTabKey);
         }
-        const activeTabs = this.tabsConfig.filter(tab => tab.options.active ?? false);
-        if (activeTabs.length === 0)
+        const activeTabs = this.tabsConfig?.filter(tab => tab.options.active ?? false);
+        if (activeTabs?.length === 0)
             this.selectTab(this.tabsConfig[0]);
     }
 

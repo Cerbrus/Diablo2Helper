@@ -1,11 +1,9 @@
 <label class="text-xl">{{ 'settings.title' | translate }}</label>
 <div class="version">
-    {{ 'common.appTitle' | translate }}
+    <a [href]="'common.repositoryUrl' | translate" target="_blank">{{ 'common.appTitle' | translate }}</a>
     {{ environment.appVersion }}
     {{ 'common.by' | translate }}
-    <a [href]="'common.authorUrl' | translate" target="_blank">
-        {{ 'common.author' | translate }}
-    </a>
+    <a [href]="'common.authorUrl' | translate" target="_blank">{{ 'common.author' | translate }}</a>
 </div>
 
 <div class="checkboxes grid">
@@ -52,16 +50,15 @@
                         sprite="oHand"></ui-sprite-animated>
 </div>
 
-
 <p class="issues">
     {{ 'common.issueSubmit' | translate }}
     <a target="_blank" routerLink="/issue/bug_report">
         <fa-icon [icon]="bug"></fa-icon>
-        {{ 'common.issueBugReport' | translate }}
+        <span>{{ 'common.issueBugReport' | translate }}</span>
     </a>
     {{ 'common.or' | translate }}
     <a target="_blank" routerLink="/issue/feature_request">
         <fa-icon [icon]="lightBulb"></fa-icon>
-        {{ 'common.issueFeatureRequest' | translate }}
+        <span>{{ 'common.issueFeatureRequest' | translate }}</span>
     </a>
 </p>

@@ -6,7 +6,7 @@
     box-sizing: border-box;
     overflow: hidden;
     display: grid;
-    grid-gap: variables.$size-gap;
+    grid-gap: variables.$size-gap * 2;
     grid-template-columns: max-content 3fr;
     grid-template-rows: repeat(2, min-content) 1fr;
     grid-template-areas:

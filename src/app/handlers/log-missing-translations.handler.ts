@@ -38,7 +38,7 @@ export class LogMissingTranslationHandler implements MissingTranslationHandler {
         const s = count > 1 ? 's' : '';
 
         console.groupCollapsed(`Translation${s} missing for ${count} key${s}:`);
-        console.info(this.missingKeys.join('\n'));
+        console.info(this.missingKeys.sort((a, b) => a.localeCompare(b)).join('\n'));
         console.groupEnd();
 
         this.missingKeys = [];

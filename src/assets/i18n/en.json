@@ -147,6 +147,7 @@
         "ARDemons": "{{sign}}{{value}}{{unit}} AR against Demons",
         "ARUndead": "{{sign}}{{value}}{{unit}} Attack Rating vs. Undead",
         "AttackRating": "{{sign}}{{value}}{{unit}} to Attack Rating",
+        "AttackSpeed": "{{sign}}{{value}}{{unit}} Increased Attack Speed",
         "Blind": "Blinds Target",
         "Blocking": "{{sign}}{{value}}{{unit}} Blocking",
         "CannotBeFrozen": "Cannot be Frozen",
@@ -224,5 +225,130 @@
         "StatStrength": "{{sign}}{{value}} Strength",
         "StatVitality": "{{sign}}{{value}} Vitality",
         "Thorns": "Attacker takes {{value}} damage"
+    },
+    "effect": {
+        "damage": {
+            "cold": "Adds {{value}} Cold Damage",
+            "coldSkill": "{{value}} to Cold Skill Damage",
+            "damage": "Damage {{value}}",
+            "demon": "{{value}} Damage to Demons",
+            "enhanced": "{{value}} Enhanced Damage",
+            "fire": "Adds {{value}} Fire Damage",
+            "fireShort": "{{value}} Fire Damage",
+            "lightning": "Adds {{value}} Lightning Damage",
+            "magic": "Adds {{value}} Magic Damage",
+            "max": "{{value}} to Maximum Damage",
+            "min": "{{value}} to Minimum Damage",
+            "poison": "{{value}} Poison Damage over {{duration}} Seconds",
+            "poisonSkill": "{{value}} to Poison Skill Damage",
+            "undead": "{{value}} Damage to Undead"
+        },
+        "resist": {
+            "all": "All Resistances {{value}}",
+            "cold": "Cold Resist {{value}}",
+            "enemyCold": "{{value}} to Enemy Cold Resistance",
+            "enemyFire": "{{value}} to Enemy Fire Resistance",
+            "enemyLightning": "{{value}} to Enemy Lightning Resistance",
+            "enemyPoison": "{{value}} to Enemy Poison Resistance",
+            "fire": "Fire Resist {{value}}",
+            "lightning": "Lightning Resist {{value}}",
+            "maxCold": "{{value}} to Maximum Cold Resist",
+            "maxFire": "{{value}} to Maximum Fire Resist",
+            "maxLightning": "{{value}} to Maximum Lightning Resist",
+            "maxPoison": "{{value}} to Maximum Poison Resist",
+            "poison": "Poison Resist {{value}}"
+        },
+        "absorb": {
+            "damage": "Damage Reduced by {{value}}",
+            "damageMagic": "Magic Damage Reduced by {{value}}",
+            "fire": "{{value}} Fire Absorb",
+            "freeze": "Cannot Be Frozen",
+            "freezeHalf": "Half Freeze Duration",
+            "magic": "{{value}} Magic Absorb"
+        },
+        "effect": {
+            "GF": "{{value}} Extra Gold From Monsters",
+            "MF": "{{value}} Better Chance of Getting Magic Items",
+            "damageToMana": "{{value}} Damage Taken Goes to Mana",
+            "defenseMissile": "{{value}} Defense vs. Missile",
+            "discount": "Reduces All Vendor Prices {{value}}",
+            "drainLife": "Drain Life {{value}}",
+            "explosiveProjectile": "Fires Explosive Arrows or Bolts (15)",
+            "freeze": "Freezes Target",
+            "freezeAmount": "Freezes Target {{value}}",
+            "ignoreDefense": "Ignore Target's Defense",
+            "indestructible": "Indestructible",
+            "knockback": "Knockback",
+            "preventHeal": "Prevent Monster Heal",
+            "reanimate": "{{value}} Reanimate As: Returned",
+            "regenerateMana": "Regenerate Mana {{value}}",
+            "repair": "Repairs 1 Durability every 4 seconds",
+            "replenishLife": "Replenish Life {{value}}",
+            "replenishMana": "Replenish Mana {{value}}",
+            "requirements": "Requirements {{value}}",
+            "rip": "Slain Monsters Rest In Peace",
+            "slow": "Slows Target by {{value}}",
+            "staminaDrain": "{{value}} Slower Stamina Drain",
+            "targetDefense": "{{value}} Target Defense",
+            "thorns": "Attacker Takes Damage of {{value}}"
+        },
+        "on": {
+            "kill": {
+                "life": "{{value}} Life After Each Kill",
+                "lifeDemon": "{{value}} Life After Each Demon Kill",
+                "mana": "{{value}} to Mana after each Kill"
+            },
+            "hit": {
+                "blind": "Hit Blinds Target",
+                "blindValue": "Hit Blinds Target {{value}}",
+                "defenseMonster": "{{value}} to Monster Defense Per Hit",
+                "fear": "Hit Causes Monster to Flee {{value}}",
+                "stealLife": "{{value}} Life stolen per hit",
+                "stealMana": "{{value}} Mana stolen per hit"
+            }
+        },
+        "chance": {
+            "attack": "{{value}} Chance to Cast Level {{level}} {{skill}} On Attack",
+            "crushingBlow": "{{value}} Chance of Crushing Blow",
+            "deadlyStrike": "{{value}} Chance of Deadly Strike",
+            "die": "{{value}} Chance to Cast Level {{level}} {{skill}} When You Die",
+            "kill": "{{value}} Chance to Cast Level {{level}} {{skill}} When You Kill An Enemy",
+            "level": "{{value}} Chance to Cast Level {{level}} {{skill}} When You Level-Up",
+            "openWounds": "{{value}} Chance of Open Wounds",
+            "strike": "{{value}} Chance to Cast Level {{level}} {{skill}} On Striking",
+            "struck": "{{value}} Chance to Cast Level {{level}} {{skill}} When Struck"
+        },
+        "stat": {
+            "all": "{{value}} to All Attributes",
+            "attackRating": "{{value}} to Attack Rating",
+            "attackRatingBonus": "{{value}} Bonus to Attack Rating",
+            "attackRatingDemon": "{{value}} to Attack Rating against Demons",
+            "attackRatingUndead": "{{value}} to Attack Rating against Undead",
+            "attackSpeed": "{{value}} Increased Attack Speed",
+            "block": "{{value}} Increased Chance of Blocking",
+            "defense": "{{value}} Defense",
+            "defenseEnhanced": "{{value}} Enhanced Defense",
+            "dexterity": "{{value}} to Dexterity",
+            "energy": "{{value}} to Energy",
+            "life": "{{value}} to Life",
+            "lightRadius": "{{value}} to Light Radius",
+            "mana": "{{value}} to Mana",
+            "maxLife": "Increase Maximum Life {{value}}",
+            "maxMana": "Increase Maximum Mana {{value}}",
+            "maxStamina": "{{value}} Maximum Stamina",
+            "rateBlock": "{{value}} Faster Block Rate",
+            "rateCast": "{{value}} Faster Cast Rate",
+            "rateHitRecovery": "{{value}} Faster Hit Recovery",
+            "runSpeed": "{{value}} Faster Run/Walk",
+            "strength": "{{value}} to Strength",
+            "vitality": "{{value}} to Vitality"
+        },
+        "skill": {
+            "aura": "Level {{value}} {{skill}} Aura When Equipped",
+            "charges": "Level {{value}} {{skill}} ({{charges}} Charges)",
+            "class": "{{value}} to {{skill}} ({{class}} Only)",
+            "levels": "{{value}} to {{class}} Skill Levels",
+            "skill": "{{value}} to {{skill}}"
+        }
     }
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 // Custom modules
-import { SharedModule } from '../';
+import { SharedModule } from '~modules';
 
 // Components
 import {
@@ -41,23 +41,11 @@ const components = [
     UiTabsComponent
 ];
 
-const directives = [
-    UiDraggableDirective
-];
+const directives = [UiDraggableDirective];
 
 @NgModule({
-    declarations: [
-        components,
-        directives
-    ],
-    imports: [
-        CommonModule,
-        SharedModule
-    ],
-    exports: [
-        components,
-        directives
-    ]
+    declarations: [components, directives],
+    imports: [CommonModule, SharedModule],
+    exports: [components, directives]
 })
-export class UiModule {
-}
+export class UiModule {}

@@ -7,5 +7,5 @@ export enum EffectType {
     Skill = 5,
     Effect = 6,
     OnHitOnKill = 7,
-    CastChance = 8,
+    CastChance = 8
 }

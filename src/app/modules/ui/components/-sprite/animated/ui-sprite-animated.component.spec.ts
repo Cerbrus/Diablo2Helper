@@ -8,10 +8,9 @@ describe('UiSpriteAnimatedComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiSpriteAnimatedComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiSpriteAnimatedComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

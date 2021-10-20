@@ -8,10 +8,9 @@ describe('UiFormatEffectComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiFormatEffectComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiFormatEffectComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

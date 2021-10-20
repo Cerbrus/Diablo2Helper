@@ -8,10 +8,9 @@ describe('UiSpriteGemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiSpriteGemComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiSpriteGemComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

@@ -8,10 +8,9 @@ describe('UiTableSortControlComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiTableSortControlComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiTableSortControlComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

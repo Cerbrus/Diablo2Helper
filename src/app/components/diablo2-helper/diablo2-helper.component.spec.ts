@@ -8,10 +8,9 @@ describe('RuneHelperComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [Diablo2HelperComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [Diablo2HelperComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

@@ -8,10 +8,9 @@ describe('UiSpriteSkillComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiSpriteSkillComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiSpriteSkillComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

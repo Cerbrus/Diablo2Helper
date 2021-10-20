@@ -8,10 +8,9 @@ describe('TabPaneCharacterImportComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [TabPaneCharacterImportComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [TabPaneCharacterImportComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

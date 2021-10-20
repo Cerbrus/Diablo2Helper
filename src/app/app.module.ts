@@ -67,9 +67,7 @@ const components = [
 ];
 
 @NgModule({
-    declarations: [
-        components
-    ],
+    declarations: [components],
     imports: [
         HttpClientModule,
         RoutingModule,
@@ -93,7 +91,4 @@ const components = [
     bootstrap: [AppComponent],
     entryComponents: [AppComponent]
 })
-export class AppModule {
-}
-
-
+export class AppModule {}

@@ -8,10 +8,9 @@ describe('TabPaneRuneWordsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [TabPaneRuneWordsComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [TabPaneRuneWordsComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

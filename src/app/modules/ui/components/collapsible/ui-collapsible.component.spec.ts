@@ -8,10 +8,9 @@ describe('UiCollapsibleComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiCollapsibleComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiCollapsibleComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

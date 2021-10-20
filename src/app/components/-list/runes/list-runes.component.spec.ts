@@ -8,10 +8,9 @@ describe('ListRunesComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [ListRunesComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [ListRunesComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

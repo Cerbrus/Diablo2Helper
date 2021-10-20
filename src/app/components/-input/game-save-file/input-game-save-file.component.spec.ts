@@ -8,10 +8,9 @@ describe('InputGameSaveFileComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [InputGameSaveFileComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [InputGameSaveFileComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

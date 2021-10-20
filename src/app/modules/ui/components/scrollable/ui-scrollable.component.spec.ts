@@ -8,10 +8,9 @@ describe('UiScrollableComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiScrollableComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiScrollableComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

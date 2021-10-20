@@ -8,10 +8,9 @@ describe('RuneTrackingCountersComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [RuneTrackingCountersComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [RuneTrackingCountersComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

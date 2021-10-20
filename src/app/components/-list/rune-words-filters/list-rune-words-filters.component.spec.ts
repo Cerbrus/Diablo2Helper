@@ -8,10 +8,9 @@ describe('ListRuneWordsFiltersComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [ListRuneWordsFiltersComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [ListRuneWordsFiltersComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

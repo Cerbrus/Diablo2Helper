@@ -50,14 +50,9 @@ export class Diablo2HelperComponent {
         }
     ];
 
-    constructor(
-        titleService: Title,
-        translate: TranslateService
-    ) {
+    constructor(titleService: Title, translate: TranslateService) {
         translate.setDefaultLang(settings.defaultLanguage);
         translate.use(settings.defaultLanguage);
-
-        translate.get('common.appTitle')
-            .subscribe(title => titleService.setTitle(title));
+        translate.get('common.appTitle').subscribe(title => titleService.setTitle(title));
     }
 }

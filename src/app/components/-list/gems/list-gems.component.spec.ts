@@ -8,10 +8,9 @@ describe('ListGemsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [ListGemsComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [ListGemsComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

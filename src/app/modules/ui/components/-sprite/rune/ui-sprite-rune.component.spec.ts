@@ -8,10 +8,9 @@ describe('UiSpriteRuneComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiSpriteRuneComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiSpriteRuneComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

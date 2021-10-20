@@ -8,10 +8,9 @@ describe('RuneTrackingSelectComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [RuneTrackingSelectComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [RuneTrackingSelectComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

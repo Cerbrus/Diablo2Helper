@@ -8,10 +8,9 @@ describe('UiSpriteClassComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiSpriteClassComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiSpriteClassComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

@@ -8,10 +8,9 @@ describe('UiTableRecordComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiTableRecordComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiTableRecordComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

@@ -1,6 +1,6 @@
 import { KeyValue } from '@angular/common';
-import { ItemOrArray, Key } from '~types/helpers';
 import { isArray } from 'rxjs/internal-compatibility';
+import { ItemOrArray, Key } from '~types/helpers';
 
 export class ArrayHelper {
     public static repeat<T>(value: T, length: number): Array<T> {
@@ -12,11 +12,7 @@ export class ArrayHelper {
     }
 
     public static toArray<T>(value: ItemOrArray<T>): Array<T> {
-        return value == null
-            ? []
-            : isArray(value)
-                ? value
-                : [value];
+        return value == null ? [] : isArray(value) ? value : [value];
     }
 
     public static toRecord<TKey extends Key, TValue>(
@@ -31,34 +27,27 @@ export class ArrayHelper {
         getKey: (item: TArrayValue) => TKey,
         getValue: (item: TArrayValue, record: Record<TKey, TValue>, index: number) => TValue
     ): Record<TKey, TValue> {
-        return ArrayHelper
-            .toArray(array)
-            .reduce((record, item, index) => {
-                const key = getKey(item);
-                return key
-                    ? {
-                        ...record,
-                        [key]: getValue(item, record, index)
-                    }
-                    : record;
-            }, <Record<TKey, TValue>>{});
+        return ArrayHelper.toArray(array).reduce((record, item, index) => {
+            const key = getKey(item);
+            return key ? { ...record, [key]: getValue(item, record, index) } : record;
+        }, <Record<TKey, TValue>>{});
     }
 
     public static countStringOccurrences<TType extends Key>(items: ItemOrArray<TType>): Record<TType, number> {
-        return ArrayHelper.toRecord(ArrayHelper.toArray(items),
-            (item, record) => (record[item] || 0) + 1);
+        return ArrayHelper.toRecord(ArrayHelper.toArray(items), (item, record) => (record[item] || 0) + 1);
     }
 
     public static countObjectOccurrences<TType>(items: ItemOrArray<TType>): Array<KeyValue<TType, number>> {
-        return ArrayHelper.toArray(items)
-            .reduce((result, item) => {
-                const kv = result.find(({ key }) => key === item);
-                if (kv)
-                    kv.value++;
-                else
-                    result.push({ key: item, value: 1 });
+        return ArrayHelper.toArray(items).reduce((result, item) => {
+            const kv = result.find(({ key }) => key === item);
 
-                return result;
-            }, <Array<KeyValue<TType, number>>>[]);
+            if (kv) {
+                kv.value++;
+            } else {
+                result.push({ key: item, value: 1 });
+            }
+
+            return result;
+        }, <Array<KeyValue<TType, number>>>[]);
     }
 }

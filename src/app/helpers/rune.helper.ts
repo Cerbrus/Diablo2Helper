@@ -38,9 +38,7 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
     }
 
     public isType(item: object | TGem | TRune): item is TRune {
-        return typeof item === 'string'
-            && !this.gemHelper.isType(item)
-            && Runes.includes(item);
+        return typeof item === 'string' && !this.gemHelper.isType(item) && Runes.includes(item);
     }
 
     public getType(item: TRune | IRune): TRune {
@@ -51,7 +49,8 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
         const owned = ArrayHelper.toRecordWithKey(
             this.itemsArray.filter(rune => rune.owned),
             rune => rune.name,
-            rune => rune.owned!);
+            rune => rune.owned!
+        );
         this.storageService.save.runesOwned(owned);
     }
 
@@ -63,7 +62,8 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
                 owned: this.sortByOwned.bind(this)
             },
             <TRuneSortKeys>'number',
-            changedSort);
+            changedSort
+        );
 
         this.storageService.save.runeSort(this.entitySort);
     }
@@ -73,13 +73,10 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
     }
 
     public sortByName(a: IRune, b: IRune, asc: boolean): number {
-        return a.name.localeCompare(b.name) * (asc ? 1 : -1) ||
-            this.sortByNumber(a, b, asc);
+        return a.name.localeCompare(b.name) * (asc ? 1 : -1) || this.sortByNumber(a, b, asc);
     }
 
     public sortByOwned(a: IRune, b: IRune, asc: boolean): number {
-        return a.owned === b.owned
-            ? this.sortByNumber(a, b, asc)
-            : ((a.owned ?? 0) - (b.owned ?? 0)) * (asc ? -1 : 1);
+        return a.owned === b.owned ? this.sortByNumber(a, b, asc) : ((a.owned ?? 0) - (b.owned ?? 0)) * (asc ? -1 : 1);
     }
 }

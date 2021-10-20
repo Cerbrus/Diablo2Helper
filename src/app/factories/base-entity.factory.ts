@@ -1,3 +1,3 @@
-export abstract class BaseEntityFactory<TEntityMap>{
+export abstract class BaseEntityFactory<TEntityMap> {
     public abstract buildItems(): TEntityMap;
 }

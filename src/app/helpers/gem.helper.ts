@@ -12,26 +12,18 @@ import { ArrayHelper } from './ts';
 
 @Injectable({ providedIn: 'root' })
 export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort> {
-    constructor(
-        gemFactory: GemFactory,
-        private readonly storageService: StorageService
-    ) {
+    constructor(gemFactory: GemFactory, private readonly storageService: StorageService) {
         super(gemFactory);
     }
 
     public fromSaveItem(item: IItem): IGem | null {
         const name = item.type_name.toLowerCase();
-        return this.getItem(<TGem>(
-            name.includes(' ')
-                ? name.replace(' ', '|')
-                : `normal|${name}`));
-
+        return this.getItem(<TGem>(name.includes(' ') ? name.replace(' ', '|') : `normal|${name}`));
     }
 
     public splitType(gem: TGem): [TGemQuality, TGemType] {
         const split = gem.split('|');
-        if (split.length !== 2)
-            throw new Error(`Invalid type! ${gem}`);
+        if (split.length !== 2) throw new Error(`Invalid type! ${gem}`);
         // @ts-ignore We checked the length.
         return split;
     }
@@ -46,9 +38,7 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
     }
 
     public isType(item: object | TGem | TRune): item is TGem {
-        if (typeof item !== 'string' ||
-            !item.includes('|'))
-            return false;
+        if (typeof item !== 'string' || !item.includes('|')) return false;
 
         const split = this.splitType(<TGem>item);
         return GemQualities.includes(split[0]) && GemTypes.includes(split[1]);
@@ -63,7 +53,8 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
         const owned = ArrayHelper.toRecordWithKey<TGem, number, IGem>(
             this.itemsArray.filter(gem => gem.owned),
             gem => `${gem.quality}|${gem.type}`,
-            gem => gem.owned!);
+            gem => gem.owned!
+        );
 
         this.storageService.save.gemsOwned(owned);
     }

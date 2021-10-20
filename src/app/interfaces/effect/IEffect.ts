@@ -10,7 +10,7 @@ export interface IEffect {
     parameters?: IEffectParameters;
 }
 
-export type IEffectParameters = {
+export interface IEffectParameters {
     skill?: TSkill | TSkillGroup | TSkillRuneWord;
     level?: number;
     duration?: number;

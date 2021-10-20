@@ -24,13 +24,13 @@ interface ISkill {
 
 export interface ISkillUi extends ISkill {
     hireling: TSkillHireling;
-    ui: TSkillUi
+    ui: TSkillUi;
 }
 
 export type ISkillArray<C extends TClass> = {
-    [key in C]: Array<ISkill[key]>
-}
+    [key in C]: Array<ISkill[key]>;
+};
 
 export type ISkillArrayUi<C extends TClassUi> = {
-    [key in C]: Array<ISkillUi[key]>
-}
+    [key in C]: Array<ISkillUi[key]>;
+};

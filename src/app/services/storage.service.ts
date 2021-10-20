@@ -17,8 +17,7 @@ export class StorageService {
         const currentVersion = environment.appVersion;
         const storedVersion = this.get.appVersion();
 
-        if (storedVersion === currentVersion)
-            return;
+        if (storedVersion === currentVersion) return;
 
         this.storageKeys
             .filter(key => !this.persistentStorageKeys.includes(key))
@@ -52,14 +51,24 @@ export class StorageService {
         'runesOwned'
     ];
 
-    public readonly get: GetValue<IStorage> = ArrayHelper
-        .toRecord(this.storageKeys, key => <T>(): T => this.getItem(key));
+    public readonly get: GetValue<IStorage> = ArrayHelper.toRecord(
+        this.storageKeys,
+        key =>
+            <T>(): T =>
+                this.getItem(key)
+    );
 
-    public readonly save: SaveValue<IStorage> = ArrayHelper
-        .toRecord(this.storageKeys, key => <T>(value: T): T => this.saveItem(key, value));
+    public readonly save: SaveValue<IStorage> = ArrayHelper.toRecord(
+        this.storageKeys,
+        key =>
+            <T>(value: T): T =>
+                this.saveItem(key, value)
+    );
 
-    public readonly remove: RemoveValue<IStorage> = ArrayHelper
-        .toRecord(this.storageKeys, key => (): void => this.removeItem(key));
+    public readonly remove: RemoveValue<IStorage> = ArrayHelper.toRecord(
+        this.storageKeys,
+        key => (): void => this.removeItem(key)
+    );
 
     private getItem<T>(key: string): T {
         const stored = localStorage.getItem(`d2helper.${key}`);
@@ -67,8 +76,7 @@ export class StorageService {
         if (!ObjectHelper.hasValue(stored)) {
             const defaultValue = this.defaultValues[<keyof IStorage>key];
 
-            if (ObjectHelper.hasValue(defaultValue))
-                return this.saveItem(key, <T>defaultValue);
+            if (ObjectHelper.hasValue(defaultValue)) return this.saveItem(key, <T>defaultValue);
         }
 
         return stored ? JSON.parse(stored) : null;

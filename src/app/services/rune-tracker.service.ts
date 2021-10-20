@@ -12,10 +12,7 @@ export class RuneTrackerService {
     public max = 999;
     public min = 0;
 
-    constructor(
-        private readonly runeHelper: RuneHelper,
-        private readonly storageService: StorageService
-    ) {
+    constructor(private readonly runeHelper: RuneHelper, private readonly storageService: StorageService) {
         this.runeArray = runeHelper.itemsArray;
         this.initializeRuneCounts();
     }
@@ -46,9 +43,9 @@ export class RuneTrackerService {
     public areRunesOwned(runes: Array<TRune | IRune>): boolean {
         const wishList = ArrayHelper.countStringOccurrences(this.runeHelper.asType(runes));
 
-        return ObjectHelper.entries(wishList)
-            .every((value: [TRune, number]) =>
-                (this.runeHelper.asItem(value[0]).owned ?? 0) >= value[1]);
+        return ObjectHelper.entries(wishList).every(
+            (value: [TRune, number]) => (this.runeHelper.asItem(value[0]).owned ?? 0) >= value[1]
+        );
     }
 
     public calculateCraftableRunes(runeWord: IRuneWord): boolean {
@@ -74,20 +71,24 @@ export class RuneTrackerService {
 
             const neededRunes = runeToCraft.craft?.runes;
 
-            return !!neededRunes && ObjectHelper.every(
-                ArrayHelper.countStringOccurrences(neededRunes),
-                (requiredRune: TRune, amountForCraft: number) =>
-                    this.hasOrCanCraftRune(ownedRunes, requiredRune, missingCount * amountForCraft, runeWord));
+            return (
+                !!neededRunes &&
+                ObjectHelper.every(
+                    ArrayHelper.countStringOccurrences(neededRunes),
+                    (requiredRune: TRune, amountForCraft: number) =>
+                        this.hasOrCanCraftRune(ownedRunes, requiredRune, missingCount * amountForCraft, runeWord)
+                )
+            );
         }
     }
 
     private getRunesOwned(): Record<TRune, number> {
-        const runes = this.runeHelper.itemsArraySorted
-            .filter(r => r.owned);
+        const runes = this.runeHelper.itemsArraySorted.filter(r => r.owned);
         return ArrayHelper.toRecordWithKey(
             runes,
             item => item.name,
-            item => item.owned ?? 0);
+            item => item.owned ?? 0
+        );
     }
 
     private initializeRuneCounts(): void {

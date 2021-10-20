@@ -16,8 +16,8 @@ export class D2sParserService {
         helper: BaseEntitiesHelper<TEntityMap, TType, TEntity, any>,
         itemsInSave: Array<IItem>
     ): Array<KeyValue<TEntity, number>> {
-        return ArrayHelper.countObjectOccurrences(itemsInSave
-            .map(i => <TEntity>helper.fromSaveItem(i))
-            .filter(ObjectHelper.hasValue));
+        return ArrayHelper.countObjectOccurrences(
+            itemsInSave.map(i => <TEntity>helper.fromSaveItem(i)).filter(ObjectHelper.hasValue)
+        );
     }
 }

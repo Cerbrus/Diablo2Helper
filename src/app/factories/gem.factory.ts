@@ -139,9 +139,9 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
         const qualityKey = `gems.quality.${gem.quality}`;
         const typeKey = `gems.type.${gem.type}`;
 
-        this.translate
-            .get([qualityKey, typeKey])
-            .subscribe(result => (gem.name = `${result[qualityKey]} ${result[typeKey]}`));
+        this.translate.get([qualityKey, typeKey]).subscribe(result => {
+            gem.name = `${result[qualityKey]} ${result[typeKey]}`;
+        });
 
         return gem;
     }

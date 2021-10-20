@@ -7,47 +7,59 @@
 </div>
 
 <div class="checkboxes grid">
-    <input-checkbox [label]="getTitleKey('darkMode') | translate"
-                    [showIcon]="true"
-                    [(checked)]="settings.darkMode"
-                    (click)="onToggle('darkMode')"
+    <input-checkbox
+        [label]="getTitleKey('darkMode') | translate"
+        [showIcon]="true"
+        [(checked)]="settings.darkMode"
+        (click)="onToggle('darkMode')"
     ></input-checkbox>
-    <ui-sprite-skill [class]="this.settings.darkMode ? 'assassin' : 'sorceress'"
-                     [skill]="this.settings.darkMode ? 'Shadow Master' : 'Lightning'"
-                     [isDown]="true"
-                     [size]="32"></ui-sprite-skill>
+    <ui-sprite-skill
+        [class]="this.settings.darkMode ? 'assassin' : 'sorceress'"
+        [skill]="this.settings.darkMode ? 'Shadow Master' : 'Lightning'"
+        [isDown]="true"
+        [size]="32"
+    ></ui-sprite-skill>
 
-    <input-checkbox [label]="getTitleKey('enableBackground') | translate"
-                    [showIcon]="true"
-                    [(checked)]="settings.enableBackground"
-                    (click)="onToggle('enableBackground')"
+    <input-checkbox
+        [label]="getTitleKey('enableBackground') | translate"
+        [showIcon]="true"
+        [(checked)]="settings.enableBackground"
+        (click)="onToggle('enableBackground')"
     ></input-checkbox>
-    <ui-sprite-skill [class]="this.settings.enableBackground ? 'paladin' : 'barbarian'"
-                     [skill]="this.settings.enableBackground ? 'Conversion' : 'Concentrate'"
-                     [size]="32"></ui-sprite-skill>
+    <ui-sprite-skill
+        [class]="this.settings.enableBackground ? 'paladin' : 'barbarian'"
+        [skill]="this.settings.enableBackground ? 'Conversion' : 'Concentrate'"
+        [size]="32"
+    ></ui-sprite-skill>
 
-    <input-checkbox [label]="getTitleKey('customCursor') | translate"
-                    [showIcon]="true"
-                    [(checked)]="settings.customCursor"
-                    (click)="onToggle('customCursor')"
+    <input-checkbox
+        [label]="getTitleKey('customCursor') | translate"
+        [showIcon]="true"
+        [(checked)]="settings.customCursor"
+        (click)="onToggle('customCursor')"
     ></input-checkbox>
-    <ui-sprite-animated [scale]="0.25"
-                        [frames]="16"
-                        [animation]="{ direction: 'alternate' }"
-                        sprite="oHand"></ui-sprite-animated>
+    <ui-sprite-animated
+        [scale]="0.25"
+        [frames]="16"
+        [animation]="{ direction: 'alternate' }"
+        sprite="oHand"
+    ></ui-sprite-animated>
 
-    <input-checkbox class="child"
-                    *ngIf="settings.customCursor"
-                    [label]="getTitleKey('customCursorLarge') | translate"
-                    [showIcon]="true"
-                    [(checked)]="settings.customCursorLarge"
-                    (click)="onToggle('customCursorLarge')"
+    <input-checkbox
+        class="child"
+        *ngIf="settings.customCursor"
+        [label]="getTitleKey('customCursorLarge') | translate"
+        [showIcon]="true"
+        [(checked)]="settings.customCursorLarge"
+        (click)="onToggle('customCursorLarge')"
     ></input-checkbox>
-    <ui-sprite-animated *ngIf="settings.customCursor"
-                        [scale]="0.25"
-                        [frames]="16"
-                        [animation]="{ direction: 'alternate' }"
-                        sprite="oHand"></ui-sprite-animated>
+    <ui-sprite-animated
+        *ngIf="settings.customCursor"
+        [scale]="0.25"
+        [frames]="16"
+        [animation]="{ direction: 'alternate' }"
+        sprite="oHand"
+    ></ui-sprite-animated>
 </div>
 
 <p class="issues">

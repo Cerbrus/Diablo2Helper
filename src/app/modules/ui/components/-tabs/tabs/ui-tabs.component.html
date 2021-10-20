@@ -1,17 +1,17 @@
 <ul class="nav nav-tabs">
     <ng-container *ngFor="let tab of tabsConfig">
-        <li *ngIf="!tab.hide"
+        <li
+            *ngIf="!tab.hide"
             (click)="selectTab(tab, $event)"
             [class.active]="tab.options.active"
-            [class.right]="tab.options.right">
+            [class.right]="tab.options.right"
+        >
             <a href="#">{{ tab.options.title | translate }}</a>
         </li>
     </ng-container>
 </ul>
 <ng-container *ngFor="let tab of tabsConfig">
-    <ui-tab *ngIf="!tab.hide"
-            [options]="tab.options"
-            [class]="tab.cssClass">
+    <ui-tab *ngIf="!tab.hide" [options]="tab.options" [class]="tab.cssClass">
         <ng-container *ngComponentOutlet="tab.component"></ng-container>
     </ui-tab>
 </ng-container>

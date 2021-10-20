@@ -1,10 +1,7 @@
 <label class="button">
     {{ 'labels.saveFile' | translate }}
-    <input type="file"
-           hidden
-           accept=".d2s"
-           (change)="onChange($event)">
+    <input type="file" hidden accept=".d2s" (change)="onChange($event)" />
 </label>
 <ul *ngIf="file">
-    <li>{{file.name}}</li>
+    <li>{{ file.name }}</li>
 </ul>

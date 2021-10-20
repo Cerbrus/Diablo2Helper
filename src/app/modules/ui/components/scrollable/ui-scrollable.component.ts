@@ -33,8 +33,7 @@ export class UiScrollableComponent {
 
     private readonly thumbHeight = 15;
 
-    constructor(@Inject(ElementRef) readonly elementRef: ElementRef<HTMLElement>) {
-    }
+    constructor(@Inject(ElementRef) readonly elementRef: ElementRef<HTMLElement>) {}
 
     public get verticalScrolled(): number {
         const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
@@ -82,19 +81,21 @@ export class UiScrollableComponent {
     @HostBinding('style.--scroll-shadow')
     public get boxShadow(): string {
         const shadows: Array<`inset ${TShadow} ${TShadow} 20px -20px #000000`> = [];
-        const {
-            scrollHeight, scrollTop, clientHeight,
-            scrollWidth, scrollLeft, clientWidth
-        } = this.elementRef.nativeElement;
+        const { scrollHeight, scrollTop, clientHeight, scrollWidth, scrollLeft, clientWidth } =
+            this.elementRef.nativeElement;
 
-        if (scrollTop > 0)
+        if (scrollTop > 0) {
             shadows.push(UiScrollableComponent.shadow(0, 1));
-        if (clientHeight + scrollTop < scrollHeight - 5)
+        }
+        if (clientHeight + scrollTop < scrollHeight - 5) {
             shadows.push(UiScrollableComponent.shadow(0, -1));
-        if (scrollLeft > 0)
+        }
+        if (scrollLeft > 0) {
             shadows.push(UiScrollableComponent.shadow(1, 0));
-        if (clientWidth + scrollLeft < scrollWidth - 5)
+        }
+        if (clientWidth + scrollLeft < scrollWidth - 5) {
             shadows.push(UiScrollableComponent.shadow(-1, 0));
+        }
 
         return shadows.join(', ');
     }
@@ -109,8 +110,7 @@ export class UiScrollableComponent {
 
     public verticalClick($event: MouseEvent) {
         const bar = <HTMLElement>$event.target;
-        if (!bar.classList.contains('bar'))
-            return;
+        if (!bar.classList.contains('bar')) return;
 
         const { scrollHeight, clientHeight } = this.elementRef.nativeElement;
         this.onVertical(($event.offsetY / bar.clientHeight) * (scrollHeight - clientHeight));
@@ -118,15 +118,16 @@ export class UiScrollableComponent {
 
     public horizontalClick($event: MouseEvent) {
         const bar = <HTMLElement>$event.target;
-        if (!bar.classList.contains('bar'))
-            return;
+        if (!bar.classList.contains('bar')) return;
 
         const { scrollWidth, clientWidth } = this.elementRef.nativeElement;
         this.onHorizontal(($event.offsetX / bar.clientWidth) * (scrollWidth - clientWidth));
     }
 
-    private static shadow(horizontal: 1 | -1 | 0, vertical: 1 | -1 | 0):
-        `inset ${TShadow} ${TShadow} 20px -20px #000000` {
+    private static shadow(
+        horizontal: 1 | -1 | 0,
+        vertical: 1 | -1 | 0
+    ): `inset ${TShadow} ${TShadow} 20px -20px #000000` {
         const h = <TShadow>(horizontal ? horizontal * 20 + 'px' : 0);
         const v = <TShadow>(vertical ? vertical * 20 + 'px' : 0);
 

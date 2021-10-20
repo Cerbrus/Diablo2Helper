@@ -6,5 +6,4 @@ import { ITabPaneComponent } from '~interfaces/ui';
     templateUrl: './tab-pane-gems.component.html',
     styleUrls: ['./tab-pane-gems.component.scss']
 })
-export class TabPaneGemsComponent implements ITabPaneComponent {
-}
+export class TabPaneGemsComponent implements ITabPaneComponent {}

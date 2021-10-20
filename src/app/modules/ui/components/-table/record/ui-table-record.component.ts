@@ -10,7 +10,10 @@ import { LabeledBaseComponent } from '~modules/shared';
     templateUrl: './ui-table-record.component.html',
     styleUrls: ['./ui-table-record.component.scss']
 })
-export class UiTableRecordComponent<K extends string | IGem | IRune | IRuneWord, V extends string | number> extends LabeledBaseComponent {
+export class UiTableRecordComponent<
+    K extends string | IGem | IRune | IRuneWord,
+    V extends string | number
+> extends LabeledBaseComponent {
     public sortedRecord?: Array<KeyValue<K, V>>;
 
     @Input()
@@ -19,9 +22,9 @@ export class UiTableRecordComponent<K extends string | IGem | IRune | IRuneWord,
     @Input()
     public set record(value: Array<KeyValue<K, V>>) {
         this.sortedRecord = this.sortBy
-            ? value.sort((a, b) => this.sortBy === 'value'
-                ? this.compare(a.value, b.value)
-                : this.compare(a.key, b.key))
+            ? value.sort((a, b) =>
+                  this.sortBy === 'value' ? this.compare(a.value, b.value) : this.compare(a.key, b.key)
+              )
             : value;
     }
 
@@ -38,8 +41,6 @@ export class UiTableRecordComponent<K extends string | IGem | IRune | IRuneWord,
     }
 
     getString(value: number | string | IGem | IRune | IRuneWord): string {
-        return typeof value === 'object'
-            ? value.name
-            : `${value}`;
+        return typeof value === 'object' ? value.name : `${value}`;
     }
 }

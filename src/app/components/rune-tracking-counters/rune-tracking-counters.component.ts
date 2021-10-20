@@ -14,8 +14,7 @@ export class RuneTrackingCountersComponent {
     @Output()
     public onChange: EventEmitter<IRune | TRune> = new EventEmitter<IRune | TRune>();
 
-    constructor(public readonly runeHelper: RuneHelper) {
-    }
+    constructor(public readonly runeHelper: RuneHelper) {}
 
     public change(rune: IRune | TRune): void {
         this.onChange.emit(rune);

@@ -6,5 +6,4 @@ import { ITabPaneComponent } from '~interfaces/ui';
     templateUrl: './tab-pane-runes.component.html',
     styleUrls: ['./tab-pane-runes.component.scss']
 })
-export class TabPaneRunesComponent implements ITabPaneComponent {
-}
+export class TabPaneRunesComponent implements ITabPaneComponent {}

@@ -18,10 +18,7 @@ export class RuneCounterComponent {
     @Output()
     public onChange: EventEmitter<IRune> = new EventEmitter<IRune>();
 
-    constructor(
-        private readonly runeTracker: RuneTrackerService,
-        private readonly runeHelper: RuneHelper
-    ) {
+    constructor(private readonly runeTracker: RuneTrackerService, private readonly runeHelper: RuneHelper) {
         this.min = runeTracker.min;
         this.max = runeTracker.max;
     }

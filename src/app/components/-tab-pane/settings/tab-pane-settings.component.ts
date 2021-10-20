@@ -38,13 +38,16 @@ export class TabPaneSettingsComponent implements ITabPaneComponent {
         const { settings } = this;
         const classList = document.getElementsByTagName('html')[0].classList;
 
-        ObjectHelper.forEach({
-            'custom-cursor': settings.customCursor && !settings.customCursorLarge,
-            'custom-cursor-large': settings.customCursor && settings.customCursorLarge,
-            'theme-dark': settings.darkMode,
-            'theme-light': !settings.darkMode,
-            'theme-background': settings.enableBackground
-        }, (className: string, value: boolean) => classList.toggle(className, value));
+        ObjectHelper.forEach(
+            {
+                'custom-cursor': settings.customCursor && !settings.customCursorLarge,
+                'custom-cursor-large': settings.customCursor && settings.customCursorLarge,
+                'theme-dark': settings.darkMode,
+                'theme-light': !settings.darkMode,
+                'theme-background': settings.enableBackground
+            },
+            (className: string, value: boolean) => classList.toggle(className, value)
+        );
 
         this.storageService.save.settings(settings);
     }

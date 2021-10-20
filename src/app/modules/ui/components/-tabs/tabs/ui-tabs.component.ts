@@ -19,24 +19,25 @@ export class UiTabsComponent implements AfterContentInit {
         private readonly storageService: StorageService,
         private readonly route: ActivatedRoute,
         private readonly router: Router,
-        private readonly activatedRoute: ActivatedRoute) {
+        private readonly activatedRoute: ActivatedRoute
+    ) {
         this.setActiveTabFromRoute();
     }
 
     public ngAfterContentInit(): void {
         const activeTabKey = this.getActiveTabs()[this.name];
         if (activeTabKey) {
-            this.tabsConfig.forEach(t => t.options.active = t.options.key === activeTabKey);
+            this.tabsConfig.forEach(t => {
+                t.options.active = t.options.key === activeTabKey;
+            });
         }
         const activeTabs = this.tabsConfig?.filter(tab => tab.options.active ?? false);
-        if (activeTabs?.length === 0)
-            this.selectTab(this.tabsConfig[0]);
+        if (activeTabs?.length === 0) this.selectTab(this.tabsConfig[0]);
     }
 
     private setActiveTabFromRoute(): void {
         const tab = this.route.snapshot.params.tab;
-        if (!tab)
-            return;
+        if (!tab) return;
 
         const [name, key] = tab.split(':');
 
@@ -47,18 +48,17 @@ export class UiTabsComponent implements AfterContentInit {
 
     public selectTab(tab: ITab, $event?: MouseEvent): void {
         $event?.preventDefault();
-        if (!tab)
-            return;
+        if (!tab) return;
 
-        this.tabsConfig.forEach(tab => tab.options.active = false);
+        this.tabsConfig.forEach(tab => {
+            tab.options.active = false;
+        });
         tab.options.active = true;
 
         // noinspection JSIgnoredPromiseFromCall
-        this.router.navigate(
-            [`/${this.name}:${tab.options.key}`],
-            {
-                relativeTo: this.activatedRoute
-            });
+        this.router.navigate([`/${this.name}:${tab.options.key}`], {
+            relativeTo: this.activatedRoute
+        });
 
         const activeTabs = this.getActiveTabs();
         activeTabs[this.name] = tab.options.key;

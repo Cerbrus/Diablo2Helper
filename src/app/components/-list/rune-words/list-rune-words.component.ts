@@ -37,17 +37,14 @@ export class ListRuneWordsComponent {
         private readonly runeTracker: RuneTrackerService,
         private readonly runewordFilterService: RunewordFilterService,
         private readonly translate: TranslateService
-    ) {
-    }
+    ) {}
 
     public applySort(changedSort?: ITable<IRuneWord>): void {
         this.runeWordHelper.applySort(changedSort);
     }
 
     public runeNames(runes: Array<TRune | IRune>): string {
-        return runes
-            .map(rune => this.runeHelper.asType(rune))
-            .join('');
+        return runes.map(rune => this.runeHelper.asType(rune)).join('');
     }
 
     public runes(runes: Array<TRune | IRune>): Array<IRune> {
@@ -87,18 +84,12 @@ export class ListRuneWordsComponent {
         const lastType = single ? '' : translated.pop();
         const types = translated.join(', ');
 
-        const translatedTypes = single
-            ? types
-            : this.translateItemType('plural', { types: types, lastType });
+        const translatedTypes = single ? types : this.translateItemType('plural', { types: types, lastType });
 
-        return all
-            ? this.translateItemType('all', { types: translatedTypes, lastType })
-            : translatedTypes;
+        return all ? this.translateItemType('all', { types: translatedTypes, lastType }) : translatedTypes;
     }
 
-    private translateItemType(
-        itemType: TItem | 'single' | 'plural',
-        params?: object): string {
+    private translateItemType(itemType: TItem | 'single' | 'plural', params?: object): string {
         return this.translate.instant(`itemTypes.${itemType}`, params);
     }
 }

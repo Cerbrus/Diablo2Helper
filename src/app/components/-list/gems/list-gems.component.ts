@@ -11,9 +11,7 @@ export class ListGemsComponent {
     public gems: IGemMap;
     public gemArray: Array<IGemType>;
 
-    constructor(
-        private readonly gemHelper: GemHelper
-    ) {
+    constructor(private readonly gemHelper: GemHelper) {
         this.gems = gemHelper.getItems();
         this.gemArray = gemHelper.buildGemArray();
     }

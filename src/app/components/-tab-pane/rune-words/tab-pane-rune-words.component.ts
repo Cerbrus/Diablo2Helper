@@ -8,10 +8,7 @@ import { RunewordFilterService } from '~services';
     styleUrls: ['./tab-pane-rune-words.component.scss']
 })
 export class TabPaneRuneWordsComponent implements ITabPaneComponent {
-    constructor(
-        private readonly runeWordFilterService: RunewordFilterService
-    ) {
-    }
+    constructor(private readonly runeWordFilterService: RunewordFilterService) {}
 
     public updateRunewordFilters(): void {
         this.runeWordFilterService.saveFilters();

@@ -9,7 +9,7 @@ export abstract class SpriteBaseComponent {
 
     protected sprite!: string;
 
-    protected abstract getBackground(): Record<'x' | 'y' | 'width' | 'height', number>
+    protected abstract getBackground(): Record<'x' | 'y' | 'width' | 'height', number>;
 
     @HostBinding('style')
     public get style(): Partial<CSSStyleDeclaration> {
@@ -28,5 +28,4 @@ export abstract class SpriteBaseComponent {
             backgroundSize: `${width}px ${height}px`
         };
     }
-
 }

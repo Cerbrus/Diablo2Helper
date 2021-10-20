@@ -15,13 +15,11 @@ export class InputGameSaveFileComponent {
     public onParse = new EventEmitter<ID2S | TError<any>>();
     public file?: File;
 
-    constructor(private readonly d2sParserService: D2sParserService) {
-    }
+    constructor(private readonly d2sParserService: D2sParserService) {}
 
     public async onChange($event: Event): Promise<void> {
         const files = (<HTMLInputElement>$event.target).files;
-        if (!files?.length)
-            return;
+        if (!files?.length) return;
 
         this.file = files[0];
 
@@ -29,14 +27,16 @@ export class InputGameSaveFileComponent {
     }
 
     private parseArrayBuffer(arrayBuffer: ArrayBuffer): void {
-        this.d2sParserService.parseSave(arrayBuffer)
-            .pipe(catchError(error => {
-                console.error('Error parsing save file', error);
-                return of({ error, message: 'Error parsing save file' });
-            }))
+        this.d2sParserService
+            .parseSave(arrayBuffer)
+            .pipe(
+                catchError(error => {
+                    console.error('Error parsing save file', error);
+                    return of({ error, message: 'Error parsing save file' });
+                })
+            )
             .subscribe(parseResult => {
-                if (!parseResult)
-                    return;
+                if (!parseResult) return;
 
                 this.onParse.emit(parseResult);
             });

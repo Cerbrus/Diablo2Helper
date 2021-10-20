@@ -66,9 +66,7 @@ export class UiTableSortControlComponent<TSort, TEntity extends Record<string, I
     public getIcon(): any {
         const sort = this.getSort();
         const icon = this.icons[sort.icon ?? 'amount'];
-        return sort.direction === 'desc'
-            ? icon.desc
-            : icon.asc;
+        return sort.direction === 'desc' ? icon.desc : icon.asc;
     }
 
     public isEnabled(): boolean {

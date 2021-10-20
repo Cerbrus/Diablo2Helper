@@ -8,7 +8,10 @@ import { SpriteBaseComponent } from '../sprite-base.component';
     templateUrl: './ui-sprite-skill.component.html',
     styleUrls: ['./ui-sprite-skill.component.scss']
 })
-export class UiSpriteSkillComponent<TClass extends TClassUi, TSkill extends ISkillUi[TClass]> extends SpriteBaseComponent {
+export class UiSpriteSkillComponent<
+    TClass extends TClassUi,
+    TSkill extends ISkillUi[TClass]
+> extends SpriteBaseComponent {
     @Input()
     public class!: TClass;
 
@@ -33,9 +36,7 @@ export class UiSpriteSkillComponent<TClass extends TClassUi, TSkill extends ISki
 
     protected getBackground(): Record<'x' | 'y' | 'width' | 'height', number> {
         const hasDown = this.class !== 'hireling';
-        const index = this.skill
-            ? (<Array<ISkillUi[TClass]>>SkillsUi[this.class]).indexOf(this.skill)
-            : this.index;
+        const index = this.skill ? (<Array<ISkillUi[TClass]>>SkillsUi[this.class]).indexOf(this.skill) : this.index;
 
         return {
             x: -this.size * (index * (hasDown ? 2 : 1) + (hasDown && this.isDown ? 1 : 0)),

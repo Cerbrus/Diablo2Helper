@@ -39,12 +39,10 @@ export class TabPaneCharacterImportComponent implements ITabPaneComponent {
         private readonly runeHelper: RuneHelper,
         private readonly runeWordHelper: RuneWordHelper,
         private readonly runeWordFilterService: RunewordFilterService
-    ) {
-    }
+    ) {}
 
     public applySaveToFilters(): void {
-        if (!this.parseResult || !this.gems || !this.runes || !this.runeWords)
-            return;
+        if (!this.parseResult || !this.gems || !this.runes || !this.runeWords) return;
 
         this.runeWordFilterService.applySaveToFilters(
             this.parseResult.header.level,
@@ -68,8 +66,9 @@ export class TabPaneCharacterImportComponent implements ITabPaneComponent {
 
         this.parseResult = result;
 
-        const lastPlayed = new DatePipe(this.translate.currentLang)
-            .transform(new Date(result.header.last_played * 1000), 'medium') ?? '';
+        const lastPlayed =
+            new DatePipe(this.translate.currentLang).transform(new Date(result.header.last_played * 1000), 'medium') ??
+            '';
 
         const gems = result.items.filter(i => i.categories?.includes('Gem'));
         const runes = result.items.filter(i => i.categories?.includes('Rune'));

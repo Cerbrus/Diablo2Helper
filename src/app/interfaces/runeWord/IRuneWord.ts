@@ -1,4 +1,5 @@
-import { TEffectApplication, TEffectKey, TItem } from '~types';
+import { TItem } from '~types';
+import { TEffectApplication, TEffectKey } from '~types/effect';
 import { ItemOrArray } from '~types/helpers';
 import { TRune } from '~types/rune';
 import { TRuneWord } from '~types/runeWord';

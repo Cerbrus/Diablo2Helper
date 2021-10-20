@@ -1,9 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import { Directive, ElementRef, Inject, Input, Renderer2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { EffectHelper, EffectRowConfig, GemHelper, RuneHelper } from '~helpers';
+import { EffectHelper, GemHelper, RuneHelper } from '~helpers';
 import { IGem } from '~interfaces/gem';
 import { IRune } from '~interfaces/rune';
+import { TEffectRowConfig } from '~types/effect';
 import { TGem } from '~types/gem';
 import { TRune } from '~types/rune';
 import { TooltipBaseDirective } from '../tooltip-base/tooltip-base';
@@ -51,7 +52,7 @@ export class TooltipSocketableDirective extends TooltipBaseDirective {
         return rune.isType(item) ? rune.getItem(item) : gem.isType(item) ? gem.getItem(item) : item;
     }
 
-    private buildEffectRow({ title, key }: EffectRowConfig): void {
+    private buildEffectRow({ title, key }: TEffectRowConfig): void {
         const effect = this.getRuneOrGem()?.effects[key];
         if (!effect) return;
 

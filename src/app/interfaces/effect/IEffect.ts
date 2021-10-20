@@ -1,5 +1,5 @@
 import { EffectOptions, EffectType } from '~enums';
-import { TEffectDescriptionKey } from '~types';
+import { TEffectDescriptionKey } from '~types/effect';
 import { TClass, TSkill, TSkillGroup, TSkillRuneWord } from '~types/player';
 
 export interface IEffect {

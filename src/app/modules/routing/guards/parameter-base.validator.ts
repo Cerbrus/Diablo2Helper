@@ -3,8 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 
 @Injectable()
 export abstract class ParameterValidatorBase implements CanActivate {
-    protected constructor(private readonly router: Router) {
-    }
+    protected constructor(private readonly router: Router) {}
 
     protected abstract validateRoute(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean;
 

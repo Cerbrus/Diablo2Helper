@@ -15,13 +15,10 @@ export class ParameterTab extends ParameterValidatorBase {
 
     protected validateRoute(route: ActivatedRouteSnapshot): boolean {
         const tabParam = route.params.tab;
-        if (!tabParam)
-            return false;
+        if (!tabParam) return false;
 
         const [tabsName, tabKey] = tabParam.split(':');
 
-        return tabsName === '' && tabKey === 'dev'
-            ? !environment.production
-            : this.tabs[tabsName]?.includes(tabKey);
+        return tabsName === '' && tabKey === 'dev' ? !environment.production : this.tabs[tabsName]?.includes(tabKey);
     }
 }

@@ -16,16 +16,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(routes)
-    ],
-    exports: [
-        RouterModule
-    ],
-    providers: [
-        ParameterTab,
-        ParameterIssueType
-    ]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
+    providers: [ParameterTab, ParameterIssueType]
 })
-export class RoutingModule {
-}
+export class RoutingModule {}

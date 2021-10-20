@@ -9,15 +9,15 @@
             "enableBackground": true
         },
         "runeSort": {
-            "name": {"key": "name", "icon": "alpha"},
-            "owned": {"key": "owned", "icon": "numericAlt"},
-            "number": {"key": "number", "icon": "numeric"}
+            "name": { "key": "name", "icon": "alpha" },
+            "owned": { "key": "owned", "icon": "numericAlt" },
+            "number": { "key": "number", "icon": "numeric" }
         },
         "runeWordSort": {
-            "name": {"key": "name", "icon": "alpha"},
-            "runes": {"key": "runes"},
-            "cLvl": {"key": "cLvl", "icon": "numeric"},
-            "owned": {"key": "owned", "icon": "numericAlt"}
+            "name": { "key": "name", "icon": "alpha" },
+            "runes": { "key": "runes" },
+            "cLvl": { "key": "cLvl", "icon": "numeric" },
+            "owned": { "key": "owned", "icon": "numericAlt" }
         },
         "runeWordFilters": {
             "showUnavailable": true,

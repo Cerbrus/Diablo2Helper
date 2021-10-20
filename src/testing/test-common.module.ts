@@ -24,9 +24,6 @@ import { LogMissingTranslationHandler } from '~handlers/log-missing-translations
             useDefaultLang: true
         })
     ],
-    exports: [
-        TranslatePipe
-    ]
+    exports: [TranslatePipe]
 })
-export class TestModule {
-}
+export class TestModule {}

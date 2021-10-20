@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ArrayHelper, NumberHelper, ObjectHelper, RuneHelper } from '../helpers';
-import { IRune } from '../interfaces/rune';
-import { IRuneWord } from '../interfaces/runeWord';
-import { TRune } from '../types/rune';
+import { ArrayHelper, NumberHelper, ObjectHelper, RuneHelper } from '~helpers';
+import { IRune } from '~interfaces/rune';
+import { IRuneWord } from '~interfaces/runeWord';
+import { TRune } from '~types/rune';
 import { StorageService } from './';
 
 @Injectable({ providedIn: 'root' })

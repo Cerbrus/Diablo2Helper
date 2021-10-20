@@ -1,6 +1,6 @@
-// noinspection SpellCheckingInspection,JSUnusedGlobalSymbols
+// noinspection SpellCheckingInspection, JSUnusedGlobalSymbols
 
-import { ISkillArray, ISkillArrayUi } from '../../interfaces/player';
+import { ISkillArray, ISkillArrayUi } from '~interfaces/player';
 import { TClass, TClassUi } from './TClass';
 
 export const Skills: ISkillArray<TClass> = {

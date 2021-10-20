@@ -1,9 +1,9 @@
+import { faAngleDoubleDown } from '~modules/font-awesome';
+import { LabeledBaseComponent } from '~modules/shared';
+import { StorageService } from '~services';
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { PullProp } from '@fortawesome/fontawesome-svg-core';
-import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from '../../../../services';
-import { LabeledBaseComponent } from '../../../shared';
 
 @Component({
     selector: 'ui-collapsible',

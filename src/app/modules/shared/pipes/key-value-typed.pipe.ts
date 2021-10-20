@@ -1,6 +1,6 @@
 import { KeyValue, KeyValuePipe } from '@angular/common';
 import { Pipe } from '@angular/core';
-import { TRune } from '../../../types/rune';
+import { TRune } from '~types/rune';
 
 @Pipe({
     name: 'keyValueTyped'

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { EffectHelper } from '../helpers';
-import { IEffectBuilderParams, IEffectBuilders } from '../interfaces/effect';
-import { IGem, IGemMap, TGemQualityMap } from '../interfaces/gem';
-import { ISocketableEffects } from '../interfaces/socketable';
-import { StorageService } from '../services';
-import { GemQualities, GemQualityMap, TGem, TGemQuality, TGemType } from '../types/gem';
+import { EffectHelper } from '~helpers';
+import { IEffectBuilderParams, IEffectBuilders } from '~interfaces/effect';
+import { IGem, IGemMap, TGemQualityMap } from '~interfaces/gem';
+import { ISocketableEffects } from '~interfaces/socketable';
+import { StorageService } from '~services';
+import { GemQualities, GemQualityMap, TGem, TGemQuality, TGemType } from '~types/gem';
 import { BaseEntityFactory } from './base-entity.factory';
 
 @Injectable({ providedIn: 'root' })

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { GemHelper } from '../../../helpers';
-import { IGem, IGemMap, IGemType } from '../../../interfaces/gem';
+import { GemHelper } from '~helpers';
+import { IGem, IGemMap, IGemType } from '~interfaces/gem';
 
 @Component({
     selector: 'list-gems',

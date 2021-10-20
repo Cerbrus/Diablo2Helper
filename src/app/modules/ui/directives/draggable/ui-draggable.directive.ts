@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Directive, ElementRef, Inject, Input, Output } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
-import { TMouseEvent } from '../../../../types/events';
+import { TMouseEvent } from '~types/events';
 import { UiScrollableComponent } from '../../components';
 
 @Directive({

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { IItem } from '@dschu012/d2s/lib/d2/types';
-import { RuneWordFactory } from '../factories/runeword.factory';
-import { IRuneWord, IRuneWordMap } from '../interfaces/runeWord';
-import { ITable } from '../interfaces/ui';
-import { StorageService } from '../services';
-import { RuneWords, TRuneWord, TRuneWordSort, TRuneWordSortKeys } from '../types/runeWord';
+import { RuneWordFactory } from '~factories/runeword.factory';
+import { IRuneWord, IRuneWordMap } from '~interfaces/runeWord';
+import { ITable } from '~interfaces/ui';
+import { StorageService } from '~services';
+import { RuneWords, TRuneWord, TRuneWordSort, TRuneWordSortKeys } from '~types/runeWord';
 import { BaseEntitiesHelper } from './base-entities.helper';
 import { GemHelper } from './gem.helper';
 import { RuneHelper } from './rune.helper';

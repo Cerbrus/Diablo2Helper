@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../testing/test-common.module';
-import { ListRunesComponent } from './list-runes.component';
+import { TestModule } from '~testModule';
+import { ListRunesComponent } from '~components/-list';
 
 describe('ListRunesComponent', () => {
     let component: ListRunesComponent;

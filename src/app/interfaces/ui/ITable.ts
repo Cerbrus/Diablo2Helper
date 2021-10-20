@@ -1,4 +1,4 @@
-import { Key, SuffixKey } from '../../types/helpers';
+import { Key, SuffixKey } from '~types/helpers';
 
 type TableSortIcons = 'amount' | 'alpha' | 'numeric';
 export type TableSortIcon = TableSortIcons | SuffixKey<TableSortIcons, 'Alt'>;

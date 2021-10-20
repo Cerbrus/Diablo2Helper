@@ -2,7 +2,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "baseUrl": "./",
+        "baseUrl": "./src",
         "outDir": "./dist/out-tsc",
         "forceConsistentCasingInFileNames": true,
         "strict": true,
@@ -21,7 +21,30 @@
             "dom"
         ],
         "resolveJsonModule": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "paths": {
+            "~components": ["app/components"],
+            "~components/*": ["app/components/*"],
+            "~enums": ["app/enums"],
+            "~enums/*": ["app/enums/*"],
+            "~environment": ["environments/environment"],
+            "~factories": ["app/factories"],
+            "~factories/*": ["app/factories/*"],
+            "~handlers": ["app/handlers"],
+            "~handlers/*": ["app/handlers/*"],
+            "~helpers": ["app/helpers"],
+            "~helpers/*": ["app/helpers/*"],
+            "~interfaces": ["app/interfaces"],
+            "~interfaces/*": ["app/interfaces/*"],
+            "~modules": ["app/modules"],
+            "~modules/*": ["app/modules/*"],
+            "~services": ["app/services"],
+            "~services/*": ["app/services/*"],
+            "~types": ["app/types"],
+            "~types/*": ["app/types/*"],
+            "~testModule": ["testing/test-common.module"],
+            "~settings": ["assets/settings.json"]
+        }
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,

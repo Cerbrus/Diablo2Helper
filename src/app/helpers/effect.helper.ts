@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { EffectOptions, EffectType } from '../enums';
-import { IEffect, IEffectParameters } from '../interfaces/effect';
-import { ISocketableEffects } from '../interfaces/socketable';
-import { TEffectKey } from '../types';
-import { ItemOrArray } from '../types/helpers';
+import { EffectOptions, EffectType } from '~enums';
+import { IEffect, IEffectParameters } from '~interfaces/effect';
+import { ISocketableEffects } from '~interfaces/socketable';
+import { TEffectKey } from '~types';
+import { ItemOrArray } from '~types/helpers';
 import { ArrayHelper } from './ts';
 
 export type EffectRowConfig = { title: string, key: keyof ISocketableEffects }

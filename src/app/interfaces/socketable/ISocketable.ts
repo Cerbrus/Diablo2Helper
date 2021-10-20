@@ -1,5 +1,5 @@
+import { Optional } from '~types/helpers';
 import { ISocketableEffects } from '.';
-import { Optional } from '../../types/helpers';
 
 export interface ISocketable<T extends 'Gem' | 'Rune'> {
     name: string;

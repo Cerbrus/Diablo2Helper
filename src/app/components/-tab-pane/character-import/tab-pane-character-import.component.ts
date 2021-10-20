@@ -2,15 +2,15 @@ import { DatePipe, KeyValue } from '@angular/common';
 import { Component } from '@angular/core';
 import { ID2S } from '@dschu012/d2s/lib/d2/types';
 import { TranslateService } from '@ngx-translate/core';
-import { GemHelper, RuneHelper, RuneWordHelper } from '../../../helpers';
-import { IGem } from '../../../interfaces/gem';
-import { IRune } from '../../../interfaces/rune';
-import { IRuneWord } from '../../../interfaces/runeWord';
-import { ITabPaneComponent } from '../../../interfaces/ui';
-import { RunewordFilterService } from '../../../services';
-import { D2sParserService } from '../../../services/d2s-parser.service';
-import { TError } from '../../../types';
-import { TClass } from '../../../types/player';
+import { GemHelper, RuneHelper, RuneWordHelper } from '~helpers';
+import { IGem } from '~interfaces/gem';
+import { IRune } from '~interfaces/rune';
+import { IRuneWord } from '~interfaces/runeWord';
+import { ITabPaneComponent } from '~interfaces/ui';
+import { RunewordFilterService } from '~services';
+import { D2sParserService } from '~services/d2s-parser.service';
+import { TError } from '~types';
+import { TClass } from '~types/player';
 
 @Component({
     selector: 'tab-pane-character-import',

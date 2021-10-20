@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../../testing/test-common.module';
-import { UiTableRecordComponent } from './ui-table-record.component';
+import { UiTableRecordComponent } from '~modules/ui/components';
+import { TestModule } from '~testModule';
 
 describe('UiTableRecordComponent', () => {
     let component: UiTableRecordComponent<any, any>;

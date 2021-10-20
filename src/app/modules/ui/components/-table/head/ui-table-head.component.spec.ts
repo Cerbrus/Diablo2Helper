@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../../testing/test-common.module';
-import { UiTableHeadComponent } from './ui-table-head.component';
+import { UiTableHeadComponent } from '~modules/ui/components';
+import { TestModule } from '~testModule';
 
 describe('UiTableHeadComponent', () => {
     let component: UiTableHeadComponent;

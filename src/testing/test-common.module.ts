@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MissingTranslationHandler, TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app/app.module';
-import { LogMissingTranslationHandler } from '../app/handlers/log-missing-translations.handler';
+import { LogMissingTranslationHandler } from '~handlers/log-missing-translations.handler';
 
 @NgModule({
     imports: [

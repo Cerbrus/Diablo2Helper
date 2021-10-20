@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RuneHelper } from '../../helpers';
-import { IRune } from '../../interfaces/rune';
-import { RuneTrackerService } from '../../services';
+import { RuneHelper } from '~helpers';
+import { IRune } from '~interfaces/rune';
+import { RuneTrackerService } from '~services';
 
 @Component({
     selector: 'rune-counter',

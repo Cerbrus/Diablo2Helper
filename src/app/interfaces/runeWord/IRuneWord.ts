@@ -1,7 +1,7 @@
-import { TEffectApplication, TEffectKey, TItem } from '../../types';
-import { ItemOrArray } from '../../types/helpers';
-import { TRune } from '../../types/rune';
-import { TRuneWord } from '../../types/runeWord';
+import { TEffectApplication, TEffectKey, TItem } from '~types';
+import { ItemOrArray } from '~types/helpers';
+import { TRune } from '~types/rune';
+import { TRuneWord } from '~types/runeWord';
 import { IEffect } from '../effect';
 import { IRune } from '../rune';
 

@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { ISkillUi } from '../../../../../interfaces/player';
-import { ClassesUi, SkillsUi, TClassUi } from '../../../../../types/player';
+import { ISkillUi } from '~interfaces/player';
+import { ClassesUi, SkillsUi, TClassUi } from '~types/player';
 import { SpriteBaseComponent } from '../sprite-base.component';
 
 @Component({

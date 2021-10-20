@@ -1,5 +1,5 @@
+import { TGemQuality, TGemType } from '~types/gem';
 import { IGem } from '.';
-import { TGemQuality, TGemType } from '../../types/gem';
 
 export interface IGemMap extends TGemMap {
 }

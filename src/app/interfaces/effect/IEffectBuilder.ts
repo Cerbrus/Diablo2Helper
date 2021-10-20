@@ -1,4 +1,4 @@
-import { ItemOrArray } from '../../types/helpers';
+import { ItemOrArray } from '~types/helpers';
 import { IWeaponArmorHelmShield } from '../socketable';
 import { IEffect } from './';
 

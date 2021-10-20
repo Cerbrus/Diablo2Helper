@@ -1,5 +1,5 @@
-import { ItemOrArray } from '../../types/helpers';
-import { TRune } from '../../types/rune';
+import { ItemOrArray } from '~types/helpers';
+import { TRune } from '~types/rune';
 import { IGem } from '../gem';
 import { ISocketable } from '../socketable';
 

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../testing/test-common.module';
-import { UiScrollableComponent } from './ui-scrollable.component';
+import { TestModule } from '~testModule';
+import { UiScrollableComponent } from '~modules/ui/components';
 
 describe('UiScrollableComponent', () => {
     let component: UiScrollableComponent;

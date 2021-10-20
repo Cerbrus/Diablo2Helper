@@ -1,6 +1,6 @@
 import { KeyValue } from '@angular/common';
+import { ItemOrArray, Key } from '~types/helpers';
 import { isArray } from 'rxjs/internal-compatibility';
-import { ItemOrArray, Key } from '../../types/helpers';
 
 export class ArrayHelper {
     public static repeat<T>(value: T, length: number): Array<T> {

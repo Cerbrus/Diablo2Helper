@@ -1,5 +1,5 @@
+import { TRuneWord } from '~types/runeWord';
 import { IRuneWord } from '.';
-import { TRuneWord } from '../../types/runeWord';
 
 export interface IRuneWordMap extends TRuneWordMap {
 }

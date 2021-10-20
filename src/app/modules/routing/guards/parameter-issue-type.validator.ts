@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { IssueTypes } from '../../../types';
+import { IssueTypes } from '~types';
 import { ParameterValidatorBase } from './parameter-base.validator';
 
 @Injectable()

@@ -1,7 +1,7 @@
 import { IItem } from '@dschu012/d2s/lib/d2/types';
-import { BaseEntityFactory } from '../factories/base-entity.factory';
-import { ITable } from '../interfaces/ui';
-import { ItemOrArray } from '../types/helpers';
+import { BaseEntityFactory } from '~factories/base-entity.factory';
+import { ITable } from '~interfaces/ui';
+import { ItemOrArray } from '~types/helpers';
 import { ArrayHelper, ObjectHelper } from './ts';
 
 export abstract class BaseEntitiesHelper<TEntityMap,

@@ -4,7 +4,7 @@ import { read as parseD2s } from '@dschu012/d2s';
 import { ID2S, IItem } from '@dschu012/d2s/lib/d2/types';
 import { constants } from '@dschu012/d2s/lib/data/versions/96_constant_data';
 import { from, Observable } from 'rxjs';
-import { ArrayHelper, BaseEntitiesHelper, ObjectHelper } from '../helpers';
+import { ArrayHelper, BaseEntitiesHelper, ObjectHelper } from '~helpers';
 
 @Injectable({ providedIn: 'root' })
 export class D2sParserService {

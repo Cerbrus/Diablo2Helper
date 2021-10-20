@@ -1,11 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { Directive, ElementRef, Inject, Input, Renderer2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { EffectHelper, EffectRowConfig, GemHelper, RuneHelper } from '../../../../helpers';
-import { IGem } from '../../../../interfaces/gem';
-import { IRune } from '../../../../interfaces/rune';
-import { TGem } from '../../../../types/gem';
-import { TRune } from '../../../../types/rune';
+import { EffectHelper, EffectRowConfig, GemHelper, RuneHelper } from '~helpers';
+import { IGem } from '~interfaces/gem';
+import { IRune } from '~interfaces/rune';
+import { TGem } from '~types/gem';
+import { TRune } from '~types/rune';
 import { TooltipBaseDirective } from '../tooltip-base/tooltip-base';
 
 @Directive({

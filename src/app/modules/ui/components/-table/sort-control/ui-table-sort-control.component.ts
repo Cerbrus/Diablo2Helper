@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
+import { ITable, ITableHeader, TableSortDirection, TableSortIcon } from '~interfaces/ui';
 import {
     faSortAlphaDown,
     faSortAlphaDownAlt,
@@ -12,9 +12,9 @@ import {
     faSortNumericDown,
     faSortNumericDownAlt,
     faSortNumericUp,
-    faSortNumericUpAlt
-} from '@fortawesome/free-solid-svg-icons';
-import { ITable, ITableHeader, TableSortDirection, TableSortIcon } from '../../../../../interfaces/ui';
+    faSortNumericUpAlt,
+    IconDefinition
+} from '~modules/font-awesome';
 
 @Component({
     selector: 'ui-table-sort-control',

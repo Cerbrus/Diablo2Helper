@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ITab } from '../../../../../interfaces/ui';
-import { StorageService } from '../../../../../services';
+import { ITab } from '~interfaces/ui';
+import { StorageService } from '~services';
 
 @Component({
     selector: 'ui-tabs',

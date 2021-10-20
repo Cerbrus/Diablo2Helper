@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../testing/test-common.module';
-import { UiFormatEffectComponent } from './ui-format-effect.component';
+import { TestModule } from '~testModule';
+import { UiFormatEffectComponent } from '~modules/ui/components';
 
 describe('UiFormatEffectComponent', () => {
     let component: UiFormatEffectComponent;

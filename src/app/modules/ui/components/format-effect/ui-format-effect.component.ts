@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { EffectHelper } from '../../../../helpers';
-import { IEffect } from '../../../../interfaces/effect';
-import { ItemOrArray } from '../../../../types/helpers';
+import { EffectHelper } from '~helpers';
+import { IEffect } from '~interfaces/effect';
+import { ItemOrArray } from '~types/helpers';
 
 @Component({
     selector: 'ui-format-effect',

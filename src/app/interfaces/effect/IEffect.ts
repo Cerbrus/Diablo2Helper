@@ -1,6 +1,6 @@
-import { EffectOptions, EffectType } from '../../enums';
-import { TEffectDescriptionKey } from '../../types';
-import { TClass, TSkill, TSkillGroup, TSkillRuneWord } from '../../types/player';
+import { EffectOptions, EffectType } from '~enums';
+import { TEffectDescriptionKey } from '~types';
+import { TClass, TSkill, TSkillGroup, TSkillRuneWord } from '~types/player';
 
 export interface IEffect {
     description: TEffectDescriptionKey;

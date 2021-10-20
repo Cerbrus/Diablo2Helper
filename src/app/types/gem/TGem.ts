@@ -1,4 +1,4 @@
-import { IGem } from '../../interfaces/gem';
+import { IGem } from '~interfaces/gem';
 
 export type TGem = `${TGemQuality}|${TGemType}`;
 

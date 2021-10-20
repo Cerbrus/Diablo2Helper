@@ -1,12 +1,12 @@
 // noinspection SpellCheckingInspection
 
 import { Injectable } from '@angular/core';
-import { EffectOptions, EffectType } from '../enums';
-import { EffectHelper, GemHelper, ObjectHelper, RuneHelper } from '../helpers';
-import { IRuneWordMap } from '../interfaces/runeWord';
-import { StorageService } from '../services';
-import { TItem } from '../types';
-import { TRune } from '../types/rune';
+import { EffectOptions, EffectType } from '~enums';
+import { EffectHelper, GemHelper, ObjectHelper, RuneHelper } from '~helpers';
+import { IRuneWordMap } from '~interfaces/runeWord';
+import { StorageService } from '~services';
+import { TItem } from '~types';
+import { TRune } from '~types/rune';
 import { BaseEntityFactory } from './base-entity.factory';
 
 @Injectable({ providedIn: 'root' })

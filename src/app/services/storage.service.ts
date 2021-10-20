@@ -1,11 +1,11 @@
 // noinspection JSRemoveUnnecessaryParentheses
 
 import { Injectable } from '@angular/core';
-import settings from '../../assets/settings.json';
-import { environment } from '../../environments/environment';
-import { ArrayHelper, ObjectHelper } from '../helpers';
-import { IStorage } from '../interfaces';
-import { GetValue, RemoveValue, SaveValue } from '../types/storage';
+import { environment } from '~environment';
+import { ArrayHelper, ObjectHelper } from '~helpers';
+import { IStorage } from '~interfaces';
+import settings from '~settings';
+import { GetValue, RemoveValue, SaveValue } from '~types/storage';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {

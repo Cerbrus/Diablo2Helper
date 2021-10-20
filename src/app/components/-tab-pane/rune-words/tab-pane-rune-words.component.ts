@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ITabPaneComponent } from '../../../interfaces/ui';
-import { RunewordFilterService } from '../../../services';
+import { ITabPaneComponent } from '~interfaces/ui';
+import { RunewordFilterService } from '~services';
 
 @Component({
     selector: 'tab-pane-rune-words',

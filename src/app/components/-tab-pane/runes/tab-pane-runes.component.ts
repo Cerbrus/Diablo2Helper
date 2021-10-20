@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ITabPaneComponent } from '../../../interfaces/ui';
+import { ITabPaneComponent } from '~interfaces/ui';
 
 @Component({
     selector: 'tab-pane-runes',

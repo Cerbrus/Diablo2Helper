@@ -1,4 +1,4 @@
-import { TRune } from '../../types/rune';
+import { TRune } from '~types/rune';
 import { IRune } from '.';
 
 export interface IRuneMap extends TRuneMap {

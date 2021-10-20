@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TIssueType } from '../../types';
+import { TIssueType } from '~types';
 
 @Component({ selector: 'report-issue', template: '' })
 export class ReportIssueComponent {

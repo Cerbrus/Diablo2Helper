@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../testing/test-common.module';
-import { TabPaneSettingsComponent } from './tab-pane-settings.component';
+import { TestModule } from '~testModule';
+import { TabPaneSettingsComponent } from '~components/-tab-pane';
 
 describe('TabPaneSettingsComponent', () => {
     let component: TabPaneSettingsComponent;

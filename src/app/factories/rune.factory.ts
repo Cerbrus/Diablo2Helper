@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ArrayHelper, EffectHelper, GemHelper } from '../helpers';
-import { IRuneMap } from '../interfaces/rune';
+import { ArrayHelper, EffectHelper, GemHelper } from '~helpers';
+import { IRuneMap } from '~interfaces/rune';
 import { BaseEntityFactory } from './base-entity.factory';
 
 @Injectable({ providedIn: 'root' })

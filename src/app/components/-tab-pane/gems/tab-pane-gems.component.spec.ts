@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../testing/test-common.module';
-import { TabPaneGemsComponent } from './tab-pane-gems.component';
+import { TestModule } from '~testModule';
+import { TabPaneGemsComponent } from '~components/-tab-pane';
 
 describe('TabPaneGemsComponent', () => {
     let component: TabPaneGemsComponent;

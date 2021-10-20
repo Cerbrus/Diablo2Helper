@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../../testing/test-common.module';
-import { UiSpriteClassComponent } from './ui-sprite-class.component';
+import { TestModule } from '~testModule';
+import { UiSpriteClassComponent } from '~modules/ui/components';
 
 describe('UiSpriteClassComponent', () => {
     let component: UiSpriteClassComponent;

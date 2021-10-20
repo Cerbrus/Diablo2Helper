@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TCssAnimation } from '../../../../../types/animation';
+import { TCssAnimation } from '~types/animation';
 
 @Component({
     selector: 'ui-sprite-animated',

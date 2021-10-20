@@ -9,12 +9,12 @@ import {
     RuneHelper,
     RuneWordHelper,
     StringHelper
-} from '../helpers';
-import { IGem } from '../interfaces/gem';
-import { IRune } from '../interfaces/rune';
-import { IRuneWord, IRuneWordFilters, IRuneWordMap } from '../interfaces/runeWord';
-import { TItem } from '../types';
-import { RuneWords, TRuneWord } from '../types/runeWord';
+} from '~helpers';
+import { IGem } from '~interfaces/gem';
+import { IRune } from '~interfaces/rune';
+import { IRuneWord, IRuneWordFilters, IRuneWordMap } from '~interfaces/runeWord';
+import { TItem } from '~types';
+import { RuneWords, TRuneWord } from '~types/runeWord';
 import { RuneTrackerService, StorageService } from './';
 
 @Injectable({ providedIn: 'root' })

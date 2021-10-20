@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { GemHelper } from '../../../../../helpers';
-import { IGem } from '../../../../../interfaces/gem';
-import { GemQualities, GemTypes, TGem } from '../../../../../types/gem';
+import { GemHelper } from '~helpers';
+import { IGem } from '~interfaces/gem';
+import { GemQualities, GemTypes, TGem } from '~types/gem';
 import { SpriteBaseComponent } from '../sprite-base.component';
 
 @Component({

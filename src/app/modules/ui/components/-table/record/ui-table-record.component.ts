@@ -1,9 +1,9 @@
 import { KeyValue } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { IGem } from '../../../../../interfaces/gem';
-import { IRune } from '../../../../../interfaces/rune';
-import { IRuneWord } from '../../../../../interfaces/runeWord';
-import { LabeledBaseComponent } from '../../../../shared';
+import { IGem } from '~interfaces/gem';
+import { IRune } from '~interfaces/rune';
+import { IRuneWord } from '~interfaces/runeWord';
+import { LabeledBaseComponent } from '~modules/shared';
 
 @Component({
     selector: 'ui-table-record',

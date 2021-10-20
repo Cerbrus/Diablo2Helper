@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
-import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
-import { faBug } from '@fortawesome/free-solid-svg-icons';
-import { environment } from '../../../../environments/environment';
-import { ObjectHelper } from '../../../helpers';
-import { ISettings } from '../../../interfaces';
-import { ITabPaneComponent } from '../../../interfaces/ui';
-import { StorageService } from '../../../services';
+import { faLightbulb } from '@fortawesome/free-regular-svg-icons/faLightbulb';
+import { environment } from '~environment';
+import { ObjectHelper } from '~helpers';
+import { ISettings } from '~interfaces';
+import { ITabPaneComponent } from '~interfaces/ui';
+import { faBug, IconDefinition } from '~modules/font-awesome';
+import { StorageService } from '~services';
 
 @Component({
     selector: 'tab-pane-settings',

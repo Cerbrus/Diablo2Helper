@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../../testing/test-common.module';
-import { UiTableSortControlComponent } from './ui-table-sort-control.component';
+import { UiTableSortControlComponent } from '~modules/ui/components';
+import { TestModule } from '~testModule';
 
 describe('UiTableSortControlComponent', () => {
     let component: UiTableSortControlComponent<any, any>;

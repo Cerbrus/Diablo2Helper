@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../testing/test-common.module';
-import { ListGemsComponent } from './list-gems.component';
+import { ListGemsComponent } from '~components/-list';
+import { TestModule } from '~testModule';
 
 describe('ListGemsComponent', () => {
     let component: ListGemsComponent;

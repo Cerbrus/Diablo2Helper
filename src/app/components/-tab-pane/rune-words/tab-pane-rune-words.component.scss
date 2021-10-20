@@ -10,9 +10,9 @@
     grid-template-columns: max-content 3fr;
     grid-template-rows: repeat(2, min-content) 1fr;
     grid-template-areas:
-    "filters tracking-select"
-    "filters tracking-count"
-    "filters runewords"
+        'filters tracking-select'
+        'filters tracking-count'
+        'filters runewords';
 }
 
 list-rune-words-filters {
@@ -29,7 +29,7 @@ rune-tracking-counters {
 
 .list-wrapper {
     grid-area: runewords;
-    position: relative
+    position: relative;
 }
 
 list-rune-words {

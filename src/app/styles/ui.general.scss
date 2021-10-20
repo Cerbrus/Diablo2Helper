@@ -72,7 +72,13 @@ p {
     text-align: center;
 }
 
-$sizes: ('xs': 0.5rem, 's': 0.75rem, 'm': 1rem, 'l': 1.5rem, 'xl': 2rem);
+$sizes: (
+    'xs': 0.5rem,
+    's': 0.75rem,
+    'm': 1rem,
+    'l': 1.5rem,
+    'xl': 2rem
+);
 @each $key, $size in $sizes {
     .text-#{$key} {
         font-size: $size;

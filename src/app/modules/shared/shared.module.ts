@@ -16,40 +16,14 @@ import { OnClickSelectDirective, TooltipSocketableDirective, VarDirective } from
 // Pipes
 import { AsArrayPipe, KeyValueTypedPipe } from './pipes';
 
-const directives = [
-    OnClickSelectDirective,
-    TooltipSocketableDirective,
-    VarDirective
-];
-
-const pipes = [
-    AsArrayPipe,
-    KeyValueTypedPipe
-];
-
-const modules = [
-    BrowserModule,
-    CommonModule,
-    FontAwesomeModule,
-    FormsModule,
-    ResizeObserverModule,
-    TranslateModule
-];
+const directives = [OnClickSelectDirective, TooltipSocketableDirective, VarDirective];
+const pipes = [AsArrayPipe, KeyValueTypedPipe];
+const modules = [BrowserModule, CommonModule, FontAwesomeModule, FormsModule, ResizeObserverModule, TranslateModule];
 
 @NgModule({
-    declarations: [
-        directives,
-        pipes
-    ],
-    imports: [
-        modules
-    ],
-    exports: [
-        directives,
-        pipes,
-        modules
-    ],
+    declarations: [directives, pipes],
+    imports: [modules],
+    exports: [directives, pipes, modules],
     providers: [NG_EVENT_PLUGINS]
 })
-export class SharedModule {
-}
+export class SharedModule {}

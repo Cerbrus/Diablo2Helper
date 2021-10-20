@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostBinding, HostListener, Input, Renderer2 } fr
 
 @Directive()
 export abstract class TooltipBaseDirective {
-    public tooltip!: HTMLElement;
+    public tooltip!: HTMLDivElement;
 
     @Input('tooltipDelay')
     public delay = 500;
@@ -22,7 +22,8 @@ export abstract class TooltipBaseDirective {
         private readonly cssClass: string,
         private readonly elementRef: ElementRef<HTMLElement>,
         protected readonly renderer: Renderer2,
-        private document: Document) {
+        private document: Document
+    ) {
         this.nativeElement.classList.add('pointer');
         this.setupContainer();
     }
@@ -50,8 +51,7 @@ export abstract class TooltipBaseDirective {
         const row = renderer.createElement('div');
         row.appendChild(renderer.createText(text));
 
-        if (cssClasses)
-            cssClasses.forEach(cssClass => renderer.addClass(row, cssClass));
+        if (cssClasses) cssClasses.forEach(cssClass => renderer.addClass(row, cssClass));
 
         this.tooltip.appendChild(row);
         return this;
@@ -65,8 +65,7 @@ export abstract class TooltipBaseDirective {
     protected abstract buildHtml(): void;
 
     private cancelHide(): void {
-        if (this.hideDelay)
-            clearTimeout(this.hideDelay);
+        if (this.hideDelay) clearTimeout(this.hideDelay);
     }
 
     private hideAllOtherTooltips(): void {
@@ -79,7 +78,8 @@ export abstract class TooltipBaseDirective {
     private createTooltip(): HTMLDivElement {
         const { renderer } = this;
 
-        const tooltip = this.tooltip = renderer.createElement('div');
+        this.tooltip = renderer.createElement('div');
+        const { tooltip } = this;
         this.buildHtml();
 
         const hostPos = this.nativeElement.getBoundingClientRect();

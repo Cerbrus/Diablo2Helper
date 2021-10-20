@@ -13,7 +13,5 @@ export type SuffixProperties<T, Suffix extends string> = {
     [key in keyof T as `${Capitalize<string & key>}${Suffix}`]: T[key];
 };
 
-export type PrefixKey<T extends string, Prefix extends string> =
-    `${Prefix}${Capitalize<string & T>}`;
-export type SuffixKey<T extends string, Suffix extends string> =
-    `${Uncapitalize<string & T>}${Suffix}`;
+export type PrefixKey<T extends string, Prefix extends string> = `${Prefix}${Capitalize<string & T>}`;
+export type SuffixKey<T extends string, Suffix extends string> = `${Uncapitalize<string & T>}${Suffix}`;

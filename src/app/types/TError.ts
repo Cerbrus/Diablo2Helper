@@ -1,4 +1,4 @@
 export type TError<T> = {
-    error: T,
-    message: string
-}
+    error: T;
+    message: string;
+};

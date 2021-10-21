@@ -12,6 +12,7 @@
         [showIcon]="true"
         [(checked)]="settings.darkMode"
         (click)="onToggle('darkMode')"
+        [keyboardShortcut]="'a'"
     ></input-checkbox>
     <ui-sprite-skill
         [class]="this.settings.darkMode ? 'assassin' : 'sorceress'"
@@ -25,6 +26,7 @@
         [showIcon]="true"
         [(checked)]="settings.enableBackground"
         (click)="onToggle('enableBackground')"
+        [keyboardShortcut]="'b'"
     ></input-checkbox>
     <ui-sprite-skill
         [class]="this.settings.enableBackground ? 'paladin' : 'barbarian'"
@@ -37,6 +39,7 @@
         [showIcon]="true"
         [(checked)]="settings.customCursor"
         (click)="onToggle('customCursor')"
+        [keyboardShortcut]="'c'"
     ></input-checkbox>
     <ui-sprite-animated
         [scale]="0.25"
@@ -52,6 +55,7 @@
         [showIcon]="true"
         [(checked)]="settings.customCursorLarge"
         (click)="onToggle('customCursorLarge')"
+        [keyboardShortcut]="'l'"
     ></input-checkbox>
     <ui-sprite-animated
         *ngIf="settings.customCursor"

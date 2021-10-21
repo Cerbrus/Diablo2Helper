@@ -5,6 +5,7 @@
             (click)="selectTab(tab, $event)"
             [class.active]="tab.options.active"
             [class.right]="tab.options.right"
+            [keyboardShortcut]="tab.options.shortcutKey"
         >
             <a href="#">{{ tab.options.title | translate }}</a>
         </li>

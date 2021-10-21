@@ -9,9 +9,7 @@ import { TGem } from '~types/gem';
 import { TRune } from '~types/rune';
 import { TooltipBaseDirective } from '../tooltip-base/tooltip-base';
 
-@Directive({
-    selector: '[tooltipSocketable]'
-})
+@Directive({ selector: '[tooltipSocketable]' })
 export class TooltipSocketableDirective extends TooltipBaseDirective {
     @Input('tooltipSocketable')
     public socketable!: TGem | IGem | TRune | IRune;

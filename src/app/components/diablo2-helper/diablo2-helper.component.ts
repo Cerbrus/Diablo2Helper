@@ -24,28 +24,28 @@ export class Diablo2HelperComponent {
     public tabs: Array<ITab> = [
         {
             component: TabPaneRuneWordsComponent,
-            options: { title: 'common.runeWords', key: 'runewords' },
+            options: { title: 'common.runeWords', key: 'runewords', shortcutKey: 'w' },
             cssClass: 'runeWords'
         },
         {
             component: TabPaneRunesComponent,
-            options: { title: 'common.runes', key: 'runes' }
+            options: { title: 'common.runes', key: 'runes', shortcutKey: 'r' }
         },
         {
             component: TabPaneGemsComponent,
-            options: { title: 'common.gems', key: 'gems' }
+            options: { title: 'common.gems', key: 'gems', shortcutKey: 'g' }
         },
         {
             component: TabPaneCharacterImportComponent,
-            options: { title: 'labels.import', key: 'import', fillHeight: false }
+            options: { title: 'labels.import', key: 'import', shortcutKey: 'i', fillHeight: false }
         },
         {
             component: TabPaneSettingsComponent,
-            options: { title: 'settings.title', key: 'settings', right: true, fillHeight: false }
+            options: { title: 'settings.title', key: 'settings', shortcutKey: 's', right: true, fillHeight: false }
         },
         {
             component: TabPaneDevComponent,
-            options: { title: 'labels.dev', key: 'dev', right: true, fillHeight: false },
+            options: { title: 'labels.dev', key: 'dev', shortcutKey: 'd', right: true, fillHeight: false },
             hide: this.environment.production
         }
     ];

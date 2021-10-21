@@ -1,0 +1,36 @@
+@use 'variables';
+
+.keyboard-shortcut {
+    position: relative;
+
+    .overlay {
+        position: absolute;
+        content: ' ';
+        color: transparent;
+        display: grid;
+        grid-auto-flow: column;
+        align-content: center;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: -1px;
+        pointer-events: none;
+    }
+
+    .accent {
+        display: contents;
+        text-underline-position: under;
+    }
+}
+
+input-checkbox.keyboard-shortcut .overlay {
+    text-align: left;
+    font-weight: bold;
+    top: -3.5px;
+    padding-left: 36px;
+}
+
+.show-keyboard-hints .keyboard-shortcut .accent {
+    text-decoration: underline variables.$theme-text;
+}

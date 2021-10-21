@@ -1,9 +1,7 @@
 @use 'variables';
 
-.tooltip-socketable {
-    .title-rune {
-        color: variables.$color-rune-name;
-    }
+.tooltip-socketable .title-rune {
+    color: variables.$color-rune-name;
 }
 
 span,

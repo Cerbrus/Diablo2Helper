@@ -11,12 +11,24 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NG_EVENT_PLUGINS } from '@tinkoff/ng-event-plugins';
 
 // Directives
-import { OnClickSelectDirective, TooltipSocketableDirective, VarDirective } from './directives';
+import {
+    KeyboardShortcutDirective,
+    OnClickSelectDirective,
+    TooltipKeyboardShortcutDirective,
+    TooltipSocketableDirective,
+    VarDirective
+} from './directives';
 
 // Pipes
 import { AsArrayPipe, KeyValueTypedPipe } from './pipes';
 
-const directives = [OnClickSelectDirective, TooltipSocketableDirective, VarDirective];
+const directives = [
+    KeyboardShortcutDirective,
+    OnClickSelectDirective,
+    TooltipKeyboardShortcutDirective,
+    TooltipSocketableDirective,
+    VarDirective
+];
 const pipes = [AsArrayPipe, KeyValueTypedPipe];
 const modules = [BrowserModule, CommonModule, FontAwesomeModule, FormsModule, ResizeObserverModule, TranslateModule];
 

@@ -1,37 +1,59 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
-import { DomHelper, ObjectHelper } from '~helpers';
-import { TLetter } from '~types/helpers';
+import { TranslateService } from '@ngx-translate/core';
+import { DomHelper, Helper, StringHelper } from '~helpers';
+import { char } from '~types/helpers';
+import { PopupService } from './popup.service';
 
 @Injectable({ providedIn: 'root' })
 export class KeyboardShortcutService {
-    private listeners: Partial<Record<TLetter | '?', HTMLElement>>;
-    private registeredKeys: Array<TLetter | '?'> = [];
+    private registeredKeys: Array<char> = [StringHelper.Char('?')];
+    private keyGroups: Map<string, Array<char>> = new Map([['title', [StringHelper.Char('?')]]]);
+    private readonly listeners: Map<char, HTMLElement>;
     private readonly metaKeys = ['Control', 'Alt', 'Shift', 'Meta'];
 
     private static = KeyboardShortcutService;
+    private tooltip?: HTMLDivElement;
 
-    constructor(@Inject(DOCUMENT) private document: Document) {
-        this.listeners = { '?': document.body };
+    private get popup(): PopupService {
+        return this.popupService.using(this.tooltip);
+    }
+
+    constructor(
+        private readonly popupService: PopupService,
+        private readonly translate: TranslateService,
+        @Inject(DOCUMENT) private document: Document
+    ) {
+        this.listeners = new Map([[StringHelper.Char('?'), document.body]]);
         document.body.addEventListener('keydown', this.onKeyDown.bind(this));
         document.body.addEventListener('keyup', this.onKeyUp.bind(this));
     }
 
-    public registerKey(key: TLetter | '?', element: HTMLElement): void {
+    public registerKey(key: char, element: HTMLElement, group?: string): void {
         if (this.listeners.hasOwnProperty(key))
             throw new Error(`A listener for key [${key}] has already been registered!`);
 
-        this.listeners[key] = element;
-        this.registeredKeys = ObjectHelper.keys(this.listeners);
+        this.listeners.set(key, element);
+        this.registeredKeys.push(key);
+        if (group) {
+            if (!this.keyGroups.has(group)) this.keyGroups.set(group, []);
+            const g = this.keyGroups.get(group);
+            Helper.assertHasValue(g);
+            g.push(key);
+        }
     }
 
     private onKeyDown(event: KeyboardEvent): void {
         if (!this.static.isAllowedEvent(event)) return;
 
-        const key = <TLetter | '?'>event.key;
-
-        if (key === '?') {
+        const key = event.key;
+        if (key === StringHelper.Char('?')) {
             event.preventDefault();
+
+            if (!this.tooltip) this.createTooltip();
+            if (!this.popup.isVisible) this.fillTooltip();
+            this.popup.toggle();
+
             return this.toggleHelp();
         }
 
@@ -40,25 +62,33 @@ export class KeyboardShortcutService {
             return this.toggleHelp(true);
         }
 
+        if (!StringHelper.isChar(key)) return;
+
         if (this.registeredKeys.includes(key)) {
             if (!this.static.hasMetaKey(event)) event.preventDefault();
 
-            const target = this.listeners[key];
-            if (target && DomHelper.isVisible(target)) target.click();
+            const target = this.listeners.get(key);
+            if (target && DomHelper.isVisible(target)) {
+                target.click();
+                setTimeout(() => {
+                    this.fillTooltip();
+                });
+            }
         }
     }
 
     private onKeyUp(event: KeyboardEvent): void {
-        if (!this.static.isAllowedEvent(event)) return;
-
-        if (this.metaKeys.includes(event.key)) {
-            event.preventDefault();
-            this.toggleHelp(false);
+        if (!this.static.isAllowedEvent(event) || !this.metaKeys.includes(event.key) || !this.tooltip) {
+            return;
         }
+
+        event.preventDefault();
+        this.toggleHelp(false);
+        this.popup.endUsing();
     }
 
     private toggleHelp(show?: boolean): void {
-        this.document.body.classList.toggle('show-keyboard-hints', show);
+        DomHelper.getRoot().classList.toggle('show-keyboard-hints', show || this.popup.isVisible);
     }
 
     private static isAllowedEvent(event: KeyboardEvent): boolean {
@@ -67,5 +97,45 @@ export class KeyboardShortcutService {
 
     private static hasMetaKey(event: KeyboardEvent): boolean {
         return event.ctrlKey || event.altKey || event.shiftKey || event.metaKey;
+    }
+
+    private createTooltip(): void {
+        this.tooltip = this.popupService.createElement('tooltip', 'tooltip-keyboard-shortcuts');
+        this.popup.setPosition({ bottom: 16, left: 16 }, true).endUsing();
+    }
+
+    private fillTooltip(): void {
+        if (!this.tooltip) return;
+        this.popup.empty();
+
+        this.registeredKeys.forEach(key => {
+            if (![...this.keyGroups.values()].some(g => g.includes(key))) this.buildKeyRow(key);
+        });
+
+        this.keyGroups.forEach((keys, group) => {
+            if (!keys?.some(key => this.isTargetVisible(key))) return;
+
+            this.popup.appendRow(this.translate.instant(`tooltip.keyboardShortcuts.${group}`), 'key-group-title');
+
+            keys.sort((a: string, b: string) => a.localeCompare(b)).forEach(this.buildKeyRow.bind(this));
+        });
+
+        this.popup.endUsing();
+    }
+
+    private buildKeyRow(key: char): void {
+        if (!this.isTargetVisible(key)) return;
+
+        const description = DomHelper.createElement('span');
+        DomHelper.underlineLetter(description, this.translate.instant(`tooltip.keyboardShortcuts.${key}`), key, 1);
+
+        this.popup
+            .append(DomHelper.createElement('span', key, 'shortcut-key', 'text-ml'))
+            .append(DomHelper.createElement('span', description));
+    }
+
+    private isTargetVisible(key: char): boolean {
+        const element = this.listeners.get(key);
+        return DomHelper.isVisible(element);
     }
 }

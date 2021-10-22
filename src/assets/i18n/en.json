@@ -73,7 +73,23 @@
         "weapons": "Weapons: {{effect}}",
         "armor": "Armor: {{effect}}",
         "helms": "Helms: {{effect}}",
-        "shields": "Shields: {{effect}}"
+        "shields": "Shields: {{effect}}",
+        "keyboardShortcuts": {
+            "title": "Keyboard shortcuts",
+            "?": "Show / hide this help popup",
+            "tabs": "Tabs",
+            "w": "Open Runewords tab",
+            "r": "Open Runes tab",
+            "g": "Open Gems tab",
+            "i": "Open Import tab",
+            "s": "Open Settings tab",
+            "d": "Open Development tab",
+            "settings": "Settings",
+            "a": "Toggle dark mode",
+            "b": "Toggle background image",
+            "c": "Toggle custom cursor",
+            "l": "Toggle large custom cursor"
+        }
     },
     "character": {
         "class": "Class",

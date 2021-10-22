@@ -1,8 +1,10 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { Helper } from '~helpers';
+import { PopupService } from '~modules/shared/services/popup.service';
 
 @Directive()
 export abstract class TooltipBaseDirective {
-    public tooltip!: HTMLDivElement;
+    public tooltip?: HTMLDivElement;
 
     @Input('tooltipDelay')
     public delay = 500;
@@ -10,101 +12,59 @@ export abstract class TooltipBaseDirective {
     @HostBinding('class')
     private className = this.cssClass;
 
-    private tooltipContainer!: HTMLDivElement;
-
     private hideDelay?: number;
 
-    private get nativeElement(): HTMLElement {
-        return this.elementRef.nativeElement;
+    protected get popup(): PopupService {
+        return this.popupService.using(this.tooltip);
+    }
+
+    private get nativeElement(): HTMLElement | undefined {
+        return this.elementRef?.nativeElement;
     }
 
     protected constructor(
         private readonly cssClass: string,
-        private readonly elementRef: ElementRef<HTMLElement>,
-        protected readonly renderer: Renderer2,
-        private document: Document
+        private readonly popupService: PopupService,
+        private readonly elementRef: ElementRef<HTMLElement>
     ) {
-        this.nativeElement.classList.add('pointer');
-        this.setupContainer();
+        this.nativeElement?.classList.add('pointer');
     }
 
     @HostListener('mouseover')
     public onMouseEnter(): void {
         this.cancelHide();
-        this.tooltip = this.tooltip ?? this.createTooltip();
+        if (!this.tooltip) this.createTooltip();
 
-        this.hideAllOtherTooltips();
-        this.renderer.addClass(this.tooltip, 'show');
+        this.popup.hideAllOtherTooltips().show().endUsing();
     }
 
     @HostListener('mouseleave')
     public onMouseLeave(): void {
         this.cancelHide();
         this.hideDelay = window.setTimeout(() => {
-            this.renderer.removeClass(this.tooltip, 'show');
+            this.popup.hide().endUsing();
         }, this.delay);
-    }
-
-    public appendRow(text: string, ...cssClasses: Array<string>): TooltipBaseDirective {
-        const { renderer } = this;
-
-        const row = renderer.createElement('div');
-        row.appendChild(renderer.createText(text));
-
-        if (cssClasses) cssClasses.forEach(cssClass => renderer.addClass(row, cssClass));
-
-        this.tooltip.appendChild(row);
-        return this;
-    }
-
-    public lineBreak(): TooltipBaseDirective {
-        this.tooltip.appendChild(this.renderer.createElement('br'));
-        return this;
     }
 
     protected abstract buildHtml(): void;
 
-    private cancelHide(): void {
-        if (this.hideDelay) clearTimeout(this.hideDelay);
-    }
-
-    private hideAllOtherTooltips(): void {
-        if (!this.tooltip) return;
-        Array.from(document.querySelectorAll('.tooltip.show'))
-            .filter(element => element !== this.tooltip)
-            .forEach(element => this.renderer.removeClass(element, 'show'));
-    }
-
-    private createTooltip(): HTMLDivElement {
-        const { renderer } = this;
-
-        this.tooltip = renderer.createElement('div');
-        const { tooltip } = this;
-        this.buildHtml();
+    protected setPosition(): void {
+        Helper.assertHasValue(this.nativeElement);
 
         const hostPos = this.nativeElement.getBoundingClientRect();
         const top = window.scrollY + hostPos.bottom;
         const left = window.scrollX + hostPos.left + hostPos.width / 2;
 
-        renderer.setStyle(tooltip, 'top', `${top}px`);
-        renderer.setStyle(tooltip, 'left', `${left}px`);
-
-        renderer.appendChild(this.tooltipContainer, tooltip);
-        renderer.addClass(tooltip, 'tooltip');
-        renderer.addClass(tooltip, this.cssClass);
-
-        return tooltip;
+        this.popup.setPosition({ top, left });
     }
 
-    private setupContainer(): void {
-        const { body } = this.document;
-        const containers = <HTMLCollectionOf<HTMLDivElement>>body.getElementsByClassName('tooltip-container');
-        if (!containers.length) {
-            this.tooltipContainer = this.renderer.createElement('div');
-            this.renderer.addClass(this.tooltipContainer, 'tooltip-container');
-            this.renderer.appendChild(body, this.tooltipContainer);
-        } else {
-            this.tooltipContainer = containers[0];
-        }
+    private cancelHide(): void {
+        if (this.hideDelay) clearTimeout(this.hideDelay);
+    }
+
+    private createTooltip(): void {
+        this.tooltip = this.popupService.createElement(this.cssClass, 'tooltip');
+        this.buildHtml();
+        this.setPosition();
     }
 }

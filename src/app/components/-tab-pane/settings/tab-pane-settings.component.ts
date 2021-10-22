@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons/faLightbulb';
 import { environment } from '~environment';
-import { ObjectHelper } from '~helpers';
+import { DomHelper, ObjectHelper } from '~helpers';
 import { ISettings } from '~interfaces';
 import { ITabPaneComponent } from '~interfaces/ui';
 import { faBug, IconDefinition } from '~modules/font-awesome';
@@ -36,7 +36,7 @@ export class TabPaneSettingsComponent implements ITabPaneComponent {
 
     private applySettings(): void {
         const { settings } = this;
-        const classList = document.getElementsByTagName('html')[0].classList;
+        const classList = DomHelper.getRoot().classList;
 
         ObjectHelper.forEach(
             {

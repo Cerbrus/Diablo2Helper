@@ -43,6 +43,7 @@ ui-sprite-animated {
     grid-column: 2;
 }
 
-a span {
+span,
+a {
     margin-left: variables.$size-gap;
 }

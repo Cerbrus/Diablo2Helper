@@ -26,3 +26,6 @@ export type TCapitalLetter =
     | 'X'
     | 'Y'
     | 'Z';
+
+enum CharType {}
+export type char = string & CharType;

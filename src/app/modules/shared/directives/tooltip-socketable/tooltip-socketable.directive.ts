@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { EffectHelper, GemHelper, RuneHelper } from '~helpers';
 import { IGem } from '~interfaces/gem';
 import { IRune } from '~interfaces/rune';
+import { PopupService } from '~modules/shared/services/popup.service';
 import { TEffectRowConfig } from '~types/effect';
 import { TGem } from '~types/gem';
 import { TRune } from '~types/rune';
@@ -16,14 +17,14 @@ export class TooltipSocketableDirective extends TooltipBaseDirective {
 
     constructor(
         elementRef: ElementRef,
-        renderer: Renderer2,
+        popupService: PopupService,
         @Inject(DOCUMENT) document: Document,
-        private readonly translate: TranslateService,
-        private readonly runeHelper: RuneHelper,
+        private readonly effectHelper: EffectHelper,
         private readonly gemHelper: GemHelper,
-        private readonly effectHelper: EffectHelper
+        private readonly runeHelper: RuneHelper,
+        private readonly translate: TranslateService
     ) {
-        super('tooltip-socketable', elementRef, renderer, document);
+        super('tooltip-socketable', popupService, elementRef);
     }
 
     protected buildHtml(): void {
@@ -35,13 +36,16 @@ export class TooltipSocketableDirective extends TooltipBaseDirective {
 
         const title = isRune ? this.translate.instant(`runes.title`, { name }) : name;
 
-        this.appendRow(title, 'title', isRune ? 'title-rune' : 'title-gem')
+        this.popup
+            .appendRow(title, 'title', isRune ? 'title-rune' : 'title-gem')
             .appendRow(this.translate.instant('tooltip.canBeInsertedIntoSocket'))
-            .lineBreak();
+            .lineBreak()
+            .endUsing();
 
         this.effectHelper.effectRows.forEach(this.buildEffectRow.bind(this), this);
 
-        if (cLvl > 1) this.lineBreak().appendRow(this.translate.instant('tooltip.lvlRequirement', { cLvl }));
+        if (cLvl > 1)
+            this.popup.lineBreak().appendRow(this.translate.instant('tooltip.lvlRequirement', { cLvl })).endUsing();
     }
 
     private getRuneOrGem(): IRune | IGem {
@@ -57,6 +61,6 @@ export class TooltipSocketableDirective extends TooltipBaseDirective {
         const effectString = this.effectHelper.formatEffects(effect);
         const row = this.translate.instant(`tooltip.${title}`, { effect: effectString });
 
-        this.appendRow(row);
+        this.popup.appendRow(row).endUsing();
     }
 }

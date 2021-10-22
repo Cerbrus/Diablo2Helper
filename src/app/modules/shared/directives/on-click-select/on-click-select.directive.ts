@@ -1,8 +1,6 @@
 import { Directive, HostListener } from '@angular/core';
 
-@Directive({
-    selector: 'input[onClickSelect], textarea[onClickSelect], pre[onClickSelect]'
-})
+@Directive({ selector: 'input[onClickSelect], textarea[onClickSelect], pre[onClickSelect]' })
 export class OnClickSelectDirective {
     @HostListener('click', ['$event.target'])
     public select(target: HTMLInputElement | HTMLTextAreaElement | HTMLPreElement): void {

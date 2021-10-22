@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+import { RuneWordHelper } from '~helpers';
+import { IRuneWordFilters } from '~interfaces/runeWord';
+import { faTimesCircle } from '~modules/font-awesome';
+import { RunewordFilterService } from '~services';
+import { Items, TItem } from '~types';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { RuneWordHelper } from '../../../helpers';
-import { IRuneWordFilters } from '../../../interfaces/runeWord';
-import { RunewordFilterService } from '../../../services';
-import { Items, TItem } from '../../../types';
 
 @Component({
     selector: 'list-rune-words-filters',
@@ -25,10 +25,7 @@ export class ListRuneWordsFiltersComponent implements OnInit {
     private searchTextChanged = new Subject<string>();
     private debounceDelay = 250;
 
-    constructor(
-        runeWordHelper: RuneWordHelper,
-        private readonly runewordFilterService: RunewordFilterService
-    ) {
+    constructor(runeWordHelper: RuneWordHelper, private readonly runewordFilterService: RunewordFilterService) {
         const cLvls = runeWordHelper.itemsArray.map(r => r.cLvl);
         this.minClvl = Math.min(...cLvls);
         this.maxClvl = Math.max(...cLvls);
@@ -42,7 +39,8 @@ export class ListRuneWordsFiltersComponent implements OnInit {
                 debounceTime(this.debounceDelay),
                 distinctUntilChanged(),
                 map(() => this.saveFilters())
-            ).subscribe();
+            )
+            .subscribe();
     }
 
     public clampClvl(): void {

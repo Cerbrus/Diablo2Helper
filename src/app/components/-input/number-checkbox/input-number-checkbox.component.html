@@ -1,12 +1,9 @@
-<input-checkbox
-    *ngIf="!value"
-    (checkedChange)="onCheck()"
-    label="X"
-    [isXl]="!small"
-></input-checkbox>
-<input *ngIf="value"
-       [class.text-l]="!small"
-       type="number"
-       onClickSelect
-       [(ngModel)]="value"
-       (ngModelChange)="onChange()">
+<input-checkbox *ngIf="!value" (checkedChange)="onCheck()" label="X" [isXl]="!small"></input-checkbox>
+<input
+    *ngIf="value"
+    [class.text-l]="!small"
+    type="number"
+    onClickSelect
+    [(ngModel)]="value"
+    (ngModelChange)="onChange()"
+/>

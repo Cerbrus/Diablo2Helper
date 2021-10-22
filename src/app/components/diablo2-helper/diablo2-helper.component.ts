@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '~environment';
+import { ITab } from '~interfaces/ui';
+import settings from '~settings';
 import {
     TabPaneCharacterImportComponent,
     TabPaneDevComponent,
@@ -9,9 +12,6 @@ import {
     TabPaneRuneWordsComponent,
     TabPaneSettingsComponent
 } from '../-tab-pane';
-import settings from '../../../assets/settings.json';
-import { environment } from '../../../environments/environment';
-import { ITab } from '../../interfaces/ui';
 
 @Component({
     selector: 'diablo2helper',
@@ -24,40 +24,35 @@ export class Diablo2HelperComponent {
     public tabs: Array<ITab> = [
         {
             component: TabPaneRuneWordsComponent,
-            options: { title: 'common.runeWords', key: 'runewords' },
+            options: { title: 'common.runeWords', key: 'runewords', shortcutKey: 'w' },
             cssClass: 'runeWords'
         },
         {
             component: TabPaneRunesComponent,
-            options: { title: 'common.runes', key: 'runes' }
+            options: { title: 'common.runes', key: 'runes', shortcutKey: 'r' }
         },
         {
             component: TabPaneGemsComponent,
-            options: { title: 'common.gems', key: 'gems' }
+            options: { title: 'common.gems', key: 'gems', shortcutKey: 'g' }
         },
         {
             component: TabPaneCharacterImportComponent,
-            options: { title: 'labels.import', key: 'import', fillHeight: false }
+            options: { title: 'labels.import', key: 'import', shortcutKey: 'i', fillHeight: false }
         },
         {
             component: TabPaneSettingsComponent,
-            options: { title: 'settings.title', key: 'settings', right: true, fillHeight: false }
+            options: { title: 'settings.title', key: 'settings', shortcutKey: 's', right: true, fillHeight: false }
         },
         {
             component: TabPaneDevComponent,
-            options: { title: 'labels.dev', key: 'dev', right: true, fillHeight: false },
+            options: { title: 'labels.dev', key: 'dev', shortcutKey: 'd', right: true, fillHeight: false },
             hide: this.environment.production
         }
     ];
 
-    constructor(
-        titleService: Title,
-        translate: TranslateService
-    ) {
+    constructor(titleService: Title, translate: TranslateService) {
         translate.setDefaultLang(settings.defaultLanguage);
         translate.use(settings.defaultLanguage);
-
-        translate.get('common.appTitle')
-            .subscribe(title => titleService.setTitle(title));
+        translate.get('common.appTitle').subscribe(title => titleService.setTitle(title));
     }
 }

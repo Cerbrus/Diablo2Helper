@@ -1,12 +1,12 @@
 // noinspection SpellCheckingInspection
 
 import { Injectable } from '@angular/core';
-import { EffectOptions, EffectType } from '../enums';
-import { EffectHelper, GemHelper, ObjectHelper, RuneHelper } from '../helpers';
-import { IRuneWordMap } from '../interfaces/runeWord';
-import { StorageService } from '../services';
-import { TItem } from '../types';
-import { TRune } from '../types/rune';
+import { EffectOptions, EffectType } from '~enums';
+import { EffectHelper, GemHelper, ObjectHelper, RuneHelper } from '~helpers';
+import { IRuneWordMap } from '~interfaces/runeWord';
+import { StorageService } from '~services';
+import { TItem } from '~types';
+import { TRune } from '~types/rune';
 import { BaseEntityFactory } from './base-entity.factory';
 
 @Injectable({ providedIn: 'root' })
@@ -26,7 +26,7 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
         return ['all', ...itemsTypes];
     }
 
-    private runes(...runes: Array<TRune>): { runes: Array<TRune>, cLvl: number } {
+    private runes(...runes: Array<TRune>): { runes: Array<TRune>; cLvl: number } {
         return {
             runes,
             cLvl: Math.max(...runes.map(r => this.runeHelper.asItem(r).cLvl))
@@ -41,8 +41,8 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
         const effect = EffectHelper.effect;
 
         const runeWords: IRuneWordMap = {
-            'Ancient\'s Pledge': {
-                name: 'Ancient\'s Pledge',
+            "Ancient's Pledge": {
+                name: "Ancient's Pledge",
                 itemTypes: all('shield'),
                 ...runes('Ral', 'Ort', 'Tal'),
                 effects: [
@@ -701,8 +701,8 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
                     effect('effect.MF', '23%')
                 ]
             },
-            'King\'s Grace': {
-                name: 'King\'s Grace',
+            "King's Grace": {
+                name: "King's Grace",
                 itemTypes: ['sword', 'scepter'],
                 ...runes('Amn', 'Ral', 'Thul'),
                 effects: [
@@ -1367,10 +1367,9 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
             }
         };
 
-        ObjectHelper.forEach(
-            runeWords,
-            (key, runeWord) =>
-                runeWord.owned = owned[runeWord.name]);
+        ObjectHelper.forEach(runeWords, (key, runeWord) => {
+            runeWord.owned = owned[runeWord.name];
+        });
 
         return runeWords;
     }

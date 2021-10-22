@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { Diablo2HelperComponent } from '../../components/diablo2-helper/diablo2-helper.component';
-import { ReportIssueComponent } from '../../components/report-issue/report-issue.component';
+import { Diablo2HelperComponent } from '~components/diablo2-helper/diablo2-helper.component';
+import { ReportIssueComponent } from '~components/report-issue/report-issue.component';
 import { ParameterIssueType, ParameterTab } from './guards';
 
 const routes: Routes = [
@@ -16,16 +16,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(routes)
-    ],
-    exports: [
-        RouterModule
-    ],
-    providers: [
-        ParameterTab,
-        ParameterIssueType
-    ]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
+    providers: [ParameterTab, ParameterIssueType]
 })
-export class RoutingModule {
-}
+export class RoutingModule {}

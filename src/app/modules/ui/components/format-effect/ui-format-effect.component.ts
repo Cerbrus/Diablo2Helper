@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { EffectHelper } from '../../../../helpers';
-import { IEffect } from '../../../../interfaces/effect';
-import { ItemOrArray } from '../../../../types/helpers';
+import { EffectHelper } from '~helpers';
+import { IEffect } from '~interfaces/effect';
+import { ItemOrArray } from '~types/helpers';
 
 @Component({
     selector: 'ui-format-effect',
@@ -12,8 +12,7 @@ export class UiFormatEffectComponent {
     private formatted?: string | null;
 
     get formattedEffects(): string | null {
-        if (!this.formatted)
-            this.formatted = this.effectHelper.formatEffects(this.effects, this.lineBreak);
+        if (!this.formatted) this.formatted = this.effectHelper.formatEffects(this.effects, this.lineBreak);
 
         return this.formatted;
     }
@@ -32,6 +31,5 @@ export class UiFormatEffectComponent {
         return !this.effects;
     }
 
-    constructor(private readonly effectHelper: EffectHelper) {
-    }
+    constructor(private readonly effectHelper: EffectHelper) {}
 }

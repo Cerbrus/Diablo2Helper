@@ -1,10 +1,11 @@
 <ui-collapsible labelKey="labels.trackedRunes" pullIcon="left">
     <div class="rune-tracker">
         <ng-container *ngFor="let rune of runes">
-            <input-checkbox *ngVar="getRune(rune) as rune"
-                            [label]="rune.name"
-                            [(checked)]="rune.track"
-                            (click)="countRune(rune)"
+            <input-checkbox
+                *ngVar="getRune(rune) as rune"
+                [label]="rune.name"
+                [(checked)]="rune.track"
+                (click)="countRune(rune)"
             ></input-checkbox>
         </ng-container>
     </div>

@@ -4,24 +4,26 @@
         <div class="row">
             <div class="grid">
                 <div class="row">
-                    <ui-sprite-skill [class]="class"
-                                     [index]="skillIndex"
-                                     [isDown]="isDown"
-                                     [size]="64"
+                    <ui-sprite-skill
+                        [class]="class"
+                        [index]="skillIndex"
+                        [isDown]="isDown"
+                        [size]="64"
                     ></ui-sprite-skill>
-                    <input-checkbox [(checked)]="isDown"
-                                    [showIcon]="true"
-                    ></input-checkbox>
+                    <input-checkbox [(checked)]="isDown" [showIcon]="true"></input-checkbox>
                 </div>
                 <button (click)="stringifySkills()">Get skills data</button>
             </div>
             <div class="grid">
-                <input type="text" [(ngModel)]="class" (keyup)="autoCompleteClass()" onClickSelect>
-                <input type="number" [(ngModel)]="skillIndex" min="0" [max]="getMax()" onClickSelect>
+                <input type="text" [(ngModel)]="class" (keyup)="autoCompleteClass()" onClickSelect />
+                <input type="number" [(ngModel)]="skillIndex" min="0" [max]="getMax()" onClickSelect />
 
-                <input type="text" [(ngModel)]="skills[class] && skills[class][skillIndex]"
-                       (keyup)="autoCompleteSkill()"
-                       onClickSelect>
+                <input
+                    type="text"
+                    [(ngModel)]="skills[class] && skills[class][skillIndex]"
+                    (keyup)="autoCompleteSkill()"
+                    onClickSelect
+                />
             </div>
         </div>
         <pre *ngIf="skillsString" onClickSelect class="pointer">{{ skillsString }}</pre>
@@ -31,21 +33,21 @@
         <div class="logo">
             <ui-sprite-animated
                 class="background"
-                [frames]="6" [animation]="{ direction: 'normal' }"
+                [frames]="6"
+                [animation]="{ direction: 'normal' }"
                 sprite="logo/fullglow_pc.lowend"
             ></ui-sprite-animated>
             <ui-sprite-animated
                 class="foreground"
-                [frames]="27" [animation]="{ direction: 'normal' }"
+                [frames]="27"
+                [animation]="{ direction: 'normal' }"
                 sprite="logo/logoanimation.lowend"
             ></ui-sprite-animated>
-            <img class="foreground"
-                 alt=""
-                 src="/assets/images/sprites/logo/resurrectedtext.lowend.png"
-            >
+            <img class="foreground" alt="" src="/assets/images/sprites/logo/resurrectedtext.lowend.png" />
             <ui-sprite-animated
                 class="foreground"
-                [frames]="27" [animation]="{ direction: 'normal' }"
+                [frames]="27"
+                [animation]="{ direction: 'normal' }"
                 sprite="logo/logo_bottomflame.lowend"
             ></ui-sprite-animated>
         </div>

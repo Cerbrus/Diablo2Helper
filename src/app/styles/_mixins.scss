@@ -1,7 +1,7 @@
-@mixin transition(
-    $name: all,
-    $duration: 0.5s,
-    $easing: ease-in-out,
-    $delay: 0s) {
+@mixin transition($name: all, $duration: 0.5s, $easing: ease-in-out, $delay: 0s) {
     transition: $name $duration $easing $delay;
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
 }

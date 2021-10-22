@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { IItem } from '@dschu012/d2s/lib/d2/types';
-import { RuneFactory } from '../factories/rune.factory';
-import { IGem } from '../interfaces/gem';
-import { IRune, IRuneMap } from '../interfaces/rune';
-import { ITable } from '../interfaces/ui';
-import { StorageService } from '../services';
-import { TGem } from '../types/gem';
-import { Runes, TRune, TRuneSort, TRuneSortKeys } from '../types/rune';
+import { RuneFactory } from '~factories/rune.factory';
+import { IGem } from '~interfaces/gem';
+import { ITable } from '~interfaces/ui';
+import { StorageService } from '~services';
+import { TGem } from '~types/gem';
+import { Runes, TRune, TRuneSort, TRuneSortKeys } from '~types/rune';
+import { IRune, IRuneMap } from '~interfaces/rune';
 import { BaseEntitiesHelper } from './base-entities.helper';
 import { GemHelper } from './gem.helper';
 import { ArrayHelper } from './ts';
@@ -38,9 +38,7 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
     }
 
     public isType(item: object | TGem | TRune): item is TRune {
-        return typeof item === 'string'
-            && !this.gemHelper.isType(item)
-            && Runes.includes(item);
+        return typeof item === 'string' && !this.gemHelper.isType(item) && Runes.includes(item);
     }
 
     public getType(item: TRune | IRune): TRune {
@@ -51,7 +49,8 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
         const owned = ArrayHelper.toRecordWithKey(
             this.itemsArray.filter(rune => rune.owned),
             rune => rune.name,
-            rune => rune.owned!);
+            rune => rune.owned!
+        );
         this.storageService.save.runesOwned(owned);
     }
 
@@ -63,7 +62,8 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
                 owned: this.sortByOwned.bind(this)
             },
             <TRuneSortKeys>'number',
-            changedSort);
+            changedSort
+        );
 
         this.storageService.save.runeSort(this.entitySort);
     }
@@ -73,13 +73,10 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
     }
 
     public sortByName(a: IRune, b: IRune, asc: boolean): number {
-        return a.name.localeCompare(b.name) * (asc ? 1 : -1) ||
-            this.sortByNumber(a, b, asc);
+        return a.name.localeCompare(b.name) * (asc ? 1 : -1) || this.sortByNumber(a, b, asc);
     }
 
     public sortByOwned(a: IRune, b: IRune, asc: boolean): number {
-        return a.owned === b.owned
-            ? this.sortByNumber(a, b, asc)
-            : ((a.owned ?? 0) - (b.owned ?? 0)) * (asc ? -1 : 1);
+        return a.owned === b.owned ? this.sortByNumber(a, b, asc) : ((a.owned ?? 0) - (b.owned ?? 0)) * (asc ? -1 : 1);
     }
 }

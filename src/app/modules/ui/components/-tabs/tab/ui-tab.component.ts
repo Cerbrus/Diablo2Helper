@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ITabOptions } from '../../../../../interfaces/ui';
+import { ITabOptions } from '~interfaces/ui';
 
 @Component({
     selector: 'ui-tab',

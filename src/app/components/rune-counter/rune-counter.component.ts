@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RuneHelper } from '../../helpers';
-import { IRune } from '../../interfaces/rune';
-import { RuneTrackerService } from '../../services';
+import { RuneHelper } from '~helpers';
+import { IRune } from '~interfaces/rune';
+import { RuneTrackerService } from '~services';
 
 @Component({
     selector: 'rune-counter',
@@ -18,10 +18,7 @@ export class RuneCounterComponent {
     @Output()
     public onChange: EventEmitter<IRune> = new EventEmitter<IRune>();
 
-    constructor(
-        private readonly runeTracker: RuneTrackerService,
-        private readonly runeHelper: RuneHelper
-    ) {
+    constructor(private readonly runeTracker: RuneTrackerService, private readonly runeHelper: RuneHelper) {
         this.min = runeTracker.min;
         this.max = runeTracker.max;
     }

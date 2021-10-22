@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
-import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
-import { faBug } from '@fortawesome/free-solid-svg-icons';
-import { environment } from '../../../../environments/environment';
-import { ObjectHelper } from '../../../helpers';
-import { ISettings } from '../../../interfaces';
-import { ITabPaneComponent } from '../../../interfaces/ui';
-import { StorageService } from '../../../services';
+import { faLightbulb } from '@fortawesome/free-regular-svg-icons/faLightbulb';
+import { environment } from '~environment';
+import { DomHelper, Helper, ObjectHelper } from '~helpers';
+import { ISettings } from '~interfaces';
+import { ITabPaneComponent } from '~interfaces/ui';
+import { faBug, IconDefinition } from '~modules/font-awesome';
+import { StorageService } from '~services';
 
 @Component({
     selector: 'tab-pane-settings',
@@ -23,7 +22,20 @@ export class TabPaneSettingsComponent implements ITabPaneComponent {
 
     constructor(private readonly storageService: StorageService) {
         this.settings = storageService.get.settings();
+        this.registerDarkModeWatch();
         this.applySettings();
+    }
+
+    private registerDarkModeWatch(): void {
+        if (!window.matchMedia) return;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (!Helper.hasValue(this.settings.darkMode)) this.settings.darkMode = prefersDark.matches;
+
+        prefersDark.addEventListener('change', e => {
+            this.settings.darkMode = e.matches;
+            this.applySettings();
+        });
     }
 
     public getTitleKey(key: keyof ISettings) {
@@ -37,15 +49,18 @@ export class TabPaneSettingsComponent implements ITabPaneComponent {
 
     private applySettings(): void {
         const { settings } = this;
-        const classList = document.getElementsByTagName('html')[0].classList;
+        const classList = DomHelper.getRoot().classList;
 
-        ObjectHelper.forEach({
-            'custom-cursor': settings.customCursor && !settings.customCursorLarge,
-            'custom-cursor-large': settings.customCursor && settings.customCursorLarge,
-            'theme-dark': settings.darkMode,
-            'theme-light': !settings.darkMode,
-            'theme-background': settings.enableBackground
-        }, (className: string, value: boolean) => classList.toggle(className, value));
+        ObjectHelper.forEach(
+            {
+                'custom-cursor': settings.customCursor && !settings.customCursorLarge,
+                'custom-cursor-large': settings.customCursor && settings.customCursorLarge,
+                'theme-dark': settings.darkMode ?? true,
+                'theme-light': !settings.darkMode,
+                'theme-background': settings.enableBackground
+            },
+            (className: string, value: boolean) => classList.toggle(className, value)
+        );
 
         this.storageService.save.settings(settings);
     }

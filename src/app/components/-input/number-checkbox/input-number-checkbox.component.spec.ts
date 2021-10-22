@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../testing/test-common.module';
-import { InputNumberCheckboxComponent } from './input-number-checkbox.component';
+import { TestModule } from '~testModule';
+import { InputNumberCheckboxComponent } from '~components/-input';
 
 describe('InputNumberComponent', () => {
     let component: InputNumberCheckboxComponent;
@@ -8,10 +8,9 @@ describe('InputNumberComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [InputNumberCheckboxComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [InputNumberCheckboxComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

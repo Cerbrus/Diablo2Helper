@@ -13,6 +13,10 @@ $table-columns: 90px 220px 130px 1fr;
         display: grid;
         grid-template-rows: auto min-content;
         align-content: space-between;
+
+        .plus {
+            margin: 0 variables.$size-gap-small;
+        }
     }
 }
 

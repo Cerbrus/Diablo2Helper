@@ -1,62 +1,82 @@
 <label class="text-xl">{{ 'settings.title' | translate }}</label>
 <div class="version">
     <a [href]="'common.repositoryUrl' | translate" target="_blank">{{ 'common.appTitle' | translate }}</a>
-    {{ environment.appVersion }}
-    {{ 'common.by' | translate }}
+    <span>{{ environment.appVersion }}</span>
+    <span>{{ 'common.by' | translate }}</span>
     <a [href]="'common.authorUrl' | translate" target="_blank">{{ 'common.author' | translate }}</a>
 </div>
 
 <div class="checkboxes grid">
-    <input-checkbox [label]="getTitleKey('darkMode') | translate"
-                    [showIcon]="true"
-                    [(checked)]="settings.darkMode"
-                    (click)="onToggle('darkMode')"
+    <input-checkbox
+        [label]="getTitleKey('darkMode') | translate"
+        [showIcon]="true"
+        [(checked)]="settings.darkMode"
+        (click)="onToggle('darkMode')"
+        [keyboardShortcut]="'a'"
+        [group]="'settings'"
     ></input-checkbox>
-    <ui-sprite-skill [class]="this.settings.darkMode ? 'assassin' : 'sorceress'"
-                     [skill]="this.settings.darkMode ? 'Shadow Master' : 'Lightning'"
-                     [isDown]="true"
-                     [size]="32"></ui-sprite-skill>
+    <ui-sprite-skill
+        [class]="this.settings.darkMode ? 'assassin' : 'sorceress'"
+        [skill]="this.settings.darkMode ? 'Shadow Master' : 'Lightning'"
+        [isDown]="true"
+        [size]="32"
+    ></ui-sprite-skill>
 
-    <input-checkbox [label]="getTitleKey('enableBackground') | translate"
-                    [showIcon]="true"
-                    [(checked)]="settings.enableBackground"
-                    (click)="onToggle('enableBackground')"
+    <input-checkbox
+        [label]="getTitleKey('enableBackground') | translate"
+        [showIcon]="true"
+        [(checked)]="settings.enableBackground"
+        (click)="onToggle('enableBackground')"
+        [keyboardShortcut]="'b'"
+        [group]="'settings'"
     ></input-checkbox>
-    <ui-sprite-skill [class]="this.settings.enableBackground ? 'paladin' : 'barbarian'"
-                     [skill]="this.settings.enableBackground ? 'Conversion' : 'Concentrate'"
-                     [size]="32"></ui-sprite-skill>
+    <ui-sprite-skill
+        [class]="this.settings.enableBackground ? 'paladin' : 'barbarian'"
+        [skill]="this.settings.enableBackground ? 'Conversion' : 'Concentrate'"
+        [size]="32"
+    ></ui-sprite-skill>
 
-    <input-checkbox [label]="getTitleKey('customCursor') | translate"
-                    [showIcon]="true"
-                    [(checked)]="settings.customCursor"
-                    (click)="onToggle('customCursor')"
+    <input-checkbox
+        [label]="getTitleKey('customCursor') | translate"
+        [showIcon]="true"
+        [(checked)]="settings.customCursor"
+        (click)="onToggle('customCursor')"
+        [keyboardShortcut]="'c'"
+        [group]="'settings'"
     ></input-checkbox>
-    <ui-sprite-animated [scale]="0.25"
-                        [frames]="16"
-                        [animation]="{ direction: 'alternate' }"
-                        sprite="oHand"></ui-sprite-animated>
+    <ui-sprite-animated
+        [scale]="0.25"
+        [frames]="16"
+        [animation]="{ direction: 'alternate' }"
+        sprite="oHand"
+    ></ui-sprite-animated>
 
-    <input-checkbox class="child"
-                    *ngIf="settings.customCursor"
-                    [label]="getTitleKey('customCursorLarge') | translate"
-                    [showIcon]="true"
-                    [(checked)]="settings.customCursorLarge"
-                    (click)="onToggle('customCursorLarge')"
+    <input-checkbox
+        class="child"
+        *ngIf="settings.customCursor"
+        [label]="getTitleKey('customCursorLarge') | translate"
+        [showIcon]="true"
+        [(checked)]="settings.customCursorLarge"
+        (click)="onToggle('customCursorLarge')"
+        [keyboardShortcut]="'l'"
+        [group]="'settings'"
     ></input-checkbox>
-    <ui-sprite-animated *ngIf="settings.customCursor"
-                        [scale]="0.25"
-                        [frames]="16"
-                        [animation]="{ direction: 'alternate' }"
-                        sprite="oHand"></ui-sprite-animated>
+    <ui-sprite-animated
+        *ngIf="settings.customCursor"
+        [scale]="0.25"
+        [frames]="16"
+        [animation]="{ direction: 'alternate' }"
+        sprite="oHand"
+    ></ui-sprite-animated>
 </div>
 
 <p class="issues">
-    {{ 'common.issueSubmit' | translate }}
+    <span>{{ 'common.issueSubmit' | translate }}</span>
     <a target="_blank" routerLink="/issue/bug_report">
         <fa-icon [icon]="bug"></fa-icon>
         <span>{{ 'common.issueBugReport' | translate }}</span>
     </a>
-    {{ 'common.or' | translate }}
+    <span>{{ 'common.or' | translate }}</span>
     <a target="_blank" routerLink="/issue/feature_request">
         <fa-icon [icon]="lightBulb"></fa-icon>
         <span>{{ 'common.issueFeatureRequest' | translate }}</span>

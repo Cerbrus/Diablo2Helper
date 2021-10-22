@@ -1,13 +1,15 @@
 import { IItem } from '@dschu012/d2s/lib/d2/types';
-import { BaseEntityFactory } from '../factories/base-entity.factory';
-import { ITable } from '../interfaces/ui';
-import { ItemOrArray } from '../types/helpers';
+import { BaseEntityFactory } from '~factories/base-entity.factory';
+import { ITable } from '~interfaces/ui';
+import { ItemOrArray } from '~types/helpers';
 import { ArrayHelper, ObjectHelper } from './ts';
 
-export abstract class BaseEntitiesHelper<TEntityMap,
+export abstract class BaseEntitiesHelper<
+    TEntityMap,
     TType,
     TEntity,
-    TSort extends Record<keyof TSort, ITable<TEntity>>> {
+    TSort extends Record<keyof TSort, ITable<TEntity>>
+> {
     public entitySort!: TSort;
 
     public get itemsArray(): Array<TEntity> {
@@ -26,12 +28,10 @@ export abstract class BaseEntitiesHelper<TEntityMap,
 
     private itemsArrayCache!: Array<TEntity>;
 
-    protected constructor(private readonly entityFactory: BaseEntityFactory<TEntityMap>) {
-    }
+    protected constructor(private readonly entityFactory: BaseEntityFactory<TEntityMap>) {}
 
     public getItems(): TEntityMap {
-        if (!this.items)
-            this.items = this.entityFactory.buildItems();
+        if (!this.items) this.items = this.entityFactory.buildItems();
 
         return this.items;
     }
@@ -40,31 +40,25 @@ export abstract class BaseEntitiesHelper<TEntityMap,
 
     public abstract getItem(item: TType): TEntity;
 
+    public abstract getType(item: TType | TEntity): TType;
+
     public abstract isItem<T>(item: any): item is TEntity;
 
     public abstract isType(item: any): item is TType;
 
     public abstract saveEntitiesOwned(): void;
 
-    public asItem(item: TType | TEntity): TEntity ;
+    public asItem(item: TType | TEntity): TEntity;
     public asItem(item: Array<TType | TEntity>): Array<TEntity>;
     public asItem(item: ItemOrArray<TType | TEntity>): ItemOrArray<TEntity> {
-        return item instanceof Array
-            ? item.map(i => this.asItem(i))
-            : this.isItem(item) ? item : this.getItem(item);
-
+        return item instanceof Array ? item.map(i => this.asItem(i)) : this.isItem(item) ? item : this.getItem(item);
     }
 
     public asType(item: TType | TEntity): TType;
     public asType(item: Array<TType | TEntity>): Array<TType>;
     public asType(item: ItemOrArray<TType | TEntity>): ItemOrArray<TType> {
-        return item instanceof Array
-            ? item.map(i => this.asType(i))
-            : this.isType(item) ? item : this.getType(item);
-
+        return item instanceof Array ? item.map(i => this.asType(i)) : this.isType(item) ? item : this.getType(item);
     }
-
-    protected abstract getType(item: TType | TEntity): TType;
 
     protected abstract applySort?(changedSort?: ITable<TEntity>): void;
 
@@ -74,25 +68,20 @@ export abstract class BaseEntitiesHelper<TEntityMap,
         changedSort?: ITable<TEntity>
     ): void {
         if (changedSort) {
-            ObjectHelper.forEach(
-                this.entitySort,
-                (key, current) => {
-                    if (changedSort !== current)
-                        current.direction = 'none';
-                });
+            ObjectHelper.forEach(this.entitySort, (key, current) => {
+                if (changedSort !== current) current.direction = 'none';
+            });
         }
 
-        const [key, activeSort] = <[TKey, ITable<TEntity>]>(ObjectHelper.find(
-            this.entitySort,
-            (key, current) =>
-                ![undefined, 'none'].includes(current.direction)) ?? []);
+        const unsorted = [undefined, 'none'];
+        const [key, activeSort] = <[TKey, ITable<TEntity>]>(
+            (ObjectHelper.find(this.entitySort, (key, current) => !unsorted.includes(current.direction)) ?? [])
+        );
 
-        const sortMethod = sortMethods [key ?? defaultMethod];
+        const sortMethod = sortMethods[key ?? defaultMethod];
 
-        this.itemsArraySorted = ArrayHelper
-            .clone(this.itemsArray)
-            .sort((a, b) =>
-                sortMethod(a, b, activeSort?.direction !== 'desc'));
+        this.itemsArraySorted = ArrayHelper.clone(this.itemsArray).sort((a, b) =>
+            sortMethod(a, b, activeSort?.direction !== 'desc')
+        );
     }
 }
-

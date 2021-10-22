@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { RuneHelper } from '../../helpers';
-import { IRune } from '../../interfaces/rune';
-import { RuneTrackerService, RunewordFilterService } from '../../services';
-import { TRune } from '../../types/rune';
+import { RuneHelper } from '~helpers';
+import { IRune } from '~interfaces/rune';
+import { RuneTrackerService, RunewordFilterService } from '~services';
+import { TRune } from '~types/rune';
 
 @Component({
     selector: 'rune-tracking-select',

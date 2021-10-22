@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../../testing/test-common.module';
+import { TestModule } from '~testModule';
 import { UiTabsComponent } from './ui-tabs.component';
 
 describe('UiTabsComponent', () => {
@@ -8,10 +8,9 @@ describe('UiTabsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiTabsComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiTabsComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

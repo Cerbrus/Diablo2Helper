@@ -1,6 +1,6 @@
 {
     "name": "rune-helper",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "scripts": {
         "ng": "ng",
         "start": "ng serve --port 666",
@@ -55,6 +55,7 @@
         "karma-coverage": "~2.0.3",
         "karma-jasmine": "~4.0.0",
         "karma-jasmine-html-reporter": "~1.7.0",
+        "prettier": "^2.4.1",
         "typescript": "~4.3.5"
     }
 }

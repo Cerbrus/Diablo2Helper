@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../../testing/test-common.module';
-import { UiSpriteSkillComponent } from './ui-sprite-skill.component';
+import { TestModule } from '~testModule';
+import { UiSpriteSkillComponent } from '~modules/ui/components';
 
 describe('UiSpriteSkillComponent', () => {
     let component: UiSpriteSkillComponent<'necromancer', 'Bone Spear'>;
@@ -8,10 +8,9 @@ describe('UiSpriteSkillComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiSpriteSkillComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiSpriteSkillComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

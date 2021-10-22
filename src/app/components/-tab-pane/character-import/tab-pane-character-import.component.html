@@ -3,8 +3,9 @@
         <label class="text-xl">{{ 'labels.import' | translate }}</label>
         <input-game-save-file (onParse)="onParse($event)"></input-game-save-file>
         <p>{{ 'labels.saveToFiltersHelp' | translate }}</p>
-        <button (click)="applySaveToFilters()"
-                [disabled]="!parseResult">{{ 'labels.saveToFilters' | translate }}</button>
+        <button (click)="applySaveToFilters()" [disabled]="!parseResult">
+            {{ 'labels.saveToFilters' | translate }}
+        </button>
         <pre *ngIf="logText">{{ logText }}</pre>
     </div>
 
@@ -29,23 +30,26 @@
                 <ui-table-record *ngIf="character" [record]="character"></ui-table-record>
                 <ui-sprite-class [class]="getClass()"></ui-sprite-class>
             </div>
-            <ui-table-record *ngIf="gems"
-                             class="column-gems"
-                             labelKey="common.gems"
-                             [record]="gems"
-                             sortBy="key"
+            <ui-table-record
+                *ngIf="gems"
+                class="column-gems"
+                labelKey="common.gems"
+                [record]="gems"
+                sortBy="key"
             ></ui-table-record>
-            <ui-table-record *ngIf="runes"
-                             class="column-runes"
-                             labelKey="common.runes"
-                             [record]="runes"
-                             sortBy="key"
+            <ui-table-record
+                *ngIf="runes"
+                class="column-runes"
+                labelKey="common.runes"
+                [record]="runes"
+                sortBy="key"
             ></ui-table-record>
-            <ui-table-record *ngIf="runeWords"
-                             class="column-runeWords"
-                             labelKey="common.runeWords"
-                             [record]="runeWords"
-                             sortBy="key"
+            <ui-table-record
+                *ngIf="runeWords"
+                class="column-runeWords"
+                labelKey="common.runeWords"
+                [record]="runeWords"
+                sortBy="key"
             ></ui-table-record>
         </div>
     </div>

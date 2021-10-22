@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { RuneHelper } from '../../helpers';
-import { IRune } from '../../interfaces/rune';
-import { Runes, TRune } from '../../types/rune';
+import { RuneHelper } from '~helpers';
+import { IRune } from '~interfaces/rune';
+import { Runes, TRune } from '~types/rune';
 
 @Component({
     selector: 'rune-tracking-counters',
@@ -14,8 +14,7 @@ export class RuneTrackingCountersComponent {
     @Output()
     public onChange: EventEmitter<IRune | TRune> = new EventEmitter<IRune | TRune>();
 
-    constructor(public readonly runeHelper: RuneHelper) {
-    }
+    constructor(public readonly runeHelper: RuneHelper) {}
 
     public change(rune: IRune | TRune): void {
         this.onChange.emit(rune);

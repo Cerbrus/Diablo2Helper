@@ -1,6 +1,17 @@
 // noinspection JSUnusedGlobalSymbols
 
+import { char } from '~types/helpers';
+
 export class StringHelper {
+    public static Char(c: string): char {
+        if (!this.isChar(c)) throw new Error('not a char');
+        return c;
+    }
+
+    public static isChar(str: string): str is char {
+        return /^(.|\n)$/.test(str);
+    }
+
     public static equalsStripped(a: string, b?: string, ignoreCase = false): boolean {
         const [valA, valB] = this.stripNonAZ(a, b, ignoreCase);
         return valA === valB;

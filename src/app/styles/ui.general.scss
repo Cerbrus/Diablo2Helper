@@ -6,7 +6,7 @@ body {
     font-family: sans-serif;
     color: variables.$theme-text;
 
-    transition: all 0.1s linear;
+    @include mixins.transition(all, 0.1s, linear);
     //height: 100vh;
     overflow: hidden;
 }
@@ -64,6 +64,10 @@ p {
     margin: variables.$size-gap 0;
 }
 
+strong {
+    margin-right: variables.$size-gap;
+}
+
 .font-d2 {
     font-family: variables.$font-family-exocet;
 }
@@ -72,7 +76,15 @@ p {
     text-align: center;
 }
 
-$sizes: ('xs': 0.5rem, 's': 0.75rem, 'm': 1rem, 'l': 1.5rem, 'xl': 2rem);
+$sizes: (
+    'xs': 0.5rem,
+    's': 0.75rem,
+    'ms': 0.815rem,
+    'm': 1rem,
+    'ml': 1.25rem,
+    'l': 1.5rem,
+    'xl': 2rem
+);
 @each $key, $size in $sizes {
     .text-#{$key} {
         font-size: $size;

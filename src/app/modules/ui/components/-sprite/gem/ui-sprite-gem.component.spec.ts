@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../../testing/test-common.module';
-import { UiSpriteGemComponent } from './ui-sprite-gem.component';
+import { TestModule } from '~testModule';
+import { UiSpriteGemComponent } from '~modules/ui/components';
 
 describe('UiSpriteGemComponent', () => {
     let component: UiSpriteGemComponent;
@@ -8,10 +8,9 @@ describe('UiSpriteGemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiSpriteGemComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiSpriteGemComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

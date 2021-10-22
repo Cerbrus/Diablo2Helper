@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { LabeledBaseComponent } from '../../../../shared';
+import { LabeledBaseComponent } from '~modules/shared';
 
 @Component({
     selector: 'ui-table-head',

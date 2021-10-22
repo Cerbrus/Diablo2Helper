@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../../testing/test-common.module';
-import { UiSpriteAnimatedComponent } from './ui-sprite-animated.component';
+import { TestModule } from '~testModule';
+import { UiSpriteAnimatedComponent } from '~modules/ui/components';
 
 describe('UiSpriteAnimatedComponent', () => {
     let component: UiSpriteAnimatedComponent;
@@ -8,10 +8,9 @@ describe('UiSpriteAnimatedComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiSpriteAnimatedComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiSpriteAnimatedComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

@@ -1,4 +1,4 @@
-import { TItem } from '../../types';
+import { TItem } from '~types';
 
 export interface IRuneWordFilters {
     cLvl?: number;

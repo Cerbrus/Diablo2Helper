@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../testing/test-common.module';
+import { TestModule } from '~testModule';
 import { ReportIssueComponent } from './report-issue.component';
 
 describe('ReportIssueComponent', () => {
@@ -7,17 +7,14 @@ describe('ReportIssueComponent', () => {
     let fixture: ComponentFixture<ReportIssueComponent>;
 
     beforeEach(async () => {
-        spyOn(ReportIssueComponent.prototype, 'openIssue')
-            .and
-            .callFake(() => {
-                console.log('openIssue should not be called, as it reloads the page.');
-            });
+        spyOn(ReportIssueComponent.prototype, 'openIssue').and.callFake(() => {
+            console.log('openIssue should not be called, as it reloads the page.');
+        });
 
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [ReportIssueComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [ReportIssueComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

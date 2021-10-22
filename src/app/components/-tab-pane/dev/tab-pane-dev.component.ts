@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ObjectHelper } from '../../../helpers';
-import { ISkillUi } from '../../../interfaces/player';
-import { ITabPaneComponent } from '../../../interfaces/ui';
-import { ClassesUi, SkillsUi, TClass, TClassUi } from '../../../types/player';
+import { ObjectHelper } from '~helpers';
+import { ISkillUi } from '~interfaces/player';
+import { ITabPaneComponent } from '~interfaces/ui';
+import { ClassesUi, SkillsUi, TClass, TClassUi } from '~types/player';
 
 @Component({
     selector: 'tab-pane-dev',
@@ -25,16 +25,13 @@ export class TabPaneDevComponent implements ITabPaneComponent {
     }
 
     public get characterClass(): TClass | undefined {
-        return this.class !== 'ui' && this.class !== 'hireling'
-            ? this.class
-            : undefined;
+        return this.class !== 'ui' && this.class !== 'hireling' ? this.class : undefined;
     }
 
     public autoCompleteSkill<TCurrentClass extends TClassUi>(): void {
         const currentClass: TCurrentClass = <TCurrentClass>this.class;
         const currentSkill = this.skills[currentClass][this.skillIndex]?.toLowerCase();
-        if (!currentSkill)
-            return;
+        if (!currentSkill) return;
 
         const currentClassSkills = <Array<ISkillUi[TCurrentClass]>>SkillsUi[currentClass];
         const matches = currentClassSkills.filter(s => {

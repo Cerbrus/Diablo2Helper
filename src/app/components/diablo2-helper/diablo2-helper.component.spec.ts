@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../testing/test-common.module';
+import { TestModule } from '~testModule';
 import { Diablo2HelperComponent } from './diablo2-helper.component';
 
 describe('RuneHelperComponent', () => {
@@ -8,10 +8,9 @@ describe('RuneHelperComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [Diablo2HelperComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [Diablo2HelperComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

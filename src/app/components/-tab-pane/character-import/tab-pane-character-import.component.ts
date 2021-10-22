@@ -2,15 +2,15 @@ import { DatePipe, KeyValue } from '@angular/common';
 import { Component } from '@angular/core';
 import { ID2S } from '@dschu012/d2s/lib/d2/types';
 import { TranslateService } from '@ngx-translate/core';
-import { GemHelper, RuneHelper, RuneWordHelper } from '../../../helpers';
-import { IGem } from '../../../interfaces/gem';
-import { IRune } from '../../../interfaces/rune';
-import { IRuneWord } from '../../../interfaces/runeWord';
-import { ITabPaneComponent } from '../../../interfaces/ui';
-import { RunewordFilterService } from '../../../services';
-import { D2sParserService } from '../../../services/d2s-parser.service';
-import { TError } from '../../../types';
-import { TClass } from '../../../types/player';
+import { GemHelper, RuneHelper, RuneWordHelper } from '~helpers';
+import { IGem } from '~interfaces/gem';
+import { IRune } from '~interfaces/rune';
+import { IRuneWord } from '~interfaces/runeWord';
+import { ITabPaneComponent } from '~interfaces/ui';
+import { RunewordFilterService } from '~services';
+import { D2sParserService } from '~services/d2s-parser.service';
+import { TError } from '~types';
+import { TClass } from '~types/player';
 
 @Component({
     selector: 'tab-pane-character-import',
@@ -39,12 +39,10 @@ export class TabPaneCharacterImportComponent implements ITabPaneComponent {
         private readonly runeHelper: RuneHelper,
         private readonly runeWordHelper: RuneWordHelper,
         private readonly runeWordFilterService: RunewordFilterService
-    ) {
-    }
+    ) {}
 
     public applySaveToFilters(): void {
-        if (!this.parseResult || !this.gems || !this.runes || !this.runeWords)
-            return;
+        if (!this.parseResult || !this.gems || !this.runes || !this.runeWords) return;
 
         this.runeWordFilterService.applySaveToFilters(
             this.parseResult.header.level,
@@ -68,8 +66,9 @@ export class TabPaneCharacterImportComponent implements ITabPaneComponent {
 
         this.parseResult = result;
 
-        const lastPlayed = new DatePipe(this.translate.currentLang)
-            .transform(new Date(result.header.last_played * 1000), 'medium') ?? '';
+        const lastPlayed =
+            new DatePipe(this.translate.currentLang).transform(new Date(result.header.last_played * 1000), 'medium') ??
+            '';
 
         const gems = result.items.filter(i => i.categories?.includes('Gem'));
         const runes = result.items.filter(i => i.categories?.includes('Rune'));

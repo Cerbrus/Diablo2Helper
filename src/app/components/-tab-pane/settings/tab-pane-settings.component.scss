@@ -6,8 +6,8 @@
     grid-template-columns: auto max-content;
     grid-template-rows: min-content min-content;
     grid-template-areas:
-    "label  version"
-    "checkboxes  issues"
+        'label  version'
+        'checkboxes  issues';
 }
 
 label {
@@ -43,6 +43,7 @@ ui-sprite-animated {
     grid-column: 2;
 }
 
-a span{
+span,
+a {
     margin-left: variables.$size-gap;
 }

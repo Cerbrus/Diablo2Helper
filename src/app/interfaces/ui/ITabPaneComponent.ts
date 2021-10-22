@@ -1,2 +1,1 @@
-export interface ITabPaneComponent {
-}
+export interface ITabPaneComponent {}

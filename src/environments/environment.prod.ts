@@ -1,5 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
+
 export const environment = {
     production: true,
-    appVersion: require('../../package.json').version,
+    appVersion: require('../../package.json').version
 };

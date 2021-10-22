@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../../testing/test-common.module';
-import { UiSpriteRuneComponent } from './ui-sprite-rune.component';
+import { TestModule } from '~testModule';
+import { UiSpriteRuneComponent } from '~modules/ui/components';
 
 describe('UiSpriteRuneComponent', () => {
     let component: UiSpriteRuneComponent;
@@ -8,10 +8,9 @@ describe('UiSpriteRuneComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiSpriteRuneComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiSpriteRuneComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ITabPaneComponent } from '../../../interfaces/ui';
-import { RunewordFilterService } from '../../../services';
+import { ITabPaneComponent } from '~interfaces/ui';
+import { RunewordFilterService } from '~services';
 
 @Component({
     selector: 'tab-pane-rune-words',
@@ -8,10 +8,7 @@ import { RunewordFilterService } from '../../../services';
     styleUrls: ['./tab-pane-rune-words.component.scss']
 })
 export class TabPaneRuneWordsComponent implements ITabPaneComponent {
-    constructor(
-        private readonly runeWordFilterService: RunewordFilterService
-    ) {
-    }
+    constructor(private readonly runeWordFilterService: RunewordFilterService) {}
 
     public updateRunewordFilters(): void {
         this.runeWordFilterService.saveFilters();

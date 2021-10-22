@@ -3,8 +3,8 @@
         *ngFor="let header of headers"
         [header]="header"
         [sort]="runeSort"
-        (onSort)="applySort($event)">
-    </ui-table-sort-control>
+        (onSort)="applySort($event)"
+    ></ui-table-sort-control>
     <ui-table-head labelKey="labels.craft" key="craft"></ui-table-head>
     <ui-table-head labelKey="labels.socketEffect" key="effects"></ui-table-head>
 
@@ -12,7 +12,7 @@
         <div class="table-row" *ngFor="let rune of runeArraySorted">
             <div class="column-name center-text">
                 #{{ rune.number }}
-                <br>
+                <br />
                 {{ rune.name }}
             </div>
             <div class="column-rune">
@@ -26,23 +26,28 @@
             </div>
             <div class="column-crafts block center-text" *ngVar="rune.craft as craft">
                 <ng-container *ngIf="craft">
-                    <ui-sprite-rune *ngFor="let rune of craft.runes | asArray" [rune]="rune"
-                                 [size]="32"></ui-sprite-rune>
+                    <ui-sprite-rune
+                        *ngFor="let rune of craft.runes | asArray"
+                        [rune]="rune"
+                        [size]="32"
+                    ></ui-sprite-rune>
                     <ui-sprite-gem *ngFor="let gem of craft.gems | asArray" [gem]="gem" [size]="32"></ui-sprite-gem>
                 </ng-container>
             </div>
             <div class="column-effects block" *ngVar="rune.effects as effects">
-                <ui-format-effect title="weapon"
-                               [effects]="effects.weapon"></ui-format-effect>
-                <ui-format-effect [title]="effects.shield ? 'armorHelm' : 'armorHelmShield'"
-                               [effects]="effects.armorHelm"></ui-format-effect>
-                <ui-format-effect title="shield"
-                               [effects]="effects.shield"></ui-format-effect>
+                <ui-format-effect title="weapon" [effects]="effects.weapon"></ui-format-effect>
+                <ui-format-effect
+                    [title]="effects.shield ? 'armorHelm' : 'armorHelmShield'"
+                    [effects]="effects.armorHelm"
+                ></ui-format-effect>
+                <ui-format-effect title="shield" [effects]="effects.shield"></ui-format-effect>
                 <div>
                     <span *ngIf="rune.iLvl">
-                        <strong>{{ 'labels.iLvl' | translate }}:</strong> {{ rune.iLvl }}
+                        <strong>{{ 'labels.iLvl' | translate }}:</strong>
+                        <span>{{ rune.iLvl }}&nbsp;</span>
                     </span>
-                    <strong>{{ 'labels.cLvl' | translate }}:</strong> {{ rune.cLvl || ('common.none' | translate) }}
+                    <strong>{{ 'labels.cLvl' | translate }}:</strong>
+                    <span>{{ rune.cLvl || ('common.none' | translate) }}</span>
                 </div>
             </div>
         </div>

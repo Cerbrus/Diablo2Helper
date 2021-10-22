@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../testing/test-common.module';
-import { TabPaneRunesComponent } from './tab-pane-runes.component';
+import { TestModule } from '~testModule';
+import { TabPaneRunesComponent } from '~components/-tab-pane';
 
 describe('TabPaneRunesComponent', () => {
     let component: TabPaneRunesComponent;
@@ -8,10 +8,9 @@ describe('TabPaneRunesComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [TabPaneRunesComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [TabPaneRunesComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

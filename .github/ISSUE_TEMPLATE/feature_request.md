@@ -1,10 +1,9 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[Feature Request]: "
+title: '[Feature Request]: '
 labels: feature-request, to-be-reviewed
 assignees: Cerbrus
-
 ---
 
 Thank you for taking your time submitting a feature request!  

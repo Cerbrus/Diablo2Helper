@@ -1,6 +1,6 @@
-import { TGem } from '../types/gem';
-import { TRune, TRuneSort } from '../types/rune';
-import { TRuneWord, TRuneWordSort } from '../types/runeWord';
+import { TGem } from '~types/gem';
+import { TRune, TRuneSort } from '~types/rune';
+import { TRuneWord, TRuneWordSort } from '~types/runeWord';
 import { ISettings } from './';
 import { IRuneWordFilters } from './runeWord';
 

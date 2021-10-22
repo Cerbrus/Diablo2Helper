@@ -2,22 +2,35 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
+        "baseUrl": "./src",
         "outDir": "./out-tsc/spec",
-        "types": [
-            "jasmine",
-            "node"
-        ],
+        "types": ["jasmine", "node"],
         "paths": {
-            "@testing": ["src/testing/index"],
-            "@testing/*": ["src/testing/*"]
+            "@testing": ["testing/index"],
+            "@testing/*": ["testing/*"],
+            "~components": ["app/components"],
+            "~components/*": ["app/components/*"],
+            "~enums": ["app/enums"],
+            "~enums/*": ["app/enums/*"],
+            "~environment": ["environments/environment"],
+            "~factories": ["app/factories"],
+            "~factories/*": ["app/factories/*"],
+            "~handlers": ["app/handlers"],
+            "~handlers/*": ["app/handlers/*"],
+            "~helpers": ["app/helpers"],
+            "~helpers/*": ["app/helpers/*"],
+            "~interfaces": ["app/interfaces"],
+            "~interfaces/*": ["app/interfaces/*"],
+            "~modules": ["app/modules"],
+            "~modules/*": ["app/modules/*"],
+            "~services": ["app/services"],
+            "~services/*": ["app/services/*"],
+            "~types": ["app/types"],
+            "~types/*": ["app/types/*"],
+            "~testModule": ["testing/test-common.module"],
+            "~settings": ["assets/settings.json"]
         }
     },
-    "files": [
-        "src/test.ts",
-        "src/polyfills.ts"
-    ],
-    "include": [
-        "src/**/*.spec.ts",
-        "src/**/*.d.ts"
-    ]
+    "files": ["src/test.ts", "src/polyfills.ts"],
+    "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }

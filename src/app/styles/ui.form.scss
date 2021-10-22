@@ -13,8 +13,8 @@ input {
     color: variables.$theme-input-text;
     caret-color: variables.$theme-input-text;
 
-    &[type=text],
-    &[type=number] {
+    &[type='text'],
+    &[type='number'] {
         background: variables.$theme-input-background;
         border: 1px solid variables.$theme-input-border;
         border-radius: variables.$size-gap-small;
@@ -25,7 +25,7 @@ input {
         }
     }
 
-    &[type=number] {
+    &[type='number'] {
         -moz-appearance: textfield;
 
         &::-webkit-outer-spin-button,

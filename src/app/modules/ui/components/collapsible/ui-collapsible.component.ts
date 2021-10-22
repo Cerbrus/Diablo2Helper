@@ -1,9 +1,9 @@
+import { faAngleDoubleDown } from '~modules/font-awesome';
+import { LabeledBaseComponent } from '~modules/shared';
+import { StorageService } from '~services';
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { PullProp } from '@fortawesome/fontawesome-svg-core';
-import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from '../../../../services';
-import { LabeledBaseComponent } from '../../../shared';
 
 @Component({
     selector: 'ui-collapsible',
@@ -23,22 +23,17 @@ export class UiCollapsibleComponent extends LabeledBaseComponent implements Afte
     @ViewChild('wrapper')
     private wrapper!: ElementRef<HTMLDivElement>;
 
-    constructor(
-        translate: TranslateService,
-        private readonly storageService: StorageService
-    ) {
+    constructor(translate: TranslateService, private readonly storageService: StorageService) {
         super(translate);
     }
 
     public ngAfterViewInit(): void {
-        const collapsed = this.storageService.get
-            .uiCollapsibleState()[this.labelKey ?? this.getLabel()];
+        const collapsed = this.storageService.get.uiCollapsibleState()[this.labelKey ?? this.getLabel()];
         this.setState(collapsed ?? false);
     }
 
     public toggle(): void {
-        if (!this.wrapper)
-            return;
+        if (!this.wrapper) return;
 
         this.setState(!this.collapsed);
     }
@@ -46,9 +41,7 @@ export class UiCollapsibleComponent extends LabeledBaseComponent implements Afte
     private setState(newState: boolean): void {
         this.collapsed = newState;
 
-        this.collapseMargin = this.collapsed
-            ? `-${this.wrapper.nativeElement.clientHeight}px`
-            : 0;
+        this.collapseMargin = this.collapsed ? `-${this.wrapper.nativeElement.clientHeight}px` : 0;
 
         window.setTimeout(() => {
             this.wrapper.nativeElement.style.marginLeft = '0px';
@@ -58,8 +51,7 @@ export class UiCollapsibleComponent extends LabeledBaseComponent implements Afte
     }
 
     private saveState(): void {
-        const state = this.storageService.get
-            .uiCollapsibleState();
+        const state = this.storageService.get.uiCollapsibleState();
         state[this.labelKey ?? this.getLabel()] = this.collapsed;
         this.storageService.save.uiCollapsibleState(state);
     }

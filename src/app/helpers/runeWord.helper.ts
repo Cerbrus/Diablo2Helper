@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { IItem } from '@dschu012/d2s/lib/d2/types';
-import { RuneWordFactory } from '../factories/runeword.factory';
-import { IRuneWord, IRuneWordMap } from '../interfaces/runeWord';
-import { ITable } from '../interfaces/ui';
-import { StorageService } from '../services';
-import { RuneWords, TRuneWord, TRuneWordSort, TRuneWordSortKeys } from '../types/runeWord';
+import { RuneWordFactory } from '~factories/runeword.factory';
+import { IRuneWord, IRuneWordMap } from '~interfaces/runeWord';
+import { ITable } from '~interfaces/ui';
+import { StorageService } from '~services';
+import { RuneWords, TRuneWord, TRuneWordSort, TRuneWordSortKeys } from '~types/runeWord';
 import { BaseEntitiesHelper } from './base-entities.helper';
 import { GemHelper } from './gem.helper';
 import { RuneHelper } from './rune.helper';
@@ -25,9 +25,7 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
     }
 
     public fromSaveItem(item: IItem): IRuneWord | null {
-        const runesString = item.socketed_items
-            .map(i => this.runeHelper.fromSaveItem(i)?.name)
-            .join('|');
+        const runesString = item.socketed_items.map(i => this.runeHelper.fromSaveItem(i)?.name).join('|');
         return this.itemsArray.find(runeWord => runeWord.runes.join('|') === runesString) ?? null;
     }
 
@@ -51,7 +49,8 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
         const owned = ArrayHelper.toRecordWithKey(
             this.itemsArray.filter(runeWord => runeWord.owned),
             runeWord => runeWord.name,
-            runeWord => runeWord.owned!);
+            runeWord => runeWord.owned!
+        );
         this.storageService.save.runeWordsOwned(owned);
     }
 
@@ -64,7 +63,8 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
                 owned: this.sortByOwned.bind(this)
             },
             <TRuneWordSortKeys>'name',
-            changedSort);
+            changedSort
+        );
 
         this.storageService.save.runeWordSort(this.entitySort);
     }
@@ -80,14 +80,10 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
     }
 
     public sortByCLvl(a: IRuneWord, b: IRuneWord, asc: boolean): number {
-        return a.cLvl === b.cLvl
-            ? this.sortByName(a, b, asc)
-            : (a.cLvl - b.cLvl) * (asc ? 1 : -1);
+        return a.cLvl === b.cLvl ? this.sortByName(a, b, asc) : (a.cLvl - b.cLvl) * (asc ? 1 : -1);
     }
 
     public sortByOwned(a: IRuneWord, b: IRuneWord, asc: boolean): number {
-        return a.owned === b.owned
-            ? this.sortByName(a, b, asc)
-            : ((a.owned ?? 0) - (b.owned ?? 0)) * (asc ? -1 : 1);
+        return a.owned === b.owned ? this.sortByName(a, b, asc) : ((a.owned ?? 0) - (b.owned ?? 0)) * (asc ? -1 : 1);
     }
 }

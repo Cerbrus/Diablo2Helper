@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { RuneHelper } from '../../../../../helpers';
-import { IRune } from '../../../../../interfaces/rune';
-import { TRune } from '../../../../../types/rune';
+import { RuneHelper } from '~helpers';
+import { IRune } from '~interfaces/rune';
+import { TRune } from '~types/rune';
 import { SpriteBaseComponent } from '../sprite-base.component';
 
 @Component({

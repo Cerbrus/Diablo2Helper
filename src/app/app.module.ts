@@ -7,17 +7,14 @@ import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ng
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NG_EVENT_PLUGINS } from '@tinkoff/ng-event-plugins';
 
-// Environment
-import { environment } from '../environments/environment';
-
 // Components
-import { InputCheckboxComponent, InputGameSaveFileComponent, InputNumberCheckboxComponent } from './components/-input';
+import { InputCheckboxComponent, InputGameSaveFileComponent, InputNumberCheckboxComponent } from '~components/-input';
 import {
     ListGemsComponent,
     ListRunesComponent,
     ListRuneWordsComponent,
     ListRuneWordsFiltersComponent
-} from './components/-list';
+} from '~components/-list';
 import {
     TabPaneCharacterImportComponent,
     TabPaneDevComponent,
@@ -25,17 +22,22 @@ import {
     TabPaneRunesComponent,
     TabPaneRuneWordsComponent,
     TabPaneSettingsComponent
-} from './components/-tab-pane';
-import { AppComponent } from './components/app/app.component';
-import { Diablo2HelperComponent } from './components/diablo2-helper/diablo2-helper.component';
-import { ReportIssueComponent } from './components/report-issue/report-issue.component';
-import { RuneCounterComponent } from './components/rune-counter/rune-counter.component';
-import { RuneTrackingCountersComponent } from './components/rune-tracking-counters/rune-tracking-counters.component';
-import { RuneTrackingSelectComponent } from './components/rune-tracking-select/rune-tracking-select.component';
-import { LogMissingTranslationHandler } from './handlers/log-missing-translations.handler';
+} from '~components/-tab-pane';
+import { AppComponent } from '~components/app/app.component';
+import { Diablo2HelperComponent } from '~components/diablo2-helper/diablo2-helper.component';
+import { ReportIssueComponent } from '~components/report-issue/report-issue.component';
+import { RuneCounterComponent } from '~components/rune-counter/rune-counter.component';
+import { RuneTrackingCountersComponent } from '~components/rune-tracking-counters/rune-tracking-counters.component';
+import { RuneTrackingSelectComponent } from '~components/rune-tracking-select/rune-tracking-select.component';
+
+// Environment
+import { environment } from '~environment';
+
+// Handlers
+import { LogMissingTranslationHandler } from '~handlers/log-missing-translations.handler';
 
 // Custom modules
-import { RoutingModule, SharedModule, UiModule } from './modules';
+import { RoutingModule, SharedModule, UiModule } from '~modules';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -65,9 +67,7 @@ const components = [
 ];
 
 @NgModule({
-    declarations: [
-        components
-    ],
+    declarations: [components],
     imports: [
         HttpClientModule,
         RoutingModule,
@@ -91,7 +91,4 @@ const components = [
     bootstrap: [AppComponent],
     entryComponents: [AppComponent]
 })
-export class AppModule {
-}
-
-
+export class AppModule {}

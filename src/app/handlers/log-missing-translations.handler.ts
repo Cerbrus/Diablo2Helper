@@ -8,18 +8,13 @@ export class LogMissingTranslationHandler implements MissingTranslationHandler {
 
     private translate?: TranslateService;
 
-    constructor(private injector: Injector) {
-    }
+    constructor(private injector: Injector) {}
 
     public handle({ key }: MissingTranslationHandlerParams): string {
-        if (this.translate == null)
-            this.translate = this.injector.get(TranslateService);
+        if (this.translate == null) this.translate = this.injector.get(TranslateService);
 
-        if (this.missingKeys.includes(key))
-            return `[${key}]`;
-
-        if (!Object.keys(this.translate.store.translations).length)
-            return key;
+        if (this.missingKeys.includes(key)) return `[${key}]`;
+        if (!Object.keys(this.translate.store.translations).length) return key;
 
         this.missingKeys.push(key);
 

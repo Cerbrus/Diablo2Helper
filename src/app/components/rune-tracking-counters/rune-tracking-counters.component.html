@@ -2,10 +2,7 @@
     <div class="rune-counter">
         <ng-container *ngFor="let rune of runes">
             <ng-container *ngVar="runeHelper.asItem(rune) as r">
-                <rune-counter *ngIf="r.track"
-                              [rune]="r"
-                              (onChange)="change($event)"
-                ></rune-counter>
+                <rune-counter *ngIf="r.track" [rune]="r" (onChange)="change($event)"></rune-counter>
             </ng-container>
         </ng-container>
     </div>

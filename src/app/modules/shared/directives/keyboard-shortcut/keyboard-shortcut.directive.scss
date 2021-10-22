@@ -1,0 +1,78 @@
+@use 'variables';
+
+.keyboard-shortcut {
+    position: relative;
+
+    &-overlay {
+        position: absolute;
+        content: ' ';
+        color: transparent;
+        display: grid;
+        grid-auto-flow: column;
+        align-content: center;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: -1px;
+        pointer-events: none;
+    }
+
+    .accent {
+        display: contents;
+        text-underline-position: under;
+    }
+}
+
+input-checkbox .keyboard-shortcut-overlay {
+    text-align: left;
+    font-weight: bold;
+    top: -3.5px;
+    padding-left: 36px;
+}
+
+.show-keyboard-hints .keyboard-shortcut .accent {
+    text-decoration: underline variables.$theme-text;
+}
+
+.tooltip.tooltip-keyboard-shortcuts {
+    text-align: left;
+    padding: variables.$size-gap;
+    display: grid;
+    grid-gap: variables.$size-gap-small variables.$size-gap;
+    grid-template-columns: min-content auto;
+    pointer-events: auto;
+
+    $row-height: 24px;
+
+    .key-group-title {
+        grid-column: span 2;
+        margin-bottom: variables.$size-gap;
+
+        &:not(:first-child) {
+            margin-top: variables.$size-gap;
+        }
+    }
+
+    .shortcut-key {
+        background-image: url(/assets/images/sprites/skills.png);
+        background-position: 0 $row-height;
+        background-size: 1439.445px 216px;
+        height: $row-height;
+        width: $row-height;
+        text-align: center;
+        display: inline-block;
+
+        &:hover {
+            background-position-x: -$row-height;
+        }
+    }
+
+    > span {
+        line-height: $row-height;
+    }
+
+    .accent {
+        text-decoration: underline;
+    }
+}

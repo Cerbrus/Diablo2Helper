@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestModule } from '../../../../../testing/test-common.module';
-import { UiCollapsibleComponent } from './ui-collapsible.component';
+import { TestModule } from '~testModule';
+import { UiCollapsibleComponent } from '~modules/ui/components';
 
 describe('UiCollapsibleComponent', () => {
     let component: UiCollapsibleComponent;
@@ -8,10 +8,9 @@ describe('UiCollapsibleComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                imports: [TestModule],
-                declarations: [UiCollapsibleComponent]
-            })
-            .compileComponents();
+            imports: [TestModule],
+            declarations: [UiCollapsibleComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

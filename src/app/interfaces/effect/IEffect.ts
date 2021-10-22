@@ -1,6 +1,6 @@
-import { EffectOptions, EffectType } from '../../enums';
-import { TEffectDescriptionKey } from '../../types';
-import { TClass, TSkill, TSkillGroup, TSkillRuneWord } from '../../types/player';
+import { EffectOptions, EffectType } from '~enums';
+import { TEffectDescriptionKey } from '~types/effect';
+import { TClass, TSkill, TSkillGroup, TSkillRuneWord } from '~types/player';
 
 export interface IEffect {
     description: TEffectDescriptionKey;
@@ -10,7 +10,7 @@ export interface IEffect {
     parameters?: IEffectParameters;
 }
 
-export type IEffectParameters = {
+export interface IEffectParameters {
     skill?: TSkill | TSkillGroup | TSkillRuneWord;
     level?: number;
     duration?: number;

@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Directive, ElementRef, Inject, Input, Output } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
-import { TMouseEvent } from '../../../../types/events';
+import { TMouseEvent } from '~types/events';
 import { UiScrollableComponent } from '../../components';
 
 @Directive({
@@ -13,10 +13,7 @@ export class UiDraggableDirective {
     public draggable: 'vertical' | 'horizontal' = 'vertical';
 
     @Output()
-    public dragged = fromEvent<TMouseEvent<HTMLElement>>(
-        this.elementRef.nativeElement,
-        'mousedown'
-    ).pipe(
+    public dragged = fromEvent<TMouseEvent<HTMLElement>>(this.elementRef.nativeElement, 'mousedown').pipe(
         switchMap(event => {
             event.preventDefault();
 
@@ -35,28 +32,19 @@ export class UiDraggableDirective {
         @Inject(UiScrollableComponent) private readonly scrollbar: UiScrollableComponent,
         @Inject(DOCUMENT) private readonly documentRef: Document,
         @Inject(ElementRef) private readonly elementRef: ElementRef<HTMLElement>
-    ) {
-    }
+    ) {}
 
-    private getScrolled(
-        { clientY, clientX }: MouseEvent,
-        offsetVertical: number,
-        offsetHorizontal: number
-    ): number {
+    private getScrolled({ clientY, clientX }: MouseEvent, offsetVertical: number, offsetHorizontal: number): number {
         const { offsetHeight, offsetWidth } = this.elementRef.nativeElement;
         const { nativeElement } = this.scrollbar.elementRef;
         const { top, left, width, height } = nativeElement.getBoundingClientRect();
 
         const maxTop = nativeElement.scrollHeight - height;
         const maxLeft = nativeElement.scrollWidth - width;
-        const scrolledTop =
-            (clientY - top - offsetHeight * offsetVertical) / (height - offsetHeight);
-        const scrolledLeft =
-            (clientX - left - offsetWidth * offsetHorizontal) / (width - offsetWidth);
+        const scrolledTop = (clientY - top - offsetHeight * offsetVertical) / (height - offsetHeight);
+        const scrolledLeft = (clientX - left - offsetWidth * offsetHorizontal) / (width - offsetWidth);
 
-        return this.draggable === 'vertical'
-            ? maxTop * scrolledTop
-            : maxLeft * scrolledLeft;
+        return this.draggable === 'vertical' ? maxTop * scrolledTop : maxLeft * scrolledLeft;
     }
 
     private static getOffsetVertical({ clientY }: MouseEvent, { top, height }: ClientRect): number {

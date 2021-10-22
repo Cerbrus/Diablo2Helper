@@ -64,6 +64,10 @@ p {
     margin: variables.$size-gap 0;
 }
 
+strong {
+    margin-right: variables.$size-gap;
+}
+
 .font-d2 {
     font-family: variables.$font-family-exocet;
 }

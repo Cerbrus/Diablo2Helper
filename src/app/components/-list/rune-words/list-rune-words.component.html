@@ -8,8 +8,7 @@
                 [header]="header"
                 [sort]="runeWordSort"
                 (onSort)="applySort($event)"
-            >
-            </ui-table-sort-control>
+            ></ui-table-sort-control>
 
             <div class="table-body" ui-scrollable vertical="left" horizontal="none">
                 <ng-container *ngFor="let runeWord of runeWordArraySorted">
@@ -26,19 +25,19 @@
                                 <em>{{ runeNames(runeWord.runes) }}</em>
                                 <div>
                                     <ng-container *ngFor="let rune of runes(runeWord.runes); let last = last">
-                                        <span [tooltipSocketable]="rune" [tooltipDelay]="2000"
-                                            >{{ rune.name }} ({{ rune.number }})</span
-                                        >
-                                        <span *ngIf="!last"> + </span>
+                                        <span [tooltipSocketable]="rune" [tooltipDelay]="2000">
+                                            <span>{{ rune.name }} ({{ rune.number }})</span>
+                                        </span>
+                                        <span *ngIf="!last" class="plus">+</span>
                                     </ng-container>
                                 </div>
-                                <span>{{
-                                    formatItemTypes(runeWord.itemTypes) + ' {' + runeWord.runes.length + '}'
-                                }}</span>
+                                <span>
+                                    {{ formatItemTypes(runeWord.itemTypes) + ' {' + runeWord.runes.length + '}' }}
+                                </span>
                             </div>
                             <div>
                                 <strong>{{ 'labels.cLvl' | translate }}:</strong>
-                                {{ runeWord.cLvl || ('common.none' | translate) }}
+                                <span>{{ runeWord.cLvl || ('common.none' | translate) }}</span>
                             </div>
                         </div>
                         <div

@@ -4,8 +4,7 @@
         [header]="header"
         [sort]="runeSort"
         (onSort)="applySort($event)"
-    >
-    </ui-table-sort-control>
+    ></ui-table-sort-control>
     <ui-table-head labelKey="labels.craft" key="craft"></ui-table-head>
     <ui-table-head labelKey="labels.socketEffect" key="effects"></ui-table-head>
 
@@ -44,9 +43,11 @@
                 <ui-format-effect title="shield" [effects]="effects.shield"></ui-format-effect>
                 <div>
                     <span *ngIf="rune.iLvl">
-                        <strong>{{ 'labels.iLvl' | translate }}:</strong> {{ rune.iLvl }}
+                        <strong>{{ 'labels.iLvl' | translate }}:</strong>
+                        <span>{{ rune.iLvl }}&nbsp;</span>
                     </span>
-                    <strong>{{ 'labels.cLvl' | translate }}:</strong> {{ rune.cLvl || ('common.none' | translate) }}
+                    <strong>{{ 'labels.cLvl' | translate }}:</strong>
+                    <span>{{ rune.cLvl || ('common.none' | translate) }}</span>
                 </div>
             </div>
         </div>

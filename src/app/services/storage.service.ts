@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { environment } from '~environment';
-import { ArrayHelper, ObjectHelper } from '~helpers';
+import { ArrayHelper, Helper } from '~helpers';
 import { IStorage } from '~interfaces';
 import settings from '~settings';
 import { GetValue, RemoveValue, SaveValue } from '~types/storage';
@@ -73,10 +73,10 @@ export class StorageService {
     private getItem<T>(key: string): T {
         const stored = localStorage.getItem(`d2helper.${key}`);
 
-        if (!ObjectHelper.hasValue(stored)) {
+        if (!Helper.hasValue(stored)) {
             const defaultValue = this.defaultValues[<keyof IStorage>key];
 
-            if (ObjectHelper.hasValue(defaultValue)) return this.saveItem(key, <T>defaultValue);
+            if (Helper.hasValue(defaultValue)) return this.saveItem(key, <T>defaultValue);
         }
 
         return stored ? JSON.parse(stored) : null;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons/faLightbulb';
 import { environment } from '~environment';
-import { DomHelper, ObjectHelper } from '~helpers';
+import { DomHelper, Helper, ObjectHelper } from '~helpers';
 import { ISettings } from '~interfaces';
 import { ITabPaneComponent } from '~interfaces/ui';
 import { faBug, IconDefinition } from '~modules/font-awesome';
@@ -22,7 +22,20 @@ export class TabPaneSettingsComponent implements ITabPaneComponent {
 
     constructor(private readonly storageService: StorageService) {
         this.settings = storageService.get.settings();
+        this.registerDarkModeWatch();
         this.applySettings();
+    }
+
+    private registerDarkModeWatch(): void {
+        if (!window.matchMedia) return;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (!Helper.hasValue(this.settings.darkMode)) this.settings.darkMode = prefersDark.matches;
+
+        prefersDark.addEventListener('change', e => {
+            this.settings.darkMode = e.matches;
+            this.applySettings();
+        });
     }
 
     public getTitleKey(key: keyof ISettings) {
@@ -42,7 +55,7 @@ export class TabPaneSettingsComponent implements ITabPaneComponent {
             {
                 'custom-cursor': settings.customCursor && !settings.customCursorLarge,
                 'custom-cursor-large': settings.customCursor && settings.customCursorLarge,
-                'theme-dark': settings.darkMode,
+                'theme-dark': settings.darkMode ?? true,
                 'theme-light': !settings.darkMode,
                 'theme-background': settings.enableBackground
             },

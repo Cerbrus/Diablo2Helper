@@ -63,11 +63,17 @@ export class EffectHelper {
                     return effect.startsWith('appliesTo') ? `<strong>${translated}</strong>` : translated;
                 }
 
-                const { parameters: parameters } = effect;
-                if (parameters?.class)
-                    parameters.class = this.translate.instant(`character.classes.${parameters?.class}`);
+                const className = effect.parameters?.class
+                    ? this.translate.instant(`character.classes.${effect.parameters?.class}`)
+                    : null;
 
-                const translated = [this.translate.instant(effect.description, { ...effect, ...parameters })];
+                const translated = [
+                    this.translate.instant(effect.description, {
+                        ...effect,
+                        ...effect.parameters,
+                        ...{ class: className }
+                    })
+                ];
 
                 if (effect.options) {
                     if (effect.options & Options.Varies) translated.push(varies);

@@ -44,7 +44,7 @@ export class KeyboardShortcutService {
     }
 
     private onKeyDown(event: KeyboardEvent): void {
-        if (!this.static.isAllowedEvent(event)) return;
+        if (DomHelper.isInput(<HTMLElement>event.target)) return;
 
         const key = event.key;
         if (key === StringHelper.Char('?')) {
@@ -78,21 +78,20 @@ export class KeyboardShortcutService {
     }
 
     private onKeyUp(event: KeyboardEvent): void {
-        if (!this.static.isAllowedEvent(event) || !this.metaKeys.includes(event.key) || !this.tooltip) {
+        if (
+            DomHelper.isInput(<HTMLElement>event.target) ||
+            !(this.metaKeys.includes(event.key) || this.static.hasMetaKey(event))
+        ) {
             return;
         }
 
         event.preventDefault();
         this.toggleHelp(false);
-        this.popup.endUsing();
+        this.tooltip && this.popup.endUsing();
     }
 
     private toggleHelp(show?: boolean): void {
-        DomHelper.getRoot().classList.toggle('show-keyboard-hints', show || this.popup.isVisible);
-    }
-
-    private static isAllowedEvent(event: KeyboardEvent): boolean {
-        return !DomHelper.isInput(<HTMLElement>event.target) || this.hasMetaKey(event);
+        DomHelper.getRoot().classList.toggle('show-keyboard-hints', show || (this.tooltip && this.popup.isVisible));
     }
 
     private static hasMetaKey(event: KeyboardEvent): boolean {

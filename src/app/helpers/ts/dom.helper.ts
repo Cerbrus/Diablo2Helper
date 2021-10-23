@@ -15,7 +15,7 @@ export class DomHelper {
     }
 
     public static isInput(element: HTMLElement | null): boolean {
-        return !!element && ['input', 'textarea'].includes(element.tagName);
+        return !!element && ['input', 'textarea'].includes(element.tagName.toLowerCase());
     }
 
     public static isVisible(element?: HTMLElement): boolean {

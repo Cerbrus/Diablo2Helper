@@ -25,6 +25,11 @@
             [(checked)]="filters.showCraftable"
             (click)="saveFilters()"
         ></input-checkbox>
+        <input-checkbox
+            labelKey="labels.showFavorite"
+            [(checked)]="filters.showFavorite"
+            (click)="saveFilters()"
+        ></input-checkbox>
     </ui-collapsible>
 
     <ui-collapsible labelKey="labels.maxClvl">

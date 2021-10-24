@@ -35,6 +35,7 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
 
     public buildItems(): IRuneWordMap {
         const owned = this.storageService.get.runeWordsOwned();
+        const favorites = this.storageService.get.runeWordsFavorited();
 
         const { all, bows } = this;
         const runes = this.runes.bind(this);
@@ -1369,6 +1370,7 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
 
         ObjectHelper.forEach(runeWords, (key, runeWord) => {
             runeWord.owned = owned[runeWord.name];
+            runeWord.favorite = favorites.includes(runeWord.name);
         });
 
         return runeWords;

@@ -6,12 +6,13 @@ import { IRuneWordFilters } from './runeWord';
 
 export interface IStorage {
     appVersion: string;
-    darkMode: boolean;
+    darkMode: boolean | null;
     gemsOwned: Partial<Record<TGem, number>>;
     runeSort: TRuneSort;
     runeWordFilters: IRuneWordFilters;
     runeWordSort: TRuneWordSort;
     runeWordsOwned: Partial<Record<TRuneWord, number>>;
+    runeWordsFavorited: Array<TRuneWord>;
     runesOwned: Partial<Record<TRune, number>>;
     settings: ISettings;
     uiActiveTabs: Record<string, string>;

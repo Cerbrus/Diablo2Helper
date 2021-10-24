@@ -2,6 +2,7 @@
     "defaultLanguage": "en",
     "storageDefaults": {
         "appVersion": "",
+        "darkMode": null,
         "settings": {
             "customCursor": true,
             "customCursorLarge": true,
@@ -22,9 +23,11 @@
         "runeWordFilters": {
             "showUnavailable": true,
             "showCraftable": true,
+            "showFavorite": false,
             "itemTypes": {}
         },
         "gemsOwned": {},
+        "runeWordsFavorited": [],
         "runeWordsOwned": {},
         "runesOwned": {},
         "uiActiveTabs": {},

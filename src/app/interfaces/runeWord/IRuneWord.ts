@@ -13,4 +13,5 @@ export interface IRuneWord {
     runes: Array<TRune | IRune>;
     itemTypes: ItemOrArray<TItem>;
     owned?: number;
+    favorite?: boolean;
 }

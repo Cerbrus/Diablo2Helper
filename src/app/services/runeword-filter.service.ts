@@ -157,6 +157,7 @@ export class RunewordFilterService {
                 return false;
 
             if (this.filters.cLvl && runeWord.cLvl > this.filters.cLvl) return false;
+            if (this.filters.showFavorite && !runeWord.favorite) return false;
 
             const enabledFilters = ObjectHelper.entries(this.filters.itemTypes)
                 .filter(([, enabled]) => enabled)

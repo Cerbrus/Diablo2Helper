@@ -4,7 +4,8 @@ import { ArrayHelper, RuneHelper, RuneWordHelper } from '~helpers';
 import { IRune } from '~interfaces/rune';
 import { IRuneWord } from '~interfaces/runeWord';
 import { ITable, ITableHeader } from '~interfaces/ui';
-import { RuneTrackerService, RunewordFilterService } from '~services';
+import { faHeartOutline, faHeartSolid } from '~modules/font-awesome';
+import { RuneTrackerService, RunewordFilterService, StorageService } from '~services';
 import { TItem } from '~types';
 import { ItemOrArray } from '~types/helpers';
 import { TRune } from '~types/rune';
@@ -16,6 +17,9 @@ import { TRuneWordSort } from '~types/runeWord';
     styleUrls: ['./list-rune-words.component.scss']
 })
 export class ListRuneWordsComponent {
+    public heartSolid = faHeartSolid;
+    public heartOutline = faHeartOutline;
+
     public get runeWordArraySorted(): Array<IRuneWord> {
         return this.runeWordHelper.itemsArraySorted;
     }
@@ -33,9 +37,10 @@ export class ListRuneWordsComponent {
 
     constructor(
         private readonly runeHelper: RuneHelper,
-        private readonly runeWordHelper: RuneWordHelper,
         private readonly runeTracker: RuneTrackerService,
+        private readonly runeWordHelper: RuneWordHelper,
         private readonly runewordFilterService: RunewordFilterService,
+        private readonly storageService: StorageService,
         private readonly translate: TranslateService
     ) {}
 
@@ -91,5 +96,12 @@ export class ListRuneWordsComponent {
 
     private translateItemType(itemType: TItem | 'single' | 'plural', params?: object): string {
         return this.translate.instant(`itemTypes.${itemType}`, params);
+    }
+
+    public toggleFavorite(runeWord: IRuneWord): void {
+        runeWord.favorite = !runeWord.favorite;
+        this.storageService.save.runeWordsFavorited(
+            this.runeWordHelper.itemsArray.filter(rw => rw.favorite).map(rw => rw.name)
+        );
     }
 }

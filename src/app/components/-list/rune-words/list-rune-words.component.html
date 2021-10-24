@@ -21,7 +21,15 @@
                         </div>
                         <div class="column-name">
                             <div class="details">
-                                <strong>{{ runeWord.name }}</strong>
+                                <span>
+                                    <strong>{{ runeWord.name }}</strong>
+                                    <fa-icon
+                                        class="pointer"
+                                        [title]="'labels.favorite' | translate"
+                                        [icon]="runeWord.favorite ? heartSolid : heartOutline"
+                                        (click)="toggleFavorite(runeWord)"
+                                    ></fa-icon>
+                                </span>
                                 <em>{{ runeNames(runeWord.runes) }}</em>
                                 <div>
                                     <ng-container *ngFor="let rune of runes(runeWord.runes); let last = last">

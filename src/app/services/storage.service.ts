@@ -37,6 +37,7 @@ export class StorageService {
         'runeSort',
         'runeWordFilters',
         'runeWordSort',
+        'runeWordsFavorited',
         'runeWordsOwned',
         'runesOwned',
         'settings',
@@ -48,6 +49,7 @@ export class StorageService {
         'darkMode',
         'gemsOwned',
         'runeWordsOwned',
+        'runeWordsFavorited',
         'runesOwned'
     ];
 

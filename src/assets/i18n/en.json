@@ -27,6 +27,7 @@
         "craft": "Cubed from",
         "dev": "Development",
         "effect": "Properties",
+        "favorite": "Mark as favorite",
         "filters": "Filters",
         "iLvl": "Ilvl",
         "import": "Import character",
@@ -45,6 +46,7 @@
         "showAllRuneWords": "All Runewords",
         "showCraftable": "Craftable Runewords",
         "showUnavailable": "Unavailable Runewords",
+        "showFavorite": "Favorite Runewords",
         "socketEffect": "Socketed Properties",
         "sort": {
             "cLvl": "Sort by required level",

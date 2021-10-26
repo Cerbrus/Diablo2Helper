@@ -32,7 +32,7 @@ export class RunewordFilterService {
     };
 
     private runeWords: IRuneWordMap;
-    private runeWordVisibility: Record<TRuneWord, boolean> = ArrayHelper.toRecord(RuneWords, () => false);
+    private runeWordVisibility: Record<TRuneWord, boolean> = ArrayHelper.toRecord([...RuneWords], () => false);
 
     private craftableRuneSets: Record<string, boolean> = {};
 
@@ -78,7 +78,7 @@ export class RunewordFilterService {
     }
 
     public calculateRuneWordVisibility(): void {
-        this.runeWordVisibility = ArrayHelper.toRecord(RuneWords, (runeWord: TRuneWord) =>
+        this.runeWordVisibility = ArrayHelper.toRecord([...RuneWords], (runeWord: TRuneWord) =>
             this.applyFilterToRuneWord(runeWord)
         );
     }

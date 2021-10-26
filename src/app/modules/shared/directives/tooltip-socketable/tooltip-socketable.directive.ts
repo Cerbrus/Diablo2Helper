@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, Inject, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Inject, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { EffectHelper, GemHelper, RuneHelper } from '~helpers';
 import { IGem } from '~interfaces/gem';

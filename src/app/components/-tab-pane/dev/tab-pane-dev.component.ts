@@ -33,15 +33,13 @@ export class TabPaneDevComponent implements ITabPaneComponent {
         const currentSkill = this.skills[currentClass][this.skillIndex]?.toLowerCase();
         if (!currentSkill) return;
 
-        const currentClassSkills = <Array<ISkillUi[TCurrentClass]>>SkillsUi[currentClass];
+        const currentClassSkills = <Array<ISkillUi[TCurrentClass]>>(<unknown>SkillsUi[currentClass]);
         const matches = currentClassSkills.filter(s => {
             const skill = s?.toLowerCase();
             return skill && (skill.startsWith(currentSkill) || currentSkill.startsWith(skill));
         });
 
-        if (matches.length === 1) {
-            this.skills[currentClass][this.skillIndex] = matches[0];
-        }
+        if (matches.length === 1) (<any>this.skills)[currentClass][this.skillIndex] = matches[0];
     }
 
     public getMax(): number {

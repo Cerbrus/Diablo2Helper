@@ -36,7 +36,8 @@ export class UiSpriteSkillComponent<
 
     protected getBackground(): Record<'x' | 'y' | 'width' | 'height', number> {
         const hasDown = this.class !== 'hireling';
-        const index = this.skill ? (<Array<ISkillUi[TClass]>>SkillsUi[this.class]).indexOf(this.skill) : this.index;
+        const skills = <Array<ISkillUi[TClass]>>(<unknown>SkillsUi[this.class]);
+        const index = this.skill ? skills.indexOf(this.skill) : this.index;
 
         return {
             x: -this.size * (index * (hasDown ? 2 : 1) + (hasDown && this.isDown ? 1 : 0)),

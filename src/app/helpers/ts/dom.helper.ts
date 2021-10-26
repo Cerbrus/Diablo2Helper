@@ -3,8 +3,11 @@ import { char } from '~types/helpers';
 type TChild = string | Node | null;
 
 export class DomHelper {
-    public static createElement(tagName: 'span', child?: TChild, ...cssClass: Array<string>): HTMLSpanElement;
-    public static createElement(tagName: 'div', child?: TChild, ...cssClass: Array<string>): HTMLDivElement;
+    public static createElement<K extends keyof HTMLElementTagNameMap>(
+        tagName: K,
+        child?: TChild,
+        ...cssClass: Array<string>
+    ): HTMLElementTagNameMap[K];
     public static createElement(tagName: string, child?: TChild, ...cssClass: Array<string>): HTMLElement {
         const element = document.createElement(tagName);
 
@@ -22,7 +25,7 @@ export class DomHelper {
         return !!element && !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
     }
 
-    public static underlineLetter(container: HTMLElement, text: string, key: char, skipWords = 0) {
+    public static underlineLetter(container: HTMLElement, text: string, key: char, skipWords = 0): void {
         if (!text.toLowerCase().includes((<string>key).toLowerCase())) {
             container.append(text);
             return;

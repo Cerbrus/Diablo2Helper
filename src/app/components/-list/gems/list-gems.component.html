@@ -5,6 +5,7 @@
 
             <ui-table-head key="quality" labelKey="gems.quality.title"></ui-table-head>
             <ui-table-head key="owned" labelKey="labels.owned"></ui-table-head>
+            <ui-table-head key="craft" labelKey="labels.craft"></ui-table-head>
             <ui-table-head key="effectWeapon" labelKey="labels.weapon"></ui-table-head>
             <ui-table-head key="effectArmorHelm" labelKey="labels.armorHelm"></ui-table-head>
             <ui-table-head key="effectShield" labelKey="labels.shield"></ui-table-head>
@@ -23,6 +24,11 @@
                         (valueChange)="gemOwned(gem)"
                         [small]="true"
                     ></input-number-checkbox>
+                </div>
+                <div class="column-crafts block center-text" *ngVar="gem.craft?.gems as gems">
+                    <ng-container *ngIf="gems">
+                        <ui-sprite-gem *ngFor="let gem of gems | asArray" [gem]="gem" [size]="24"></ui-sprite-gem>
+                    </ng-container>
                 </div>
                 <ng-container *ngVar="gem.effects as effects">
                     <div class="column-effectWeapon">

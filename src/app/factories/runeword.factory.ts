@@ -26,9 +26,9 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
         return ['all', ...itemsTypes];
     }
 
-    private runes(...runes: Array<TRune>): { runes: Array<TRune>; cLvl: number } {
+    private runes(...runes: Array<TRune>): { craft: { runes: Array<TRune> }; cLvl: number } {
         return {
-            runes,
+            craft: { runes },
             cLvl: Math.max(...runes.map(r => this.runeHelper.asItem(r).cLvl))
         };
     }

@@ -61,7 +61,9 @@ export class ListRuneWordsComponent {
     }
 
     public areRunesOwned(runeWord: IRuneWord): boolean {
-        return this.runeTracker.areRunesOwned(runeWord.runes);
+        if (!runeWord.craft?.runes) return true;
+        const runes = ArrayHelper.toArray(runeWord.craft?.runes);
+        return runes && this.runeTracker.areRunesOwned(runes);
     }
 
     public canCraftRunes(runeWord: IRuneWord): boolean {

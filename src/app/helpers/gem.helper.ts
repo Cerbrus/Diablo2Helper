@@ -33,8 +33,8 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
         return this.getItems()[type][quality];
     }
 
-    public isItem(socketable: IGem | IRune): socketable is IGem {
-        return 'quality' in socketable;
+    public isItem(socketable: TGem | TRune | IGem | IRune): socketable is IGem {
+        return typeof socketable !== 'string' && 'quality' in socketable;
     }
 
     public isType(item: object | TGem | TRune): item is TGem {

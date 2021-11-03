@@ -177,7 +177,7 @@ export class RunewordFilterService {
         this.craftableRuneSets[runeWord.name] = this.runeTracker.calculateCraftableRunes(runeWord);
 
         return (
-            this.runeTracker.areRunesOwned(runeWord.runes) ||
+            this.runeTracker.areRunesOwned(runeWord.craft?.runes) ||
             (this.filters.showCraftable && this.canCraftRunes(runeWord.name)) ||
             this.filters.showUnavailable
         );

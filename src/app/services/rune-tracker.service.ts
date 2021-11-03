@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ArrayHelper, NumberHelper, ObjectHelper, RuneHelper } from '~helpers';
 import { IRune } from '~interfaces/rune';
 import { IRuneWord } from '~interfaces/runeWord';
+import { ItemOrArray } from '~types/helpers';
 import { TRune } from '~types/rune';
 import { StorageService } from './';
 
@@ -40,8 +41,11 @@ export class RuneTrackerService {
         this.storageService.save.runesOwned(this.getRunesOwned());
     }
 
-    public areRunesOwned(runes: Array<TRune | IRune>): boolean {
-        const wishList = ArrayHelper.countStringOccurrences(this.runeHelper.asType(runes));
+    public areRunesOwned(runes?: ItemOrArray<TRune | IRune>): boolean {
+        if (!runes) return true;
+
+        const runesArray = ArrayHelper.toArray(runes);
+        const wishList = ArrayHelper.countStringOccurrences(this.runeHelper.asType(runesArray));
 
         return ObjectHelper.entries(wishList).every(
             (value: [TRune, number]) => (this.runeHelper.asItem(value[0]).owned ?? 0) >= value[1]
@@ -50,7 +54,9 @@ export class RuneTrackerService {
 
     public calculateCraftableRunes(runeWord: IRuneWord): boolean {
         const countClone = this.getRunesOwned();
-        return runeWord.runes.every(r => this.hasOrCanCraftRune(countClone, r, 1, runeWord));
+        return ArrayHelper.toArray(runeWord.craft?.runes).every(
+            r => r && this.hasOrCanCraftRune(countClone, r, 1, runeWord)
+        );
     }
 
     public hasOrCanCraftRune(

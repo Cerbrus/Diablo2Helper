@@ -7,6 +7,7 @@ import { SharedModule } from '~modules';
 
 // Components
 import {
+    UiButtonComponent,
     UiCollapsibleComponent,
     UiFormatEffectComponent,
     UiScrollableComponent,
@@ -26,6 +27,7 @@ import {
 import { UiDraggableDirective } from './directives';
 
 const components = [
+    UiButtonComponent,
     UiCollapsibleComponent,
     UiFormatEffectComponent,
     UiScrollableComponent,

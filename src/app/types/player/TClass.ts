@@ -1,13 +1,5 @@
-export const Classes: Array<TClass> = [
-    'amazon',
-    'assassin',
-    'barbarian',
-    'druid',
-    'necromancer',
-    'paladin',
-    'sorceress'
-];
-export type TClass = 'amazon' | 'assassin' | 'barbarian' | 'druid' | 'necromancer' | 'paladin' | 'sorceress';
+export type TClass = typeof Classes[number];
+export const Classes = ['amazon', 'assassin', 'barbarian', 'druid', 'necromancer', 'paladin', 'sorceress'] as const;
 
-export const ClassesUi: Array<TClassUi> = [...Classes, 'hireling', 'ui'];
-export type TClassUi = TClass | 'hireling' | 'ui';
+export type TClassUi = typeof ClassesUi[number];
+export const ClassesUi = [...Classes, 'hireling', 'ui'] as const;

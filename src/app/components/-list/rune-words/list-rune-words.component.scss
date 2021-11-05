@@ -1,12 +1,18 @@
 @use 'variables';
 @use 'mixins';
 
-$table-columns: 90px 220px 130px 1fr;
+$table-columns: 90px 220px 130px 75px 1fr;
+$table-column-count: 5;
 
 .column {
     &-name .details,
-    &-runes {
+    &-runes,
+    &-craft {
         display: grid;
+    }
+
+    &-craft {
+        justify-content: center;
     }
 
     &-name {
@@ -20,7 +26,7 @@ $table-columns: 90px 220px 130px 1fr;
     }
 }
 
-.runes {
+.table-row .runes {
     &-craftable {
         background: variables.$theme-background-craftable;
     }
@@ -44,7 +50,7 @@ $table-columns: 90px 220px 130px 1fr;
     }
 
     .table-body {
-        grid-column: span 4;
+        grid-column: span $table-column-count;
     }
 }
 

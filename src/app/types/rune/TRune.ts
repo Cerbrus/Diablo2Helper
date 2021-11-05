@@ -1,4 +1,5 @@
-export const Runes: Array<TRune> = [
+export type TRune = typeof Runes[number];
+export const Runes = [
     'El',
     'Eld',
     'Tir',
@@ -32,39 +33,5 @@ export const Runes: Array<TRune> = [
     'Jah',
     'Cham',
     'Zod'
-];
+] as const;
 
-export type TRune =
-    | 'El'
-    | 'Eld'
-    | 'Tir'
-    | 'Nef'
-    | 'Eth'
-    | 'Ith'
-    | 'Tal'
-    | 'Ral'
-    | 'Ort'
-    | 'Thul'
-    | 'Amn'
-    | 'Sol'
-    | 'Shael'
-    | 'Dol'
-    | 'Hel'
-    | 'Io'
-    | 'Lum'
-    | 'Ko'
-    | 'Fal'
-    | 'Lem'
-    | 'Pul'
-    | 'Um'
-    | 'Mal'
-    | 'Ist'
-    | 'Gul'
-    | 'Vex'
-    | 'Ohm'
-    | 'Lo'
-    | 'Sur'
-    | 'Ber'
-    | 'Jah'
-    | 'Cham'
-    | 'Zod';

@@ -17,6 +17,7 @@
         "runeWordSort": {
             "name": { "key": "name", "icon": "alpha" },
             "runes": { "key": "runes" },
+            "craft": { "key": "craft" },
             "cLvl": { "key": "cLvl", "icon": "numeric" },
             "owned": { "key": "owned", "icon": "numericAlt" }
         },

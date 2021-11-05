@@ -3,7 +3,7 @@ import { isArray } from 'rxjs/internal-compatibility';
 import { ItemOrArray, Key } from '~types/helpers';
 
 export class ArrayHelper {
-    public static repeat<T>(value: T, length: number): Array<T> {
+    public static repeat<T extends string>(value: T, length: number): Array<T> {
         return new Array(length).fill(value);
     }
 

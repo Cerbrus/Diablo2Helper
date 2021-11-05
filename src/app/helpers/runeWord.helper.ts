@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { RuneWordFactory } from '~factories/runeword.factory';
+import { CraftableHelper } from '~helpers/craftable.helper';
 import { IRuneWord, IRuneWordMap } from '~interfaces/runeWord';
 import { ITable } from '~interfaces/ui';
 import { StorageService } from '~services';
@@ -26,7 +27,10 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
 
     public fromSaveItem(item: IItem): IRuneWord | null {
         const runesString = item.socketed_items.map(i => this.runeHelper.fromSaveItem(i)?.name).join('|');
-        return this.itemsArray.find(runeWord => runeWord.runes.join('|') === runesString) ?? null;
+        const result = this.itemsArray.find(
+            runeWord => ArrayHelper.toArray(runeWord.craft?.runes)?.join('|') === runesString
+        );
+        return result ?? null;
     }
 
     public getItem(rune: TRuneWord): IRuneWord {
@@ -60,7 +64,8 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
                 name: this.sortByName.bind(this),
                 runes: this.sortByRunes.bind(this),
                 cLvl: this.sortByCLvl.bind(this),
-                owned: this.sortByOwned.bind(this)
+                owned: this.sortByOwned.bind(this),
+                craft: this.sortByCraftable.bind(this)
             },
             <TRuneWordSortKeys>'name',
             changedSort
@@ -74,9 +79,9 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
     }
 
     public sortByRunes(a: IRuneWord, b: IRuneWord, asc: boolean): number {
-        return a.runes.length === b.runes.length
+        return a.craft?.runes?.length === b.craft?.runes?.length
             ? this.sortByCLvl(a, b, asc)
-            : (a.runes.length - b.runes.length) * (asc ? -1 : 1);
+            : ((a.craft?.runes?.length ?? 0) - (b.craft?.runes?.length ?? 0)) * (asc ? -1 : 1);
     }
 
     public sortByCLvl(a: IRuneWord, b: IRuneWord, asc: boolean): number {
@@ -85,5 +90,9 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
 
     public sortByOwned(a: IRuneWord, b: IRuneWord, asc: boolean): number {
         return a.owned === b.owned ? this.sortByName(a, b, asc) : ((a.owned ?? 0) - (b.owned ?? 0)) * (asc ? -1 : 1);
+    }
+
+    public sortByCraftable(a: IRuneWord, b: IRuneWord, asc: boolean): number {
+        return CraftableHelper.sortByCraftable(a, b, asc) || this.sortByName(a, b, asc);
     }
 }

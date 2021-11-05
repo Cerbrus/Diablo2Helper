@@ -18,12 +18,7 @@
                 <input type="text" [(ngModel)]="class" (keyup)="autoCompleteClass()" onClickSelect />
                 <input type="number" [(ngModel)]="skillIndex" min="0" [max]="getMax()" onClickSelect />
 
-                <input
-                    type="text"
-                    [(ngModel)]="skills[class] && skills[class][skillIndex]"
-                    (keyup)="autoCompleteSkill()"
-                    onClickSelect
-                />
+                <input type="text" [(ngModel)]="skill" (keyup)="autoCompleteSkill()" onClickSelect />
             </div>
         </div>
         <pre *ngIf="skillsString" onClickSelect class="pointer">{{ skillsString }}</pre>

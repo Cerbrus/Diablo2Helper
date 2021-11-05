@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ArrayHelper, NumberHelper, ObjectHelper, RuneHelper } from '~helpers';
+import { ArrayHelper, NumberHelper, ObjectHelper, RuneHelper, RuneWordHelper } from '~helpers';
 import { IRune } from '~interfaces/rune';
 import { IRuneWord } from '~interfaces/runeWord';
+import { ItemOrArray } from '~types/helpers';
 import { TRune } from '~types/rune';
 import { StorageService } from './';
 
@@ -12,7 +13,11 @@ export class RuneTrackerService {
     public max = 999;
     public min = 0;
 
-    constructor(private readonly runeHelper: RuneHelper, private readonly storageService: StorageService) {
+    constructor(
+        private readonly runeHelper: RuneHelper,
+        private readonly runeWordHelper: RuneWordHelper,
+        private readonly storageService: StorageService
+    ) {
         this.runeArray = runeHelper.itemsArray;
         this.initializeRuneCounts();
     }
@@ -40,32 +45,47 @@ export class RuneTrackerService {
         this.storageService.save.runesOwned(this.getRunesOwned());
     }
 
-    public areRunesOwned(runes: Array<TRune | IRune>): boolean {
-        const wishList = ArrayHelper.countStringOccurrences(this.runeHelper.asType(runes));
+    public areRunesOwned(runes?: ItemOrArray<TRune | IRune>): boolean {
+        if (!runes) return true;
+
+        const runesArray = ArrayHelper.toArray(runes);
+        const wishList = ArrayHelper.countStringOccurrences(this.runeHelper.asType(runesArray));
 
         return ObjectHelper.entries(wishList).every(
             (value: [TRune, number]) => (this.runeHelper.asItem(value[0]).owned ?? 0) >= value[1]
         );
     }
 
-    public calculateCraftableRunes(runeWord: IRuneWord): boolean {
+    public canCraftRuneWordRunes(runeWord: IRuneWord, usedRunes?: Partial<Record<TRune, number>>): boolean {
+        if (!runeWord.craft) return true;
         const countClone = this.getRunesOwned();
-        return runeWord.runes.every(r => this.hasOrCanCraftRune(countClone, r, 1, runeWord));
+        const canCraft = ArrayHelper.toArray(runeWord.craft?.runes).every(
+            r => r && this.hasOrCanCraftRune(countClone, r, 1, runeWord, usedRunes)
+        );
+
+        runeWord.craft.canCraftMaterials = canCraft;
+
+        return canCraft;
     }
 
     public hasOrCanCraftRune(
         ownedRunes: Record<TRune, number>,
         runeToCraft: TRune | IRune,
         amountNeeded = 1,
-        runeWord?: IRuneWord
+        runeWord?: IRuneWord,
+        usedRunes?: Partial<Record<TRune, number>>
     ): boolean {
         runeToCraft = this.runeHelper.asItem(runeToCraft);
         const craft = runeToCraft.name;
 
         if (ownedRunes[craft] >= amountNeeded) {
             ownedRunes[craft] -= amountNeeded;
+
+            if (usedRunes) usedRunes[craft] = (usedRunes[craft] ?? 0) + amountNeeded;
             return true;
         } else {
+            if (usedRunes && ownedRunes[craft]) usedRunes[craft] = ownedRunes[craft];
+
             const missingCount = amountNeeded - (ownedRunes[craft] ?? 0);
             ownedRunes[craft] = 0;
 
@@ -76,10 +96,56 @@ export class RuneTrackerService {
                 ObjectHelper.every(
                     ArrayHelper.countStringOccurrences(neededRunes),
                     (requiredRune: TRune, amountForCraft: number) =>
-                        this.hasOrCanCraftRune(ownedRunes, requiredRune, missingCount * amountForCraft, runeWord)
+                        this.hasOrCanCraftRune(
+                            ownedRunes,
+                            requiredRune,
+                            missingCount * amountForCraft,
+                            runeWord,
+                            usedRunes
+                        )
                 )
             );
         }
+    }
+
+    public hasRunewordRunes(runeWord: IRuneWord): boolean {
+        if (!runeWord.craft?.runes) return true;
+        const runes = ArrayHelper.toArray(runeWord.craft?.runes);
+
+        const hasMaterials = runes && this.areRunesOwned(runes);
+        runeWord.craft.hasMaterials = hasMaterials;
+        return hasMaterials;
+    }
+
+    public craft(runeWord: IRuneWord): void {
+        if (!runeWord.craft) return this.incrementOwnedCount(runeWord);
+
+        if (this.hasRunewordRunes(runeWord) && runeWord.craft.runes) {
+            const usedRunes = ArrayHelper.countStringOccurrences(runeWord.craft.runes);
+            return this.applyCraft(runeWord, usedRunes);
+        }
+
+        const usedRunes: Partial<Record<TRune, number>> = {};
+        if (this.canCraftRuneWordRunes(runeWord, usedRunes)) {
+            this.applyCraft(runeWord, usedRunes);
+        }
+    }
+
+    private applyCraft(runeWord: IRuneWord, runes: Partial<Record<TRune, number>>) {
+        ObjectHelper.forEach(<Record<TRune, number>>runes, (runeName: TRune, count: number) => {
+            if (!runeName) return;
+            const rune = this.runeHelper.getItem(runeName);
+            rune.owned = (rune.owned ?? 0) - count;
+        });
+
+        this.saveStoredRunes();
+
+        return this.incrementOwnedCount(runeWord);
+    }
+
+    private incrementOwnedCount(runeWord: IRuneWord): void {
+        runeWord.owned = (runeWord.owned ?? 0) + 1;
+        this.runeWordHelper.saveEntitiesOwned();
     }
 
     private getRunesOwned(): Record<TRune, number> {

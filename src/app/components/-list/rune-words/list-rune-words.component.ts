@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ArrayHelper, RuneHelper, RuneWordHelper } from '~helpers';
 import { IRune } from '~interfaces/rune';
@@ -14,7 +14,8 @@ import { TRuneWordSort } from '~types/runeWord';
 @Component({
     selector: 'list-rune-words',
     templateUrl: './list-rune-words.component.html',
-    styleUrls: ['./list-rune-words.component.scss']
+    styleUrls: ['./list-rune-words.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListRuneWordsComponent {
     public heartSolid = faHeartSolid;
@@ -29,9 +30,10 @@ export class ListRuneWordsComponent {
     }
 
     public headers: Array<ITableHeader<TRuneWordSort, IRuneWord>> = [
-        { title: 'labels.owned', key: 'owned', width: 80 },
+        { title: 'labels.owned', key: 'owned' },
         { title: 'common.rune', key: 'name' },
         { title: 'common.runes', key: 'runes' },
+        { title: 'labels.craft', key: 'craft' },
         { title: 'labels.effect', key: 'cLvl' }
     ];
 
@@ -60,17 +62,14 @@ export class ListRuneWordsComponent {
         return this.runewordFilterService.canShowRuneWord(runeWord);
     }
 
-    public areRunesOwned(runeWord: IRuneWord): boolean {
-        return this.runeTracker.areRunesOwned(runeWord.runes);
-    }
-
-    public canCraftRunes(runeWord: IRuneWord): boolean {
-        return this.runewordFilterService.canCraftRunes(runeWord.name);
-    }
-
     public runeWordOwned(runeWord: IRuneWord, amount?: number): void {
         if (amount) runeWord.owned = amount;
         this.runeWordHelper.saveEntitiesOwned();
+    }
+
+    public craft(runeWord: IRuneWord): void {
+        this.runeTracker.craft(runeWord);
+        this.runewordFilterService.calculateRuneWordVisibility();
     }
 
     public formatItemTypes(itemTypes: ItemOrArray<TItem>): string {
@@ -103,5 +102,6 @@ export class ListRuneWordsComponent {
         this.storageService.save.runeWordsFavorited(
             this.runeWordHelper.itemsArray.filter(rw => rw.favorite).map(rw => rw.name)
         );
+        this.runewordFilterService.calculateRuneWordVisibility();
     }
 }

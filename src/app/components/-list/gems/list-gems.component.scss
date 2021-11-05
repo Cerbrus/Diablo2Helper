@@ -6,11 +6,11 @@
 }
 
 .table {
-    grid-template-columns: 90px 40px 70px repeat(3, auto) 90px;
+    grid-template-columns: 90px 34px 70px 70px repeat(3, auto) 90px;
 
     .header {
         &-gemType {
-            grid-column: span 7;
+            grid-column: span 8;
         }
 
         &-quality {
@@ -22,9 +22,18 @@
         display: grid;
     }
 
-    .column-gem {
-        display: block;
-        justify-content: center;
+    .column {
+        &-gem {
+            display: block;
+            justify-content: center;
+        }
+
+        &-gem,
+        &-crafts {
+            ui-sprite-gem {
+                margin: 0 -3px;
+            }
+        }
     }
 }
 

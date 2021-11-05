@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { EffectHelper } from '~helpers';
+import { ArrayHelper, EffectHelper, ObjectHelper } from '~helpers';
 import { IEffectBuilderParams, IEffectBuilders } from '~interfaces/effect';
 import { IGem, IGemMap, TGemQualityMap } from '~interfaces/gem';
 import { ISocketableEffects } from '~interfaces/socketable';
@@ -27,7 +27,7 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
         const effect = EffectHelper.effect;
         const $ = (a: number, b: number) => [a, b];
 
-        return {
+        const gemMap = {
             amethyst: this.buildGemQualities(
                 'amethyst',
                 owned,
@@ -133,6 +133,18 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
                 }
             )
         };
+
+        ObjectHelper.forEach(gemMap, (type: TGemType, qualities: TGemQualityMap<IGem>) => {
+            ObjectHelper.forEach(qualities, (quality: TGemQuality, gem: IGem) => {
+                if (quality === 'chipped') return;
+
+                gem.craft = {
+                    gems: ArrayHelper.repeat(`${GemQualities[GemQualities.indexOf(quality) - 1]}|${type}`, 3)
+                };
+            });
+        });
+
+        return gemMap;
     }
 
     private setNewGemName<TGem extends IGem>(gem: TGem): TGem {

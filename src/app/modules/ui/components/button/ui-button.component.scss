@@ -1,0 +1,20 @@
+@use 'variables';
+
+div {
+    background-size: cover;
+    background-position-x: 0;
+
+    &:hover {
+        background-position-x: 100%;
+    }
+
+    &:active {
+        background-position-x: 50%;
+    }
+
+    &.disabled {
+        background-position-x: 0;
+        cursor: variables.$cursor-forbidden;
+        opacity: 0.5;
+    }
+}

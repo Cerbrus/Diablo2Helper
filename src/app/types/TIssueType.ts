@@ -1,3 +1,2 @@
-export const IssueTypes: Array<TIssueType> = ['bug_report', 'feature_request'];
-
-export type TIssueType = 'bug_report' | 'feature_request';
+export type TIssueType = typeof IssueTypes[number];
+export const IssueTypes = ['bug_report', 'feature_request'] as const;

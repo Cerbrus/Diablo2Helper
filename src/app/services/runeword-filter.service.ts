@@ -32,9 +32,7 @@ export class RunewordFilterService {
     };
 
     private runeWords: IRuneWordMap;
-    private runeWordVisibility: Record<TRuneWord, boolean> = ArrayHelper.toRecord(RuneWords, () => false);
-
-    private craftableRuneSets: Record<string, boolean> = {};
+    private runeWordVisibility: Record<TRuneWord, boolean> = ArrayHelper.toRecord([...RuneWords], () => false);
 
     constructor(
         private readonly storageService: StorageService,
@@ -78,7 +76,7 @@ export class RunewordFilterService {
     }
 
     public calculateRuneWordVisibility(): void {
-        this.runeWordVisibility = ArrayHelper.toRecord(RuneWords, (runeWord: TRuneWord) =>
+        this.runeWordVisibility = ArrayHelper.toRecord([...RuneWords], (runeWord: TRuneWord) =>
             this.applyFilterToRuneWord(runeWord)
         );
     }
@@ -91,10 +89,6 @@ export class RunewordFilterService {
         if (this.filters.cLvl) this.filters.cLvl = NumberHelper.clamp(this.filters.cLvl, min, max);
 
         this.saveFilters();
-    }
-
-    public canCraftRunes(runeWord: TRuneWord): boolean {
-        return this.craftableRuneSets[runeWord];
     }
 
     public isMelee(itemType: TItem): boolean {
@@ -174,11 +168,12 @@ export class RunewordFilterService {
             }
         }
 
-        this.craftableRuneSets[runeWord.name] = this.runeTracker.calculateCraftableRunes(runeWord);
+        this.runeTracker.canCraftRuneWordRunes(runeWord);
+        this.runeTracker.hasRunewordRunes(runeWord);
 
         return (
-            this.runeTracker.areRunesOwned(runeWord.runes) ||
-            (this.filters.showCraftable && this.canCraftRunes(runeWord.name)) ||
+            runeWord.craft?.hasMaterials ||
+            (this.filters.showCraftable && runeWord.craft?.canCraftMaterials) ||
             this.filters.showUnavailable
         );
     }

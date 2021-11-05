@@ -72,8 +72,8 @@
 
             --theme-background: #222222;
             --theme-background-transparent: #{color.change(#222222, $alpha: 0.8)};
-            --theme-background-owned: #{color.change(#00ff00, $alpha: 0.4)};
-            --theme-background-craftable: #{color.change(#ff8800, $alpha: 0.6)};
+            --theme-background-owned: #006600;
+            --theme-background-craftable: #aa5500;
             --theme-background-image: url('/assets/images/ui/background/endgame_hd.lowend.png');
             --theme-background-image-xl: url('/assets/images/ui/background/endgame_hd.png');
             --theme-background-opacity: 1;

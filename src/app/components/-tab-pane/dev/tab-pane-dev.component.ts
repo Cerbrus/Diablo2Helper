@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ObjectHelper } from '~helpers';
 import { ISkillUi } from '~interfaces/player';
 import { ITabPaneComponent } from '~interfaces/ui';
-import { ClassesUi, SkillsUi, TClass, TClassUi } from '~types/player';
+import { ClassesUi, SkillsUi, TClass, TClassUi, TSkill, TSkillUi } from '~types/player';
 
 @Component({
     selector: 'tab-pane-dev',
@@ -10,10 +10,13 @@ import { ClassesUi, SkillsUi, TClass, TClassUi } from '~types/player';
     styleUrls: ['./tab-pane-dev.component.scss']
 })
 export class TabPaneDevComponent implements ITabPaneComponent {
+    public skills = ObjectHelper.deepCopy(SkillsUi);
+
     public class: TClassUi = 'amazon';
     public skillIndex = 0;
+    public skill: TSkill | TSkillUi = this.skills[this.class][this.skillIndex];
+
     public isDown = false;
-    public skills = ObjectHelper.deepCopy(SkillsUi);
     public skillsString?: string;
 
     public autoCompleteClass(): void {
@@ -21,6 +24,7 @@ export class TabPaneDevComponent implements ITabPaneComponent {
         if (matches.length === 1) {
             this.class = matches[0];
             this.skillIndex = 0;
+            this.skill = this.skills[this.class][this.skillIndex];
         }
     }
 
@@ -29,17 +33,19 @@ export class TabPaneDevComponent implements ITabPaneComponent {
     }
 
     public autoCompleteSkill<TCurrentClass extends TClassUi>(): void {
-        const currentClass: TCurrentClass = <TCurrentClass>this.class;
-        const currentSkill = this.skills[currentClass][this.skillIndex]?.toLowerCase();
-        if (!currentSkill) return;
+        if (!this.skill) return;
+        const find = this.skill.toLowerCase();
 
-        const currentClassSkills = <Array<ISkillUi[TCurrentClass]>>(<unknown>SkillsUi[currentClass]);
+        const currentClassSkills = <Array<ISkillUi[TCurrentClass]>>(<unknown>SkillsUi[this.class]);
         const matches = currentClassSkills.filter(s => {
             const skill = s?.toLowerCase();
-            return skill && (skill.startsWith(currentSkill) || currentSkill.startsWith(skill));
+            return skill && (skill.startsWith(find) || find.startsWith(skill));
         });
 
-        if (matches.length === 1) (<any>this.skills)[currentClass][this.skillIndex] = matches[0];
+        if (matches.length === 1) {
+            this.skill = matches[0];
+            if (this.skill) this.skillIndex = currentClassSkills.indexOf(matches[0]);
+        }
     }
 
     public getMax(): number {

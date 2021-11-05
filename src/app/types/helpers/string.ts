@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 export type TLetter = typeof Letters[number];
 export type TCapitalLetter = Uppercase<TLetter>;
 export const Letters = [

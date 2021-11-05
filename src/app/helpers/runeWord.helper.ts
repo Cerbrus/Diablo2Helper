@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { RuneWordFactory } from '~factories/runeword.factory';
+import { CraftableHelper } from '~helpers/craftable.helper';
 import { IRuneWord, IRuneWordMap } from '~interfaces/runeWord';
 import { ITable } from '~interfaces/ui';
 import { StorageService } from '~services';
@@ -63,7 +64,8 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
                 name: this.sortByName.bind(this),
                 runes: this.sortByRunes.bind(this),
                 cLvl: this.sortByCLvl.bind(this),
-                owned: this.sortByOwned.bind(this)
+                owned: this.sortByOwned.bind(this),
+                craft: this.sortByCraftable.bind(this)
             },
             <TRuneWordSortKeys>'name',
             changedSort
@@ -88,5 +90,9 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
 
     public sortByOwned(a: IRuneWord, b: IRuneWord, asc: boolean): number {
         return a.owned === b.owned ? this.sortByName(a, b, asc) : ((a.owned ?? 0) - (b.owned ?? 0)) * (asc ? -1 : 1);
+    }
+
+    public sortByCraftable(a: IRuneWord, b: IRuneWord, asc: boolean): number {
+        return CraftableHelper.sortByCraftable(a, b, asc) || this.sortByName(a, b, asc);
     }
 }

@@ -23,7 +23,7 @@ export class ListRunesComponent {
 
     public headers: Array<ITableHeader<TRuneSort, IRune>> = [
         { title: 'common.rune', key: 'name', colSpan: 2 },
-        { title: 'labels.owned', key: 'owned', width: 80 }
+        { title: 'labels.owned', key: 'owned' }
     ];
 
     constructor(

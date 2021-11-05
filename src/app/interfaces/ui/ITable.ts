@@ -13,6 +13,5 @@ export interface ITable<T> {
 export interface ITableHeader<TSort extends Record<Key, ITable<Entity>>, Entity> {
     title: string;
     key: keyof TSort;
-    width?: number;
     colSpan?: number;
 }

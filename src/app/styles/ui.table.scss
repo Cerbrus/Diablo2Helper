@@ -29,7 +29,7 @@ $td: '[class*=column-]';
         display: grid;
     }
 
-    .table-row {
+    &-row {
         display: contents;
 
         &:hover {

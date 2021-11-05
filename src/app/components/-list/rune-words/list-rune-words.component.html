@@ -51,8 +51,8 @@
                             </div>
                             <div
                                 class="column-runes runes center-text"
-                                [class.runes-owned]="areRunesOwned(runeWord)"
-                                [class.runes-craftable]="canCraftRunes(runeWord)"
+                                [class.runes-owned]="runeWord.craft?.hasMaterials"
+                                [class.runes-craftable]="runeWord.craft?.canCraftMaterials"
                             >
                                 <div>
                                     <ui-sprite-rune
@@ -61,6 +61,14 @@
                                         [size]="32"
                                     ></ui-sprite-rune>
                                 </div>
+                            </div>
+                            <div class="column-craft">
+                                <ui-button
+                                    [labelKey]="'labels.applyCraft'"
+                                    sprite="transmuteButton"
+                                    [disabled]="!(runeWord.craft?.hasMaterials || runeWord.craft?.canCraftMaterials)"
+                                    (onButtonPress)="craft(runeWord)"
+                                ></ui-button>
                             </div>
                         </ng-container>
                         <div class="column-effects" *ngVar="runeWord.effects as effects">

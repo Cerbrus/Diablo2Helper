@@ -32,7 +32,7 @@ export class ObjectHelper {
     ): Record<TKey, TResult> {
         const result = <Record<TKey, TResult>>{};
         ObjectHelper.forEach(object, (key, value, index) => {
-            result[key] = toValue(key, value, index, result);
+            result[key] = toValue(key, <TValue>value, index, result);
         });
         return result;
     }

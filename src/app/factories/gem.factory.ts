@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ArrayHelper, EffectHelper, ObjectHelper } from '~helpers';
+import { ArrayHelper, EffectHelper, GemHelper, ObjectHelper } from '~helpers';
 import { IEffectBuilderParams, IEffectBuilders } from '~interfaces/effect';
 import { IGem, IGemMap, TGemQualityMap } from '~interfaces/gem';
 import { ISocketableEffects } from '~interfaces/socketable';
@@ -136,11 +136,11 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
 
         ObjectHelper.forEach(gemMap, (type: TGemType, qualities: TGemQualityMap<IGem>) => {
             ObjectHelper.forEach(qualities, (quality: TGemQuality, gem: IGem) => {
-                if (quality === 'chipped') return;
+                const lowerGemType = GemHelper.getLowerQuality(quality, type);
 
-                gem.craft = {
-                    gems: ArrayHelper.repeat(`${GemQualities[GemQualities.indexOf(quality) - 1]}|${type}`, 3)
-                };
+                gem.craft = lowerGemType
+                    ? { gems: lowerGemType ? ArrayHelper.repeat(lowerGemType, 3) : [] }
+                    : { craftable: false };
             });
         });
 

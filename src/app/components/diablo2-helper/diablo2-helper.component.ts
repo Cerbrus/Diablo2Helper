@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '~environment';
+import { CraftableHelper } from '~helpers';
 import { ITab } from '~interfaces/ui';
 import settings from '~settings';
 import {
@@ -50,9 +51,11 @@ export class Diablo2HelperComponent {
         }
     ];
 
-    constructor(titleService: Title, translate: TranslateService) {
+    constructor(titleService: Title, translate: TranslateService, craftableHelper: CraftableHelper) {
         translate.setDefaultLang(settings.defaultLanguage);
         translate.use(settings.defaultLanguage);
         translate.get('common.appTitle').subscribe(title => titleService.setTitle(title));
+
+        craftableHelper.calculateCraftability();
     }
 }

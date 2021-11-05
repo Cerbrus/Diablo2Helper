@@ -70,10 +70,18 @@
             --theme-text: #ffffff;
             --theme-tabs-border: #dddddd;
 
-            --theme-background: #222222;
-            --theme-background-transparent: #{color.change(#222222, $alpha: 0.8)};
-            --theme-background-owned: #006600;
-            --theme-background-craftable: #aa5500;
+            $background: #222222;
+            --theme-background: $background;
+            --theme-background-transparent: #{color.change($background, $alpha: 0.8)};
+            --theme-background-owned: #{color.change(
+                    color.mix($background, color.change(#00ff00, $alpha: 0.4), $weight: 50%),
+                    $alpha: 1
+                )};
+            --theme-background-craftable: #{color.change(
+                    color.mix($background, color.change(#00ff00, $alpha: 0.6), $weight: 50%),
+                    $alpha: 1
+                )};
+
             --theme-background-image: url('/assets/images/ui/background/endgame_hd.lowend.png');
             --theme-background-image-xl: url('/assets/images/ui/background/endgame_hd.png');
             --theme-background-opacity: 1;

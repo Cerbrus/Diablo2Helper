@@ -34,7 +34,7 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
     }
 
     public getItem(rune: TRuneWord): IRuneWord {
-        return this.getItems()[rune];
+        return this.items[rune];
     }
 
     public isItem(item: object | IRuneWord | TRuneWord): item is IRuneWord {

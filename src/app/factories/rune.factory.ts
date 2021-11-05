@@ -19,7 +19,7 @@ export class RuneFactory extends BaseEntityFactory<IRuneMap> {
     }
 
     public buildItems(): IRuneMap {
-        const gems = this.gemHelper.getItems();
+        const gems = this.gemHelper.items;
 
         const { repeat } = ArrayHelper;
         const { key } = RuneFactory;

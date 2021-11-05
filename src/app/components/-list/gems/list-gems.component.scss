@@ -1,16 +1,18 @@
 @use 'variables';
-@use 'ui.table' as table;
+
+$table-columns: 90px 34px 70px 76px 54px repeat(3, auto) 90px;
+$table-column-count: 9;
 
 .grid {
     height: 100%;
 }
 
 .table {
-    grid-template-columns: 90px 34px 70px 70px repeat(3, auto) 90px;
+    grid-template-columns: $table-columns;
 
     .header {
         &-gemType {
-            grid-column: span 8;
+            grid-column: span $table-column-count;
         }
 
         &-quality {
@@ -18,22 +20,40 @@
         }
     }
 
-    #{table.$td} {
-        display: grid;
-    }
-
     .column {
+        &-quality,
+        &-craft,
+        &-effectWeapon,
+        &-effectArmorHelm,
+        &-effectShield,
+        &-cLvl {
+            display: grid;
+        }
         &-gem {
             display: block;
+            justify-content: center;
+        }
+
+        &-craft {
             justify-content: center;
         }
 
         &-gem,
         &-crafts {
             ui-sprite-gem {
-                margin: 0 -3px;
+                margin: 0 -2px;
             }
         }
+    }
+}
+
+.table-row .gems {
+    &-craftable {
+        background: variables.$theme-background-craftable;
+    }
+
+    &-owned {
+        background: variables.$theme-background-owned;
     }
 }
 

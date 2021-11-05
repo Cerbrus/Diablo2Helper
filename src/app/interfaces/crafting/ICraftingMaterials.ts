@@ -4,6 +4,7 @@ import { ItemOrArray } from '~types/helpers';
 import { TRune } from '~types/rune';
 
 export interface ICraftingMaterials {
+    craftable?: false;
     runes?: ItemOrArray<TRune>;
     gems?: ItemOrArray<TGem | IGem>;
     hasMaterials?: boolean;

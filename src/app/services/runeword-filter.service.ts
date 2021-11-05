@@ -42,7 +42,7 @@ export class RunewordFilterService {
         private readonly runeTracker: RuneTrackerService
     ) {
         this.filters = storageService.get.runeWordFilters();
-        this.runeWords = runeWordHelper.getItems();
+        this.runeWords = runeWordHelper.items;
         this.calculateRuneWordVisibility();
     }
 

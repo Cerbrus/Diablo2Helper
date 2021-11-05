@@ -57,8 +57,9 @@
                                 <div>
                                     <ui-sprite-rune
                                         *ngFor="let rune of runeList"
-                                        [rune]="rune"
+                                        [item]="rune"
                                         [size]="32"
+                                        [highlightOwned]="true"
                                     ></ui-sprite-rune>
                                 </div>
                             </div>

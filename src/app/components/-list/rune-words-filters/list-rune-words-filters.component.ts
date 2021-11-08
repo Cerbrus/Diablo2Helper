@@ -22,7 +22,7 @@ export class ListRuneWordsFiltersComponent implements OnInit {
 
     public clearInputIcon = faTimesCircle;
 
-    private searchTextChanged = new Subject<string>();
+    private searchTextChanged = new Subject<string | undefined>();
     private debounceDelay = 250;
 
     constructor(runeWordHelper: RuneWordHelper, private readonly runewordFilterService: RunewordFilterService) {

@@ -1,5 +1,4 @@
 import { KeyValue } from '@angular/common';
-import { isArray } from 'rxjs/internal-compatibility';
 import { ItemOrArray, Key } from '~types/helpers';
 
 export class ArrayHelper {
@@ -12,7 +11,7 @@ export class ArrayHelper {
     }
 
     public static toArray<T>(value: ItemOrArray<T>): Array<T> {
-        return value == null ? [] : isArray(value) ? value : [value];
+        return value == null ? [] : Array.isArray(value) ? value : [value];
     }
 
     public static toRecord<TKey extends Key, TValue>(

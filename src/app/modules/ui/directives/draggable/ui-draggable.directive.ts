@@ -47,11 +47,11 @@ export class UiDraggableDirective {
         return this.draggable === 'vertical' ? maxTop * scrolledTop : maxLeft * scrolledLeft;
     }
 
-    private static getOffsetVertical({ clientY }: MouseEvent, { top, height }: ClientRect): number {
+    private static getOffsetVertical({ clientY }: MouseEvent, { top, height }: DOMRect): number {
         return (clientY - top) / height;
     }
 
-    private static getOffsetHorizontal({ clientX }: MouseEvent, { left, width }: ClientRect): number {
+    private static getOffsetHorizontal({ clientX }: MouseEvent, { left, width }: DOMRect): number {
         return (clientX - left) / width;
     }
 }

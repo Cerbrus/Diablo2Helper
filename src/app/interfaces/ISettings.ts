@@ -3,4 +3,6 @@ export interface ISettings {
     customCursorLarge: boolean;
     darkMode: boolean;
     enableBackground: boolean;
+    tooltipDelay: number;
+    tooltipDelaySocketable: number;
 }

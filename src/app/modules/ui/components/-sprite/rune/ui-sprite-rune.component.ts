@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RuneHelper } from '~helpers';
 import { IRune } from '~interfaces/rune';
 import { SpriteSocketableBaseComponent } from '~modules/ui/components/-sprite/sprite-socketable-base.component';
+import { StorageService } from '~services';
 import { TRune } from '~types/rune';
 
 @Component({
@@ -10,8 +11,8 @@ import { TRune } from '~types/rune';
     styleUrls: ['./ui-sprite-rune.component.scss']
 })
 export class UiSpriteRuneComponent extends SpriteSocketableBaseComponent<TRune, IRune> {
-    constructor(runeHelper: RuneHelper) {
-        super(runeHelper);
+    constructor(runeHelper: RuneHelper, storageService: StorageService) {
+        super(runeHelper, storageService);
         this.sprite = 'runes';
     }
 

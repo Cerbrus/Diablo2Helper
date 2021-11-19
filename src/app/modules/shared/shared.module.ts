@@ -13,6 +13,8 @@ import { NG_EVENT_PLUGINS } from '@tinkoff/ng-event-plugins';
 // Directives
 import {
     KeyboardShortcutDirective,
+    MaxDirective,
+    MinDirective,
     OnClickSelectDirective,
     TooltipSocketableDirective,
     VarDirective
@@ -21,7 +23,14 @@ import {
 // Pipes
 import { AsArrayPipe, KeyValueTypedPipe } from './pipes';
 
-const directives = [KeyboardShortcutDirective, OnClickSelectDirective, TooltipSocketableDirective, VarDirective];
+const directives = [
+    KeyboardShortcutDirective,
+    MaxDirective,
+    MinDirective,
+    OnClickSelectDirective,
+    TooltipSocketableDirective,
+    VarDirective
+];
 const pipes = [AsArrayPipe, KeyValueTypedPipe];
 const modules = [BrowserModule, CommonModule, FontAwesomeModule, FormsModule, ResizeObserverModule, TranslateModule];
 

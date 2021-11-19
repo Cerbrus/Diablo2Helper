@@ -9,6 +9,59 @@ import { GetValue, RemoveValue, SaveValue } from '~types/storage';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
+    private readonly defaultValues: IStorage = <IStorage>settings.storageDefaults;
+
+    private readonly storageCache: Partial<IStorage> = {};
+
+    private readonly storageKeys: Array<keyof IStorage> = [
+        'appVersion',
+        'darkMode',
+        'gemsOwned',
+        'runeSort',
+        'runeWordFilters',
+        'runeWordSort',
+        'runeWordsFavorited',
+        'runeWordsOwned',
+        'runesOwned',
+        'settings',
+        'uiActiveTabs',
+        'uiCollapsibleState'
+    ];
+
+    public readonly get: GetValue<IStorage> = ArrayHelper.toRecord(
+        this.storageKeys,
+        key =>
+            <T>(): T =>
+                this.getItem(key)
+    );
+
+    public readonly getDefault: GetValue<IStorage> = ArrayHelper.toRecord(
+        this.storageKeys,
+        key =>
+            <T>(): T =>
+                <T>this.defaultValues[key]
+    );
+
+    public readonly save: SaveValue<IStorage> = ArrayHelper.toRecord(
+        this.storageKeys,
+        key =>
+            <T>(value: T): T =>
+                this.saveItem(key, value)
+    );
+
+    public readonly remove: RemoveValue<IStorage> = ArrayHelper.toRecord(
+        this.storageKeys,
+        key => (): void => this.removeItem(key)
+    );
+
+    private readonly persistentStorageKeys: Array<keyof IStorage> = [
+        'darkMode',
+        'gemsOwned',
+        'runeWordsOwned',
+        'runeWordsFavorited',
+        'runesOwned'
+    ];
+
     constructor() {
         this.checkStoredVersion();
     }
@@ -28,65 +81,30 @@ export class StorageService {
         this.save.appVersion(currentVersion);
     }
 
-    private readonly defaultValues: IStorage = <IStorage>settings.storageDefaults;
+    private getItem<T extends IStorage[TKey], TKey extends keyof IStorage>(key: TKey): T {
+        if (Helper.hasValue(this.storageCache[key])) return <T>this.storageCache[key];
 
-    private readonly storageKeys: Array<keyof IStorage> = [
-        'appVersion',
-        'darkMode',
-        'gemsOwned',
-        'runeSort',
-        'runeWordFilters',
-        'runeWordSort',
-        'runeWordsFavorited',
-        'runeWordsOwned',
-        'runesOwned',
-        'settings',
-        'uiActiveTabs',
-        'uiCollapsibleState'
-    ];
-
-    private readonly persistentStorageKeys: Array<keyof IStorage> = [
-        'darkMode',
-        'gemsOwned',
-        'runeWordsOwned',
-        'runeWordsFavorited',
-        'runesOwned'
-    ];
-
-    public readonly get: GetValue<IStorage> = ArrayHelper.toRecord(
-        this.storageKeys,
-        key =>
-            <T>(): T =>
-                this.getItem(key)
-    );
-
-    public readonly save: SaveValue<IStorage> = ArrayHelper.toRecord(
-        this.storageKeys,
-        key =>
-            <T>(value: T): T =>
-                this.saveItem(key, value)
-    );
-
-    public readonly remove: RemoveValue<IStorage> = ArrayHelper.toRecord(
-        this.storageKeys,
-        key => (): void => this.removeItem(key)
-    );
-
-    private getItem<T>(key: string): T {
         const stored = localStorage.getItem(`d2helper.${key}`);
 
         if (!Helper.hasValue(stored)) {
-            const defaultValue = this.defaultValues[<keyof IStorage>key];
+            const defaultValue = this.defaultValues[key];
 
             if (Helper.hasValue(defaultValue)) return this.saveItem(key, <T>defaultValue);
         }
 
-        return stored ? JSON.parse(stored) : null;
+        if (stored) {
+            const value = JSON.parse(stored);
+            this.storageCache[key] = value;
+            return value;
+        }
+
+        return <T>null;
     }
 
     // noinspection JSMethodCanBeStatic
-    private saveItem<T>(key: string, value: T): T {
+    private saveItem<T extends IStorage[TKey], TKey extends keyof IStorage>(key: TKey, value: T): T {
         localStorage.setItem(`d2helper.${key}`, JSON.stringify(value));
+        this.storageCache[key] = value;
         return value;
     }
 

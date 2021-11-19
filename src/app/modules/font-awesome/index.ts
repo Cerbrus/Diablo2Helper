@@ -4,6 +4,7 @@ export { faBug } from '@fortawesome/free-solid-svg-icons/faBug';
 export { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 export { faHeart as faHeartOutline } from '@fortawesome/free-regular-svg-icons/faHeart';
 export { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons/faHeart';
+export { faLightbulb } from '@fortawesome/free-regular-svg-icons/faLightbulb';
 export { faSortAlphaDown } from '@fortawesome/free-solid-svg-icons/faSortAlphaDown';
 export { faSortAlphaDownAlt } from '@fortawesome/free-solid-svg-icons/faSortAlphaDownAlt';
 export { faSortAlphaUp } from '@fortawesome/free-solid-svg-icons/faSortAlphaUp';
@@ -18,3 +19,4 @@ export { faSortNumericUp } from '@fortawesome/free-solid-svg-icons/faSortNumeric
 export { faSortNumericUpAlt } from '@fortawesome/free-solid-svg-icons/faSortNumericUpAlt';
 export { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 export { faTimesCircle } from '@fortawesome/free-regular-svg-icons/faTimesCircle';
+export { faUndo } from '@fortawesome/free-solid-svg-icons/faUndo';

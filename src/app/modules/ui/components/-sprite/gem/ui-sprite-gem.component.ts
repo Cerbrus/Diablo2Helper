@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GemHelper } from '~helpers';
 import { IGem } from '~interfaces/gem';
 import { SpriteSocketableBaseComponent } from '~modules/ui/components/-sprite/sprite-socketable-base.component';
+import { StorageService } from '~services';
 import { GemQualities, GemTypes, TGem } from '~types/gem';
 
 @Component({
@@ -10,8 +11,8 @@ import { GemQualities, GemTypes, TGem } from '~types/gem';
     styleUrls: ['./ui-sprite-gem.component.scss']
 })
 export class UiSpriteGemComponent extends SpriteSocketableBaseComponent<TGem, IGem> {
-    constructor(gemHelper: GemHelper) {
-        super(gemHelper);
+    constructor(gemHelper: GemHelper, storageService: StorageService) {
+        super(gemHelper, storageService);
         this.sprite = 'gems';
     }
 

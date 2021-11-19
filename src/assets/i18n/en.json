@@ -149,6 +149,7 @@
         "plural": "{{types}} and {{lastType}}",
         "weaponsMelee": "Melee Weapons",
         "weaponsRanged": "Ranged Weapons",
+        "armor": "Armor",
         "armorHead": "Headgear",
         "armorBody": "Body Armor",
         "axe": "Axes",

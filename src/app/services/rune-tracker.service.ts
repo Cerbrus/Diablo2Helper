@@ -1,7 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ArrayHelper, NumberHelper, ObjectHelper, RuneHelper, RuneWordHelper } from '~helpers';
+import {
+    ArrayHelper,
+    CraftableHelper,
+    GemHelper,
+    NumberHelper,
+    ObjectHelper,
+    RuneHelper,
+    RuneWordHelper
+} from '~helpers';
+import { IGem } from '~interfaces/gem';
 import { IRune } from '~interfaces/rune';
 import { IRuneWord } from '~interfaces/runeWord';
+import { TGem } from '~types/gem';
 import { ItemOrArray } from '~types/helpers';
 import { TRune } from '~types/rune';
 import { StorageService } from './';
@@ -14,9 +24,11 @@ export class RuneTrackerService {
     public min = 0;
 
     constructor(
+        private readonly gemHelper: GemHelper,
         private readonly runeHelper: RuneHelper,
         private readonly runeWordHelper: RuneWordHelper,
-        private readonly storageService: StorageService
+        private readonly storageService: StorageService,
+        private readonly craftableHelper: CraftableHelper
     ) {
         this.runeArray = runeHelper.itemsArray;
         this.initializeRuneCounts();
@@ -42,7 +54,7 @@ export class RuneTrackerService {
     }
 
     public saveStoredRunes(): void {
-        this.storageService.save.runesOwned(this.getRunesOwned());
+        this.storageService.save.runesOwned(this.craftableHelper.getRunesOwned());
     }
 
     public areRunesOwned(runes?: ItemOrArray<TRune | IRune>): boolean {
@@ -56,17 +68,24 @@ export class RuneTrackerService {
         );
     }
 
-    public canCraftRuneWordRunes(runeWord: IRuneWord, usedRunes?: Partial<Record<TRune, number>>): boolean {
-        if (!runeWord.craft) return true;
-        const countClone = this.getRunesOwned();
-        const canCraft = ArrayHelper.toArray(runeWord.craft?.runes).every(
-            r => r && this.hasOrCanCraftRune(countClone, r, 1, runeWord, usedRunes)
-        );
-
-        runeWord.craft.canCraftMaterials = canCraft;
-
-        return canCraft;
-    }
+    // public canCraftRuneWordRunes(
+    //     runeWord: IRuneWord,
+    //     usedRunes?: Partial<Record<TRune, number>>,
+    //     usedGems?: Partial<Record<TGem, number>>
+    // ): boolean {
+    //     //TODO
+    //     if (!runeWord.craft) return true;
+    //     const countClone = this.getRunesOwned();
+    //     const canCraft = ArrayHelper.toArray(runeWord.craft?.runes).every(
+    //         r => r && this.hasOrCanCraftRune(countClone, r, 1, runeWord, usedRunes)
+    //     );
+    //
+    //     runeWord.craft.canCraftMaterials = canCraft;
+    //
+    //     console.log(canCraft, this.craftableHelper.canCraftMaterialsFor(runeWord, usedRunes, usedGems));
+    //
+    //     return canCraft;
+    // }
 
     public hasOrCanCraftRune(
         ownedRunes: Record<TRune, number>,
@@ -122,16 +141,25 @@ export class RuneTrackerService {
 
         if (this.hasRunewordRunes(runeWord) && runeWord.craft.runes) {
             const usedRunes = ArrayHelper.countStringOccurrences(runeWord.craft.runes);
-            return this.applyCraft(runeWord, usedRunes);
+            const usedGems = ArrayHelper.countStringOccurrences(
+                ArrayHelper.toArray(runeWord.craft?.gems).map(gem => this.gemHelper.asType(<TGem | IGem>gem))
+            );
+            return this.applyCraft(runeWord, usedRunes, usedGems);
         }
 
         const usedRunes: Partial<Record<TRune, number>> = {};
-        if (this.canCraftRuneWordRunes(runeWord, usedRunes)) {
-            this.applyCraft(runeWord, usedRunes);
+        const usedGems: Partial<Record<TGem, number>> = {};
+        if (this.craftableHelper.canCraftMaterialsFor(runeWord, usedRunes, usedGems)) {
+            this.applyCraft(runeWord, usedRunes, usedGems);
         }
     }
 
-    private applyCraft(runeWord: IRuneWord, runes: Partial<Record<TRune, number>>) {
+    private applyCraft(
+        runeWord: IRuneWord,
+        runes: Partial<Record<TRune, number>>,
+        gems: Partial<Record<TGem, number>>
+    ) {
+        //TODO
         ObjectHelper.forEach(<Record<TRune, number>>runes, (runeName: TRune, count: number) => {
             if (!runeName) return;
             const rune = this.runeHelper.getItem(runeName);
@@ -148,14 +176,14 @@ export class RuneTrackerService {
         this.runeWordHelper.saveEntitiesOwned();
     }
 
-    private getRunesOwned(): Record<TRune, number> {
-        const runes = this.runeHelper.itemsArraySorted.filter(r => r.owned);
-        return ArrayHelper.toRecordWithKey(
-            runes,
-            item => item.name,
-            item => item.owned ?? 0
-        );
-    }
+    // private getRunesOwned(): Record<TRune, number> {
+    //     const runes = this.runeHelper.itemsArraySorted.filter(r => r.owned);
+    //     return ArrayHelper.toRecordWithKey(
+    //         runes,
+    //         item => item.name,
+    //         item => item.owned ?? 0
+    //     );
+    // }
 
     private initializeRuneCounts(): void {
         const runesOwned = this.storageService.get.runesOwned();

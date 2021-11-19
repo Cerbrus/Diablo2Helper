@@ -22,6 +22,8 @@ export class ListRuneWordsFiltersComponent implements OnInit {
 
     public clearInputIcon = faTimesCircle;
 
+    public largeItemTypes: Array<TItem> = ['weaponsMelee', 'weaponsRanged', 'armor'];
+
     private onSearch$ = new Subject<void>();
     private debounceDelay = 250;
 

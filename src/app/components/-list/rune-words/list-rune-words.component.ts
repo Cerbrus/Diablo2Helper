@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ArrayHelper, RuneHelper, RuneWordHelper } from '~helpers';
 import { IRune } from '~interfaces/rune';
@@ -14,8 +14,7 @@ import { TRuneWordSort } from '~types/runeWord';
 @Component({
     selector: 'list-rune-words',
     templateUrl: './list-rune-words.component.html',
-    styleUrls: ['./list-rune-words.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./list-rune-words.component.scss']
 })
 export class ListRuneWordsComponent {
     public heartSolid = faHeartSolid;

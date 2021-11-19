@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { RuneWordHelper } from '~helpers';
 import { IRuneWordFilters } from '~interfaces/runeWord';
 import { faTimesCircle } from '~modules/font-awesome';
 import { RunewordFilterService } from '~services';
 import { Items, TItem } from '~types';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
     selector: 'list-rune-words-filters',
@@ -22,7 +22,7 @@ export class ListRuneWordsFiltersComponent implements OnInit {
 
     public clearInputIcon = faTimesCircle;
 
-    private searchTextChanged = new Subject<string | undefined>();
+    private onSearch$ = new Subject<string | undefined>();
     private debounceDelay = 250;
 
     constructor(runeWordHelper: RuneWordHelper, private readonly runewordFilterService: RunewordFilterService) {
@@ -34,11 +34,11 @@ export class ListRuneWordsFiltersComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.searchTextChanged
+        this.onSearch$
             .pipe(
                 debounceTime(this.debounceDelay),
                 distinctUntilChanged(),
-                map(() => this.saveFilters())
+                map(() => this.applyFilters())
             )
             .subscribe();
     }
@@ -51,11 +51,11 @@ export class ListRuneWordsFiltersComponent implements OnInit {
         this.runewordFilterService.updateFilters(itemType);
     }
 
-    public saveFilters(): void {
+    public applyFilters(): void {
         this.runewordFilterService.saveFilters();
     }
 
     public search(): void {
-        this.searchTextChanged.next(this.filters.name);
+        this.onSearch$.next(this.filters.name);
     }
 }

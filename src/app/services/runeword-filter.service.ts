@@ -34,6 +34,13 @@ export class RunewordFilterService {
     private runeWords: IRuneWordMap;
     private runeWordVisibility: Record<TRuneWord, boolean> = ArrayHelper.toRecord([...RuneWords], () => false);
 
+    private readonly filterPredicates: Array<(runeWord: IRuneWord) => boolean> = [
+        rw => this.filters.showFavorite && !rw.favorite,
+        rw => !!this.filters.cLvl && rw.cLvl > this.filters.cLvl,
+        rw => !!this.filters.name && !StringHelper.includesStripped(rw.name, this.filters.name, true),
+        rw => !!this.filters.numberOfRunes && rw.craft?.runes?.length !== this.filters.numberOfRunes
+    ];
+
     constructor(
         private readonly storageService: StorageService,
         private readonly gemHelper: GemHelper,
@@ -61,23 +68,10 @@ export class RunewordFilterService {
         this.saveFilters();
     }
 
-    // noinspection JSMethodCanBeStatic
-    private applyOwnedCount(
-        helper: BaseEntitiesHelper<any, any, any, any>,
-        itemCounts: Array<KeyValue<{ owned?: number }, number>>
-    ): void {
-        helper.itemsArray.forEach(i => {
-            i.count = 0;
-        });
-        itemCounts.forEach(({ key, value }) => {
-            key.owned = value;
-        });
-        helper.saveEntitiesOwned();
-    }
-
     public calculateRuneWordVisibility(): void {
+        const itemTypes = this.getItemTypeFilters();
         this.runeWordVisibility = ArrayHelper.toRecord([...RuneWords], (runeWord: TRuneWord) =>
-            this.applyFilterToRuneWord(runeWord)
+            this.applyFilterToRuneWord(runeWord, itemTypes)
         );
     }
 
@@ -136,36 +130,47 @@ export class RunewordFilterService {
         this.set('ranged', enabled);
     }
 
+    // noinspection JSMethodCanBeStatic
+    private applyOwnedCount(
+        helper: BaseEntitiesHelper<any, any, any, any>,
+        itemCounts: Array<KeyValue<{ owned?: number }, number>>
+    ): void {
+        helper.itemsArray.forEach(i => {
+            i.count = 0;
+        });
+        itemCounts.forEach(({ key, value }) => {
+            key.owned = value;
+        });
+        helper.saveEntitiesOwned();
+    }
+
     private set(itemType: 'melee' | 'ranged' | 'shields', enabled: boolean = false): void {
         this.types[itemType].forEach(type => {
             this.filters.itemTypes[type] = enabled;
         });
     }
 
-    private applyFilterToRuneWord(runeWord: TRuneWord | IRuneWord): boolean {
+    private getItemTypeFilters(): Array<TItem> {
+        const itemTypes = ObjectHelper.entries(this.filters.itemTypes)
+            .filter(([, enabled]) => enabled)
+            .map(([key]) => key);
+
+        if (itemTypes.includes('weaponsMelee')) itemTypes.push(...this.types.melee);
+        if (itemTypes.some(f => this.isMelee(f))) itemTypes.push('weaponsMelee');
+
+        if (itemTypes.includes('weaponsRanged')) itemTypes.push(...this.types.ranged);
+        if (itemTypes.some(f => this.isRanged(f))) itemTypes.push('weaponsRanged');
+
+        return itemTypes;
+    }
+
+    private applyFilterToRuneWord(runeWord: TRuneWord | IRuneWord, itemTypes: Array<TItem>): boolean {
         runeWord = this.runeWordHelper.asItem(runeWord);
         if (!runeWord) return false;
 
         if (this.filters) {
-            if (this.filters.name && !StringHelper.includesStripped(runeWord.name, this.filters.name, true))
-                return false;
-
-            if (this.filters.cLvl && runeWord.cLvl > this.filters.cLvl) return false;
-            if (this.filters.showFavorite && !runeWord.favorite) return false;
-
-            const enabledFilters = ObjectHelper.entries(this.filters.itemTypes)
-                .filter(([, enabled]) => enabled)
-                .map(([key]) => key);
-
-            if (enabledFilters.includes('weaponsMelee')) enabledFilters.push(...this.types.melee);
-            if (enabledFilters.some(f => this.isMelee(f))) enabledFilters.push('weaponsMelee');
-
-            if (enabledFilters.includes('weaponsRanged')) enabledFilters.push(...this.types.ranged);
-            if (enabledFilters.some(f => this.isRanged(f))) enabledFilters.push('weaponsRanged');
-
-            if (enabledFilters.length && !this.hasEnabledItemFilter(runeWord, enabledFilters)) {
-                return false;
-            }
+            if (this.filterPredicates.some(shouldHide => shouldHide(<IRuneWord>runeWord))) return false;
+            if (itemTypes?.length && !this.hasEnabledItemFilter(runeWord, itemTypes)) return false;
         }
 
         this.runeTracker.canCraftRuneWordRunes(runeWord);

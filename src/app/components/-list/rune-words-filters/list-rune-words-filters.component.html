@@ -4,52 +4,76 @@
     <ui-collapsible labelKey="labels.search">
         <div class="clearable-input">
             <input
-                type="text"
+                (keyup)="search()"
                 [(ngModel)]="filters.name"
                 [placeholder]="'labels.search-placeholder' | translate"
-                (keyup)="search()"
                 onClickSelect
+                type="text"
             />
-            <fa-icon class="clear-input" [icon]="clearInputIcon" (click)="this.filters.name = ''; search()"></fa-icon>
+            <fa-icon (click)="this.filters.name = ''; search()" [icon]="clearInputIcon" class="clear-input"></fa-icon>
         </div>
     </ui-collapsible>
 
     <ui-collapsible labelKey="labels.show">
         <input-checkbox
-            labelKey="labels.showUnavailable"
+            (click)="applyFilters()"
             [(checked)]="filters.showUnavailable"
-            (click)="saveFilters()"
+            labelKey="labels.showUnavailable"
         ></input-checkbox>
         <input-checkbox
-            labelKey="labels.showCraftable"
+            (click)="applyFilters()"
             [(checked)]="filters.showCraftable"
-            (click)="saveFilters()"
+            labelKey="labels.showCraftable"
         ></input-checkbox>
         <input-checkbox
-            labelKey="labels.showFavorite"
+            (click)="applyFilters()"
             [(checked)]="filters.showFavorite"
-            (click)="saveFilters()"
+            labelKey="labels.showFavorite"
         ></input-checkbox>
     </ui-collapsible>
 
+    <ui-collapsible labelKey="labels.numberOfRunes">
+        <div class="clearable-input">
+            <input
+                (change)="applyFilters()"
+                (keyup)="applyFilters()"
+                [(ngModel)]="filters.numberOfRunes"
+                [max]="6"
+                [min]="0"
+                [placeholder]="'labels.numberOfRunes' | translate"
+                onClickSelect
+                type="number"
+            />
+            <fa-icon
+                (click)="this.filters.numberOfRunes = undefined; applyFilters()"
+                [icon]="clearInputIcon"
+                class="clear-input"
+            ></fa-icon>
+        </div>
+    </ui-collapsible>
     <ui-collapsible labelKey="labels.maxClvl">
-        <input
-            type="number"
-            [(ngModel)]="filters.cLvl"
-            [placeholder]="'labels.maxClvl' | translate"
-            [min]="minClvl"
-            [max]="maxClvl"
-            (change)="clampClvl()"
-            onClickSelect
-        />
+        <div class="clearable-input">
+            <input
+                (change)="clampClvl()"
+                [(ngModel)]="filters.cLvl"
+                [placeholder]="'labels.maxClvl' | translate"
+                onClickSelect
+                type="number"
+            />
+            <fa-icon
+                (click)="this.filters.cLvl = undefined; applyFilters()"
+                [icon]="clearInputIcon"
+                class="clear-input"
+            ></fa-icon>
+        </div>
     </ui-collapsible>
 
     <ui-collapsible labelKey="labels.itemType">
         <input-checkbox
-            *ngFor="let itemType of itemTypes"
-            [labelKey]="'itemTypes.' + itemType"
-            [(checked)]="filters.itemTypes[itemType]"
             (click)="updateFilters(itemType)"
+            *ngFor="let itemType of itemTypes"
+            [(checked)]="filters.itemTypes[itemType]"
+            [labelKey]="'itemTypes.' + itemType"
         ></input-checkbox>
     </ui-collapsible>
 </div>

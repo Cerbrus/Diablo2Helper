@@ -22,7 +22,7 @@ export class ListRuneWordsFiltersComponent implements OnInit {
 
     public clearInputIcon = faTimesCircle;
 
-    private onSearch$ = new Subject<string | undefined>();
+    private onSearch$ = new Subject<void>();
     private debounceDelay = 250;
 
     constructor(runeWordHelper: RuneWordHelper, private readonly runewordFilterService: RunewordFilterService) {
@@ -56,6 +56,6 @@ export class ListRuneWordsFiltersComponent implements OnInit {
     }
 
     public search(): void {
-        this.onSearch$.next(this.filters.name);
+        this.onSearch$.next();
     }
 }

@@ -1,7 +1,7 @@
 <div class="grid" ui-scrollable>
     <ng-container *ngFor="let gemType of gemArray">
         <div class="table">
-            <ui-table-head key="gemType" [labelKey]="'gems.type.' + gemType.type"></ui-table-head>
+            <ui-table-head [labelKey]="'gems.type.' + gemType.type" key="gemType"></ui-table-head>
 
             <ui-table-head key="quality" labelKey="gems.quality.title"></ui-table-head>
             <ui-table-head key="owned" labelKey="labels.owned"></ui-table-head>
@@ -10,9 +10,9 @@
             <ui-table-head key="effectWeapon" labelKey="labels.weapon"></ui-table-head>
             <ui-table-head key="effectArmorHelm" labelKey="labels.armorHelm"></ui-table-head>
             <ui-table-head key="effectShield" labelKey="labels.shield"></ui-table-head>
-            <ui-table-head key="cLvl" labelKey="labels.cLvl" class="center-text"></ui-table-head>
+            <ui-table-head class="center-text" key="cLvl" labelKey="labels.cLvlRequired"></ui-table-head>
 
-            <div class="table-row" *ngFor="let gem of gemType.gems">
+            <div *ngFor="let gem of gemType.gems" class="table-row">
                 <div class="column-quality">
                     {{ 'gems.quality.' + gem.quality | translate }}
                 </div>
@@ -21,33 +21,33 @@
                 </div>
                 <div class="column-owned">
                     <input-number-checkbox
-                        [(value)]="gem.owned"
                         (valueChange)="gemOwned(gem)"
+                        [(value)]="gem.owned"
                         [small]="true"
                     ></input-number-checkbox>
                 </div>
                 <div
-                    class="column-crafts block center-text"
                     *ngVar="gem.craft?.gems as gems"
-                    [class.gems-owned]="gem.craft?.hasMaterials"
                     [class.gems-craftable]="gem.craft?.canCraftMaterials"
+                    [class.gems-owned]="gem.craft?.hasMaterials"
+                    class="column-crafts block center-text"
                 >
                     <ng-container *ngIf="gems">
                         <ui-sprite-gem
                             *ngFor="let gem of gems | asArray; index as i"
+                            [highlightOwned]="i + 1"
                             [item]="gem"
                             [size]="24"
-                            [highlightOwned]="i + 1"
                         ></ui-sprite-gem>
                     </ng-container>
                 </div>
                 <div class="column-craft">
                     <ui-button
-                        [labelKey]="'labels.applyCraft'"
-                        sprite="transmuteButton"
-                        [disabled]="!(gem.craft?.hasMaterials || gem.craft?.canCraftMaterials)"
                         (onButtonPress)="craft(gem)"
+                        [disabled]="!(gem.craft?.hasMaterials || gem.craft?.canCraftMaterials)"
+                        [labelKey]="'labels.applyCraft'"
                         [size]="24"
+                        sprite="transmuteButton"
                     ></ui-button>
                 </div>
                 <ng-container *ngVar="gem.effects as effects">

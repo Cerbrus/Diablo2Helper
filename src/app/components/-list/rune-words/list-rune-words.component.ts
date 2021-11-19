@@ -23,10 +23,11 @@ export class ListRuneWordsComponent {
     public tooltipDelay: number;
     public headers: Array<ITableHeader<TRuneWordSort, IRuneWord>> = [
         { title: 'labels.owned', key: 'owned' },
-        { title: 'common.rune', key: 'name' },
+        { title: 'common.runeWord', key: 'name' },
+        { title: 'labels.cLvl', key: 'cLvl', sortIconPosition: 'right' },
         { title: 'common.runes', key: 'runes' },
         { title: 'labels.craft', key: 'craft' },
-        { title: 'labels.effect', key: 'cLvl' }
+        { title: 'labels.effect', key: 'effect' }
     ];
 
     constructor(

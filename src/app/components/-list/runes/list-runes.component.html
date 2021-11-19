@@ -1,15 +1,15 @@
 <div class="table">
     <ui-table-sort-control
+        (onSort)="applySort($event)"
         *ngFor="let header of headers"
         [header]="header"
         [sort]="runeSort"
-        (onSort)="applySort($event)"
     ></ui-table-sort-control>
-    <ui-table-head labelKey="labels.recipe" key="craft"></ui-table-head>
-    <ui-table-head labelKey="labels.socketEffect" key="effects"></ui-table-head>
+    <ui-table-head key="craft" labelKey="labels.recipe"></ui-table-head>
+    <ui-table-head key="effects" labelKey="labels.socketEffect"></ui-table-head>
 
     <div class="table-body" ui-scrollable>
-        <div class="table-row" *ngFor="let rune of runeArraySorted">
+        <div *ngFor="let rune of runeArraySorted" class="table-row">
             <div class="column-name center-text">
                 #{{ rune.number }}
                 <br />
@@ -20,39 +20,39 @@
             </div>
             <div class="column-owned">
                 <input-number-checkbox
-                    [(value)]="rune.owned"
                     (valueChange)="onCountChange(rune)"
+                    [(value)]="rune.owned"
                 ></input-number-checkbox>
             </div>
-            <div class="column-crafts block center-text" *ngVar="rune.craft as craft">
+            <div *ngVar="rune.craft as craft" class="column-crafts block center-text">
                 <ng-container *ngIf="craft">
                     <ui-sprite-rune
                         *ngFor="let rune of craft.runes | asArray"
+                        [highlightOwned]="true"
                         [item]="rune"
                         [size]="32"
-                        [highlightOwned]="true"
                     ></ui-sprite-rune>
                     <ui-sprite-gem
                         *ngFor="let gem of craft.gems | asArray"
+                        [highlightOwned]="true"
                         [item]="gem"
                         [size]="32"
-                        [highlightOwned]="true"
                     ></ui-sprite-gem>
                 </ng-container>
             </div>
-            <div class="column-effects block" *ngVar="rune.effects as effects">
-                <ui-format-effect title="weapon" [effects]="effects.weapon"></ui-format-effect>
+            <div *ngVar="rune.effects as effects" class="column-effects block">
+                <ui-format-effect [effects]="effects.weapon" title="weapon"></ui-format-effect>
                 <ui-format-effect
-                    [title]="effects.shield ? 'armorHelm' : 'armorHelmShield'"
                     [effects]="effects.armorHelm"
+                    [title]="effects.shield ? 'armorHelm' : 'armorHelmShield'"
                 ></ui-format-effect>
-                <ui-format-effect title="shield" [effects]="effects.shield"></ui-format-effect>
+                <ui-format-effect [effects]="effects.shield" title="shield"></ui-format-effect>
                 <div>
                     <span *ngIf="rune.iLvl">
                         <strong>{{ 'labels.iLvl' | translate }}:</strong>
                         <span>{{ rune.iLvl }}&nbsp;</span>
                     </span>
-                    <strong>{{ 'labels.cLvl' | translate }}:</strong>
+                    <strong>{{ 'labels.cLvlRequired' | translate }}:</strong>
                     <span>{{ rune.cLvl || ('common.none' | translate) }}</span>
                 </div>
             </div>

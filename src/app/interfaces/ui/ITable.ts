@@ -14,4 +14,5 @@ export interface ITableHeader<TSort extends Record<Key, ITable<Entity>>, Entity>
     title: string;
     key: keyof TSort;
     colSpan?: number;
+    sortIconPosition?: 'left' | 'right';
 }

@@ -10,6 +10,10 @@
     &:hover .sort-control:not(.enabled) {
         opacity: 0.6;
     }
+
+    &.sort-icon-right {
+        direction: rtl;
+    }
 }
 
 .sort-control {

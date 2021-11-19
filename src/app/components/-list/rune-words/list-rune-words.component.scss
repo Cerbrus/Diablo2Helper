@@ -1,8 +1,8 @@
 @use 'variables';
 @use 'mixins';
 
-$table-columns: 90px 220px 130px 75px 1fr;
-$table-column-count: 5;
+$table-columns: 90px 130px 80px 130px 75px 1fr;
+$table-column-count: 6;
 
 .column {
     &-name .details,
@@ -16,6 +16,7 @@ $table-column-count: 5;
     }
 
     &-name {
+        grid-column: span 2;
         display: grid;
         grid-template-rows: auto min-content;
         align-content: space-between;

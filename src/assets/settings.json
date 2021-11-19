@@ -17,11 +17,12 @@
             "number": {"key": "number", "icon": "numeric"}
         },
         "runeWordSort": {
+            "owned": {"key": "owned", "icon": "numericAlt"},
             "name": {"key": "name", "icon": "alpha"},
+            "cLvl": {"key": "cLvl", "icon": "numeric"},
             "runes": {"key": "runes"},
             "craft": {"key": "craft"},
-            "cLvl": {"key": "cLvl", "icon": "numeric"},
-            "owned": {"key": "owned", "icon": "numericAlt"}
+            "effect": {"key": "effect"}
         },
         "runeWordFilters": {
             "showUnavailable": true,

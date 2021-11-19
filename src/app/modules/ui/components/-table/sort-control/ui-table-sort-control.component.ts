@@ -31,16 +31,6 @@ export class UiTableSortControlComponent<TSort, TEntity extends Record<string, I
     @Input()
     public sort!: TEntity;
 
-    @HostBinding('colSpan')
-    public get colSpan(): number | undefined {
-        return this.header?.colSpan;
-    }
-
-    @HostBinding('class')
-    public get cssClass(): string {
-        return `header-${this.header?.key}`;
-    }
-
     private icons: Record<TableSortIcon, Record<'asc' | 'desc', IconDefinition>> = {
         amount: { asc: faSortAmountUp, desc: faSortAmountDownAlt },
         amountAlt: { asc: faSortAmountUpAlt, desc: faSortAmountDown },
@@ -55,6 +45,16 @@ export class UiTableSortControlComponent<TSort, TEntity extends Record<string, I
         desc: 'none',
         none: 'asc'
     };
+
+    @HostBinding('colSpan')
+    public get colSpan(): number | undefined {
+        return this.header?.colSpan;
+    }
+
+    @HostBinding('class')
+    public get cssClass(): string {
+        return `header-${this.header?.key} sort-icon-${this.header?.sortIconPosition ?? 'left'}`;
+    }
 
     @HostListener('click')
     public onClick(): void {

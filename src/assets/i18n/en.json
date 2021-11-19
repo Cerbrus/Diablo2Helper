@@ -22,7 +22,8 @@
     "labels": {
         "armorHelm": "Armor/Helm",
         "armorHelmShield": "Armor/Helm/Shield",
-        "cLvl": "Clvl Required",
+        "cLvl": "Clvl",
+        "cLvlRequired": "Clvl Required",
         "character": "Character",
         "recipe": "Cubed from",
         "craft": "Craft",

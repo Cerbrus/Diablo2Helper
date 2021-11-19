@@ -61,11 +61,12 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
     public applySort(changedSort?: ITable<IRuneWord>): void {
         this.applyChangedSort(
             {
-                name: this.sortByName.bind(this),
-                runes: this.sortByRunes.bind(this),
-                cLvl: this.sortByCLvl.bind(this),
                 owned: this.sortByOwned.bind(this),
-                craft: this.sortByCraftable.bind(this)
+                name: this.sortByName.bind(this),
+                cLvl: this.sortByCLvl.bind(this),
+                runes: this.sortByCraft.bind(this),
+                craft: this.sortByCraftable.bind(this),
+                effect: this.sortByEffect.bind(this)
             },
             <TRuneWordSortKeys>'name',
             changedSort
@@ -78,21 +79,28 @@ export class RuneWordHelper extends BaseEntitiesHelper<IRuneWordMap, TRuneWord, 
         return a.name.localeCompare(b.name) * (asc ? 1 : -1);
     }
 
-    public sortByRunes(a: IRuneWord, b: IRuneWord, asc: boolean): number {
-        return a.craft?.runes?.length === b.craft?.runes?.length
-            ? this.sortByCLvl(a, b, asc)
-            : ((a.craft?.runes?.length ?? 0) - (b.craft?.runes?.length ?? 0)) * (asc ? -1 : 1);
+    public sortByCraft(a: IRuneWord, b: IRuneWord, asc: boolean): number {
+        return this.sortBy(a, b, asc, x => x.craft?.runes?.length ?? 0);
     }
 
     public sortByCLvl(a: IRuneWord, b: IRuneWord, asc: boolean): number {
-        return a.cLvl === b.cLvl ? this.sortByName(a, b, asc) : (a.cLvl - b.cLvl) * (asc ? 1 : -1);
+        return this.sortBy(a, b, asc, x => x.cLvl);
     }
 
     public sortByOwned(a: IRuneWord, b: IRuneWord, asc: boolean): number {
-        return a.owned === b.owned ? this.sortByName(a, b, asc) : ((a.owned ?? 0) - (b.owned ?? 0)) * (asc ? -1 : 1);
+        return this.sortBy(a, b, asc, x => x.owned ?? 0);
+    }
+
+    public sortByEffect(a: IRuneWord, b: IRuneWord, asc: boolean): number {
+        return this.sortBy(a, b, asc, x => ArrayHelper.toArray(x.effects).length);
     }
 
     public sortByCraftable(a: IRuneWord, b: IRuneWord, asc: boolean): number {
         return CraftableHelper.sortByCraftable(a, b, asc) || this.sortByName(a, b, asc);
+    }
+
+    private sortBy(a: IRuneWord, b: IRuneWord, asc: boolean, getValue: (runeWord: IRuneWord) => number) {
+        const [numA, numB] = [a, b].map(getValue);
+        return (numA - numB) * (asc ? -1 : 1) || this.sortByName(a, b, asc);
     }
 }

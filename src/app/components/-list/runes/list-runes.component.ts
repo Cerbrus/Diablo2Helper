@@ -31,7 +31,7 @@ export class ListRunesComponent {
         private readonly runeTracker: RuneTrackerService,
         private readonly runeWordFilterService: RunewordFilterService
     ) {
-        this.runes = runeHelper.getItems();
+        this.runes = runeHelper.items;
     }
 
     public applySort(changedSort?: ITable<IRune>): void {

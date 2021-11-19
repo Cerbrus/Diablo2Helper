@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { IItem } from '@dschu012/d2s/lib/d2/types';
 import { RuneFactory } from '~factories/rune.factory';
 import { IGem } from '~interfaces/gem';
+import { IRune, IRuneMap } from '~interfaces/rune';
 import { ITable } from '~interfaces/ui';
 import { StorageService } from '~services';
 import { TGem } from '~types/gem';
 import { Runes, TRune, TRuneSort, TRuneSortKeys } from '~types/rune';
-import { IRune, IRuneMap } from '~interfaces/rune';
 import { BaseEntitiesHelper } from './base-entities.helper';
 import { GemHelper } from './gem.helper';
 import { ArrayHelper } from './ts';
@@ -30,7 +30,7 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
     }
 
     public getItem(rune: TRune): IRune {
-        return this.getItems()[rune];
+        return this.items[rune];
     }
 
     public isItem(item: TGem | IGem | TRune | IRune): item is IRune {
@@ -42,7 +42,11 @@ export class RuneHelper extends BaseEntitiesHelper<IRuneMap, TRune, IRune, TRune
     }
 
     public getType(item: TRune | IRune): TRune {
-        return this.asItem(item).name;
+        return RuneHelper.getType(item);
+    }
+
+    public static getType(item: TRune | IRune): TRune {
+        return typeof item === 'string' ? item : item.name;
     }
 
     public saveEntitiesOwned(): void {

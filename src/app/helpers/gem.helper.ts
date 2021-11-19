@@ -30,7 +30,7 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
 
     public getItem(gem: TGem): IGem {
         const [quality, type] = this.splitType(gem);
-        return this.getItems()[type][quality];
+        return this.items[type][quality];
     }
 
     public isItem(socketable: TGem | TRune | IGem | IRune): socketable is IGem {
@@ -45,8 +45,11 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
     }
 
     public getType(item: TGem | IGem): TGem {
-        const { quality, type } = this.asItem(item);
-        return `${quality}|${type}`;
+        return GemHelper.getType(item);
+    }
+
+    public static getType(gem: TGem | IGem): TGem {
+        return typeof gem === 'string' ? gem : `${gem.quality}|${gem.type}`;
     }
 
     public saveEntitiesOwned(): void {
@@ -64,6 +67,18 @@ export class GemHelper extends BaseEntitiesHelper<IGemMap, TGem, IGem, TGemSort>
             type: type,
             gems: GemQualities.map(quality => this.items[type][quality])
         }));
+    }
+
+    public static getLowerQuality(quality: TGemQuality, type: TGemType): TGem | null {
+        return quality === 'chipped' ? null : this.getNextQuality(quality, type, -1);
+    }
+
+    public static getHigherQuality(quality: TGemQuality, type: TGemType): TGem | null {
+        return quality === 'perfect' ? null : this.getNextQuality(quality, type, 1);
+    }
+
+    public static getNextQuality(quality: TGemQuality, type: TGemType, offset: 1 | -1): TGem | null {
+        return `${GemQualities[GemQualities.indexOf(quality) + offset]}|${type}`;
     }
 
     // noinspection JSUnusedLocalSymbols

@@ -1,0 +1,10 @@
+@use 'variables';
+
+:host {
+    position: relative;
+
+    &.owned {
+        background-color: variables.$theme-background-owned;
+        border-radius: variables.$size-gap;
+    }
+}

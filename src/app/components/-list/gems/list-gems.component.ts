@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GemHelper } from '~helpers';
+import { ArrayHelper, CraftableHelper, GemHelper } from '~helpers';
 import { IGem, IGemMap, IGemType } from '~interfaces/gem';
 
 @Component({
@@ -11,13 +11,32 @@ export class ListGemsComponent {
     public gems: IGemMap;
     public gemArray: Array<IGemType>;
 
-    constructor(private readonly gemHelper: GemHelper) {
-        this.gems = gemHelper.getItems();
+    constructor(private readonly gemHelper: GemHelper, private readonly craftableHelper: CraftableHelper) {
+        this.gems = gemHelper.items;
         this.gemArray = gemHelper.buildGemArray();
     }
 
     public gemOwned(gem: IGem, amount?: number): void {
         if (amount) gem.owned = amount;
+
+        const nextGem = GemHelper.getHigherQuality(gem.quality, gem.type);
+        if (nextGem) this.craftableHelper.calculateCraftabilityFor(this.gemHelper.getItem(nextGem));
+        this.gemHelper.saveEntitiesOwned();
+    }
+
+    public craft(gem: IGem): void {
+        const material = ArrayHelper.toArray(gem.craft?.gems)[0];
+        if (!material) return;
+
+        const item = this.gemHelper.asItem(material);
+        if ((item?.owned ?? 0) < 3) return;
+
+        gem.owned = (gem.owned ?? 0) + 1;
+        item.owned = (item.owned ?? 0) - 3;
+
+        this.craftableHelper.calculateCraftabilityFor(gem);
+        const nextGem = GemHelper.getHigherQuality(gem.quality, gem.type);
+        if (nextGem) this.craftableHelper.calculateCraftabilityFor(this.gemHelper.getItem(nextGem));
         this.gemHelper.saveEntitiesOwned();
     }
 }

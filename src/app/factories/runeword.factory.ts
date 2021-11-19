@@ -21,18 +21,6 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
         super();
     }
 
-    // noinspection JSMethodCanBeStatic
-    private all(...itemsTypes: Array<TItem>): Array<TItem> {
-        return ['all', ...itemsTypes];
-    }
-
-    private runes(...runes: Array<TRune>): { craft: { runes: Array<TRune> }; cLvl: number } {
-        return {
-            craft: { runes },
-            cLvl: Math.max(...runes.map(r => this.runeHelper.asItem(r).cLvl))
-        };
-    }
-
     public buildItems(): IRuneWordMap {
         const owned = this.storageService.get.runeWordsOwned();
         const favorites = this.storageService.get.runeWordsFavorited();
@@ -868,7 +856,7 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
                 effects: [
                     effect('chance.struck', '3%', { level: 1, skill: 'Howl' }),
                     effect('chance.strike', '10%', { level: 1, skill: 'Taunt' }),
-                    effect('skill.levels', '+3', { class: 'barbarian' }),
+                    effect('skill.levels', '+2', { class: 'barbarian' }),
                     effect('effect.defenseMissile', '+30'),
                     effect('effect.replenishLife', '+10'),
                     effect('effect.thorns', 14),
@@ -1374,5 +1362,17 @@ export class RuneWordFactory extends BaseEntityFactory<IRuneWordMap> {
         });
 
         return runeWords;
+    }
+
+    // noinspection JSMethodCanBeStatic
+    private all(...itemsTypes: Array<TItem>): Array<TItem> {
+        return ['all', ...itemsTypes];
+    }
+
+    private runes(...runes: Array<TRune>): { craft: { runes: Array<TRune> }; cLvl: number } {
+        return {
+            craft: { runes },
+            cLvl: Math.max(...runes.map(r => this.runeHelper.asItem(r).cLvl))
+        };
     }
 }

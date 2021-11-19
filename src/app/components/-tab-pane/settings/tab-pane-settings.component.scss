@@ -6,12 +6,12 @@
     grid-template-columns: auto max-content;
     grid-template-rows: min-content min-content;
     grid-template-areas:
-        'label  version'
+        'title  version'
         'checkboxes  issues';
 }
 
-label {
-    grid-area: label;
+.title {
+    grid-area: title;
 }
 
 .version {
@@ -36,6 +36,10 @@ input-checkbox {
     &.child {
         margin-left: variables.$size-gap * 2;
     }
+}
+
+.numeric-setting {
+    grid-column: 1 / 3;
 }
 
 ui-sprite-skill,

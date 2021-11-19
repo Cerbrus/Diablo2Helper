@@ -16,7 +16,7 @@
                 {{ rune.name }}
             </div>
             <div class="column-rune">
-                <ui-sprite-rune [rune]="rune" [size]="32"></ui-sprite-rune>
+                <ui-sprite-rune [item]="rune" [size]="32"></ui-sprite-rune>
             </div>
             <div class="column-owned">
                 <input-number-checkbox
@@ -28,10 +28,16 @@
                 <ng-container *ngIf="craft">
                     <ui-sprite-rune
                         *ngFor="let rune of craft.runes | asArray"
-                        [rune]="rune"
+                        [item]="rune"
                         [size]="32"
+                        [highlightOwned]="true"
                     ></ui-sprite-rune>
-                    <ui-sprite-gem *ngFor="let gem of craft.gems | asArray" [gem]="gem" [size]="32"></ui-sprite-gem>
+                    <ui-sprite-gem
+                        *ngFor="let gem of craft.gems | asArray"
+                        [item]="gem"
+                        [size]="32"
+                        [highlightOwned]="true"
+                    ></ui-sprite-gem>
                 </ng-container>
             </div>
             <div class="column-effects block" *ngVar="rune.effects as effects">

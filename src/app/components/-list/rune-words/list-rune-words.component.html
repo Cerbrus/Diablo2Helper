@@ -1,23 +1,23 @@
 <label>{{ 'common.runeWords' | translate }}</label>
 
-<ui-scrollable vertical="child" horizontal="bottom">
+<ui-scrollable horizontal="bottom" vertical="child">
     <div class="table-wrapper">
         <div class="table">
             <ui-table-sort-control
+                (onSort)="applySort($event)"
                 *ngFor="let header of headers"
                 [header]="header"
                 [sort]="runeWordSort"
-                (onSort)="applySort($event)"
             ></ui-table-sort-control>
 
-            <div class="table-body" ui-scrollable vertical="left" horizontal="none">
+            <div class="table-body" horizontal="none" ui-scrollable vertical="left">
                 <ng-container *ngFor="let runeWord of runeWordArraySorted">
-                    <div class="table-row" *ngVar="!showRuneWord(runeWord) as hidden" [class.hidden]="hidden">
+                    <div *ngVar="!showRuneWord(runeWord) as hidden" [class.hidden]="hidden" class="table-row">
                         <ng-container *ngVar="runeWord.craft?.runes | asArray as runeList">
                             <div class="column-owned">
                                 <input-number-checkbox
-                                    [(value)]="runeWord.owned"
                                     (valueChange)="runeWordOwned(runeWord)"
+                                    [(value)]="runeWord.owned"
                                 ></input-number-checkbox>
                             </div>
                             <div class="column-name">
@@ -25,16 +25,16 @@
                                     <span>
                                         <strong>{{ runeWord.name }}</strong>
                                         <fa-icon
-                                            class="pointer"
-                                            [title]="'labels.favorite' | translate"
-                                            [icon]="runeWord.favorite ? heartSolid : heartOutline"
                                             (click)="toggleFavorite(runeWord)"
+                                            [icon]="runeWord.favorite ? heartSolid : heartOutline"
+                                            [title]="'labels.favorite' | translate"
+                                            class="pointer"
                                         ></fa-icon>
                                     </span>
                                     <em>{{ runeNames(runeList) }}</em>
                                     <div>
                                         <ng-container *ngFor="let rune of runes(runeList); let last = last">
-                                            <span [tooltipSocketable]="rune" [tooltipDelay]="2000">
+                                            <span [tooltipDelay]="tooltipDelay" [tooltipSocketable]="rune">
                                                 <span>{{ rune.name }} ({{ rune.number }})</span>
                                             </span>
                                             <span *ngIf="!last" class="plus">+</span>
@@ -50,28 +50,29 @@
                                 </div>
                             </div>
                             <div
-                                class="column-runes runes center-text"
-                                [class.runes-owned]="runeWord.craft?.hasMaterials"
                                 [class.runes-craftable]="runeWord.craft?.canCraftMaterials"
+                                [class.runes-owned]="runeWord.craft?.hasMaterials"
+                                class="column-runes runes center-text"
                             >
                                 <div>
                                     <ui-sprite-rune
                                         *ngFor="let rune of runeList"
-                                        [rune]="rune"
+                                        [highlightOwned]="true"
+                                        [item]="rune"
                                         [size]="32"
                                     ></ui-sprite-rune>
                                 </div>
                             </div>
                             <div class="column-craft">
                                 <ui-button
+                                    (onButtonPress)="craft(runeWord)"
+                                    [disabled]="!(runeWord.craft?.hasMaterials || runeWord.craft?.canCraftMaterials)"
                                     [labelKey]="'labels.applyCraft'"
                                     sprite="transmuteButton"
-                                    [disabled]="!(runeWord.craft?.hasMaterials || runeWord.craft?.canCraftMaterials)"
-                                    (onButtonPress)="craft(runeWord)"
                                 ></ui-button>
                             </div>
                         </ng-container>
-                        <div class="column-effects" *ngVar="runeWord.effects as effects">
+                        <div *ngVar="runeWord.effects as effects" class="column-effects">
                             <ui-format-effect [effects]="effects" [lineBreak]="true"></ui-format-effect>
                         </div>
                     </div>

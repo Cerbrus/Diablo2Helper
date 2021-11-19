@@ -14,7 +14,7 @@ export abstract class BaseEntitiesHelper<
 
     public get itemsArray(): Array<TEntity> {
         if (!this.itemsArrayCache) {
-            this.itemsArrayCache = Object.values(this.getItems());
+            this.itemsArrayCache = Object.values(this.items);
             if (!this.isItem(this.itemsArrayCache[0])) {
                 this.itemsArrayCache = this.itemsArrayCache.map(i => Object.values(i)).flat();
             }
@@ -24,16 +24,12 @@ export abstract class BaseEntitiesHelper<
 
     public itemsArraySorted!: Array<TEntity>;
 
-    protected items!: TEntityMap;
+    public items!: TEntityMap;
 
     private itemsArrayCache!: Array<TEntity>;
 
-    protected constructor(private readonly entityFactory: BaseEntityFactory<TEntityMap>) {}
-
-    public getItems(): TEntityMap {
-        if (!this.items) this.items = this.entityFactory.buildItems();
-
-        return this.items;
+    protected constructor(private readonly entityFactory: BaseEntityFactory<TEntityMap>) {
+        this.items = this.entityFactory.buildItems();
     }
 
     public abstract fromSaveItem(item: IItem): TEntity | null;

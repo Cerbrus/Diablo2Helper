@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { faLightbulb } from '@fortawesome/free-regular-svg-icons/faLightbulb';
 import { environment } from '~environment';
 import { DomHelper, Helper, ObjectHelper } from '~helpers';
 import { ISettings } from '~interfaces';
 import { ITabPaneComponent } from '~interfaces/ui';
-import { faBug, IconDefinition } from '~modules/font-awesome';
+import { faBug, faLightbulb, faUndo } from '~modules/font-awesome';
 import { StorageService } from '~services';
+
+type NumericKeys = 'tooltipDelay' | 'tooltipDelaySocketable';
 
 @Component({
     selector: 'tab-pane-settings',
@@ -17,12 +18,31 @@ export class TabPaneSettingsComponent implements ITabPaneComponent {
 
     public settings: ISettings;
 
-    public bug: IconDefinition = faBug;
-    public lightBulb: IconDefinition = faLightbulb;
+    public bug = faBug;
+    public lightBulb = faLightbulb;
+    public clearInputIcon = faUndo;
 
     constructor(private readonly storageService: StorageService) {
         this.settings = storageService.get.settings();
         this.registerDarkModeWatch();
+        this.applySettings();
+    }
+
+    public getTitleKey(key: keyof ISettings) {
+        return `settings.${key}${this.settings[key] ? 'On' : 'Off'}`;
+    }
+
+    public onBoolChange(key: keyof Omit<ISettings, NumericKeys>): void {
+        this.settings[key] = !this.settings[key];
+        this.applySettings();
+    }
+
+    public onNumberChange(): void {
+        this.applySettings();
+    }
+
+    public resetNumber(key: keyof Pick<ISettings, NumericKeys>): void {
+        this.settings[key] = this.storageService.getDefault.settings()[key];
         this.applySettings();
     }
 
@@ -36,15 +56,6 @@ export class TabPaneSettingsComponent implements ITabPaneComponent {
             this.settings.darkMode = e.matches;
             this.applySettings();
         });
-    }
-
-    public getTitleKey(key: keyof ISettings) {
-        return `settings.${key}${this.settings[key] ? 'On' : 'Off'}`;
-    }
-
-    public onToggle(key: keyof ISettings): void {
-        this.settings[key] = !this.settings[key];
-        this.applySettings();
     }
 
     private applySettings(): void {

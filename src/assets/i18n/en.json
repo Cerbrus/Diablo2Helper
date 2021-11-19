@@ -36,6 +36,7 @@
         "imported": "Imported character",
         "itemType": "Item Type",
         "maxClvl": "Max Clvl",
+        "numberOfRunes": "Number of runes",
         "owned": "Owned",
         "saveFile": "Select Diablo 2 save file (.d2s)",
         "saveToFilters": "Apply imported data",
@@ -69,7 +70,9 @@
         "darkModeOff": "Dark mode disabled",
         "darkModeOn": "Dark mode enabled",
         "enableBackgroundOff": "Background image disabled",
-        "enableBackgroundOn": "Background image enabled"
+        "enableBackgroundOn": "Background image enabled",
+        "tooltipDelay": "Time tooltips remain open in ms",
+        "tooltipDelaySocketable": "Time gem & rune tooltips remain open in ms"
     },
     "tooltip": {
         "canBeInsertedIntoSocket": "Can be Inserted into Socketed Items",

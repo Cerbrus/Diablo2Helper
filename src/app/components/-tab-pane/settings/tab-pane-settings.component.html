@@ -1,4 +1,4 @@
-<label class="text-xl">{{ 'settings.title' | translate }}</label>
+<label class="title text-xl">{{ 'settings.title' | translate }}</label>
 <div class="version">
     <a [href]="'common.repositoryUrl' | translate" target="_blank">{{ 'common.appTitle' | translate }}</a>
     <span>{{ environment.appVersion }}</span>
@@ -8,76 +8,112 @@
 
 <div class="checkboxes grid">
     <input-checkbox
+        (click)="onBoolChange('darkMode')"
+        [(checked)]="settings.darkMode"
+        [group]="'settings'"
+        [keyboardShortcut]="'a'"
         [label]="getTitleKey('darkMode') | translate"
         [showIcon]="true"
-        [(checked)]="settings.darkMode"
-        (click)="onToggle('darkMode')"
-        [keyboardShortcut]="'a'"
-        [group]="'settings'"
     ></input-checkbox>
     <ui-sprite-skill
         [class]="this.settings.darkMode ? 'assassin' : 'sorceress'"
-        [skill]="this.settings.darkMode ? 'Shadow Master' : 'Lightning'"
         [isDown]="true"
         [size]="32"
+        [skill]="this.settings.darkMode ? 'Shadow Master' : 'Lightning'"
     ></ui-sprite-skill>
 
     <input-checkbox
+        (click)="onBoolChange('enableBackground')"
+        [(checked)]="settings.enableBackground"
+        [group]="'settings'"
+        [keyboardShortcut]="'b'"
         [label]="getTitleKey('enableBackground') | translate"
         [showIcon]="true"
-        [(checked)]="settings.enableBackground"
-        (click)="onToggle('enableBackground')"
-        [keyboardShortcut]="'b'"
-        [group]="'settings'"
     ></input-checkbox>
     <ui-sprite-skill
         [class]="this.settings.enableBackground ? 'paladin' : 'barbarian'"
-        [skill]="this.settings.enableBackground ? 'Conversion' : 'Concentrate'"
         [size]="32"
+        [skill]="this.settings.enableBackground ? 'Conversion' : 'Concentrate'"
     ></ui-sprite-skill>
 
     <input-checkbox
+        (click)="onBoolChange('customCursor')"
+        [(checked)]="settings.customCursor"
+        [group]="'settings'"
+        [keyboardShortcut]="'c'"
         [label]="getTitleKey('customCursor') | translate"
         [showIcon]="true"
-        [(checked)]="settings.customCursor"
-        (click)="onToggle('customCursor')"
-        [keyboardShortcut]="'c'"
-        [group]="'settings'"
     ></input-checkbox>
     <ui-sprite-animated
-        [scale]="0.25"
-        [frames]="16"
         [animation]="{ direction: 'alternate' }"
+        [frames]="16"
+        [scale]="0.25"
         sprite="oHand"
     ></ui-sprite-animated>
 
     <input-checkbox
-        class="child"
+        (click)="onBoolChange('customCursorLarge')"
         *ngIf="settings.customCursor"
+        [(checked)]="settings.customCursorLarge"
+        [group]="'settings'"
+        [keyboardShortcut]="'l'"
         [label]="getTitleKey('customCursorLarge') | translate"
         [showIcon]="true"
-        [(checked)]="settings.customCursorLarge"
-        (click)="onToggle('customCursorLarge')"
-        [keyboardShortcut]="'l'"
-        [group]="'settings'"
+        class="child"
     ></input-checkbox>
     <ui-sprite-animated
         *ngIf="settings.customCursor"
-        [scale]="0.25"
-        [frames]="16"
         [animation]="{ direction: 'alternate' }"
+        [frames]="16"
+        [scale]="0.25"
         sprite="oHand"
     ></ui-sprite-animated>
+
+    <label class="numeric-setting">
+        {{ 'settings.tooltipDelay' | translate }}
+        <div class="clearable-input">
+            <input
+                (keyup)="onNumberChange()"
+                [(ngModel)]="settings.tooltipDelay"
+                [max]="10000"
+                [min]="0"
+                [placeholder]="'settings.tooltipDelay' | translate"
+                onClickSelect
+                type="number"
+            />
+            <fa-icon (click)="resetNumber('tooltipDelay')" [icon]="clearInputIcon" class="clear-input"></fa-icon>
+        </div>
+    </label>
+
+    <label class="numeric-setting">
+        {{ 'settings.tooltipDelaySocketable' | translate }}
+        <div class="clearable-input">
+            <input
+                (keyup)="onNumberChange()"
+                [(ngModel)]="settings.tooltipDelaySocketable"
+                [max]="10000"
+                [min]="0"
+                [placeholder]="'settings.tooltipDelaySocketable' | translate"
+                onClickSelect
+                type="number"
+            />
+            <fa-icon
+                (click)="resetNumber('tooltipDelaySocketable')"
+                [icon]="clearInputIcon"
+                class="clear-input"
+            ></fa-icon>
+        </div>
+    </label>
 </div>
 
 <p class="issues">
     <span>{{ 'common.issueSubmit' | translate }}</span>
-    <a target="_blank" routerLink="/issue/bug_report">
+    <a routerLink="/issue/bug_report" target="_blank">
         <fa-icon [icon]="bug"></fa-icon>
         <span>{{ 'common.issueBugReport' | translate }}</span>
     </a>
     <span>{{ 'common.or' | translate }}</span>
-    <a target="_blank" routerLink="/issue/feature_request">
+    <a routerLink="/issue/feature_request" target="_blank">
         <fa-icon [icon]="lightBulb"></fa-icon>
         <span>{{ 'common.issueFeatureRequest' | translate }}</span>
     </a>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ArrayHelper, RuneHelper, RuneWordHelper } from '~helpers';
 import { IRune } from '~interfaces/rune';
@@ -14,21 +14,13 @@ import { TRuneWordSort } from '~types/runeWord';
 @Component({
     selector: 'list-rune-words',
     templateUrl: './list-rune-words.component.html',
-    styleUrls: ['./list-rune-words.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./list-rune-words.component.scss']
 })
 export class ListRuneWordsComponent {
     public heartSolid = faHeartSolid;
     public heartOutline = faHeartOutline;
 
-    public get runeWordArraySorted(): Array<IRuneWord> {
-        return this.runeWordHelper.itemsArraySorted;
-    }
-
-    public get runeWordSort(): TRuneWordSort {
-        return this.runeWordHelper.entitySort;
-    }
-
+    public tooltipDelay: number;
     public headers: Array<ITableHeader<TRuneWordSort, IRuneWord>> = [
         { title: 'labels.owned', key: 'owned' },
         { title: 'common.rune', key: 'name' },
@@ -44,7 +36,17 @@ export class ListRuneWordsComponent {
         private readonly runewordFilterService: RunewordFilterService,
         private readonly storageService: StorageService,
         private readonly translate: TranslateService
-    ) {}
+    ) {
+        this.tooltipDelay = this.storageService.get.settings().tooltipDelaySocketable;
+    }
+
+    public get runeWordArraySorted(): Array<IRuneWord> {
+        return this.runeWordHelper.itemsArraySorted;
+    }
+
+    public get runeWordSort(): TRuneWordSort {
+        return this.runeWordHelper.entitySort;
+    }
 
     public applySort(changedSort?: ITable<IRuneWord>): void {
         this.runeWordHelper.applySort(changedSort);
@@ -93,15 +95,15 @@ export class ListRuneWordsComponent {
         return all ? this.translateItemType('all', { types: translatedTypes, lastType }) : translatedTypes;
     }
 
-    private translateItemType(itemType: TItem | 'single' | 'plural', params?: object): string {
-        return this.translate.instant(`itemTypes.${itemType}`, params);
-    }
-
     public toggleFavorite(runeWord: IRuneWord): void {
         runeWord.favorite = !runeWord.favorite;
         this.storageService.save.runeWordsFavorited(
             this.runeWordHelper.itemsArray.filter(rw => rw.favorite).map(rw => rw.name)
         );
         this.runewordFilterService.calculateRuneWordVisibility();
+    }
+
+    private translateItemType(itemType: TItem | 'single' | 'plural', params?: object): string {
+        return this.translate.instant(`itemTypes.${itemType}`, params);
     }
 }

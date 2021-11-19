@@ -5,7 +5,8 @@
 
             <ui-table-head key="quality" labelKey="gems.quality.title"></ui-table-head>
             <ui-table-head key="owned" labelKey="labels.owned"></ui-table-head>
-            <ui-table-head key="craft" labelKey="labels.recipe"></ui-table-head>
+            <ui-table-head key="recipe" labelKey="labels.recipe"></ui-table-head>
+            <ui-table-head key="craft" labelKey="labels.craft"></ui-table-head>
             <ui-table-head key="effectWeapon" labelKey="labels.weapon"></ui-table-head>
             <ui-table-head key="effectArmorHelm" labelKey="labels.armorHelm"></ui-table-head>
             <ui-table-head key="effectShield" labelKey="labels.shield"></ui-table-head>
@@ -16,7 +17,7 @@
                     {{ 'gems.quality.' + gem.quality | translate }}
                 </div>
                 <div class="column-gem">
-                    <ui-sprite-gem [gem]="gem" [size]="24"></ui-sprite-gem>
+                    <ui-sprite-gem [item]="gem" [size]="24"></ui-sprite-gem>
                 </div>
                 <div class="column-owned">
                     <input-number-checkbox
@@ -25,10 +26,29 @@
                         [small]="true"
                     ></input-number-checkbox>
                 </div>
-                <div class="column-crafts block center-text" *ngVar="gem.craft?.gems as gems">
+                <div
+                    class="column-crafts block center-text"
+                    *ngVar="gem.craft?.gems as gems"
+                    [class.gems-owned]="gem.craft?.hasMaterials"
+                    [class.gems-craftable]="gem.craft?.canCraftMaterials"
+                >
                     <ng-container *ngIf="gems">
-                        <ui-sprite-gem *ngFor="let gem of gems | asArray" [gem]="gem" [size]="24"></ui-sprite-gem>
+                        <ui-sprite-gem
+                            *ngFor="let gem of gems | asArray; index as i"
+                            [item]="gem"
+                            [size]="24"
+                            [highlightOwned]="i + 1"
+                        ></ui-sprite-gem>
                     </ng-container>
+                </div>
+                <div class="column-craft">
+                    <ui-button
+                        [labelKey]="'labels.applyCraft'"
+                        sprite="transmuteButton"
+                        [disabled]="!(gem.craft?.hasMaterials || gem.craft?.canCraftMaterials)"
+                        (onButtonPress)="craft(gem)"
+                        [size]="24"
+                    ></ui-button>
                 </div>
                 <ng-container *ngVar="gem.effects as effects">
                     <div class="column-effectWeapon">

@@ -1,18 +1,29 @@
 import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 import { Helper } from '~helpers';
 import { PopupService } from '~modules/shared/services/popup.service';
+import { StorageService } from '~services';
 
 @Directive()
 export abstract class TooltipBaseDirective {
     public tooltip?: HTMLDivElement;
 
     @Input('tooltipDelay')
-    public delay = 500;
+    public delay: number;
 
     @HostBinding('class')
     private className = this.cssClass;
 
     private hideDelay?: number;
+
+    protected constructor(
+        private readonly cssClass: string,
+        private readonly popupService: PopupService,
+        private readonly storageService: StorageService,
+        private readonly elementRef: ElementRef<HTMLElement>
+    ) {
+        this.delay = this.storageService.get.settings().tooltipDelay;
+        this.nativeElement?.classList.add('pointer');
+    }
 
     protected get popup(): PopupService {
         return this.popupService.using(this.tooltip);
@@ -20,14 +31,6 @@ export abstract class TooltipBaseDirective {
 
     private get nativeElement(): HTMLElement | undefined {
         return this.elementRef?.nativeElement;
-    }
-
-    protected constructor(
-        private readonly cssClass: string,
-        private readonly popupService: PopupService,
-        private readonly elementRef: ElementRef<HTMLElement>
-    ) {
-        this.nativeElement?.classList.add('pointer');
     }
 
     @HostListener('mouseover')

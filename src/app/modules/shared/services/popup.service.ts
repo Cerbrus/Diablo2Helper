@@ -5,18 +5,17 @@ import { DomHelper, Helper } from '~helpers';
 @Injectable({ providedIn: 'root' })
 export class PopupService {
     private renderer: Renderer2;
-
     private element?: HTMLDivElement;
     private tooltipContainer?: HTMLDivElement;
-
-    public get isVisible(): boolean {
-        this.hasElement(this.element);
-        return this.element.classList.contains('show');
-    }
 
     protected constructor(rendererFactory: RendererFactory2, @Inject(DOCUMENT) private document: Document) {
         this.renderer = rendererFactory.createRenderer(null, null);
         this.setupContainer();
+    }
+
+    public get isVisible(): boolean {
+        this.hasElement(this.element);
+        return this.element.classList.contains('show');
     }
 
     public using(element?: HTMLDivElement): this {
@@ -58,10 +57,6 @@ export class PopupService {
 
         this.renderer.appendChild(this.element, this.toNode(element));
         return this;
-    }
-
-    private toNode(element: string | Node): Node {
-        return typeof element === 'string' ? this.renderer.createText(element) : element;
     }
 
     public setPosition(
@@ -122,6 +117,10 @@ export class PopupService {
         const element = DomHelper.createElement('div', null, ...cssClass);
         this.renderer.appendChild(this.tooltipContainer, element);
         return element;
+    }
+
+    private toNode(element: string | Node): Node {
+        return typeof element === 'string' ? this.renderer.createText(element) : element;
     }
 
     private setupContainer(): void {

@@ -5,6 +5,7 @@ import { EffectHelper, GemHelper, RuneHelper } from '~helpers';
 import { IGem } from '~interfaces/gem';
 import { IRune } from '~interfaces/rune';
 import { PopupService } from '~modules/shared/services/popup.service';
+import { StorageService } from '~services';
 import { TEffectRowConfig } from '~types/effect';
 import { TGem } from '~types/gem';
 import { TRune } from '~types/rune';
@@ -18,13 +19,14 @@ export class TooltipSocketableDirective extends TooltipBaseDirective {
     constructor(
         elementRef: ElementRef,
         popupService: PopupService,
+        storageService: StorageService,
         @Inject(DOCUMENT) document: Document,
         private readonly effectHelper: EffectHelper,
         private readonly gemHelper: GemHelper,
         private readonly runeHelper: RuneHelper,
         private readonly translate: TranslateService
     ) {
-        super('tooltip-socketable', popupService, elementRef);
+        super('tooltip-socketable', popupService, storageService, elementRef);
     }
 
     protected buildHtml(): void {

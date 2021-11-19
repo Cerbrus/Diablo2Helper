@@ -15,10 +15,6 @@ export class KeyboardShortcutService {
     private static = KeyboardShortcutService;
     private tooltip?: HTMLDivElement;
 
-    private get popup(): PopupService {
-        return this.popupService.using(this.tooltip);
-    }
-
     constructor(
         private readonly popupService: PopupService,
         private readonly translate: TranslateService,
@@ -27,6 +23,14 @@ export class KeyboardShortcutService {
         this.listeners = new Map([[StringHelper.Char('?'), document.body]]);
         document.body.addEventListener('keydown', this.onKeyDown.bind(this));
         document.body.addEventListener('keyup', this.onKeyUp.bind(this));
+    }
+
+    private get popup(): PopupService {
+        return this.popupService.using(this.tooltip);
+    }
+
+    private static hasMetaKey(event: KeyboardEvent): boolean {
+        return event.ctrlKey || event.altKey || event.shiftKey || event.metaKey;
     }
 
     public registerKey(key: char, element: HTMLElement, group?: string): void {
@@ -64,9 +68,8 @@ export class KeyboardShortcutService {
 
         if (!StringHelper.isChar(key)) return;
 
-        if (this.registeredKeys.includes(key)) {
-            if (!this.static.hasMetaKey(event)) event.preventDefault();
-
+        if (this.registeredKeys.includes(key) && !this.static.hasMetaKey(event)) {
+            event.preventDefault();
             const target = this.listeners.get(key);
             if (target && DomHelper.isVisible(target)) {
                 target.click();
@@ -92,10 +95,6 @@ export class KeyboardShortcutService {
 
     private toggleHelp(show?: boolean): void {
         DomHelper.getRoot().classList.toggle('show-keyboard-hints', show || (this.tooltip && this.popup.isVisible));
-    }
-
-    private static hasMetaKey(event: KeyboardEvent): boolean {
-        return event.ctrlKey || event.altKey || event.shiftKey || event.metaKey;
     }
 
     private createTooltip(): void {

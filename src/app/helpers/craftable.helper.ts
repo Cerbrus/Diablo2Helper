@@ -57,13 +57,17 @@ export class CraftableHelper {
         if (!craft) return true;
         const ownRunes = this.getRunesOwned();
         const ownGems = this.getGemsOwned();
-        const canCraft =
-            ArrayHelper.toArray(craft.runes).every(r => r && this.hasOrCanCraftRune(ownRunes, r, 1, usedRunes)) &&
-            ArrayHelper.toArray(craft.gems).every(r => r && this.hasOrCanCraftGem(ownGems, r, 1, usedGems));
+        const runes = ArrayHelper.toArray(craft.runes);
+        const gems = ArrayHelper.toArray(craft.gems);
 
-        craft.canCraftMaterials = canCraft;
+        const canCraftRunes =
+            !!runes.length && runes.every(rune => rune && this.hasOrCanCraftRune(ownRunes, rune, 1, usedRunes));
+        const canCraftGems =
+            !!gems.length && gems.every(gem => gem && this.hasOrCanCraftGem(ownGems, gem, 1, usedGems));
 
-        return canCraft;
+        craft.canCraftMaterials = canCraftRunes || canCraftGems;
+
+        return craft.canCraftMaterials;
     }
 
     public hasOrCanCraftRune(
@@ -124,7 +128,7 @@ export class CraftableHelper {
             );
 
             return (
-                !!neededGems &&
+                !!neededGems.length &&
                 ObjectHelper.every(
                     ArrayHelper.countStringOccurrences(neededGems),
                     (requiredGem: TGem, amountForCraft: number) =>

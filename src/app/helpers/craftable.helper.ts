@@ -196,7 +196,7 @@ export class CraftableHelper {
         helper: BaseEntitiesHelper<any, TItem, TEntity, any>
     ): boolean {
         const requiredItems = ArrayHelper.countStringOccurrences(ArrayHelper.toArray(items).map(helper.getType));
-        console.log(requiredItems);
+
         return ObjectHelper.every(
             requiredItems,
             (requiredItem: TItem, requiredAmount: number) => (helper.getItem(requiredItem).owned ?? 0) >= requiredAmount

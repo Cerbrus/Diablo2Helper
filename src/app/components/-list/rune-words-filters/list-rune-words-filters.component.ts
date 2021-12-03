@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime, map } from 'rxjs/operators';
 import { RuneWordHelper } from '~helpers';
 import { IRuneWordFilters } from '~interfaces/runeWord';
 import { faTimesCircle } from '~modules/font-awesome';
@@ -22,6 +22,8 @@ export class ListRuneWordsFiltersComponent implements OnInit {
 
     public clearInputIcon = faTimesCircle;
 
+    public largeItemTypes: Array<TItem> = ['weaponsMelee', 'weaponsRanged', 'armor'];
+
     private onSearch$ = new Subject<void>();
     private debounceDelay = 250;
 
@@ -37,7 +39,6 @@ export class ListRuneWordsFiltersComponent implements OnInit {
         this.onSearch$
             .pipe(
                 debounceTime(this.debounceDelay),
-                distinctUntilChanged(),
                 map(() => this.applyFilters())
             )
             .subscribe();

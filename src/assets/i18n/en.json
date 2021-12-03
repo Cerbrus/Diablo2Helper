@@ -56,7 +56,9 @@
             "cLvl": "Sort by required level",
             "name": "Sort by name",
             "owned": "Sort by owned count",
-            "runes": "Sort by rune count"
+            "runes": "Sort by rune count",
+            "craft": "Sort by craftability",
+            "effect": "Sort by number of effects"
         },
         "trackedRunes": "Runes in possession",
         "trackedRunesCount": "How many?",
@@ -149,6 +151,7 @@
         "plural": "{{types}} and {{lastType}}",
         "weaponsMelee": "Melee Weapons",
         "weaponsRanged": "Ranged Weapons",
+        "armor": "Armor",
         "armorHead": "Headgear",
         "armorBody": "Body Armor",
         "axe": "Axes",

@@ -68,11 +68,12 @@
         </div>
     </ui-collapsible>
 
-    <ui-collapsible labelKey="labels.itemType">
+    <ui-collapsible class="collapsible-item-types" labelKey="labels.itemType">
         <input-checkbox
             (click)="updateFilters(itemType)"
             *ngFor="let itemType of itemTypes"
             [(checked)]="filters.itemTypes[itemType]"
+            [class.text-ml]="largeItemTypes.includes(itemType)"
             [labelKey]="'itemTypes.' + itemType"
         ></input-checkbox>
     </ui-collapsible>

@@ -5,7 +5,8 @@
         [header]="header"
         [sort]="runeSort"
     ></ui-table-sort-control>
-    <ui-table-head key="craft" labelKey="labels.recipe"></ui-table-head>
+    <ui-table-head key="recipe" labelKey="labels.recipe"></ui-table-head>
+    <ui-table-head key="craft" labelKey="labels.craft"></ui-table-head>
     <ui-table-head key="effects" labelKey="labels.socketEffect"></ui-table-head>
 
     <div class="table-body" ui-scrollable>
@@ -20,15 +21,20 @@
             </div>
             <div class="column-owned">
                 <input-number-checkbox
-                    (valueChange)="onCountChange(rune)"
+                    (valueChange)="onCountChange(rune, $event)"
                     [(value)]="rune.owned"
                 ></input-number-checkbox>
             </div>
-            <div *ngVar="rune.craft as craft" class="column-crafts block center-text">
+            <div
+                *ngVar="rune.craft as craft"
+                [class.runes-craftable]="craft?.canCraftMaterials"
+                [class.runes-owned]="craft?.hasMaterials"
+                class="column-crafts block center-text"
+            >
                 <ng-container *ngIf="craft">
                     <ui-sprite-rune
-                        *ngFor="let rune of craft.runes | asArray"
-                        [highlightOwned]="true"
+                        *ngFor="let rune of craft.runes | asArray; index as i"
+                        [highlightOwned]="i + 1"
                         [item]="rune"
                         [size]="32"
                     ></ui-sprite-rune>
@@ -39,6 +45,15 @@
                         [size]="32"
                     ></ui-sprite-gem>
                 </ng-container>
+            </div>
+            <div class="column-craft">
+                <ui-button
+                    (onButtonPress)="craft(rune)"
+                    [disabled]="!(rune.craft?.hasMaterials || rune.craft?.canCraftMaterials)"
+                    [labelKey]="'labels.applyCraft'"
+                    [size]="32"
+                    sprite="transmuteButton"
+                ></ui-button>
             </div>
             <div *ngVar="rune.effects as effects" class="column-effects block">
                 <ui-format-effect [effects]="effects.weapon" title="weapon"></ui-format-effect>

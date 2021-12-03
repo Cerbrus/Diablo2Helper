@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ArrayHelper, RuneHelper, RuneWordHelper } from '~helpers';
+import { ArrayHelper, CraftableHelper, RuneHelper, RuneWordHelper } from '~helpers';
 import { IRune } from '~interfaces/rune';
 import { IRuneWord } from '~interfaces/runeWord';
 import { ITable, ITableHeader } from '~interfaces/ui';
@@ -35,6 +35,7 @@ export class ListRuneWordsComponent {
         private readonly runeTracker: RuneTrackerService,
         private readonly runeWordHelper: RuneWordHelper,
         private readonly runewordFilterService: RunewordFilterService,
+        private readonly craftableHelper: CraftableHelper,
         private readonly storageService: StorageService,
         private readonly translate: TranslateService
     ) {
@@ -71,7 +72,7 @@ export class ListRuneWordsComponent {
     }
 
     public craft(runeWord: IRuneWord): void {
-        this.runeTracker.craft(runeWord);
+        this.craftableHelper.craft(runeWord, this.runeWordHelper);
         this.runewordFilterService.calculateRuneWordVisibility();
     }
 

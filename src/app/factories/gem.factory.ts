@@ -102,12 +102,12 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
                 'topaz',
                 owned,
                 {
-                    weapon: ([min, max]) => effect('damage.lightning', `${min}-${max}`),
+                    weapon: value => effect('damage.lightning', value),
                     armorHelm: value => effect('effect.MF', `+${value}%`),
                     shield: value => effect('resist.lightning', `+${value}%`)
                 },
                 {
-                    weapon: [[1 - 8], [1 - 14], [1 - 22], [1 - 30], [1 - 40]],
+                    weapon: ['1-8', '1-14', '1-22', '1-30', '1-40'],
                     armorHelm: [9, 13, 16, 20, 24],
                     shield: [12, 16, 22, 28, 40]
                 }
@@ -147,17 +147,6 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
         return gemMap;
     }
 
-    private setNewGemName<TGem extends IGem>(gem: TGem): TGem {
-        const qualityKey = `gems.quality.${gem.quality}`;
-        const typeKey = `gems.type.${gem.type}`;
-
-        this.translate.get([qualityKey, typeKey]).subscribe(result => {
-            gem.name = `${result[qualityKey]} ${result[typeKey]}`;
-        });
-
-        return gem;
-    }
-
     public buildGem<TType extends TGemType, TQuality extends TGemQuality>(
         quality: TQuality,
         type: TType,
@@ -172,6 +161,17 @@ export class GemFactory extends BaseEntityFactory<IGemMap> {
             cLvl: this.qualityLevels[quality],
             effects
         });
+    }
+
+    private setNewGemName<TGem extends IGem>(gem: TGem): TGem {
+        const qualityKey = `gems.quality.${gem.quality}`;
+        const typeKey = `gems.type.${gem.type}`;
+
+        this.translate.get([qualityKey, typeKey]).subscribe(result => {
+            gem.name = `${result[qualityKey]} ${result[typeKey]}`;
+        });
+
+        return gem;
     }
 
     private buildGemQualities<TType extends TGemType, W, A, S>(

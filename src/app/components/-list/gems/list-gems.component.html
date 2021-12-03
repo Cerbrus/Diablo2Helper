@@ -21,7 +21,7 @@
                 </div>
                 <div class="column-owned">
                     <input-number-checkbox
-                        (valueChange)="gemOwned(gem, $event)"
+                        (valueChange)="onCountChange(gem, $event)"
                         [small]="true"
                         [value]="gem.owned"
                     ></input-number-checkbox>

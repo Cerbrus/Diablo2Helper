@@ -1,6 +1,7 @@
 @use 'variables' as v;
 
-$table-columns: 60px 50px 90px 80px 1fr;
+$table-columns: 60px 50px 90px 80px 76px 1fr;
+$table-column-count: 6;
 
 .table {
     grid-template-columns: $table-columns;
@@ -10,20 +11,35 @@ $table-columns: 60px 50px 90px 80px 1fr;
     }
 
     &-body {
-        grid-column: span 5;
+        grid-column: span $table-column-count;
         $offset: v.$size-gap * 3 + v.$size-tab-control + 1px + v.$size-gap-table * 2 + v.$size-header;
         max-height: calc(100vh - #{$offset});
     }
 
     .column {
-        &-name {
+        &-name,
+        &-craft {
             display: grid;
+        }
+
+        &-craft {
+            justify-content: center;
         }
 
         &-rune {
             display: grid;
             justify-items: center;
         }
+    }
+}
+
+.table-row .runes {
+    &-craftable {
+        background: v.$theme-background-craftable;
+    }
+
+    &-owned {
+        background: v.$theme-background-owned;
     }
 }
 

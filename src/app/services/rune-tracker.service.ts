@@ -8,10 +8,8 @@ import {
     RuneHelper,
     RuneWordHelper
 } from '~helpers';
-import { IGem } from '~interfaces/gem';
 import { IRune } from '~interfaces/rune';
 import { IRuneWord } from '~interfaces/runeWord';
-import { TGem } from '~types/gem';
 import { ItemOrArray } from '~types/helpers';
 import { TRune } from '~types/rune';
 import { StorageService } from './';
@@ -68,65 +66,6 @@ export class RuneTrackerService {
         );
     }
 
-    // public canCraftRuneWordRunes(
-    //     runeWord: IRuneWord,
-    //     usedRunes?: Partial<Record<TRune, number>>,
-    //     usedGems?: Partial<Record<TGem, number>>
-    // ): boolean {
-    //     //TODO
-    //     if (!runeWord.craft) return true;
-    //     const countClone = this.getRunesOwned();
-    //     const canCraft = ArrayHelper.toArray(runeWord.craft?.runes).every(
-    //         r => r && this.hasOrCanCraftRune(countClone, r, 1, runeWord, usedRunes)
-    //     );
-    //
-    //     runeWord.craft.canCraftMaterials = canCraft;
-    //
-    //     console.log(canCraft, this.craftableHelper.canCraftMaterialsFor(runeWord, usedRunes, usedGems));
-    //
-    //     return canCraft;
-    // }
-
-    public hasOrCanCraftRune(
-        ownedRunes: Record<TRune, number>,
-        runeToCraft: TRune | IRune,
-        amountNeeded = 1,
-        runeWord?: IRuneWord,
-        usedRunes?: Partial<Record<TRune, number>>
-    ): boolean {
-        runeToCraft = this.runeHelper.asItem(runeToCraft);
-        const craft = runeToCraft.name;
-
-        if (ownedRunes[craft] >= amountNeeded) {
-            ownedRunes[craft] -= amountNeeded;
-
-            if (usedRunes) usedRunes[craft] = (usedRunes[craft] ?? 0) + amountNeeded;
-            return true;
-        } else {
-            if (usedRunes && ownedRunes[craft]) usedRunes[craft] = ownedRunes[craft];
-
-            const missingCount = amountNeeded - (ownedRunes[craft] ?? 0);
-            ownedRunes[craft] = 0;
-
-            const neededRunes = runeToCraft.craft?.runes;
-
-            return (
-                !!neededRunes &&
-                ObjectHelper.every(
-                    ArrayHelper.countStringOccurrences(neededRunes),
-                    (requiredRune: TRune, amountForCraft: number) =>
-                        this.hasOrCanCraftRune(
-                            ownedRunes,
-                            requiredRune,
-                            missingCount * amountForCraft,
-                            runeWord,
-                            usedRunes
-                        )
-                )
-            );
-        }
-    }
-
     public hasRunewordRunes(runeWord: IRuneWord): boolean {
         if (!runeWord.craft?.runes) return true;
         const runes = ArrayHelper.toArray(runeWord.craft?.runes);
@@ -135,55 +74,6 @@ export class RuneTrackerService {
         runeWord.craft.hasMaterials = hasMaterials;
         return hasMaterials;
     }
-
-    public craft(runeWord: IRuneWord): void {
-        if (!runeWord.craft) return this.incrementOwnedCount(runeWord);
-
-        if (this.hasRunewordRunes(runeWord) && runeWord.craft.runes) {
-            const usedRunes = ArrayHelper.countStringOccurrences(runeWord.craft.runes);
-            const usedGems = ArrayHelper.countStringOccurrences(
-                ArrayHelper.toArray(runeWord.craft?.gems).map(gem => this.gemHelper.asType(<TGem | IGem>gem))
-            );
-            return this.applyCraft(runeWord, usedRunes, usedGems);
-        }
-
-        const usedRunes: Partial<Record<TRune, number>> = {};
-        const usedGems: Partial<Record<TGem, number>> = {};
-        if (this.craftableHelper.canCraftMaterialsFor(runeWord, usedRunes, usedGems)) {
-            this.applyCraft(runeWord, usedRunes, usedGems);
-        }
-    }
-
-    private applyCraft(
-        runeWord: IRuneWord,
-        runes: Partial<Record<TRune, number>>,
-        gems: Partial<Record<TGem, number>>
-    ) {
-        //TODO
-        ObjectHelper.forEach(<Record<TRune, number>>runes, (runeName: TRune, count: number) => {
-            if (!runeName) return;
-            const rune = this.runeHelper.getItem(runeName);
-            rune.owned = (rune.owned ?? 0) - count;
-        });
-
-        this.saveStoredRunes();
-
-        return this.incrementOwnedCount(runeWord);
-    }
-
-    private incrementOwnedCount(runeWord: IRuneWord): void {
-        runeWord.owned = (runeWord.owned ?? 0) + 1;
-        this.runeWordHelper.saveEntitiesOwned();
-    }
-
-    // private getRunesOwned(): Record<TRune, number> {
-    //     const runes = this.runeHelper.itemsArraySorted.filter(r => r.owned);
-    //     return ArrayHelper.toRecordWithKey(
-    //         runes,
-    //         item => item.name,
-    //         item => item.owned ?? 0
-    //     );
-    // }
 
     private initializeRuneCounts(): void {
         const runesOwned = this.storageService.get.runesOwned();

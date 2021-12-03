@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'input-number-checkbox',
@@ -15,9 +15,16 @@ export class InputNumberCheckboxComponent {
     @Input()
     public small = false;
 
+    @ViewChild('inputElement', { static: false, read: ElementRef })
+    private input!: ElementRef<HTMLInputElement>;
+
     public onCheck(): void {
         this.value = 1;
         this.onChange();
+
+        setTimeout(() => {
+            this.input?.nativeElement?.select();
+        });
     }
 
     public onChange(): void {

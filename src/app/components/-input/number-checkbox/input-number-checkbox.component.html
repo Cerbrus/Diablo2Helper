@@ -1,5 +1,6 @@
 <input-checkbox *ngIf="!value" (checkedChange)="onCheck()" label="X" [isXl]="!small"></input-checkbox>
 <input
+    #inputElement
     *ngIf="value"
     [class.text-l]="!small"
     type="number"

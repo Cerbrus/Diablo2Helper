@@ -4,3 +4,21 @@
     grid-template-rows: min-content;
     grid-template-columns: auto;
 }
+
+::ng-deep .collapsible-item-types .grid {
+    grid-template-columns: repeat(2, minmax(min-content, 50%)) !important;
+    grid-gap: variables.$size-gap;
+
+    input-checkbox {
+        display: grid;
+
+        &.text-ml {
+            grid-column: span 2;
+        }
+
+        .wrapper.button {
+            display: grid;
+            align-content: center;
+        }
+    }
+}

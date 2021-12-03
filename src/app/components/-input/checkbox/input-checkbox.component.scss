@@ -6,9 +6,7 @@
     $icon-scale: 0.5;
     $icon-width: 162px * $icon-scale;
     $icon-height: 104px * $icon-scale;
-    //noinspection CssInvalidFunction Not yet in the IDE
     $icon-w: math.div($icon-width, 3);
-    //noinspection CssInvalidFunction Not yet in the IDE
     $icon-h: math.div($icon-height, 2);
 
     user-select: none;

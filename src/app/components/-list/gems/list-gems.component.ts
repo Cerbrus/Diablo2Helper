@@ -16,11 +16,16 @@ export class ListGemsComponent {
         this.gemArray = gemHelper.buildGemArray();
     }
 
-    public gemOwned(gem: IGem, amount?: number): void {
-        if (amount) gem.owned = amount;
+    public onCountChange(gem: IGem, amount: number | null = null): void {
+        if (amount != null) gem.owned = amount;
 
         const nextGem = GemHelper.getHigherQuality(gem.quality, gem.type);
-        if (nextGem) this.craftableHelper.calculateCraftabilityFor(this.gemHelper.getItem(nextGem));
+        if (nextGem) {
+            const nextGemEntity = this.gemHelper.getItem(nextGem);
+            this.craftableHelper.calculateCraftabilityFor(nextGemEntity);
+            this.onCountChange(nextGemEntity);
+        }
+
         this.gemHelper.saveEntitiesOwned();
     }
 

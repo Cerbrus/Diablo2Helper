@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
     ArrayHelper,
     BaseEntitiesHelper,
+    CraftableHelper,
     GemHelper,
     NumberHelper,
     ObjectHelper,
@@ -21,18 +22,11 @@ import { RuneTrackerService, StorageService } from './';
 export class RunewordFilterService {
     public filters: IRuneWordFilters;
 
-    private readonly types: {
-        melee: Array<TItem>;
-        ranged: Array<TItem>;
-        shields: Array<TItem>;
-    } = {
-        melee: ['axe', 'claw', 'club', 'hammer', 'mace', 'poleArm', 'scepter', 'stave', 'sword', 'wand'],
-        ranged: ['bow', 'crossbow'],
-        shields: ['shield', 'paladinShield']
+    private readonly typeCollections: Record<'weaponsMelee' | 'weaponsRanged' | 'armor', Array<TItem>> = {
+        weaponsMelee: ['axe', 'claw', 'club', 'hammer', 'mace', 'poleArm', 'scepter', 'stave', 'sword', 'wand'],
+        weaponsRanged: ['bow', 'crossbow'],
+        armor: ['armorBody', 'armorHead', 'shield', 'paladinShield']
     };
-
-    private runeWords: IRuneWordMap;
-    private runeWordVisibility: Record<TRuneWord, boolean> = ArrayHelper.toRecord([...RuneWords], () => false);
 
     private readonly filterPredicates: Array<(runeWord: IRuneWord) => boolean> = [
         rw => this.filters.showFavorite && !rw.favorite,
@@ -41,11 +35,15 @@ export class RunewordFilterService {
         rw => !!this.filters.numberOfRunes && rw.craft?.runes?.length !== this.filters.numberOfRunes
     ];
 
+    private runeWords: IRuneWordMap;
+    private runeWordVisibility: Record<TRuneWord, boolean> = ArrayHelper.toRecord([...RuneWords], () => false);
+
     constructor(
         private readonly storageService: StorageService,
         private readonly gemHelper: GemHelper,
         private readonly runeHelper: RuneHelper,
         private readonly runeWordHelper: RuneWordHelper,
+        private readonly craftableHelper: CraftableHelper,
         private readonly runeTracker: RuneTrackerService
     ) {
         this.filters = storageService.get.runeWordFilters();
@@ -85,49 +83,31 @@ export class RunewordFilterService {
         this.saveFilters();
     }
 
-    public isMelee(itemType: TItem): boolean {
-        return this.types.melee.includes(itemType);
+    public isInCollection(itemType: TItem, collection: Array<TItem>): boolean {
+        return collection.includes(itemType);
     }
 
-    public isAllMeleeEnabled(): boolean {
-        return this.types.melee.every(type => this.filters.itemTypes[type]);
+    public isAllEnabled(collection: Array<TItem>): boolean {
+        return collection.every(type => this.filters.itemTypes[type]);
     }
 
-    public isRanged(itemType: TItem): boolean {
-        return this.types.ranged.includes(itemType);
-    }
+    public updateFilters(itemType: TItem): void {
+        const filters = this.filters.itemTypes;
 
-    public isAllRangedEnabled(): boolean {
-        return this.types.ranged.every(type => this.filters.itemTypes[type]);
+        ObjectHelper.forEach(this.typeCollections, (type: TItem, collection: Array<TItem>) => {
+            if (itemType === type) {
+                collection.forEach(t => (filters[t] = filters[type]));
+            } else if (this.isInCollection(itemType, collection)) {
+                filters[type] = this.isAllEnabled(collection);
+            }
+        });
+
+        this.saveFilters();
     }
 
     public saveFilters(): void {
         this.calculateRuneWordVisibility();
         this.storageService.save.runeWordFilters(this.filters);
-    }
-
-    public updateFilters(itemType: TItem): void {
-        const types = this.filters.itemTypes;
-
-        if (itemType === 'weaponsMelee') {
-            this.setMelee(types.weaponsMelee);
-        } else if (itemType === 'weaponsRanged') {
-            this.setRanged(types.weaponsRanged);
-        } else if (this.isMelee(itemType)) {
-            types.weaponsMelee = this.isAllMeleeEnabled();
-        } else if (this.isRanged(itemType)) {
-            types.weaponsRanged = this.isAllRangedEnabled();
-        }
-
-        this.saveFilters();
-    }
-
-    public setMelee(enabled: boolean = false): void {
-        this.set('melee', enabled);
-    }
-
-    public setRanged(enabled: boolean = false): void {
-        this.set('ranged', enabled);
     }
 
     // noinspection JSMethodCanBeStatic
@@ -144,24 +124,17 @@ export class RunewordFilterService {
         helper.saveEntitiesOwned();
     }
 
-    private set(itemType: 'melee' | 'ranged' | 'shields', enabled: boolean = false): void {
-        this.types[itemType].forEach(type => {
-            this.filters.itemTypes[type] = enabled;
-        });
-    }
-
     private getItemTypeFilters(): Array<TItem> {
         const itemTypes = ObjectHelper.entries(this.filters.itemTypes)
             .filter(([, enabled]) => enabled)
             .map(([key]) => key);
 
-        if (itemTypes.includes('weaponsMelee')) itemTypes.push(...this.types.melee);
-        if (itemTypes.some(f => this.isMelee(f))) itemTypes.push('weaponsMelee');
+        ObjectHelper.forEach(this.typeCollections, (type: TItem, collection: Array<TItem>) => {
+            if (itemTypes.includes(type)) itemTypes.push(...collection);
+            if (itemTypes.some(f => this.isInCollection(f, collection))) itemTypes.push(type);
+        });
 
-        if (itemTypes.includes('weaponsRanged')) itemTypes.push(...this.types.ranged);
-        if (itemTypes.some(f => this.isRanged(f))) itemTypes.push('weaponsRanged');
-
-        return itemTypes;
+        return [...new Set(itemTypes)];
     }
 
     private applyFilterToRuneWord(runeWord: TRuneWord | IRuneWord, itemTypes: Array<TItem>): boolean {
@@ -173,7 +146,8 @@ export class RunewordFilterService {
             if (itemTypes?.length && !this.hasEnabledItemFilter(runeWord, itemTypes)) return false;
         }
 
-        this.runeTracker.canCraftRuneWordRunes(runeWord);
+        this.craftableHelper.canCraftMaterialsFor(runeWord);
+        // this.runeTracker.canCraftRuneWordRunes(runeWord);
         this.runeTracker.hasRunewordRunes(runeWord);
 
         return (

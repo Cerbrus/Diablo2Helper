@@ -24,7 +24,7 @@ export const Skills = {
         'Plague Javelin',
         'Strafe',
         'Immolation Arrow',
-        'Dopplezon',
+        'Decoy',
         'Evade',
         'Fend',
         'Freezing Arrow',

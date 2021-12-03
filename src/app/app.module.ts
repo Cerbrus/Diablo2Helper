@@ -21,7 +21,8 @@ import {
     TabPaneGemsComponent,
     TabPaneRunesComponent,
     TabPaneRuneWordsComponent,
-    TabPaneSettingsComponent
+    TabPaneSettingsComponent,
+    TabPaneSkillsComponent
 } from '~components/-tab-pane';
 import { AppComponent } from '~components/app/app.component';
 import { Diablo2HelperComponent } from '~components/diablo2-helper/diablo2-helper.component';
@@ -63,7 +64,8 @@ const components = [
     TabPaneGemsComponent,
     TabPaneRuneWordsComponent,
     TabPaneRunesComponent,
-    TabPaneSettingsComponent
+    TabPaneSettingsComponent,
+    TabPaneSkillsComponent
 ];
 
 @NgModule({

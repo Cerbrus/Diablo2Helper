@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="tree">
+        <div class="tree-background"></div>
+        <div
+            class="tree-class"
+            *ngFor="let tree of getTrees(); index as tab"
+            [class]="'tree-class-' + class + ' tree-tab-' + tab"
+            [hidden]="tab !== currentTab"
+        >
+            <div
+                *ngFor="let skill of tree.skills"
+                class="skill"
+                [class]="'skill-tier-' + (skill.tier - 1) + ' skill-position-' + skill.position"
+                (click)="displaySkill(skill)"
+            >
+                <ui-sprite-skill
+                    *ngIf="skill"
+                    [class]="class"
+                    [index]="skill.index || 0"
+                    [size]="64"
+                    [isDown]="skillIndex === (skill.index || 0) + 1"
+                ></ui-sprite-skill>
+            </div>
+        </div>
+    </div>
+    <div class="grid skills">
+        <div class="row">
+            <div class="grid"></div>
+            <div class="grid">
+                <input (keyup)="autoCompleteClass()" [(ngModel)]="class" onClickSelect type="text" />
+
+                <input [(ngModel)]="currentTab" [max]="2" [min]="0" onClickSelect type="number" />
+                <div class="row">
+                    <input
+                        [(ngModel)]="skillIndex"
+                        [max]="getMax()"
+                        [min]="1"
+                        (change)="skillName = skills[class][skillIndex - 1]"
+                        onClickSelect
+                        type="number"
+                    />
+
+                    <input (keyup)="autoCompleteSkill()" [(ngModel)]="skillName" onClickSelect type="text" />
+                </div>
+            </div>
+        </div>
+        <ui-sprite-class [class]="class"></ui-sprite-class>
+    </div>
+    <div>[Skill info]</div>
+</div>

@@ -11,7 +11,8 @@ import {
     TabPaneGemsComponent,
     TabPaneRunesComponent,
     TabPaneRuneWordsComponent,
-    TabPaneSettingsComponent
+    TabPaneSettingsComponent,
+    TabPaneSkillsComponent
 } from '../-tab-pane';
 
 @Component({
@@ -39,6 +40,10 @@ export class Diablo2HelperComponent {
         {
             component: TabPaneCharacterImportComponent,
             options: { title: 'labels.import', key: 'import', shortcutKey: 'i', fillHeight: false }
+        },
+        {
+            component: TabPaneSkillsComponent,
+            options: { title: 'labels.skills', key: 'skills', shortcutKey: 't', fillHeight: false }
         },
         {
             component: TabPaneSettingsComponent,

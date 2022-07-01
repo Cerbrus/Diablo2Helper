@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+    man:
+        build: .
+        image:
+            diablo2helper:${VERSION}
